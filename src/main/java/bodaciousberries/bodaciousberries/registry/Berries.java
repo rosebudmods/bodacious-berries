@@ -1,13 +1,14 @@
 package bodaciousberries.bodaciousberries.registry;
 
-import bodaciousberries.bodaciousberries.block.plant.BerryBush;
-import bodaciousberries.bodaciousberries.block.plant.DoubleBerryBush;
-import net.fabricmc.fabric.impl.content.registry.CompostingChanceRegistryImpl;
+import bodaciousberries.bodaciousberries.block.BerryBush;
+import bodaciousberries.bodaciousberries.block.DoubleBerryBush;
 import net.minecraft.item.Item;
 import oshi.util.tuples.Pair;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static net.fabricmc.fabric.impl.content.registry.CompostingChanceRegistryImpl.INSTANCE;
 
 public class Berries {
     /**
@@ -27,7 +28,7 @@ public class Berries {
      * @param berry the berry to make compostable
      */
     private static void registerCompostableBerry(Item berry) {
-        CompostingChanceRegistryImpl.INSTANCE.add(berry, BERRY_COMPOST_LEVEL_INCREASE_CHANCE);
+        INSTANCE.add(berry, BERRY_COMPOST_LEVEL_INCREASE_CHANCE);
     }
 
     /**

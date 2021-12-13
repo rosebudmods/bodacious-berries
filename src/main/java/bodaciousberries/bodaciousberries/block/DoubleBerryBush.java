@@ -1,6 +1,7 @@
-package bodaciousberries.bodaciousberries.block.plant;
+package bodaciousberries.bodaciousberries.block;
 
 import bodaciousberries.bodaciousberries.registry.BodaciousItems;
+import bodaciousberries.bodaciousberries.util.ImproperConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
@@ -31,7 +32,7 @@ import java.util.Random;
 @SuppressWarnings({"deprecation", "unused"})
 public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     private static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
-    private static final int maxBerryAmount = 6;
+    private static final int MAX_BERRY_AMOUNT = 6;
 
     private static final IntProperty BERRY_AGE = IntProperty.of("berry_age", 0, 3);
     private final int maxBerryAge;
@@ -45,7 +46,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         this.maxBerryAge = maxBerryAge;
         this.berryType = berryType;
         this.unripeBerryType = unripeBerryType;
-        this.spiky = !(damageSource == null);
+        this.spiky = damageSource != null;
         this.damageSource = damageSource;
     }
 
@@ -124,14 +125,14 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (berryType == null) {
-            throw new RuntimeException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
+            throw new ImproperConfigurationException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
         }
 
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             world.setBlockState(pos, state.with(BERRY_AGE, Math.min(maxBerryAge, state.get(BERRY_AGE) + 1)), 2);
             return ActionResult.PASS;
         } else if (state.get(BERRY_AGE) > 1) {
-            return BasicBerryBush.pickBerries(pos, world, state, berryType, unripeBerryType, maxBerryAmount, maxBerryAge, 0, BERRY_AGE);
+            return BasicBerryBush.pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxBerryAge, 0, BERRY_AGE);
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }

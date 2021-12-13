@@ -1,9 +1,9 @@
 package bodaciousberries.bodaciousberries.registry;
 
 import bodaciousberries.bodaciousberries.Bodaciousberries;
-import bodaciousberries.bodaciousberries.block.plant.DoubleBerryBush;
-import bodaciousberries.bodaciousberries.block.plant.GrowingBerryBush;
-import bodaciousberries.bodaciousberries.block.plant.BasicBerryBush;
+import bodaciousberries.bodaciousberries.block.DoubleBerryBush;
+import bodaciousberries.bodaciousberries.block.GrowingBerryBush;
+import bodaciousberries.bodaciousberries.block.BasicBerryBush;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;

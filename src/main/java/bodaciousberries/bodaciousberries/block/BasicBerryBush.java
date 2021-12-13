@@ -1,6 +1,7 @@
-package bodaciousberries.bodaciousberries.block.plant;
+package bodaciousberries.bodaciousberries.block;
 
 import bodaciousberries.bodaciousberries.registry.Sounds;
+import bodaciousberries.bodaciousberries.util.ImproperConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -37,8 +38,9 @@ import java.util.Random;
 public class BasicBerryBush extends PlantBlock implements BerryBush {
     private static final Vec3d BERRY_BUSH_SLOWING_VECTOR = new Vec3d(0.5D, 0.25D, 0.5D);
     //chance to grow is one in growChance
-    private static final int growChance = 5;
-    protected static final int maxBerryAmount = 3;
+    private static final int GROW_CHANCE = 5;
+    protected static final int MAX_BERRY_AMOUNT = 3;
+    private static final Random RANDOM = new Random();
 
     protected Item berryType;
     protected Item unripeBerryType;
@@ -174,7 +176,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int age = state.get(BERRY_AGE);
         //if the age isn't maximum and the light level is high enough grow the bush
-        if (age <= maxBerryAge && random.nextInt(growChance) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+        if (age <= maxBerryAge && random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             world.setBlockState(pos, state.with(BERRY_AGE, age + 1), 2);
         }
     }
@@ -200,7 +202,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * get a random berry pick sound
      */
     public static SoundEvent selectPickSound() {
-        return switch (new Random().nextInt(3)) {
+        return switch (RANDOM.nextInt(3)) {
             case 1 -> Sounds.BERRY_PICK_2;
             case 2 -> Sounds.BERRY_PICK_3;
             default -> Sounds.BERRY_PICK_1;
@@ -216,7 +218,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (berryType == null) {
-            throw new RuntimeException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
+            throw new ImproperConfigurationException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
         }
 
         final int currentBerryAge = state.get(BERRY_AGE);
@@ -227,7 +229,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             return ActionResult.PASS;
         } else if (currentBerryAge > 1) {
             //otherwise, give berries/unripe berries
-            return pickBerries(pos, world, state, berryType, unripeBerryType, maxBerryAmount, maxBerryAge, sizeChangeAge, BERRY_AGE);
+            return pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxBerryAge, sizeChangeAge, BERRY_AGE);
         } else {
             //otherwise, do default use action from superclass
             return super.onUse(state, world, pos, player, hand, hit);

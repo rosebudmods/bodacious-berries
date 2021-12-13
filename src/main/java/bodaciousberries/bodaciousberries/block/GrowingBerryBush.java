@@ -1,5 +1,6 @@
-package bodaciousberries.bodaciousberries.block.plant;
+package bodaciousberries.bodaciousberries.block;
 
+import bodaciousberries.bodaciousberries.util.ImproperConfigurationException;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -59,7 +60,7 @@ public class GrowingBerryBush extends BasicBerryBush {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (berryType == null) {
-            throw new RuntimeException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
+            throw new ImproperConfigurationException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
         }
 
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
@@ -71,7 +72,7 @@ public class GrowingBerryBush extends BasicBerryBush {
             }
             return ActionResult.PASS;
         } else if (state.get(BERRY_AGE) > 1) {
-            return pickBerries(pos, world, state, berryType, unripeBerryType, maxBerryAmount, maxBerryAge, sizeChangeAge, BERRY_AGE);
+            return pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxBerryAge, sizeChangeAge, BERRY_AGE);
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
