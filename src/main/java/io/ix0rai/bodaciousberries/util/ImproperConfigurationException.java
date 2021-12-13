@@ -1,4 +1,4 @@
-package bodaciousberries.bodaciousberries.util;
+package io.ix0rai.bodaciousberries.util;
 
 public class ImproperConfigurationException extends RuntimeException {
     public ImproperConfigurationException(String message) {

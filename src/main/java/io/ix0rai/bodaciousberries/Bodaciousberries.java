@@ -1,8 +1,8 @@
-package bodaciousberries.bodaciousberries;
+package io.ix0rai.bodaciousberries;
 
-import bodaciousberries.bodaciousberries.registry.BodaciousItems;
-import bodaciousberries.bodaciousberries.registry.Bushes;
-import bodaciousberries.bodaciousberries.registry.Sounds;
+import io.ix0rai.bodaciousberries.registry.BodaciousItems;
+import io.ix0rai.bodaciousberries.registry.Bushes;
+import io.ix0rai.bodaciousberries.registry.Sounds;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 

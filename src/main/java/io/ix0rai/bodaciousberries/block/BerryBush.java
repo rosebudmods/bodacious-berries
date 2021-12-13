@@ -1,4 +1,4 @@
-package bodaciousberries.bodaciousberries.block;
+package io.ix0rai.bodaciousberries.block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;

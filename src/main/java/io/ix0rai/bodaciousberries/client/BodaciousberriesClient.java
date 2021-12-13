@@ -1,4 +1,4 @@
-package bodaciousberries.bodaciousberries.client;
+package io.ix0rai.bodaciousberries.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.Environment;

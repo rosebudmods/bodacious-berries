@@ -1,13 +1,11 @@
-package bodaciousberries.bodaciousberries.registry;
+package io.ix0rai.bodaciousberries.registry;
 
-import bodaciousberries.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.Bodaciousberries;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.registry.Registry;
-
-import static bodaciousberries.bodaciousberries.registry.Bushes.*;
 
 public class BodaciousItems {
     //berry items
@@ -19,17 +17,17 @@ public class BodaciousItems {
 
     public static void registerItems() {
         //create items for each berry
-        SASKATOON_BERRIES = new AliasedBlockItem(SASKATOON_BERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(2).saturationModifier(2f).snack().build()));
+        SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(2).saturationModifier(2f).snack().build()));
         UNRIPE_SASKATOON_BERRIES = new Item(new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(1).saturationModifier(2f).snack().build()));
-        STRAWBERRIES = new AliasedBlockItem(STRAWBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(3).saturationModifier(1.5f).snack().build()));
-        RASPBERRIES = new AliasedBlockItem(RASPBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(1).saturationModifier(4f).snack().build()));
-        BLACKBERRIES = new AliasedBlockItem(BLACKBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(1).saturationModifier(3.5f).snack().build()));
+        STRAWBERRIES = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(3).saturationModifier(1.5f).snack().build()));
+        RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(1).saturationModifier(4f).snack().build()));
+        BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(1).saturationModifier(3.5f).snack().build()));
 
         //automatic stuffs
-        Berries.addDoubleBushToList(SASKATOON_BERRY_BUSH, DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES, UNRIPE_SASKATOON_BERRIES);
-        Berries.addToList(STRAWBERRY_BUSH, STRAWBERRIES, null);
-        Berries.addToList(RASPBERRY_BUSH, RASPBERRIES, null);
-        Berries.addToList(BLACKBERRY_BUSH, BLACKBERRIES, null);
+        Berries.addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES, UNRIPE_SASKATOON_BERRIES);
+        Berries.addToList(Bushes.STRAWBERRY_BUSH, STRAWBERRIES, null);
+        Berries.addToList(Bushes.RASPBERRY_BUSH, RASPBERRIES, null);
+        Berries.addToList(Bushes.BLACKBERRY_BUSH, BLACKBERRIES, null);
         Berries.initialiseBerries();
 
         //register

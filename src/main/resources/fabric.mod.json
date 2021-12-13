@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "bodaciousberries.bodaciousberries.Bodaciousberries"
+      "io.ix0rai.bodaciousberries.Bodaciousberries"
     ]
   },
   "mixins": [

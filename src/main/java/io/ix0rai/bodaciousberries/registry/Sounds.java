@@ -1,6 +1,6 @@
-package bodaciousberries.bodaciousberries.registry;
+package io.ix0rai.bodaciousberries.registry;
 
-import bodaciousberries.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.Bodaciousberries;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

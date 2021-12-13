@@ -1,7 +1,7 @@
-package bodaciousberries.bodaciousberries.registry;
+package io.ix0rai.bodaciousberries.registry;
 
-import bodaciousberries.bodaciousberries.block.BerryBush;
-import bodaciousberries.bodaciousberries.block.DoubleBerryBush;
+import io.ix0rai.bodaciousberries.block.BerryBush;
+import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import net.minecraft.item.Item;
 import oshi.util.tuples.Pair;
 

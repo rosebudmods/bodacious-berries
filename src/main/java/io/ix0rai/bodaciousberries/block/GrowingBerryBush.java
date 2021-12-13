@@ -1,6 +1,6 @@
-package bodaciousberries.bodaciousberries.block;
+package io.ix0rai.bodaciousberries.block;
 
-import bodaciousberries.bodaciousberries.util.ImproperConfigurationException;
+import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.player.PlayerEntity;

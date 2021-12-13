@@ -1,7 +1,7 @@
-package bodaciousberries.bodaciousberries.block;
+package io.ix0rai.bodaciousberries.block;
 
-import bodaciousberries.bodaciousberries.registry.Sounds;
-import bodaciousberries.bodaciousberries.util.ImproperConfigurationException;
+import io.ix0rai.bodaciousberries.registry.Sounds;
+import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
