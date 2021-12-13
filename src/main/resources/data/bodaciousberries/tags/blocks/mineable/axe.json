@@ -1,0 +1,10 @@
+{
+  "replace": "false",
+  "values": [
+    "bodaciousberries:strawberry_bush",
+    "bodaciousberries:double_saskatoon_berry_bush",
+    "bodaciousberries:saskatoon_berry_bush",
+    "bodaciousberries:raspberry_bush",
+    "bodaciousberries:blackberry_bush"
+  ]
+}

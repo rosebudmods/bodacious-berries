@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "bodaciousberries",
+  "version": "${version}",
+
+  "name": "Bodacious Berries",
+  "description": "berries for all!",
+  "authors": [
+    "ix0rai",
+    "thonkman"
+  ],
+  "contact": {
+    "sources": "https://github.com/ix0rai/bodaciousberries"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/bodaciousberries/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "bodaciousberries.bodaciousberries.Bodaciousberries"
+    ]
+  },
+  "mixins": [
+    "bodaciousberries.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}

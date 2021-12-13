@@ -1,0 +1,17 @@
+{
+  "berry_pick_1": {
+    "sounds": [
+      "bodaciousberries:berry_pick_1"
+    ]
+  },
+  "berry_pick_2": {
+    "sounds": [
+      "bodaciousberries:berry_pick_2"
+    ]
+  },
+  "berry_pick_3": {
+    "sounds": [
+      "bodaciousberries:berry_pick_3"
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+package bodaciousberries.bodaciousberries.registry;
+
+import bodaciousberries.bodaciousberries.block.plant.BerryBush;
+import bodaciousberries.bodaciousberries.block.plant.DoubleBerryBush;
+import net.fabricmc.fabric.impl.content.registry.CompostingChanceRegistryImpl;
+import net.minecraft.item.Item;
+import oshi.util.tuples.Pair;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Berries {
+    private static final Map<BerryBush, Pair<Item, Item>> BERRY_BUSHES = new HashMap<>();
+
+    private static final float BERRY_COMPOST_LEVEL_INCREASE_CHANCE = 0.4f;
+
+    private static void registerCompostableBerry(Item berry) {
+        CompostingChanceRegistryImpl.INSTANCE.add(berry, BERRY_COMPOST_LEVEL_INCREASE_CHANCE);
+    }
+
+    private static void registerCompostableBerries(Item berry1, Item berry2) {
+        registerCompostableBerry(berry1);
+        registerCompostableBerry(berry2);
+    }
+
+    public static void addToList(BerryBush bush, Item berries, Item unripeBerries) {
+        BERRY_BUSHES.put(bush, new Pair<>(berries, unripeBerries));
+    }
+
+    public static void addDoubleBushToList(BerryBush smallBush, DoubleBerryBush bigBush, Item berries, Item unripeBerries) {
+        var berryPair = new Pair<>(berries, unripeBerries);
+        BERRY_BUSHES.put(smallBush, berryPair);
+        BERRY_BUSHES.put(bigBush, berryPair);
+    }
+
+    public static void initialiseBerries() {
+        for (var entry : BERRY_BUSHES.entrySet()) {
+            BerryBush bush = entry.getKey();
+            //set berry types
+            Item berryType = entry.getValue().getA();
+            bush.setBerryType(berryType);
+            //honestly this probably isn't an optimisation but :hahayes:
+            Item unripeBerryType = entry.getValue().getB();
+            if (unripeBerryType != null) {
+                bush.setUnripeBerryType(unripeBerryType);
+            }
+
+            //register as compostable
+            if (unripeBerryType != null) {
+                registerCompostableBerries(entry.getValue().getA(), unripeBerryType);
+            } else {
+                registerCompostableBerry(berryType);
+            }
+        }
+    }
+}
