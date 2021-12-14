@@ -1,10 +1,9 @@
 package io.ix0rai.bodaciousberries.registry;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
-import io.ix0rai.bodaciousberries.block.BasicBerryBush;
-
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -42,10 +41,14 @@ public class Bushes {
         RASPBERRY_BUSH.setBerryType(BodaciousItems.RASPBERRIES);
         BLACKBERRY_BUSH.setBerryType(BodaciousItems.BLACKBERRIES);
 
-        Registry.register(Registry.BLOCK, Bodaciousberries.getIdentifier("double_saskatoon_berry_bush"), DOUBLE_SASKATOON_BERRY_BUSH);
-        Registry.register(Registry.BLOCK, Bodaciousberries.getIdentifier("saskatoon_berry_bush"), SASKATOON_BERRY_BUSH);
-        Registry.register(Registry.BLOCK, Bodaciousberries.getIdentifier("strawberry_bush"), STRAWBERRY_BUSH);
-        Registry.register(Registry.BLOCK, Bodaciousberries.getIdentifier("raspberry_bush"), RASPBERRY_BUSH);
-        Registry.register(Registry.BLOCK, Bodaciousberries.getIdentifier("blackberry_bush"), BLACKBERRY_BUSH);
+        register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
+        register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
+        register("strawberry_bush", STRAWBERRY_BUSH);
+        register("raspberry_bush", RASPBERRY_BUSH);
+        register("blackberry_bush", BLACKBERRY_BUSH);
+    }
+
+    private static void register(String name, Block block) {
+        Registry.register(Registry.BLOCK, Bodaciousberries.getIdentifier(name), block);
     }
 }

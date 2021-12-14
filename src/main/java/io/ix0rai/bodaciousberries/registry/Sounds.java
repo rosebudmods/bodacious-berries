@@ -14,8 +14,12 @@ public class Sounds {
     public static final SoundEvent BERRY_PICK_3 = new SoundEvent(BERRY_PICK_3_ID);
 
     public static void registerSounds() {
-        Registry.register(Registry.SOUND_EVENT, BERRY_PICK_1_ID, BERRY_PICK_1);
-        Registry.register(Registry.SOUND_EVENT, BERRY_PICK_2_ID, BERRY_PICK_2);
-        Registry.register(Registry.SOUND_EVENT, BERRY_PICK_3_ID, BERRY_PICK_3);
+        register(BERRY_PICK_1_ID, BERRY_PICK_1);
+        register(BERRY_PICK_2_ID, BERRY_PICK_2);
+        register(BERRY_PICK_3_ID, BERRY_PICK_3);
+    }
+
+    private static void register(Identifier identifier, SoundEvent soundEvent) {
+        Registry.register(Registry.SOUND_EVENT, identifier, soundEvent);
     }
 }

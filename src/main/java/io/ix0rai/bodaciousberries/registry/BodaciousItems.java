@@ -31,10 +31,14 @@ public class BodaciousItems {
         Berries.initialiseBerries();
 
         //register
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier("saskatoon_berries"), SASKATOON_BERRIES);
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier("unripe_saskatoon_berries"), UNRIPE_SASKATOON_BERRIES);
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier("strawberries"), STRAWBERRIES);
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier("raspberries"), RASPBERRIES);
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier("blackberries"), BLACKBERRIES);
+        register("saskatoon_berries", SASKATOON_BERRIES);
+        register("unripe_saskatoon_berries", UNRIPE_SASKATOON_BERRIES);
+        register("strawberries", STRAWBERRIES);
+        register("raspberries", RASPBERRIES);
+        register("blackberries", BLACKBERRIES);
+    }
+
+    private static void register(String name, Item item) {
+        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), item);
     }
 }
