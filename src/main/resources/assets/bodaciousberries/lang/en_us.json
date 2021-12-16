@@ -1,0 +1,14 @@
+{
+  "item.bodaciousberries.saskatoon_berries": "Saskatoon Berries",
+  "item.bodaciousberries.raspberries": "Raspberries",
+  "item.bodaciousberries.blackberries": "Blackberries",
+  "item.bodaciousberries.strawberries": "Strawberries",
+  "blocks.bodaciousberries.double_saskatoon_berry_bush": "Double Saskatoon Berry Bush",
+  "blocks.bodaciousberries.saskatoon_berry_bush": "Saskatoon Berry Bush",
+  "blocks.bodaciousberries.raspberry_bush": "Raspberry Bush",
+  "blocks.bodaciousberries.blackberry_bush": "Blackberry Bush",
+  "blocks.bodaciousberries.strawberry_bush": "Strawberry Bush",
+  "sound_event.bodaciousberries.berry_pick_1": "Bodacious berries pop",
+  "sound_event.bodaciousberries.berry_pick_2": "Bodacious berries pop",
+  "sound_event.bodaciousberries.berry_pick_3": "Bodacious berries pop"
+}
