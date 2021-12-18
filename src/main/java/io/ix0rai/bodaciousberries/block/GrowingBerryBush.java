@@ -19,11 +19,6 @@ import java.util.Random;
 public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 
-    public GrowingBerryBush(Settings settings, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DamageSourceTwoElectricBoogaloo damageSource, DoubleBerryBush bush) {
-        super(settings, bush.getBerryType(), bush.getUnripeBerryType(), bush.getMaxBerryAge(), smallShape, largeShape, sizeChangeAge, damageSource);
-        this.futureBush = bush;
-    }
-
     public GrowingBerryBush(Settings settings, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DoubleBerryBush bush) {
         super(settings, bush.getBerryType(), bush.getUnripeBerryType(), bush.getMaxBerryAge(), smallShape, largeShape, sizeChangeAge);
         this.futureBush = bush;

@@ -8,7 +8,6 @@ import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -38,20 +37,12 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     private final int maxBerryAge;
     private Item berryType;
     private Item unripeBerryType;
-    private final boolean spiky;
-    private final DamageSource damageSource;
 
-    public DoubleBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge, BasicBerryBush.DamageSourceTwoElectricBoogaloo damageSource) {
+    public DoubleBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge) {
         super(settings);
         this.maxBerryAge = maxBerryAge;
         this.berryType = berryType;
         this.unripeBerryType = unripeBerryType;
-        this.spiky = damageSource != null;
-        this.damageSource = damageSource;
-    }
-
-    public DoubleBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge) {
-        this(settings, berryType, unripeBerryType, maxBerryAge, null);
     }
 
     public void setBerryType(Item berryType) {
@@ -73,10 +64,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
         if (entity instanceof LivingEntity && !BasicBerryBush.SMALL_ENTITIES.contains(type)) {
             entity.slowMovement(state, DOUBLE_BUSH_SLOWING_VECTOR);
-            //damage as well if our bush is thorny
-            if (spiky) {
-                entity.damage(damageSource, 1.0F);
-            }
         }
     }
 
@@ -84,7 +71,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         //so it turns out I spent about an hour and a half debugging a crash before realising it originated from this property not existing
         //yay me
-        //this is staying in the final version
+        //this comment is staying in the final version
         builder.add(BERRY_AGE).add(HALF);
     }
 
@@ -122,6 +109,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, Integer newAge) {
         world.setBlockState(pos, state.with(BERRY_AGE, newAge), 2);
     }
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (berryType == null) {
@@ -174,15 +162,5 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public int getSizeChangeAge() {
         throw new IllegalStateException("size change age does not apply to double berry bushes");
-    }
-
-    @Override
-    public boolean isSpiky() {
-        return spiky;
-    }
-
-    @Override
-    public DamageSource getDamageSource() {
-        return damageSource;
     }
 }

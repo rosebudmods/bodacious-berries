@@ -11,7 +11,6 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -49,8 +48,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected final VoxelShape smallShape;
     protected final VoxelShape largeShape;
     protected final int sizeChangeAge;
-    protected final boolean spiky;
-    protected final DamageSource damageSource;
 
     //animals that can move through bushes without being slowed
     public static final List<EntityType<?>> SMALL_ENTITIES = Arrays.asList(new EntityType<?>[]{
@@ -75,19 +72,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
     public BasicBerryBush(Settings settings, Item berryType, int maxBerryAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        this(settings, berryType, null, maxBerryAge, smallShape, largeShape, sizeChangeAge, false, null);
-    }
-
-    public BasicBerryBush(Settings settings, Item berryType, int maxBerryAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DamageSourceTwoElectricBoogaloo damageSource) {
-        this(settings, berryType, null, maxBerryAge, smallShape, largeShape, sizeChangeAge, true, damageSource);
-    }
-
-    public BasicBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DamageSourceTwoElectricBoogaloo damageSource) {
-        this(settings, berryType, unripeBerryType, maxBerryAge, smallShape, largeShape, sizeChangeAge, true, damageSource);
-    }
-
-    public BasicBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        this(settings, berryType, unripeBerryType, maxBerryAge, smallShape, largeShape, sizeChangeAge, false, null);
+        this(settings, berryType, null, maxBerryAge, smallShape, largeShape, sizeChangeAge);
     }
 
     /**
@@ -99,9 +84,8 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param smallShape small voxel shape for the bush
      * @param largeShape large voxel shape for the bush
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
-     * @param damageSource the damage source for when a player is poked by the bush's thorns
      */
-    public BasicBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, boolean spiky, DamageSourceTwoElectricBoogaloo damageSource) {
+    public BasicBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         //add nonOpaque to settings to ensure that the bush isn't considered a solid block when rendering
         super(settings.nonOpaque());
         this.berryType = berryType;
@@ -110,8 +94,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         this.largeShape = largeShape;
         this.unripeBerryType = unripeBerryType;
         this.sizeChangeAge = sizeChangeAge;
-        this.spiky = spiky;
-        this.damageSource = this.spiky ? damageSource : null;
         //set default age to 0
         this.setDefaultState((this.stateManager.getDefaultState()).with(BERRY_AGE, 0));
         //ensure cutout texture is rendered
@@ -185,10 +167,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
         if (entity instanceof LivingEntity && !SMALL_ENTITIES.contains(type)) {
             entity.slowMovement(state, BERRY_BUSH_SLOWING_VECTOR);
-            //damage as well if our bush is thorny
-            if (spiky) {
-                entity.damage(damageSource, 1.0F);
-            }
         }
     }
 
@@ -340,24 +318,5 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public int getSizeChangeAge() {
         return sizeChangeAge;
-    }
-
-    @Override
-    public boolean isSpiky() {
-        return spiky;
-    }
-
-    @Override
-    public DamageSource getDamageSource() {
-        return damageSource;
-    }
-
-    /**
-     * this class is an easy way to make a new damage source, as the constructor in {@link DamageSource} itself is protected
-     */
-    public static class DamageSourceTwoElectricBoogaloo extends DamageSource {
-        public DamageSourceTwoElectricBoogaloo(String name) {
-            super(name);
-        }
     }
 }
