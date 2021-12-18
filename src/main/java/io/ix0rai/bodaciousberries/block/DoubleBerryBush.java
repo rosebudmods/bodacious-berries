@@ -149,12 +149,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     }
 
     @Override
-    public int getBerryAge(BlockState state) {
-        return state.get(BERRY_AGE);
-    }
-
-    @Override
-    public IntProperty getBerryAgeProperty() {
+    public IntProperty getBerryAge() {
         return BERRY_AGE;
     }
 
@@ -175,11 +170,10 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     /**
      * DO NOT USE, SIZE CHANGE AGE DOES NOT APPLY TO DOUBLE BERRY BUSHES
-     * @return 0
      */
     @Override
     public int getSizeChangeAge() {
-        return 0;
+        throw new IllegalStateException("size change age does not apply to double berry bushes");
     }
 
     @Override

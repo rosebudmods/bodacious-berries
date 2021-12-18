@@ -151,13 +151,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        int age = state.get(BERRY_AGE);
-
-        if (age < sizeChangeAge) {
-            return smallShape;
-        } else {
-            return largeShape;
-        }
+        return state.get(BERRY_AGE) < sizeChangeAge ? smallShape : largeShape;
     }
 
     /**
@@ -236,6 +230,10 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         }
     }
 
+    /**
+     * handles berries being picked
+     * <br> this method is static so that it can be used in {@link DoubleBerryBush}
+     */
     public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, Item unripeBerryType, int maxBerryAmount, int maxBerryAge, int resetAge, IntProperty berryAge) {
         //play randomly picked sound
         world.playSound(null, pos, selectPickSound(), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
@@ -320,12 +318,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     @Override
-    public int getBerryAge(BlockState state) {
-        return state.get(BERRY_AGE);
-    }
-
-    @Override
-    public IntProperty getBerryAgeProperty() {
+    public IntProperty getBerryAge() {
         return BERRY_AGE;
     }
 

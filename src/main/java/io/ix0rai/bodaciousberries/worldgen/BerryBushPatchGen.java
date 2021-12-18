@@ -26,6 +26,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BerryBushPatchGen {
+    private static final int MEDIUM_BERRY_BUSH_RARITY = 32;
+    private static final int COMMON_BERRY_BUSH_RARITY = 20;
+
     public static ConfiguredFeature<?, ?> PATCH_SASKATOON_BERRY;
     public static PlacedFeature PATCH_SASKATOON_BERRY_PLACED;
     public static ConfiguredFeature<?, ?> PATCH_STRAWBERRY;
@@ -41,10 +44,10 @@ public class BerryBushPatchGen {
         PATCH_BLACKBERRY = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, 4);
         PATCH_RASPBERRY = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, 4);
 
-        PATCH_SASKATOON_BERRY_PLACED = berryPatchPlacedFeature("patch_saskatoon_berry_placed", 20, PATCH_SASKATOON_BERRY);
-        PATCH_STRAWBERRY_PLACED = berryPatchPlacedFeature("patch_strawberry_placed", 15, PATCH_STRAWBERRY);
-        PATCH_BLACKBERRY_PLACED = berryPatchPlacedFeature("patch_blackberry_placed", 32, PATCH_BLACKBERRY);
-        PATCH_RASPBERRY_PLACED = berryPatchPlacedFeature("patch_raspberry_placed", 32, PATCH_RASPBERRY);
+        PATCH_SASKATOON_BERRY_PLACED = berryPatchPlacedFeature("patch_saskatoon_berry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_SASKATOON_BERRY);
+        PATCH_STRAWBERRY_PLACED = berryPatchPlacedFeature("patch_strawberry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_STRAWBERRY);
+        PATCH_BLACKBERRY_PLACED = berryPatchPlacedFeature("patch_blackberry_placed", MEDIUM_BERRY_BUSH_RARITY, PATCH_BLACKBERRY);
+        PATCH_RASPBERRY_PLACED = berryPatchPlacedFeature("patch_raspberry_placed", MEDIUM_BERRY_BUSH_RARITY, PATCH_RASPBERRY);
 
         Biome.Category[] saskatoonBerryCategories = new Biome.Category[]{Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.MOUNTAIN};
         Biome.Category[] strawberryCategories = new Biome.Category[]{Biome.Category.PLAINS, Biome.Category.FOREST, Biome.Category.SWAMP};

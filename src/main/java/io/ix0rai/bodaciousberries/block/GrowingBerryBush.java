@@ -32,7 +32,7 @@ public class GrowingBerryBush extends BasicBerryBush {
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int age = state.get(BERRY_AGE);
-        //if the age isn't maximum and the light level is high enough grow the bush
+        //if the age isn't maximum and the light level is high enough, grow the bush
         if (age <= maxBerryAge && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             grow(world, random, pos, state, age + 1);
         }
