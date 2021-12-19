@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.registry;
+package io.ix0rai.bodaciousberries.registry.berries;
 
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
@@ -49,6 +49,15 @@ public class Berries {
      */
     public static void addToList(BerryBush bush, Item berries, Item unripeBerries) {
         BERRY_BUSHES.put(bush, new Pair<>(berries, unripeBerries));
+    }
+
+    /**
+     * add a berry bush to the automatic registration list
+     * @param bush the berry bush you wish to associate your berries with
+     * @param berries the base form of the berries to associate
+     */
+    public static void addToList(BerryBush bush, Item berries) {
+        addToList(bush, berries, null);
     }
 
     /**

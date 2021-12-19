@@ -25,7 +25,7 @@ public class Bushes {
     //bushes
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_SASKATOON_BERRY_BUSH);
-    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, BodaciousItems.STRAWBERRIES,
+    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, BodaciousItems.STRAWBERRY, BodaciousItems.UNRIPE_STRAWBERRY,
                 3, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
     public static final BasicBerryBush RASPBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, BodaciousItems.RASPBERRIES,
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
@@ -37,7 +37,7 @@ public class Bushes {
         SASKATOON_BERRY_BUSH.setUnripeBerryType(BodaciousItems.UNRIPE_SASKATOON_BERRIES);
         DOUBLE_SASKATOON_BERRY_BUSH.setBerryType(BodaciousItems.SASKATOON_BERRIES);
         DOUBLE_SASKATOON_BERRY_BUSH.setUnripeBerryType(BodaciousItems.SASKATOON_BERRIES);
-        STRAWBERRY_BUSH.setBerryType(BodaciousItems.STRAWBERRIES);
+        STRAWBERRY_BUSH.setBerryType(BodaciousItems.STRAWBERRY);
         RASPBERRY_BUSH.setBerryType(BodaciousItems.RASPBERRIES);
         BLACKBERRY_BUSH.setBerryType(BodaciousItems.BLACKBERRIES);
 
