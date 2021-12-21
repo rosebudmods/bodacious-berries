@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.registry.BodaciousItems;
+import io.ix0rai.bodaciousberries.registry.items.Berries;
 import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -29,7 +29,7 @@ import java.util.Random;
 
 //minecraft deprecates methods oddly
 @SuppressWarnings({"deprecation", "unused"})
-public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
+public class DoubleSaskatoonBerryBush extends TallPlantBlock implements BerryBush {
     private static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
     private static final int MAX_BERRY_AMOUNT = 6;
 
@@ -38,7 +38,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     private Item berryType;
     private Item unripeBerryType;
 
-    public DoubleBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge) {
+    public DoubleSaskatoonBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge) {
         super(settings);
         this.maxBerryAge = maxBerryAge;
         this.berryType = berryType;
@@ -55,7 +55,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(BodaciousItems.SASKATOON_BERRIES);
+        return new ItemStack(Berries.SASKATOON_BERRIES);
     }
 
     @Override

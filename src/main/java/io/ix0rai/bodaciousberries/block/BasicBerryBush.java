@@ -210,7 +210,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     /**
      * handles berries being picked
-     * <br> this method is static so that it can be used in {@link DoubleBerryBush}
+     * <br> this method is static so that it can be used in {@link DoubleSaskatoonBerryBush}
      */
     public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, Item unripeBerryType, int maxBerryAmount, int maxBerryAge, int resetAge, IntProperty berryAge) {
         //play randomly picked sound
