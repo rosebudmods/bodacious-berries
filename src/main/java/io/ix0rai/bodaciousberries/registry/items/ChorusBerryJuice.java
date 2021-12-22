@@ -17,8 +17,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 
 public class ChorusBerryJuice extends Item {
     private final Identifier biome;
@@ -31,28 +33,43 @@ public class ChorusBerryJuice extends Item {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         //teleport user to biome specified in constructor
+        //the biome can be null, in which case the user will not be teleported
+        boolean success = false;
+
         if (biome != null) {
             MinecraftServer server = world.getServer();
             if (server != null) {
-                ServerWorld serverWorld = server.getOverworld();
-                //locate the biome to teleport to
-                BlockPos teleportTo = serverWorld.locateBiome(
-                        server.getRegistryManager().get(Registry.BIOME_KEY).getOrEmpty(biome).orElseThrow(),
-                        user.getBlockPos(),
-                        5000,
-                        25
-                );
-                if (teleportTo != null) {
-                    user.teleport(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ(), true);
-                    //teleport occasionally silently fails
-                    if (!user.getBlockPos().equals(teleportTo)) {
-                        user.requestTeleport(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
-                    }
+                //ensure we are in the overworld
+                DynamicRegistryManager registryManager = server.getRegistryManager();
+                if (world.getDimension().equals(registryManager.get(Registry.DIMENSION_TYPE_KEY).get(DimensionType.OVERWORLD_ID))) {
+                    ServerWorld serverWorld = server.getOverworld();
+                    //locate the biome to teleport to
+                    BlockPos teleportTo = serverWorld.locateBiome(
+                            server.getRegistryManager().get(Registry.BIOME_KEY).getOrEmpty(biome).orElseThrow(),
+                            user.getBlockPos(),
+                            5000,
+                            25
+                    );
+                    if (teleportTo != null) {
+                        user.teleport(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ(), true);
+                        //teleport occasionally silently fails
+                        if (!user.getBlockPos().equals(teleportTo)) {
+                            user.requestTeleport(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
+                        }
 
-                    //sending entity status 46 causes ender pearl particles to appear
-                    world.sendEntityStatus(user, (byte) 46);
+                        //sending entity status 46 causes ender pearl particles to appear
+                        world.sendEntityStatus(user, (byte) 46);
+
+                        //success!
+                        success = true;
+                    }
                 }
             }
+        }
+
+        if (!success) {
+            //sending entity status 43 causes the player to emit some particles similar to the ones an explosion would emit
+            world.sendEntityStatus(user, (byte) 43);
         }
 
         //consume item
