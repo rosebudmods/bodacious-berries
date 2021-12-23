@@ -15,11 +15,10 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-@SuppressWarnings("unused")
 public class GrowingBerryBush extends BasicBerryBush {
-    private final DoubleSaskatoonBerryBush futureBush;
+    private final DoubleBerryBush futureBush;
 
-    public GrowingBerryBush(Settings settings, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DoubleSaskatoonBerryBush bush) {
+    public GrowingBerryBush(Settings settings, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DoubleBerryBush bush) {
         super(settings, bush.getBerryType(), bush.getUnripeBerryType(), bush.getMaxBerryAge(), smallShape, largeShape, sizeChangeAge);
         this.futureBush = bush;
     }

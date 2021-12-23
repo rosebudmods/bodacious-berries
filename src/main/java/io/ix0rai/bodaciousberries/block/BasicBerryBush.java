@@ -33,7 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-@SuppressWarnings({"deprecation", "unused"})
+@SuppressWarnings("deprecation")
 public class BasicBerryBush extends PlantBlock implements BerryBush {
     private static final Vec3d BERRY_BUSH_SLOWING_VECTOR = new Vec3d(0.5D, 0.25D, 0.5D);
     //chance to grow is one in growChance
@@ -210,7 +210,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     /**
      * handles berries being picked
-     * <br> this method is static so that it can be used in {@link DoubleSaskatoonBerryBush}
+     * <br> this method is static so that it can be used in {@link DoubleBerryBush}
      */
     public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, Item unripeBerryType, int maxBerryAmount, int maxBerryAge, int resetAge, IntProperty berryAge) {
         //play randomly picked sound

@@ -2,7 +2,7 @@ package io.ix0rai.bodaciousberries.registry.items;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BerryBush;
-import io.ix0rai.bodaciousberries.block.DoubleSaskatoonBerryBush;
+import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
@@ -24,6 +24,7 @@ public class Berries {
     public static Item UNRIPE_STRAWBERRY;
     public static Item RASPBERRIES;
     public static Item BLACKBERRIES;
+    public static Item CHORUS_BERRIES;
 
     /**
      * map containing a berry bush, its associated berry, and unripe form if applicable
@@ -81,7 +82,7 @@ public class Berries {
      * @param berries the base form of the berries to associate
      * @param unripeBerries the unripe form of the berries to associate
      */
-    public static void addDoubleBushToList(BerryBush smallBush, DoubleSaskatoonBerryBush bigBush, Item berries, Item unripeBerries) {
+    public static void addDoubleBushToList(BerryBush smallBush, DoubleBerryBush bigBush, Item berries, Item unripeBerries) {
         var berryPair = new Pair<>(berries, unripeBerries);
         BERRY_BUSHES.put(smallBush, berryPair);
         BERRY_BUSHES.put(bigBush, berryPair);
@@ -95,6 +96,7 @@ public class Berries {
         UNRIPE_STRAWBERRY = new Item(settings(1, 1.5f));
         RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(1, 4f));
         BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(1, 3.5f));
+        CHORUS_BERRIES = new AliasedBlockItem(Bushes.CHORUS_BERRY_BUSH, settings(1, 2f));
 
         //automatic stuffs
         Berries.addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES, UNRIPE_SASKATOON_BERRIES);

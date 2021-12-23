@@ -2,7 +2,8 @@ package io.ix0rai.bodaciousberries.registry;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
-import io.ix0rai.bodaciousberries.block.DoubleSaskatoonBerryBush;
+import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
+import io.ix0rai.bodaciousberries.block.DoubleChorusBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.registry.items.Berries;
 import net.minecraft.block.AbstractBlock;
@@ -20,10 +21,13 @@ public class Bushes {
 
     private static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH);
 
-    public static final DoubleSaskatoonBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleSaskatoonBerryBush(BERRY_BUSH_SETTINGS, Berries.SASKATOON_BERRIES, Berries.UNRIPE_SASKATOON_BERRIES,
-            3);
-
     //bushes
+    public static final DoubleChorusBerryBush DOUBLE_CHORUS_BERRY_BUSH = new DoubleChorusBerryBush(BERRY_BUSH_SETTINGS,
+            Berries.CHORUS_BERRIES);
+    public static final GrowingBerryBush CHORUS_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
+            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_CHORUS_BERRY_BUSH);
+    public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(BERRY_BUSH_SETTINGS,
+            Berries.SASKATOON_BERRIES, Berries.UNRIPE_SASKATOON_BERRIES);
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_SASKATOON_BERRY_BUSH);
     public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.STRAWBERRY, Berries.UNRIPE_STRAWBERRY,
