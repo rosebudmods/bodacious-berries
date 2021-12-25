@@ -37,17 +37,21 @@ public class BerryBushPatchGen {
     public static PlacedFeature PATCH_RASPBERRY_PLACED;
     public static ConfiguredFeature<?, ?> PATCH_BLACKBERRY;
     public static PlacedFeature PATCH_BLACKBERRY_PLACED;
+    public static ConfiguredFeature<?, ?> PATCH_CHORUS_BERRY;
+    public static PlacedFeature PATCH_CHORUS_BERRY_PLACED;
 
     public static void registerFeatures() {
         PATCH_SASKATOON_BERRY = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, 3);
         PATCH_STRAWBERRY = berryPatchConfiguredFeature("patch_strawberry", Bushes.STRAWBERRY_BUSH, 3);
         PATCH_BLACKBERRY = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, 4);
         PATCH_RASPBERRY = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, 4);
+        PATCH_CHORUS_BERRY = berryPatchConfiguredFeature("patch_chorus_berry", Bushes.CHORUS_BERRY_BUSH, 4);
 
         PATCH_SASKATOON_BERRY_PLACED = berryPatchPlacedFeature("patch_saskatoon_berry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_SASKATOON_BERRY);
         PATCH_STRAWBERRY_PLACED = berryPatchPlacedFeature("patch_strawberry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_STRAWBERRY);
         PATCH_BLACKBERRY_PLACED = berryPatchPlacedFeature("patch_blackberry_placed", MEDIUM_BERRY_BUSH_RARITY, PATCH_BLACKBERRY);
         PATCH_RASPBERRY_PLACED = berryPatchPlacedFeature("patch_raspberry_placed", MEDIUM_BERRY_BUSH_RARITY, PATCH_RASPBERRY);
+        PATCH_CHORUS_BERRY_PLACED = berryPatchPlacedFeature("patch_chorus_berry_placed", MEDIUM_BERRY_BUSH_RARITY, PATCH_CHORUS_BERRY);
 
         Biome.Category[] saskatoonBerryCategories = new Biome.Category[]{Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.MOUNTAIN};
         Biome.Category[] strawberryCategories = new Biome.Category[]{Biome.Category.PLAINS, Biome.Category.FOREST, Biome.Category.SWAMP};
@@ -56,6 +60,7 @@ public class BerryBushPatchGen {
         generateBerryPatches("add_strawberry_patches", strawberryCategories, PATCH_STRAWBERRY_PLACED);
         generateBerryPatches("add_raspberry_patches", saskatoonBerryCategories, PATCH_RASPBERRY_PLACED);
         generateBerryPatches("add_blackberry_patches", saskatoonBerryCategories, PATCH_BLACKBERRY_PLACED);
+        generateBerryPatches("add_chorus_berry_patches", new Biome.Category[]{Biome.Category.THEEND}, PATCH_CHORUS_BERRY_PLACED);
     }
 
     /**
