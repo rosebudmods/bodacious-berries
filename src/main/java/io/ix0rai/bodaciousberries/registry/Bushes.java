@@ -45,12 +45,16 @@ public class Bushes {
         STRAWBERRY_BUSH.setBerryType(Berries.STRAWBERRY);
         RASPBERRY_BUSH.setBerryType(Berries.RASPBERRIES);
         BLACKBERRY_BUSH.setBerryType(Berries.BLACKBERRIES);
+        CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
+        DOUBLE_CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
 
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
         register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
         register("strawberry_bush", STRAWBERRY_BUSH);
         register("raspberry_bush", RASPBERRY_BUSH);
         register("blackberry_bush", BLACKBERRY_BUSH);
+        register("double_chorus_berry_bush", DOUBLE_CHORUS_BERRY_BUSH);
+        register("chorus_berry_bush", CHORUS_BERRY_BUSH);
     }
 
     private static void register(String name, Block block) {

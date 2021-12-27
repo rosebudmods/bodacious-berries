@@ -88,6 +88,16 @@ public class Berries {
         BERRY_BUSHES.put(bigBush, berryPair);
     }
 
+    /**
+     * uses {@link #addDoubleBushToList(BerryBush, DoubleBerryBush, Item, Item)} to add both forms of a double berry bush to the automatic registration list
+     * @param smallBush the small form of the berry bush
+     * @param bigBush the double form of the berry bush
+     * @param berries the base form of the berries to associate
+     */
+    public static void addDoubleBushToList(BerryBush smallBush, DoubleBerryBush bigBush, Item berries) {
+        addDoubleBushToList(smallBush, bigBush, berries, null);
+    }
+
     public static void registerBerries() {
         //create items for each berry
         SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(2, 2f));
@@ -103,6 +113,7 @@ public class Berries {
         Berries.addToList(Bushes.STRAWBERRY_BUSH, STRAWBERRY, UNRIPE_STRAWBERRY);
         Berries.addToList(Bushes.RASPBERRY_BUSH, RASPBERRIES);
         Berries.addToList(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
+        Berries.addDoubleBushToList(Bushes.CHORUS_BERRY_BUSH, Bushes.DOUBLE_CHORUS_BERRY_BUSH, CHORUS_BERRIES);
         Berries.initialiseBerries();
 
         //register
@@ -112,6 +123,7 @@ public class Berries {
         register("unripe_strawberry", UNRIPE_STRAWBERRY);
         register("raspberries", RASPBERRIES);
         register("blackberries", BLACKBERRIES);
+        register("chorus_berries", CHORUS_BERRIES);
     }
 
     private static void register(String name, Item item) {
