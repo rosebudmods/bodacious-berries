@@ -5,6 +5,7 @@ import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleChorusBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
+import io.ix0rai.bodaciousberries.block.GrowingChorusBerryBush;
 import io.ix0rai.bodaciousberries.registry.items.Berries;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -24,7 +25,7 @@ public class Bushes {
     //bushes
     public static final DoubleChorusBerryBush DOUBLE_CHORUS_BERRY_BUSH = new DoubleChorusBerryBush(BERRY_BUSH_SETTINGS,
             Berries.CHORUS_BERRIES);
-    public static final GrowingBerryBush CHORUS_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
+    public static final GrowingChorusBerryBush CHORUS_BERRY_BUSH = new GrowingChorusBerryBush(BERRY_BUSH_SETTINGS,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_CHORUS_BERRY_BUSH);
     public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(BERRY_BUSH_SETTINGS,
             Berries.SASKATOON_BERRIES, Berries.UNRIPE_SASKATOON_BERRIES);
