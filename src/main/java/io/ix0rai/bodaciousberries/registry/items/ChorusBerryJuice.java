@@ -10,6 +10,7 @@ import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
@@ -59,6 +60,9 @@ public class ChorusBerryJuice extends Item {
 
                         //sending entity status 46 causes ender pearl particles to appear
                         world.sendEntityStatus(user, (byte) 46);
+
+                        //play teleporty sound
+                        world.playSound((PlayerEntity) user, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
                         //success!
                         success = true;
