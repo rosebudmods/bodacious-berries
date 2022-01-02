@@ -106,7 +106,7 @@ public class Berries {
         UNRIPE_STRAWBERRY = new Item(settings(1, 1.5f));
         RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(1, 4f));
         BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(1, 3.5f));
-        CHORUS_BERRIES = new AliasedBlockItem(Bushes.CHORUS_BERRY_BUSH, settings(1, 2f));
+        CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(1, 2f));
 
         //automatic stuffs
         Berries.addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES, UNRIPE_SASKATOON_BERRIES);
