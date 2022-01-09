@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-@SuppressWarnings("unused")
 public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 

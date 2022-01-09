@@ -1,7 +1,7 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.registry.BodaciousItems;
 import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
@@ -27,22 +27,25 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-//minecraft deprecates methods oddly
-@SuppressWarnings({"deprecation", "unused"})
+@SuppressWarnings("deprecation")
 public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
-    private static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
-    private static final int MAX_BERRY_AMOUNT = 6;
+    protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
+    //berry age is hard capped at 3
+    protected static final IntProperty BERRY_AGE = IntProperty.of("berry_age", 0, 3);
+    protected static final int MAX_BERRY_AGE = 3;
+    protected static final int MAX_BERRY_AMOUNT = 6;
 
-    private static final IntProperty BERRY_AGE = IntProperty.of("berry_age", 0, 3);
-    private final int maxBerryAge;
-    private Item berryType;
-    private Item unripeBerryType;
+    protected Item berryType;
+    protected Item unripeBerryType;
 
-    public DoubleBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge) {
+    public DoubleBerryBush(AbstractBlock.Settings settings, Item berryType, Item unripeBerryType) {
         super(settings);
-        this.maxBerryAge = maxBerryAge;
         this.berryType = berryType;
         this.unripeBerryType = unripeBerryType;
+    }
+
+    public DoubleBerryBush(AbstractBlock.Settings settings, Item berryType) {
+        this(settings, berryType, null);
     }
 
     public void setBerryType(Item berryType) {
@@ -55,7 +58,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(BodaciousItems.SASKATOON_BERRIES);
+        return new ItemStack(berryType);
     }
 
     @Override
@@ -77,14 +80,14 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return state.get(BERRY_AGE) < maxBerryAge;
+        return state.get(BERRY_AGE) < MAX_BERRY_AGE;
     }
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         int age = state.get(BERRY_AGE);
         //if the age isn't maximum and the light level is high enough grow the bush
-        if (age < maxBerryAge && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+        if (age < MAX_BERRY_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             world.setBlockState(pos, state.with(BERRY_AGE, age + 1), 2);
         }
     }
@@ -101,7 +104,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        int newBerryAge = Math.min(maxBerryAge, state.get(BERRY_AGE) + 1);
+        int newBerryAge = Math.min(MAX_BERRY_AGE, state.get(BERRY_AGE) + 1);
         grow(world, random, pos, state, newBerryAge);
     }
 
@@ -117,10 +120,10 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         }
 
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-            world.setBlockState(pos, state.with(BERRY_AGE, Math.min(maxBerryAge, state.get(BERRY_AGE) + 1)), 2);
+            world.setBlockState(pos, state.with(BERRY_AGE, Math.min(MAX_BERRY_AGE, state.get(BERRY_AGE) + 1)), 2);
             return ActionResult.PASS;
         } else if (state.get(BERRY_AGE) > 1) {
-            return BasicBerryBush.pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxBerryAge, 0, BERRY_AGE);
+            return BasicBerryBush.pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, MAX_BERRY_AGE, 0, BERRY_AGE);
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
@@ -143,7 +146,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public int getMaxBerryAge() {
-        return maxBerryAge;
+        return MAX_BERRY_AGE;
     }
 
     @Override

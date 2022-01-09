@@ -3,7 +3,10 @@ package io.ix0rai.bodaciousberries.registry;
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
+import io.ix0rai.bodaciousberries.block.DoubleChorusBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
+import io.ix0rai.bodaciousberries.block.GrowingChorusBerryBush;
+import io.ix0rai.bodaciousberries.registry.items.Berries;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -19,33 +22,40 @@ public class Bushes {
 
     private static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH);
 
-    public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(BERRY_BUSH_SETTINGS, BodaciousItems.SASKATOON_BERRIES, BodaciousItems.UNRIPE_SASKATOON_BERRIES,
-            3);
-
     //bushes
+    public static final DoubleChorusBerryBush DOUBLE_CHORUS_BERRY_BUSH = new DoubleChorusBerryBush(BERRY_BUSH_SETTINGS,
+            Berries.CHORUS_BERRIES);
+    public static final GrowingChorusBerryBush CHORUS_BERRY_BUSH = new GrowingChorusBerryBush(BERRY_BUSH_SETTINGS,
+            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_CHORUS_BERRY_BUSH);
+    public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(BERRY_BUSH_SETTINGS,
+            Berries.SASKATOON_BERRIES, Berries.UNRIPE_SASKATOON_BERRIES);
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_SASKATOON_BERRY_BUSH);
-    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, BodaciousItems.STRAWBERRY, BodaciousItems.UNRIPE_STRAWBERRY,
+    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.STRAWBERRY, Berries.UNRIPE_STRAWBERRY,
                 3, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
-    public static final BasicBerryBush RASPBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, BodaciousItems.RASPBERRIES,
+    public static final BasicBerryBush RASPBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.RASPBERRIES,
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
-    public static final BasicBerryBush BLACKBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, BodaciousItems.BLACKBERRIES,
+    public static final BasicBerryBush BLACKBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.BLACKBERRIES,
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
 
     public static void registerBushes() {
-        SASKATOON_BERRY_BUSH.setBerryType(BodaciousItems.SASKATOON_BERRIES);
-        SASKATOON_BERRY_BUSH.setUnripeBerryType(BodaciousItems.UNRIPE_SASKATOON_BERRIES);
-        DOUBLE_SASKATOON_BERRY_BUSH.setBerryType(BodaciousItems.SASKATOON_BERRIES);
-        DOUBLE_SASKATOON_BERRY_BUSH.setUnripeBerryType(BodaciousItems.SASKATOON_BERRIES);
-        STRAWBERRY_BUSH.setBerryType(BodaciousItems.STRAWBERRY);
-        RASPBERRY_BUSH.setBerryType(BodaciousItems.RASPBERRIES);
-        BLACKBERRY_BUSH.setBerryType(BodaciousItems.BLACKBERRIES);
+        SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
+        SASKATOON_BERRY_BUSH.setUnripeBerryType(Berries.UNRIPE_SASKATOON_BERRIES);
+        DOUBLE_SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
+        DOUBLE_SASKATOON_BERRY_BUSH.setUnripeBerryType(Berries.SASKATOON_BERRIES);
+        STRAWBERRY_BUSH.setBerryType(Berries.STRAWBERRY);
+        RASPBERRY_BUSH.setBerryType(Berries.RASPBERRIES);
+        BLACKBERRY_BUSH.setBerryType(Berries.BLACKBERRIES);
+        CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
+        DOUBLE_CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
 
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
         register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
         register("strawberry_bush", STRAWBERRY_BUSH);
         register("raspberry_bush", RASPBERRY_BUSH);
         register("blackberry_bush", BLACKBERRY_BUSH);
+        register("double_chorus_berry_bush", DOUBLE_CHORUS_BERRY_BUSH);
+        register("chorus_berry_bush", CHORUS_BERRY_BUSH);
     }
 
     private static void register(String name, Block block) {
