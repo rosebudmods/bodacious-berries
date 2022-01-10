@@ -25,6 +25,99 @@ public class Berries {
     public static Item RASPBERRIES;
     public static Item BLACKBERRIES;
     public static Item CHORUS_BERRIES;
+    public static Item WHITE_RAINBOWBERRIES;
+    public static Item ORANGE_RAINBOWBERRIES;
+    public static Item MAGENTA_RAINBOWBERRIES;
+    public static Item LIGHT_BLUE_RAINBOWBERRIES;
+    public static Item YELLOW_RAINBOWBERRIES;
+    public static Item LIME_RAINBOWBERRIES;
+    public static Item PINK_RAINBOWBERRIES;
+    public static Item GRAY_RAINBOWBERRIES;
+    public static Item LIGHT_GRAY_RAINBOWBERRIES;
+    public static Item CYAN_RAINBOWBERRIES;
+    public static Item PURPLE_RAINBOWBERRIES;
+    public static Item BLUE_RAINBOWBERRIES;
+    public static Item BROWN_RAINBOWBERRIES;
+    public static Item GREEN_RAINBOWBERRIES;
+    public static Item RED_RAINBOWBERRIES;
+    public static Item BLACK_RAINBOWBERRIES;
+
+    public static void registerBerries() {
+        //create items for each berry
+        SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(2, 2f));
+        UNRIPE_SASKATOON_BERRIES = new Item(settings(1, 2f));
+        STRAWBERRY = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
+        UNRIPE_STRAWBERRY = new Item(settings(1, 1.5f));
+        RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(1, 4f));
+        BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(1, 3.5f));
+        CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(1, 2f));
+        WHITE_RAINBOWBERRIES = rainbowberries();
+        ORANGE_RAINBOWBERRIES = rainbowberries();
+        MAGENTA_RAINBOWBERRIES = rainbowberries();
+        LIGHT_BLUE_RAINBOWBERRIES = rainbowberries();
+        YELLOW_RAINBOWBERRIES = rainbowberries();
+        LIME_RAINBOWBERRIES = rainbowberries();
+        PINK_RAINBOWBERRIES = rainbowberries();
+        GRAY_RAINBOWBERRIES = rainbowberries();
+        LIGHT_GRAY_RAINBOWBERRIES = rainbowberries();
+        CYAN_RAINBOWBERRIES = rainbowberries();
+        PURPLE_RAINBOWBERRIES = rainbowberries();
+        BLUE_RAINBOWBERRIES = rainbowberries();
+        BROWN_RAINBOWBERRIES = rainbowberries();
+        GREEN_RAINBOWBERRIES = rainbowberries();
+        RED_RAINBOWBERRIES = rainbowberries();
+        BLACK_RAINBOWBERRIES = rainbowberries();
+
+        //automatic stuffs
+        Berries.addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES, UNRIPE_SASKATOON_BERRIES);
+        Berries.addToList(Bushes.STRAWBERRY_BUSH, STRAWBERRY, UNRIPE_STRAWBERRY);
+        Berries.addToList(Bushes.RASPBERRY_BUSH, RASPBERRIES);
+        Berries.addToList(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
+        Berries.addDoubleBushToList(Bushes.CHORUS_BERRY_BUSH, Bushes.DOUBLE_CHORUS_BERRY_BUSH, CHORUS_BERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, WHITE_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, ORANGE_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, MAGENTA_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, LIGHT_BLUE_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, YELLOW_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, LIME_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, PINK_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, GRAY_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, LIGHT_GRAY_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, CYAN_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, PURPLE_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, BLUE_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, BROWN_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, GREEN_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, RED_RAINBOWBERRIES);
+        Berries.addToList(Bushes.RAINBOWBERRY_BUSH, BLACK_RAINBOWBERRIES);
+
+        Berries.initialiseBerries();
+
+        //register
+        register("saskatoon_berries", SASKATOON_BERRIES);
+        register("unripe_saskatoon_berries", UNRIPE_SASKATOON_BERRIES);
+        register("strawberry", STRAWBERRY);
+        register("unripe_strawberry", UNRIPE_STRAWBERRY);
+        register("raspberries", RASPBERRIES);
+        register("blackberries", BLACKBERRIES);
+        register("chorus_berries", CHORUS_BERRIES);
+        register("white_rainbowberries", WHITE_RAINBOWBERRIES);
+        register("orange_rainbowberries", ORANGE_RAINBOWBERRIES);
+        register("magenta_rainbowberries", MAGENTA_RAINBOWBERRIES);
+        register("light_blue_rainbowberries", LIGHT_BLUE_RAINBOWBERRIES);
+        register("yellow_rainbowberries", YELLOW_RAINBOWBERRIES);
+        register("lime_rainbowberries", LIME_RAINBOWBERRIES);
+        register("pink_rainbowberries", PINK_RAINBOWBERRIES);
+        register("gray_rainbowberries", GRAY_RAINBOWBERRIES);
+        register("light_gray_rainbowberries", LIGHT_GRAY_RAINBOWBERRIES);
+        register("cyan_rainbowberries", CYAN_RAINBOWBERRIES);
+        register("purple_rainbowberries", PURPLE_RAINBOWBERRIES);
+        register("blue_rainbowberries", BLUE_RAINBOWBERRIES);
+        register("brown_rainbowberries", BROWN_RAINBOWBERRIES);
+        register("green_rainbowberries", GREEN_RAINBOWBERRIES);
+        register("red_rainbowberries", RED_RAINBOWBERRIES);
+        register("black_rainbowberries", BLACK_RAINBOWBERRIES);
+    }
 
     /**
      * map containing a berry bush, its associated berry, and unripe form if applicable
@@ -98,40 +191,16 @@ public class Berries {
         addDoubleBushToList(smallBush, bigBush, berries, null);
     }
 
-    public static void registerBerries() {
-        //create items for each berry
-        SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(2, 2f));
-        UNRIPE_SASKATOON_BERRIES = new Item(settings(1, 2f));
-        STRAWBERRY = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
-        UNRIPE_STRAWBERRY = new Item(settings(1, 1.5f));
-        RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(1, 4f));
-        BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(1, 3.5f));
-        CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(1, 2f));
-
-        //automatic stuffs
-        Berries.addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES, UNRIPE_SASKATOON_BERRIES);
-        Berries.addToList(Bushes.STRAWBERRY_BUSH, STRAWBERRY, UNRIPE_STRAWBERRY);
-        Berries.addToList(Bushes.RASPBERRY_BUSH, RASPBERRIES);
-        Berries.addToList(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
-        Berries.addDoubleBushToList(Bushes.CHORUS_BERRY_BUSH, Bushes.DOUBLE_CHORUS_BERRY_BUSH, CHORUS_BERRIES);
-        Berries.initialiseBerries();
-
-        //register
-        register("saskatoon_berries", SASKATOON_BERRIES);
-        register("unripe_saskatoon_berries", UNRIPE_SASKATOON_BERRIES);
-        register("strawberry", STRAWBERRY);
-        register("unripe_strawberry", UNRIPE_STRAWBERRY);
-        register("raspberries", RASPBERRIES);
-        register("blackberries", BLACKBERRIES);
-        register("chorus_berries", CHORUS_BERRIES);
-    }
-
     private static void register(String name, Item item) {
         Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), item);
     }
 
     private static Item.Settings settings(int hunger, float saturation) {
         return new Item.Settings().group(ItemGroup.FOOD).food(new FoodComponent.Builder().hunger(hunger).saturationModifier(saturation).snack().build());
+    }
+
+    private static Item rainbowberries() {
+        return new AliasedBlockItem(Bushes.RAINBOWBERRY_BUSH, settings(2, 1.5f));
     }
 
     /**

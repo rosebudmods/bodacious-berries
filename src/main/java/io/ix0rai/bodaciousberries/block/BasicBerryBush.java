@@ -212,7 +212,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * handles berries being picked
      * <br> this method is static so that it can be used in {@link DoubleBerryBush}
      */
-    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, Item unripeBerryType, int maxBerryAmount, int maxBerryAge, int resetAge, IntProperty berryAge) {
+    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, Item unripeBerryType, int maxBerryAmount, int maxBerryAge, int sizeChangeAge, IntProperty berryAge) {
         //play randomly picked sound
         world.playSound(null, pos, selectPickSound(), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 
@@ -243,7 +243,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         }
 
         //reset berry growth; they were just picked
-        world.setBlockState(pos, state.with(berryAge, resetAge), 2);
+        world.setBlockState(pos, state.with(berryAge, sizeChangeAge), 2);
         return ActionResult.success(world.isClient);
     }
 
