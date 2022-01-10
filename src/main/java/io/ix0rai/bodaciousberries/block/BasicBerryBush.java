@@ -43,7 +43,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     protected Item berryType;
     protected Item unripeBerryType;
-    public static final IntProperty BERRY_AGE = IntProperty.of("age", 0 ,10);
+    public static final IntProperty BERRY_AGE = IntProperty.of("age", 0,10);
     protected final int maxBerryAge;
     protected final VoxelShape smallShape;
     protected final VoxelShape largeShape;
