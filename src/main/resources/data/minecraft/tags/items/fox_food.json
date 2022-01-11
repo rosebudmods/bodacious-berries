@@ -6,21 +6,6 @@
     "bodaciousberries:strawberry",
     "bodaciousberries:blackberries",
     "bodaciousberries:chorus_berries",
-    "bodaciousberries:white_rainbowberries",
-    "bodaciousberries:orange_rainbowberries",
-    "bodaciousberries:magenta_rainbowberries",
-    "bodaciousberries:light_blue_rainbowberries",
-    "bodaciousberries:yellow_rainbowberries",
-    "bodaciousberries:lime_rainbowberries",
-    "bodaciousberries:pink_rainbowberries",
-    "bodaciousberries:gray_rainbowberries",
-    "bodaciousberries:light_gray_rainbowberries",
-    "bodaciousberries:cyan_rainbowberries",
-    "bodaciousberries:purple_rainbowberries",
-    "bodaciousberries:blue_rainbowberries",
-    "bodaciousberries:brown_rainbowberries",
-    "bodaciousberries:green_rainbowberries",
-    "bodaciousberries:red_rainbowberries",
-    "bodaciousberries:black_rainbowberries"
+    "bodaciousberries:rainbowberries"
   ]
 }

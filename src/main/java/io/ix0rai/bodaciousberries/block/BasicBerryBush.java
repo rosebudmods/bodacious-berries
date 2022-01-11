@@ -213,9 +213,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * <br> this method is static so that it can be used in {@link DoubleBerryBush}
      */
     public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, Item unripeBerryType, int maxBerryAmount, int maxBerryAge, int sizeChangeAge, IntProperty berryAge) {
-        //play randomly picked sound
-        world.playSound(null, pos, selectPickSound(), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
-
         //pick berry amount
         //up to three berries
         int berryAmount = world.random.nextInt(maxBerryAmount + 1);
@@ -225,11 +222,13 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         if (currentBerryAge < maxBerryAge) {
             //if we have an unripe berry type, provide unripe berries and maybe one berry
             //if we don't, ensure a berry
-            boolean giveRipeBerry = true;
+            boolean giveRipeBerry;
             if (unripeBerryType != null) {
                 dropStack(world, pos, new ItemStack(unripeBerryType, berryAmount));
                 berryAmount = 1;
                 giveRipeBerry = world.random.nextInt(2) == 0;
+            } else {
+                return ActionResult.FAIL;
             }
 
             //if age is one under maximum, have a chance of getting a ripe berry
@@ -241,6 +240,9 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             berryAmount += 2;
             dropStack(world, pos, new ItemStack(berryType, berryAmount));
         }
+
+        //play randomly picked sound
+        world.playSound(null, pos, selectPickSound(), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 
         //reset berry growth; they were just picked
         world.setBlockState(pos, state.with(berryAge, sizeChangeAge), 2);

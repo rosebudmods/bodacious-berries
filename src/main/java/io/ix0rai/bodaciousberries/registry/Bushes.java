@@ -6,7 +6,6 @@ import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleChorusBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingChorusBerryBush;
-import io.ix0rai.bodaciousberries.block.RainbowberryBush;
 import io.ix0rai.bodaciousberries.registry.items.Berries;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -38,8 +37,8 @@ public class Bushes {
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
     public static final BasicBerryBush BLACKBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.BLACKBERRIES,
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
-    public static final RainbowberryBush RAINBOWBERRY_BUSH = new RainbowberryBush(BERRY_BUSH_SETTINGS, Berries.MAGENTA_RAINBOWBERRIES,
-            3, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
+    public static final BasicBerryBush RAINBOWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.RAINBOWBERRIES,
+            4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
 
     public static void registerBushes() {
         SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
@@ -51,7 +50,7 @@ public class Bushes {
         BLACKBERRY_BUSH.setBerryType(Berries.BLACKBERRIES);
         CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
         DOUBLE_CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
-        RAINBOWBERRY_BUSH.setBerryType(Berries.MAGENTA_RAINBOWBERRIES);
+        RAINBOWBERRY_BUSH.setBerryType(Berries.RAINBOWBERRIES);
 
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
         register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
