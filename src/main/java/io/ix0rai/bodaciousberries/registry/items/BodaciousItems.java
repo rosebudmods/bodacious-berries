@@ -15,6 +15,7 @@ import static net.minecraft.world.biome.BiomeKeys.*;
 public class BodaciousItems {
     private static final Settings CHORUS_JUICE_SETTINGS = new Settings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(2).saturationModifier(4F).build()).group(ItemGroup.FOOD).maxCount(16);
 
+    public static Item CHORUS_BERRY_JUICE;
     public static Item CHORUS_BERRY_JUICE_JUNGLE;
     public static Item CHORUS_BERRY_JUICE_PLAINS;
     public static Item CHORUS_BERRY_JUICE_SNOWY_SLOPES;
@@ -38,6 +39,7 @@ public class BodaciousItems {
     public static void registerItems() {
         Berries.registerBerries();
 
+        CHORUS_BERRY_JUICE = chorusBerryJuice(null);
         CHORUS_BERRY_JUICE_JUNGLE = chorusBerryJuice(JUNGLE);
         CHORUS_BERRY_JUICE_PLAINS = chorusBerryJuice(PLAINS);
         CHORUS_BERRY_JUICE_SNOWY_SLOPES = chorusBerryJuice(SNOWY_SLOPES);
@@ -58,6 +60,7 @@ public class BodaciousItems {
         CHORUS_BERRY_JUICE_LUSH_CAVES = chorusBerryJuice(LUSH_CAVES);
         CHORUS_BERRY_JUICE_DRIPSTONE_CAVES = chorusBerryJuice(DRIPSTONE_CAVES);
 
+        register("chorus_berry_juice", CHORUS_BERRY_JUICE);
         register("chorus_berry_juice_jungle", CHORUS_BERRY_JUICE_JUNGLE);
         register("chorus_berry_juice_plains", CHORUS_BERRY_JUICE_PLAINS);
         register("chorus_berry_juice_snowy_slopes", CHORUS_BERRY_JUICE_SNOWY_SLOPES);
@@ -84,6 +87,9 @@ public class BodaciousItems {
     }
 
     private static ChorusBerryJuice chorusBerryJuice(RegistryKey<Biome> biome) {
+        if (biome == null) {
+            return new ChorusBerryJuice(CHORUS_JUICE_SETTINGS, null);
+        }
         return new ChorusBerryJuice(CHORUS_JUICE_SETTINGS, biome.getValue());
     }
 }

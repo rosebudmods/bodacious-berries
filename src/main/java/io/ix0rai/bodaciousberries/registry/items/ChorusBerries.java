@@ -30,7 +30,7 @@ public class ChorusBerries extends AliasedBlockItem {
             double originalY = user.getY();
             double originalZ = user.getZ();
 
-            for(int i = 0; i < 16; ++i) {
+            for (int i = 0; i < 16; i++) {
                 double x = user.getX() + (random.nextDouble() - 0.5D) * 8.0D;
                 double y = MathHelper.clamp(user.getY() + (random.nextInt(16) - 8), world.getBottomY(), (world.getBottomY() + ((ServerWorld) world).getLogicalHeight() - 1));
                 double z = user.getZ() + (random.nextDouble() - 0.5D) * 8.0D;

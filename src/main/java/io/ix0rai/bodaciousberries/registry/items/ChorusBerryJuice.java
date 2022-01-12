@@ -44,6 +44,7 @@ public class ChorusBerryJuice extends Item {
                 DynamicRegistryManager registryManager = server.getRegistryManager();
                 if (world.getDimension().equals(registryManager.get(Registry.DIMENSION_TYPE_KEY).get(DimensionType.OVERWORLD_ID))) {
                     ServerWorld serverWorld = server.getOverworld();
+
                     //locate the biome to teleport to
                     BlockPos teleportTo = serverWorld.locateBiome(
                             server.getRegistryManager().get(Registry.BIOME_KEY).getOrEmpty(biome).orElseThrow(),
@@ -51,6 +52,7 @@ public class ChorusBerryJuice extends Item {
                             5000,
                             25
                     );
+
                     if (teleportTo != null) {
                         user.teleport(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ(), true);
                         //teleport occasionally silently fails
@@ -62,7 +64,9 @@ public class ChorusBerryJuice extends Item {
                         world.sendEntityStatus(user, (byte) 46);
 
                         //play teleporty sound
-                        world.playSound((PlayerEntity) user, user.getBlockPos(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                        SoundEvent soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+                        user.playSound(soundEvent, 1.0F, 1.0F);
+                        world.playSound(null, user.getBlockPos(), soundEvent, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
                         //success!
                         success = true;
