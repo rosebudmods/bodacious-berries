@@ -43,8 +43,8 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     protected Item berryType;
     protected Item unripeBerryType;
-    public static final IntProperty BERRY_AGE = IntProperty.of("age", 0 ,10);
-    protected final int maxBerryAge;
+    public static final IntProperty AGE = IntProperty.of("age", 0 ,10);
+    protected final int maxAge;
     protected final VoxelShape smallShape;
     protected final VoxelShape largeShape;
     protected final int sizeChangeAge;
@@ -66,36 +66,36 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * default berry bush constructor
      * @param settings block settings for this berry bush
      * @param berryType which berries will be given when this bush is picked from
-     * @param maxBerryAge maximum age bush can grow to
+     * @param maxAge maximum age bush can grow to
      * @param smallShape small voxel shape for the bush
      * @param largeShape large voxel shape for the bush
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
-    public BasicBerryBush(Settings settings, Item berryType, int maxBerryAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        this(settings, berryType, null, maxBerryAge, smallShape, largeShape, sizeChangeAge);
+    public BasicBerryBush(Settings settings, Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        this(settings, berryType, null, maxAge, smallShape, largeShape, sizeChangeAge);
     }
 
     /**
      * secondary berry bush constructor
-     * * @param settings block settings for this berry bush
+     * @param settings block settings for this berry bush
      * @param berryType which berries will be given when this bush is picked from
      * @param unripeBerryType which type of berries will be given when this bush is picked from, but not yet fully grown
-     * @param maxBerryAge maximum age bush can grow to
+     * @param maxAge maximum age bush can grow to
      * @param smallShape small voxel shape for the bush
      * @param largeShape large voxel shape for the bush
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
-    public BasicBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxBerryAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+    public BasicBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         //add nonOpaque to settings to ensure that the bush isn't considered a solid block when rendering
         super(settings.nonOpaque());
         this.berryType = berryType;
-        this.maxBerryAge = maxBerryAge;
+        this.maxAge = maxAge;
         this.smallShape = smallShape;
         this.largeShape = largeShape;
         this.unripeBerryType = unripeBerryType;
         this.sizeChangeAge = sizeChangeAge;
         //set default age to 0
-        this.setDefaultState((this.stateManager.getDefaultState()).with(BERRY_AGE, 0));
+        this.setDefaultState((this.stateManager.getDefaultState()).with(AGE, 0));
         //ensure cutout texture is rendered
         BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
     }
@@ -133,7 +133,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return state.get(BERRY_AGE) < sizeChangeAge ? smallShape : largeShape;
+        return state.get(AGE) < sizeChangeAge ? smallShape : largeShape;
     }
 
     /**
@@ -141,7 +141,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return state.get(BERRY_AGE) < maxBerryAge;
+        return state.get(AGE) < maxAge;
     }
 
     /**
@@ -150,10 +150,10 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int age = state.get(BERRY_AGE);
+        int age = state.get(AGE);
         //if the age isn't maximum and the light level is high enough grow the bush
-        if (age <= maxBerryAge && random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
-            world.setBlockState(pos, state.with(BERRY_AGE, age + 1), 2);
+        if (age <= maxAge && random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+            world.setBlockState(pos, state.with(AGE, age + 1), 2);
         }
     }
 
@@ -163,9 +163,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        final EntityType<?> type = entity.getType();
-
-        if (entity instanceof LivingEntity && !SMALL_ENTITIES.contains(type)) {
+        if (entity instanceof LivingEntity && !SMALL_ENTITIES.contains(entity.getType())) {
             entity.slowMovement(state, BERRY_BUSH_SLOWING_VECTOR);
         }
     }
@@ -193,15 +191,15 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             throw new ImproperConfigurationException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
         }
 
-        final int currentBerryAge = state.get(BERRY_AGE);
+        final int currentAge = state.get(AGE);
         //if bone meal is allowed to be used, grow plant and pass action
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-            final int newAge = Math.min(maxBerryAge, currentBerryAge + 1);
-            world.setBlockState(pos, state.with(BERRY_AGE, newAge), 2);
+            final int newAge = Math.min(maxAge, currentAge + 1);
+            world.setBlockState(pos, state.with(AGE, newAge), 2);
             return ActionResult.PASS;
-        } else if (currentBerryAge > 1) {
+        } else if (currentAge > 1) {
             //otherwise, give berries/unripe berries
-            return pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxBerryAge, sizeChangeAge, BERRY_AGE);
+            return pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxAge, sizeChangeAge, AGE);
         } else {
             //otherwise, do default use action from superclass
             return super.onUse(state, world, pos, player, hand, hit);
@@ -212,14 +210,14 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * handles berries being picked
      * <br> this method is static so that it can be used in {@link DoubleBerryBush}
      */
-    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, Item unripeBerryType, int maxBerryAmount, int maxBerryAge, int sizeChangeAge, IntProperty berryAge) {
+    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, Item unripeBerryType, int maxBerryAmount, int maxAge, int sizeChangeAge, IntProperty berryAge) {
         //pick berry amount
         //up to three berries
         int berryAmount = world.random.nextInt(maxBerryAmount + 1);
-        final int currentBerryAge = state.get(berryAge);
+        final int currentAge = state.get(berryAge);
 
         //if growing not finished give unripe berries
-        if (currentBerryAge < maxBerryAge) {
+        if (currentAge < maxAge) {
             //if we have an unripe berry type, provide unripe berries and maybe one berry
             //if we don't, ensure a berry
             boolean giveRipeBerry;
@@ -232,7 +230,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             }
 
             //if age is one under maximum, have a chance of getting a ripe berry
-            if (currentBerryAge == maxBerryAge - 1 && giveRipeBerry) {
+            if (currentAge == maxAge - 1 && giveRipeBerry) {
                 dropStack(world, pos, new ItemStack(berryType, berryAmount));
             }
         } else {
@@ -251,7 +249,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(BERRY_AGE);
+        builder.add(AGE);
     }
 
     /**
@@ -264,27 +262,21 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         return hasRandomTicks(state);
     }
 
-    /**
-     * checks if the bush can grow
-     */
     @Override
     public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
         //hasRandomTicks checks the same thing as this method
         return hasRandomTicks(state);
     }
 
-    /**
-     * grows the bush. simple as that.
-     */
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        int newAge = Math.min(maxBerryAge, state.get(BERRY_AGE) + 1);
+        int newAge = Math.min(maxAge, state.get(AGE) + 1);
         grow(world, random, pos, state, newAge);
     }
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, Integer newAge) {
-        world.setBlockState(pos, state.with(BERRY_AGE, newAge), 2);
+        world.setBlockState(pos, state.with(AGE, newAge), 2);
     }
 
     @Override
@@ -298,13 +290,13 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     @Override
-    public IntProperty getBerryAge() {
-        return BERRY_AGE;
+    public IntProperty getAge() {
+        return AGE;
     }
 
     @Override
-    public int getMaxBerryAge() {
-        return maxBerryAge;
+    public int getMaxAge() {
+        return maxAge;
     }
 
     @Override
@@ -317,7 +309,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         return largeShape;
     }
 
-    @Override
     public int getSizeChangeAge() {
         return sizeChangeAge;
     }

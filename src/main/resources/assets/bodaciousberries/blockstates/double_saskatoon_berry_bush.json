@@ -1,27 +1,27 @@
 {
   "variants": {
-    "half=lower,berry_age=0": {
+    "half=lower,age=0": {
       "model": "bodaciousberries:block/berry_bush/double_saskatoon_bush_stage0"
     },
-    "half=lower,berry_age=1": {
+    "half=lower,age=1": {
       "model": "bodaciousberries:block/berry_bush/double_saskatoon_bush_stage1"
     },
-    "half=lower,berry_age=2": {
+    "half=lower,age=2": {
       "model": "bodaciousberries:block/berry_bush/double_saskatoon_bush_stage2"
     },
-    "half=lower,berry_age=3": {
+    "half=lower,age=3": {
       "model": "bodaciousberries:block/berry_bush/double_saskatoon_bush_stage3"
     },
-    "half=upper,berry_age=0": {
+    "half=upper,age=0": {
       "model": "bodaciousberries:block/berry_bush/double_saskatoon_bush_stage0"
     },
-    "half=upper,berry_age=1": {
+    "half=upper,age=1": {
       "model": "bodaciousberries:block/berry_bush/double_saskatoon_bush_stage1"
     },
-    "half=upper,berry_age=2": {
+    "half=upper,age=2": {
       "model": "bodaciousberries:block/berry_bush/double_saskatoon_bush_stage2"
     },
-    "half=upper,berry_age=3": {
+    "half=upper,age=3": {
       "model": "bodaciousberries:block/berry_bush/double_saskatoon_bush_stage3"
     }
   }

@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -30,9 +29,9 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
-    //berry age is hard capped at 3
-    protected static final IntProperty BERRY_AGE = IntProperty.of("berry_age", 0, 3);
-    protected static final int MAX_BERRY_AGE = 3;
+    //berry age is hard capped at 3 for double bushes
+    protected static final IntProperty AGE = IntProperty.of("age", 0, 3);
+    protected static final int MAX_AGE = 3;
     protected static final int MAX_BERRY_AMOUNT = 6;
 
     protected Item berryType;
@@ -48,10 +47,12 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         this(settings, berryType, null);
     }
 
+    @Override
     public void setBerryType(Item berryType) {
         this.berryType = berryType;
     }
 
+    @Override
     public void setUnripeBerryType(Item unripeBerryType) {
         this.unripeBerryType = unripeBerryType;
     }
@@ -63,32 +64,29 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        final EntityType<?> type = entity.getType();
-
-        if (entity instanceof LivingEntity && !BasicBerryBush.SMALL_ENTITIES.contains(type)) {
+        if (entity instanceof LivingEntity && !BasicBerryBush.SMALL_ENTITIES.contains(entity.getType())) {
             entity.slowMovement(state, DOUBLE_BUSH_SLOWING_VECTOR);
         }
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        //so it turns out I spent about an hour and a half debugging a crash before realising it originated from this property not existing
+        //I spent about an hour and a half debugging a crash before realising it originated from this property not existing
         //yay me
-        //this comment is staying in the final version
-        builder.add(BERRY_AGE).add(HALF);
+        builder.add(AGE).add(HALF);
     }
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return state.get(BERRY_AGE) < MAX_BERRY_AGE;
+        return state.get(AGE) < MAX_AGE;
     }
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int age = state.get(BERRY_AGE);
+        int age = state.get(AGE);
         //if the age isn't maximum and the light level is high enough grow the bush
-        if (age < MAX_BERRY_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
-            world.setBlockState(pos, state.with(BERRY_AGE, age + 1), 2);
+        if (age < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+            world.setBlockState(pos, state.with(AGE, age + 1), 2);
         }
     }
 
@@ -104,13 +102,13 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        int newBerryAge = Math.min(MAX_BERRY_AGE, state.get(BERRY_AGE) + 1);
+        int newBerryAge = Math.min(MAX_AGE, state.get(AGE) + 1);
         grow(world, random, pos, state, newBerryAge);
     }
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, Integer newAge) {
-        world.setBlockState(pos, state.with(BERRY_AGE, newAge), 2);
+        world.setBlockState(pos, state.with(AGE, newAge), 2);
     }
 
     @Override
@@ -120,10 +118,10 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         }
 
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-            world.setBlockState(pos, state.with(BERRY_AGE, Math.min(MAX_BERRY_AGE, state.get(BERRY_AGE) + 1)), 2);
+            world.setBlockState(pos, state.with(AGE, Math.min(MAX_AGE, state.get(AGE) + 1)), 2);
             return ActionResult.PASS;
-        } else if (state.get(BERRY_AGE) > 1) {
-            return BasicBerryBush.pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, MAX_BERRY_AGE, 0, BERRY_AGE);
+        } else if (state.get(AGE) > 1) {
+            return BasicBerryBush.pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, MAX_AGE, 0, AGE);
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
@@ -140,13 +138,13 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     }
 
     @Override
-    public IntProperty getBerryAge() {
-        return BERRY_AGE;
+    public IntProperty getAge() {
+        return AGE;
     }
 
     @Override
-    public int getMaxBerryAge() {
-        return MAX_BERRY_AGE;
+    public int getMaxAge() {
+        return MAX_AGE;
     }
 
     @Override
@@ -159,9 +157,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         return VoxelShapes.fullCube();
     }
 
-    /**
-     * DO NOT USE, SIZE CHANGE AGE DOES NOT APPLY TO DOUBLE BERRY BUSHES
-     */
     @Override
     public int getSizeChangeAge() {
         throw new IllegalStateException("size change age does not apply to double berry bushes");
