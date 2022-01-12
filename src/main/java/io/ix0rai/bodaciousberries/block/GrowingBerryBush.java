@@ -19,22 +19,22 @@ public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 
     public GrowingBerryBush(Settings settings, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DoubleBerryBush bush) {
-        super(settings, bush.getBerryType(), bush.getUnripeBerryType(), bush.getMaxBerryAge(), smallShape, largeShape, sizeChangeAge);
+        super(settings, bush.getBerryType(), bush.getUnripeBerryType(), bush.getMaxAge(), smallShape, largeShape, sizeChangeAge);
         this.futureBush = bush;
     }
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int age = state.get(BERRY_AGE);
+        int age = state.get(AGE);
         //if the age isn't maximum and the light level is high enough, grow the bush
-        if (age <= maxBerryAge && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+        if (age <= maxAge && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             grow(world, random, pos, state, age + 1);
         }
     }
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        int newAge = Math.min(maxBerryAge, state.get(BERRY_AGE) + 1);
+        int newAge = Math.min(maxAge, state.get(AGE) + 1);
         grow(world, random, pos, state, newAge);
     }
 
@@ -43,8 +43,8 @@ public class GrowingBerryBush extends BasicBerryBush {
         if (newAge == null) {
             grow(world, random, pos, state);
         } else {
-            if (newAge < maxBerryAge) {
-                world.setBlockState(pos, state.with(BERRY_AGE, newAge), 2);
+            if (newAge < maxAge) {
+                world.setBlockState(pos, state.with(AGE, newAge), 2);
             } else {
                 TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, 2);
             }
@@ -58,15 +58,15 @@ public class GrowingBerryBush extends BasicBerryBush {
         }
 
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-            final int newAge = Math.min(maxBerryAge, state.get(BERRY_AGE) + 1);
-            if (newAge < maxBerryAge) {
-                world.setBlockState(pos, state.with(BERRY_AGE, newAge), 2);
+            final int newAge = Math.min(maxAge, state.get(AGE) + 1);
+            if (newAge < maxAge) {
+                world.setBlockState(pos, state.with(AGE, newAge), 2);
             } else {
                 TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, 2);
             }
             return ActionResult.PASS;
-        } else if (state.get(BERRY_AGE) > 1) {
-            return pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxBerryAge, sizeChangeAge, BERRY_AGE);
+        } else if (state.get(AGE) > 1) {
+            return pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxAge, sizeChangeAge, AGE);
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }

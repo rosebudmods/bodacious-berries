@@ -14,8 +14,8 @@ import java.util.Random;
 public interface BerryBush extends Fertilizable {
     Item getBerryType();
     Item getUnripeBerryType();
-    IntProperty getBerryAge();
-    int getMaxBerryAge();
+    IntProperty getAge();
+    int getMaxAge();
     VoxelShape getSmallShape();
     VoxelShape getLargeShape();
     int getSizeChangeAge();
