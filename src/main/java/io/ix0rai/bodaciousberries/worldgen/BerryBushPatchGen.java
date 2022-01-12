@@ -40,8 +40,8 @@ public class BerryBushPatchGen {
     public static PlacedFeature PATCH_BLACKBERRY_PLACED;
     public static ConfiguredFeature<?, ?> PATCH_CHORUS_BERRY;
     public static PlacedFeature PATCH_CHORUS_BERRY_PLACED;
-    public static ConfiguredFeature<?, ?> PATCH_RAINBOWBERRY;
-    public static PlacedFeature PATCH_RAINBOWBERRY_PLACED;
+    public static ConfiguredFeature<?, ?> PATCH_RAINBERRY;
+    public static PlacedFeature PATCH_RAINBERRY_PLACED;
 
     public static void registerFeatures() {
         PATCH_SASKATOON_BERRY = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, 3, Blocks.GRASS_BLOCK);
@@ -49,14 +49,14 @@ public class BerryBushPatchGen {
         PATCH_BLACKBERRY = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
         PATCH_RASPBERRY = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
         PATCH_CHORUS_BERRY = berryPatchConfiguredFeature("patch_chorus_berry", Bushes.CHORUS_BERRY_BUSH, 3, Blocks.END_STONE);
-        PATCH_RAINBOWBERRY = berryPatchConfiguredFeature("patch_rainbowberry", Bushes.RAINBOWBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
+        PATCH_RAINBERRY = berryPatchConfiguredFeature("patch_rainberry", Bushes.RAINBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
 
         PATCH_SASKATOON_BERRY_PLACED = berryPatchPlacedFeature("patch_saskatoon_berry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_SASKATOON_BERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
         PATCH_STRAWBERRY_PLACED = berryPatchPlacedFeature("patch_strawberry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_STRAWBERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
         PATCH_BLACKBERRY_PLACED = berryPatchPlacedFeature("patch_blackberry_placed", MEDIUM_BERRY_BUSH_RARITY, PATCH_BLACKBERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
         PATCH_RASPBERRY_PLACED = berryPatchPlacedFeature("patch_raspberry_placed", MEDIUM_BERRY_BUSH_RARITY, PATCH_RASPBERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
         PATCH_CHORUS_BERRY_PLACED = berryPatchPlacedFeature("patch_chorus_berry_placed", RARE_BERRY_BUSH_RARITY, PATCH_CHORUS_BERRY, PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP);
-        PATCH_RAINBOWBERRY_PLACED = berryPatchPlacedFeature("patch_rainbowberry_placed", RARE_BERRY_BUSH_RARITY, PATCH_RAINBOWBERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
+        PATCH_RAINBERRY_PLACED = berryPatchPlacedFeature("patch_rainberry_placed", RARE_BERRY_BUSH_RARITY, PATCH_RAINBERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
 
         List<Biome.Category> saskatoonBerryCategories = List.of(Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.MOUNTAIN);
         List<Biome.Category> strawberryCategories = List.of(Biome.Category.PLAINS, Biome.Category.FOREST, Biome.Category.SWAMP);
@@ -66,7 +66,7 @@ public class BerryBushPatchGen {
         generateBerryPatches("add_raspberry_patches", saskatoonBerryCategories, PATCH_RASPBERRY_PLACED);
         generateBerryPatches("add_blackberry_patches", saskatoonBerryCategories, PATCH_BLACKBERRY_PLACED);
         generateBerryPatches("add_chorus_berry_patches", List.of(Biome.Category.THEEND), PATCH_CHORUS_BERRY_PLACED);
-        generateBerryPatches("add_rainbowberry_patches", strawberryCategories, PATCH_RAINBOWBERRY_PLACED);
+        generateBerryPatches("add_rainberry_patches", strawberryCategories, PATCH_RAINBERRY_PLACED);
     }
 
     /**

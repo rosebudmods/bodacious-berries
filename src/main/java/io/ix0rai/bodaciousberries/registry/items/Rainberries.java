@@ -12,8 +12,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class Rainbowberries extends AliasedBlockItem {
-    public Rainbowberries(Block block, Settings settings) {
+public class Rainberries extends AliasedBlockItem {
+    public Rainberries(Block block, Settings settings) {
         super(block, settings);
     }
 

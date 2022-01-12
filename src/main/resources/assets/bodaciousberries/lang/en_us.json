@@ -5,7 +5,7 @@
   "item.bodaciousberries.strawberry": "Strawberry",
   "item.bodaciousberries.unripe_strawberry": "Unripe Strawberry",
   "item.bodaciousberries.chorus_berries": "Chorus Berries",
-  "item.bodaciousberries.rainbowberries": "Rainbowberries",
+  "item.bodaciousberries.rainberries": "Rainberries",
   "item.bodaciousberries.chorus_berry_juice": "Chorus Berry Juice",
   "item.bodaciousberries.chorus_berry_juice_badlands": "Badlands Chorus Berry Juice",
   "item.bodaciousberries.chorus_berry_juice_birch_forest": "Birch Forest Chorus Berry Juice",
@@ -33,7 +33,7 @@
   "blocks.bodaciousberries.strawberry_bush": "Strawberry Bush",
   "blocks.bodaciousberries.chorus_berry_bush": "Chorus Berry Bush",
   "blocks.bodaciousberries.double_chorus_berry_bush": "Double Chorus Berry Bush",
-  "blocks.bodaciousberries.rainbowberry_bush": "Rainbowberry Bush",
+  "blocks.bodaciousberries.rainberry_bush": "Rainberry Bush",
   "sound_event.bodaciousberries.berry_pick_1": "Bodacious berries pop",
   "sound_event.bodaciousberries.berry_pick_2": "Bodacious berries pop",
   "sound_event.bodaciousberries.berry_pick_3": "Bodacious berries pop"

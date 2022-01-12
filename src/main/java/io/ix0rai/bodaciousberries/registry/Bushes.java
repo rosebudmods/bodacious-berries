@@ -37,7 +37,7 @@ public class Bushes {
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
     public static final BasicBerryBush BLACKBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.BLACKBERRIES,
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
-    public static final BasicBerryBush RAINBOWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.RAINBOWBERRIES,
+    public static final BasicBerryBush RAINBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.RAINBERRIES,
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
 
     public static void registerBushes() {
@@ -50,7 +50,7 @@ public class Bushes {
         BLACKBERRY_BUSH.setBerryType(Berries.BLACKBERRIES);
         CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
         DOUBLE_CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
-        RAINBOWBERRY_BUSH.setBerryType(Berries.RAINBOWBERRIES);
+        RAINBERRY_BUSH.setBerryType(Berries.RAINBERRIES);
 
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
         register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
@@ -59,7 +59,7 @@ public class Bushes {
         register("blackberry_bush", BLACKBERRY_BUSH);
         register("double_chorus_berry_bush", DOUBLE_CHORUS_BERRY_BUSH);
         register("chorus_berry_bush", CHORUS_BERRY_BUSH);
-        register("rainbowberry_bush", RAINBOWBERRY_BUSH);
+        register("rainberry_bush", RAINBERRY_BUSH);
     }
 
     private static void register(String name, Block block) {
