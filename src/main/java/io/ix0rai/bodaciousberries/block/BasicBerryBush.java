@@ -231,7 +231,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             if (currentAge == maxAge - 1 && giveRipeBerry) {
                 dropStack(world, pos, new ItemStack(berryType, berryAmount));
             }
-        } else if (currentAge == maxAge) {
+        } else {
             //guarantee two berries
             berryAmount += 2;
             dropStack(world, pos, new ItemStack(berryType, berryAmount));
