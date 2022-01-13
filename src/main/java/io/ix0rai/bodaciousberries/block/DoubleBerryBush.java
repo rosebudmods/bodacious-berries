@@ -47,10 +47,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
     }
 
-    public DoubleBerryBush(AbstractBlock.Settings settings, Item berryType) {
-        this(settings, berryType, null);
-    }
-
     @Override
     public void setBerryType(Item berryType) {
         this.berryType = berryType;

@@ -121,16 +121,6 @@ public class Berries {
         BERRY_BUSHES.put(bigBush, berryPair);
     }
 
-    /**
-     * uses {@link #addDoubleBushToList(BerryBush, DoubleBerryBush, Item, Item)} to add both forms of a double berry bush to the automatic registration list
-     * @param smallBush the small form of the berry bush
-     * @param bigBush the double form of the berry bush
-     * @param berries the base form of the berries to associate
-     */
-    public static void addDoubleBushToList(BerryBush smallBush, DoubleBerryBush bigBush, Item berries) {
-        addDoubleBushToList(smallBush, bigBush, berries, null);
-    }
-
     private static void register(String name, Item item) {
         Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), item);
     }
