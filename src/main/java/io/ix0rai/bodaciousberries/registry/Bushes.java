@@ -16,7 +16,8 @@ import net.minecraft.util.shape.VoxelShape;
 public class Bushes {
     private static final VoxelShape SMALL_SWEET_BERRY = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
     private static final VoxelShape LARGE_SWEET_BERRY = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
-
+    private static final VoxelShape SMALL_LINGONBERRY = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 6.0D, 13.0D);
+    private static final VoxelShape LARGE_LINGONBERRY = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
     private static final VoxelShape LARGE_STRAWBERRY = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
 
     private static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH);
@@ -36,6 +37,8 @@ public class Bushes {
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
     public static final BasicBerryBush RAINBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.RAINBERRY,
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
+    public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.LINGONBERRIES,
+            4, SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
 
     public static void registerBushes() {
         SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
@@ -47,6 +50,7 @@ public class Bushes {
         BLACKBERRY_BUSH.setBerryType(Berries.BLACKBERRIES);
         CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
         RAINBERRY_BUSH.setBerryType(Berries.RAINBERRY);
+        LINGONBERRY_BUSH.setBerryType(Berries.LINGONBERRIES);
 
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
         register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
@@ -55,6 +59,7 @@ public class Bushes {
         register("blackberry_bush", BLACKBERRY_BUSH);
         register("chorus_berry_bush", CHORUS_BERRY_BUSH);
         register("rainberry_bush", RAINBERRY_BUSH);
+        register("lingonberry_bush", LINGONBERRY_BUSH);
     }
 
     private static void register(String name, Block block) {
