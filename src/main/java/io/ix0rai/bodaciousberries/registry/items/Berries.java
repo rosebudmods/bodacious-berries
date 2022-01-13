@@ -45,7 +45,7 @@ public class Berries {
         Berries.addToList(Bushes.STRAWBERRY_BUSH, STRAWBERRY, UNRIPE_STRAWBERRY);
         Berries.addToList(Bushes.RASPBERRY_BUSH, RASPBERRIES);
         Berries.addToList(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
-        Berries.addDoubleBushToList(Bushes.CHORUS_BERRY_BUSH, Bushes.DOUBLE_CHORUS_BERRY_BUSH, CHORUS_BERRIES);
+        Berries.addToList(Bushes.CHORUS_BERRY_BUSH, CHORUS_BERRIES);
         Berries.addToList(Bushes.RAINBERRY_BUSH, RAINBERRY);
         Berries.addToList(Bushes.LINGONBERRY_BUSH, LINGONBERRIES);
 
