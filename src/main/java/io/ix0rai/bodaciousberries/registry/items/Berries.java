@@ -26,6 +26,7 @@ public class Berries {
     public static Item BLACKBERRIES;
     public static Item CHORUS_BERRIES;
     public static Item RAINBERRY;
+    public static Item LINGONBERRIES;
 
     public static void registerBerries() {
         //create items for each berry
@@ -37,6 +38,7 @@ public class Berries {
         BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(1, 3.5f));
         CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(1, 2f));
         RAINBERRY = new Rainberry(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
+        LINGONBERRIES = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
 
         //automatic stuffs
         Berries.addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES, UNRIPE_SASKATOON_BERRIES);
@@ -45,6 +47,7 @@ public class Berries {
         Berries.addToList(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
         Berries.addDoubleBushToList(Bushes.CHORUS_BERRY_BUSH, Bushes.DOUBLE_CHORUS_BERRY_BUSH, CHORUS_BERRIES);
         Berries.addToList(Bushes.RAINBERRY_BUSH, RAINBERRY);
+        Berries.addToList(Bushes.LINGONBERRY_BUSH, LINGONBERRIES);
 
         Berries.initialiseBerries();
 
@@ -57,6 +60,7 @@ public class Berries {
         register("blackberries", BLACKBERRIES);
         register("chorus_berries", CHORUS_BERRIES);
         register("rainberry", RAINBERRY);
+        register("lingonberries", LINGONBERRIES);
     }
 
     /**

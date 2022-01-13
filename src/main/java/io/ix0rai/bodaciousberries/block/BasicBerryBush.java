@@ -194,8 +194,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         final int currentAge = state.get(AGE);
         //if bone meal is allowed to be used, grow plant and pass action
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-            final int newAge = Math.min(maxAge, currentAge + 1);
-            world.setBlockState(pos, state.with(AGE, newAge), 2);
             return ActionResult.PASS;
         } else if (currentAge > 1) {
             //otherwise, give berries/unripe berries
@@ -233,7 +231,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             if (currentAge == maxAge - 1 && giveRipeBerry) {
                 dropStack(world, pos, new ItemStack(berryType, berryAmount));
             }
-        } else {
+        } else if (currentAge == maxAge) {
             //guarantee two berries
             berryAmount += 2;
             dropStack(world, pos, new ItemStack(berryType, berryAmount));
