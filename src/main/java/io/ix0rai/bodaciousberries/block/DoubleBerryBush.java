@@ -1,10 +1,12 @@
 package io.ix0rai.bodaciousberries.block;
 
 import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -38,9 +40,11 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected Item unripeBerryType;
 
     public DoubleBerryBush(AbstractBlock.Settings settings, Item berryType, Item unripeBerryType) {
-        super(settings);
+        super(settings.nonOpaque());
         this.berryType = berryType;
         this.unripeBerryType = unripeBerryType;
+        //ensure cutout texture is rendered
+        BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
     }
 
     public DoubleBerryBush(AbstractBlock.Settings settings, Item berryType) {
@@ -118,7 +122,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         }
 
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-            world.setBlockState(pos, state.with(AGE, Math.min(MAX_AGE, state.get(AGE) + 1)), 2);
             return ActionResult.PASS;
         } else if (state.get(AGE) > 1) {
             return BasicBerryBush.pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, MAX_AGE, 0, AGE);
