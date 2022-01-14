@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/coral_fan",
   "textures": {
-    "cross": "bodaciousberries:block/chorus_berry_bush_stage3"
+    "fan": "bodaciousberries:block/chorus_berry_bush_stage3"
   }
 }

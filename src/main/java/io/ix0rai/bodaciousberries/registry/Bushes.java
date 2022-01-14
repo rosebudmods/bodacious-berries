@@ -24,7 +24,7 @@ public class Bushes {
 
     //bushes
     public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(BERRY_BUSH_SETTINGS, Berries.CHORUS_BERRIES,
-            4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
+            4, SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
     public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(BERRY_BUSH_SETTINGS,
             Berries.SASKATOON_BERRIES, Berries.UNRIPE_SASKATOON_BERRIES);
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
