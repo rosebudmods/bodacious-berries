@@ -107,7 +107,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     }
 
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, Integer newAge) {
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, int newAge) {
         world.setBlockState(pos, state.with(AGE, newAge), 2);
     }
 

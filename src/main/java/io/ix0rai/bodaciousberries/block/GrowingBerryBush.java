@@ -24,15 +24,11 @@ public class GrowingBerryBush extends BasicBerryBush {
     }
 
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, Integer newAge) {
-        if (newAge == null) {
-            grow(world, random, pos, state);
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, int newAge) {
+        if (newAge < maxAge) {
+            world.setBlockState(pos, state.with(AGE, newAge), 2);
         } else {
-            if (newAge < maxAge) {
-                world.setBlockState(pos, state.with(AGE, newAge), 2);
-            } else {
-                TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, 2);
-            }
+            TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, 2);
         }
     }
 

@@ -19,7 +19,7 @@ public interface BerryBush extends Fertilizable {
     VoxelShape getSmallShape();
     VoxelShape getLargeShape();
     int getSizeChangeAge();
-    void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, Integer newAge);
+    void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, int newAge);
     void setBerryType(Item berryType);
     void setUnripeBerryType(Item unripeBerryType);
 }
