@@ -24,21 +24,6 @@ public class GrowingBerryBush extends BasicBerryBush {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int age = state.get(AGE);
-        //if the age isn't maximum and the light level is high enough, grow the bush
-        if (age <= maxAge && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
-            grow(world, random, pos, state, age + 1);
-        }
-    }
-
-    @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        int newAge = Math.min(maxAge, state.get(AGE) + 1);
-        grow(world, random, pos, state, newAge);
-    }
-
-    @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, Integer newAge) {
         if (newAge == null) {
             grow(world, random, pos, state);
@@ -64,6 +49,7 @@ public class GrowingBerryBush extends BasicBerryBush {
             } else {
                 TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, 2);
             }
+
             return ActionResult.PASS;
         } else if (state.get(AGE) > 1) {
             return pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxAge, sizeChangeAge, AGE);
