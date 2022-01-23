@@ -27,10 +27,10 @@ public class Bushes {
     public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(BERRY_BUSH_SETTINGS, Berries.CHORUS_BERRIES,
             4, SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
     public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(BERRY_BUSH_SETTINGS,
-            Berries.SASKATOON_BERRIES, Berries.UNRIPE_SASKATOON_BERRIES);
+            Berries.SASKATOON_BERRIES);
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_SASKATOON_BERRY_BUSH);
-    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.STRAWBERRY, Berries.UNRIPE_STRAWBERRY,
+    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.STRAWBERRY,
             3, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
     public static final BasicBerryBush RASPBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.RASPBERRIES,
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
@@ -43,9 +43,7 @@ public class Bushes {
 
     public static void registerBushes() {
         SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
-        SASKATOON_BERRY_BUSH.setUnripeBerryType(Berries.UNRIPE_SASKATOON_BERRIES);
         DOUBLE_SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
-        DOUBLE_SASKATOON_BERRY_BUSH.setUnripeBerryType(Berries.SASKATOON_BERRIES);
         STRAWBERRY_BUSH.setBerryType(Berries.STRAWBERRY);
         RASPBERRY_BUSH.setBerryType(Berries.RASPBERRIES);
         BLACKBERRY_BUSH.setBerryType(Berries.BLACKBERRIES);

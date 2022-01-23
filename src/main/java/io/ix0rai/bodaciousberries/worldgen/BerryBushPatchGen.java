@@ -122,7 +122,7 @@ public class BerryBushPatchGen {
                     Biome.Category category = context.getBiome().getCategory();
                     return categories.contains(category) && category != Biome.Category.NONE;
                 },
-                // add feature to the biome under the step vegetal decoration
+                //add feature to the biome under the step vegetal decoration
                 context -> context.getGenerationSettings().addBuiltInFeature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeature)
         );
     }

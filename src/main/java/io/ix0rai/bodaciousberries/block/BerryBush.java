@@ -13,7 +13,6 @@ import java.util.Random;
 @SuppressWarnings("unused")
 public interface BerryBush extends Fertilizable {
     Item getBerryType();
-    Item getUnripeBerryType();
     IntProperty getAge();
     int getMaxAge();
     VoxelShape getSmallShape();
@@ -21,5 +20,4 @@ public interface BerryBush extends Fertilizable {
     int getSizeChangeAge();
     void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, int newAge);
     void setBerryType(Item berryType);
-    void setUnripeBerryType(Item unripeBerryType);
 }

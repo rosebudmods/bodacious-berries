@@ -19,7 +19,7 @@ public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 
     public GrowingBerryBush(Settings settings, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DoubleBerryBush bush) {
-        super(settings, bush.getBerryType(), bush.getUnripeBerryType(), bush.getMaxAge(), smallShape, largeShape, sizeChangeAge);
+        super(settings, bush.getBerryType(), bush.getMaxAge(), smallShape, largeShape, sizeChangeAge);
         this.futureBush = bush;
     }
 
@@ -38,6 +38,8 @@ public class GrowingBerryBush extends BasicBerryBush {
             throw new ImproperConfigurationException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
         }
 
+        //a GrowingBerryBush cannot produce berries until it grows to its double bush state
+
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             final int newAge = Math.min(maxAge, state.get(AGE) + 1);
             if (newAge < maxAge) {
@@ -47,10 +49,8 @@ public class GrowingBerryBush extends BasicBerryBush {
             }
 
             return ActionResult.PASS;
-        } else if (state.get(AGE) > 1) {
-            return pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxAge, sizeChangeAge, AGE);
         } else {
-            return super.onUse(state, world, pos, player, hand, hit);
+            return ActionResult.FAIL;
         }
     }
 }

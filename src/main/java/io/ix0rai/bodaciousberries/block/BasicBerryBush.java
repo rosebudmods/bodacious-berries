@@ -42,7 +42,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     private static final Random RANDOM = new Random();
 
     protected Item berryType;
-    protected Item unripeBerryType;
     public static final IntProperty AGE = IntProperty.of("age", 0 ,10);
     protected final int maxAge;
     protected final VoxelShape smallShape;
@@ -63,7 +62,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     });
 
     /**
-     * default berry bush constructor
+     * secondary berry bush constructor
      * @param settings block settings for this berry bush
      * @param berryType which berries will be given when this bush is picked from
      * @param maxAge maximum age bush can grow to
@@ -72,27 +71,12 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
     public BasicBerryBush(Settings settings, Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        this(settings, berryType, null, maxAge, smallShape, largeShape, sizeChangeAge);
-    }
-
-    /**
-     * secondary berry bush constructor
-     * @param settings block settings for this berry bush
-     * @param berryType which berries will be given when this bush is picked from
-     * @param unripeBerryType which type of berries will be given when this bush is picked from, but not yet fully grown
-     * @param maxAge maximum age bush can grow to
-     * @param smallShape small voxel shape for the bush
-     * @param largeShape large voxel shape for the bush
-     * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
-     */
-    public BasicBerryBush(Settings settings, Item berryType, Item unripeBerryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         //add nonOpaque to settings to ensure that the bush isn't considered a solid block when rendering
         super(settings.nonOpaque());
         this.berryType = berryType;
         this.maxAge = maxAge;
         this.smallShape = smallShape;
         this.largeShape = largeShape;
-        this.unripeBerryType = unripeBerryType;
         this.sizeChangeAge = sizeChangeAge;
         //set default age to 0
         this.setDefaultState((this.stateManager.getDefaultState()).with(AGE, 0));
@@ -107,15 +91,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public void setBerryType(Item berryType) {
         this.berryType = berryType;
-    }
-
-    /**
-     * sets the unripe berry type
-     * @param unripeBerryType the item to use
-     */
-    @Override
-    public void setUnripeBerryType(Item unripeBerryType) {
-        this.unripeBerryType = unripeBerryType;
     }
 
     /**
@@ -197,7 +172,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             return ActionResult.PASS;
         } else if (currentAge > 1) {
             //otherwise, give berries/unripe berries
-            return pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, maxAge, sizeChangeAge, AGE);
+            return pickBerries(pos, world, state, berryType, MAX_BERRY_AMOUNT, sizeChangeAge, AGE);
         } else {
             //otherwise, do default use action from superclass
             return super.onUse(state, world, pos, player, hand, hit);
@@ -208,34 +183,14 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * handles berries being picked
      * <br> this method is static so that it can be used in {@link DoubleBerryBush}
      */
-    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, Item unripeBerryType, int maxBerryAmount, int maxAge, int sizeChangeAge, IntProperty berryAge) {
+    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, int maxBerryAmount, int sizeChangeAge, IntProperty berryAge) {
         //pick berry amount
         //up to three berries
-        int berryAmount = world.random.nextInt(maxBerryAmount + 1);
-        final int currentAge = state.get(berryAge);
+        int berryAmount = world.random.nextInt(maxBerryAmount + 1) + 2;
 
-        //if growing not finished give unripe berries
-        if (currentAge < maxAge) {
-            //if we have an unripe berry type, provide unripe berries and maybe one berry
-            //if we don't, ensure a berry
-            boolean giveRipeBerry;
-            if (unripeBerryType != null) {
-                dropStack(world, pos, new ItemStack(unripeBerryType, berryAmount));
-                berryAmount = 1;
-                giveRipeBerry = world.random.nextInt(2) == 0;
-            } else {
-                return ActionResult.FAIL;
-            }
-
-            //if age is one under maximum, have a chance of getting a ripe berry
-            if (currentAge == maxAge - 1 && giveRipeBerry) {
-                dropStack(world, pos, new ItemStack(berryType, berryAmount));
-            }
-        } else {
-            //guarantee two berries
-            berryAmount += 2;
-            dropStack(world, pos, new ItemStack(berryType, berryAmount));
-        }
+        //guarantee two berries
+        berryAmount += 2;
+        dropStack(world, pos, new ItemStack(berryType, berryAmount));
 
         //play randomly picked sound
         world.playSound(null, pos, selectPickSound(), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
@@ -280,11 +235,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public Item getBerryType() {
         return berryType;
-    }
-
-    @Override
-    public Item getUnripeBerryType() {
-        return unripeBerryType;
     }
 
     @Override

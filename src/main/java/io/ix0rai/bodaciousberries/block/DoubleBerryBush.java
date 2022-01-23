@@ -2,7 +2,6 @@ package io.ix0rai.bodaciousberries.block;
 
 import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
@@ -37,12 +36,10 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected static final int MAX_BERRY_AMOUNT = 6;
 
     protected Item berryType;
-    protected Item unripeBerryType;
 
-    public DoubleBerryBush(AbstractBlock.Settings settings, Item berryType, Item unripeBerryType) {
+    public DoubleBerryBush(Settings settings, Item berryType) {
         super(settings.nonOpaque());
         this.berryType = berryType;
-        this.unripeBerryType = unripeBerryType;
         //ensure cutout texture is rendered
         BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
     }
@@ -50,11 +47,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public void setBerryType(Item berryType) {
         this.berryType = berryType;
-    }
-
-    @Override
-    public void setUnripeBerryType(Item unripeBerryType) {
-        this.unripeBerryType = unripeBerryType;
     }
 
     @Override
@@ -120,7 +112,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (state.get(AGE) > 1) {
-            return BasicBerryBush.pickBerries(pos, world, state, berryType, unripeBerryType, MAX_BERRY_AMOUNT, MAX_AGE, 0, AGE);
+            return BasicBerryBush.pickBerries(pos, world, state, berryType, MAX_BERRY_AMOUNT, 0, AGE);
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
@@ -129,11 +121,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public Item getBerryType() {
         return berryType;
-    }
-
-    @Override
-    public Item getUnripeBerryType() {
-        return unripeBerryType;
     }
 
     @Override

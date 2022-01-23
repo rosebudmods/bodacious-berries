@@ -14,6 +14,7 @@ public class RainberryBush extends BasicBerryBush {
         super(settings, berryType, maxAge, smallShape, largeShape, sizeChangeAge);
     }
 
+    @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         int i = pos.getX();
         int j = pos.getY();
