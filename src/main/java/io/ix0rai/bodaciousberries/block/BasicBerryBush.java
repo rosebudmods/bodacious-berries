@@ -166,7 +166,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         }
 
         final int currentAge = state.get(AGE);
-        //if bone meal is allowed to be used, grow plant and pass action
+        //if bone meal is allowed to be used, pass action
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (currentAge > 1) {
@@ -183,12 +183,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * <br> this method is static so that it can be used in {@link DoubleBerryBush}
      */
     public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, int maxBerryAmount, int sizeChangeAge, IntProperty berryAge) {
-        //pick berry amount
-        //up to three berries
         int berryAmount = world.random.nextInt(maxBerryAmount + 1) + 2;
-
-        //guarantee two berries
-        berryAmount += 2;
         dropStack(world, pos, new ItemStack(berryType, berryAmount));
 
         //play randomly picked sound
@@ -204,10 +199,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         builder.add(AGE);
     }
 
-    /**
-     * check that the plant is bone meal-able, also known as whether the plant can grow
-     * @return true if the plant can grow, false if it can't
-     */
     @Override
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
         //hasRandomTicks checks the same thing as this method

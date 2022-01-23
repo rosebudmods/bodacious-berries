@@ -19,9 +19,9 @@ public class RainberryBush extends BasicBerryBush {
         int i = pos.getX();
         int j = pos.getY();
         int k = pos.getZ();
-        double d = (double) i + random.nextDouble();
-        double e = (double) j + 0.7D;
-        double f = (double) k + random.nextDouble();
+        double d = i + random.nextDouble();
+        double e = j + 0.7D;
+        double f = k + random.nextDouble();
         world.addParticle(Particles.RAINBOW_PARTICLE_TYPE, d, e, f, 0.0D, 0.0D, 0.0D);
     }
 }
