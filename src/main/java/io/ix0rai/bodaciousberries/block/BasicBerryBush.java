@@ -39,7 +39,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     //chance to grow is one in growChance
     private static final int GROW_CHANCE = 5;
     protected static final int MAX_BERRY_AMOUNT = 3;
-    private static final Random RANDOM = new Random();
 
     protected Item berryType;
     public static final IntProperty AGE = IntProperty.of("age", 0 ,10);
@@ -146,8 +145,8 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     /**
      * get a random berry pick sound
      */
-    public static SoundEvent selectPickSound() {
-        return switch (RANDOM.nextInt(3)) {
+    public static SoundEvent selectPickSound(World world) {
+        return switch (world.random.nextInt(3)) {
             case 1 -> Sounds.BERRY_PICK_2;
             case 2 -> Sounds.BERRY_PICK_3;
             default -> Sounds.BERRY_PICK_1;
@@ -193,7 +192,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         dropStack(world, pos, new ItemStack(berryType, berryAmount));
 
         //play randomly picked sound
-        world.playSound(null, pos, selectPickSound(), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+        world.playSound(null, pos, selectPickSound(world), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 
         //reset berry growth; they were just picked
         world.setBlockState(pos, state.with(berryAge, sizeChangeAge), 2);
