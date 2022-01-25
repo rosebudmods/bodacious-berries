@@ -16,7 +16,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -24,10 +23,9 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BerryVine extends VineBlock implements BerryBush {
-    //TODO: check over code, ensure growing is working, etc
     protected static final int MAX_AGE = 3;
     protected static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
-    protected static final int MAX_BERRY_AMOUNT = 4;
+    protected static final int MAX_BERRY_AMOUNT = 3;
 
     protected Item berryType;
 
@@ -48,9 +46,7 @@ public class BerryVine extends VineBlock implements BerryBush {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        //I spent about an hour and a half debugging a crash before realising it originated from this property not existing
-        //yay me
-        builder.add(AGE).add(UP, NORTH, EAST, SOUTH, WEST);
+        builder.add(AGE, UP, NORTH, EAST, SOUTH, WEST);
     }
 
     @Override
@@ -122,12 +118,12 @@ public class BerryVine extends VineBlock implements BerryBush {
 
     @Override
     public VoxelShape getSmallShape() {
-        return VoxelShapes.fullCube();
+        throw new IllegalStateException("this method should not be called on a vine, use getOutlineShape(...) instead");
     }
 
     @Override
     public VoxelShape getLargeShape() {
-        return VoxelShapes.fullCube();
+        throw new IllegalStateException("this method should not be called on a vine, use getOutlineShape(...) instead");
     }
 
     @Override
