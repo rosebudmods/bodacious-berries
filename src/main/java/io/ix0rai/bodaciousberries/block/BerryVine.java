@@ -26,7 +26,7 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class BerryVine extends VineBlock implements BerryBush {
     protected static final int MAX_AGE = 3;
-    protected static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
+    public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
     protected static final int MAX_BERRY_AMOUNT = 3;
 
     protected Item berryType;
