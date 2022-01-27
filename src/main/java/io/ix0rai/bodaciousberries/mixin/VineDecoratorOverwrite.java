@@ -31,7 +31,7 @@ public class VineDecoratorOverwrite {
         placeVine(access, replacer, pos, facing);
 
         //place vines that are hanging down from other vines
-        int i = 4;
+        int i = access.getRandom().nextInt(3, 6);
         for(pos = pos.down(); Feature.isAir(world, pos) && i > 0; --i) {
             placeVine(access, replacer, pos, facing);
             pos = pos.down();
