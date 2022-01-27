@@ -5,6 +5,7 @@ import io.ix0rai.bodaciousberries.mixin.DefaultParticleTypeAccessor;
 import io.ix0rai.bodaciousberries.mixin.WaterSuspendParticleAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.impl.client.particle.ParticleFactoryRegistryImpl;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleFactory;
@@ -22,8 +23,12 @@ public class Particles {
     public static final DefaultParticleType RAINBOW_PARTICLE_TYPE = DefaultParticleTypeAccessor.create(false);
 
     public static void registerParticles() {
-        Registry.register(Registry.PARTICLE_TYPE, Bodaciousberries.getIdentifier("rainbow_particle"), RAINBOW_PARTICLE_TYPE);
-        ParticleFactoryRegistryImpl.INSTANCE.register(RAINBOW_PARTICLE_TYPE, RainbowParticleFactory::new);
+        registerParticle("rainbow_particle", RAINBOW_PARTICLE_TYPE, RainbowParticleFactory::new);
+    }
+
+    private static void registerParticle(String name, DefaultParticleType particle, ParticleFactoryRegistry.PendingParticleFactory<DefaultParticleType> constructor) {
+        Registry.register(Registry.PARTICLE_TYPE, Bodaciousberries.getIdentifier(name), particle);
+        ParticleFactoryRegistryImpl.INSTANCE.register(particle, constructor);
     }
 
     @Environment(EnvType.CLIENT)
