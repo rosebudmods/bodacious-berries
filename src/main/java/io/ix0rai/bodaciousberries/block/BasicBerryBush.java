@@ -236,18 +236,4 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     public int getMaxAge() {
         return maxAge;
     }
-
-    @Override
-    public VoxelShape getSmallShape() {
-        return smallShape;
-    }
-
-    @Override
-    public VoxelShape getLargeShape() {
-        return largeShape;
-    }
-
-    public int getSizeChangeAge() {
-        return sizeChangeAge;
-    }
 }

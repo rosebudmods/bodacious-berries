@@ -17,7 +17,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -118,20 +117,5 @@ public class BerryVine extends VineBlock implements BerryBush {
     @Override
     public int getMaxAge() {
         return MAX_AGE;
-    }
-
-    @Override
-    public VoxelShape getSmallShape() {
-        throw new IllegalStateException("this method should not be called on a vine, use getOutlineShape(...) instead");
-    }
-
-    @Override
-    public VoxelShape getLargeShape() {
-        throw new IllegalStateException("this method should not be called on a vine, use getOutlineShape(...) instead");
-    }
-
-    @Override
-    public int getSizeChangeAge() {
-        throw new IllegalStateException("size change age does not apply to vine type berry bushes");
     }
 }

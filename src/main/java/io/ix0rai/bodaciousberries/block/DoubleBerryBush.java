@@ -20,8 +20,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -131,20 +129,5 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public int getMaxAge() {
         return MAX_AGE;
-    }
-
-    @Override
-    public VoxelShape getSmallShape() {
-        return VoxelShapes.fullCube();
-    }
-
-    @Override
-    public VoxelShape getLargeShape() {
-        return VoxelShapes.fullCube();
-    }
-
-    @Override
-    public int getSizeChangeAge() {
-        throw new IllegalStateException("size change age does not apply to double berry bushes");
     }
 }

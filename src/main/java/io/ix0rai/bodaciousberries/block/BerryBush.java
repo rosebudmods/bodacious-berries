@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
 
 import java.util.Random;
 
@@ -15,9 +14,6 @@ public interface BerryBush extends Fertilizable {
     Item getBerryType();
     IntProperty getAge();
     int getMaxAge();
-    VoxelShape getSmallShape();
-    VoxelShape getLargeShape();
-    int getSizeChangeAge();
     void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, int newAge);
     void setBerryType(Item berryType);
 }
