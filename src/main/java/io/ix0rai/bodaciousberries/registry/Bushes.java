@@ -37,7 +37,7 @@ public class Bushes {
     public static final BasicBerryBush BLACKBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.BLACKBERRIES,
             4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
     public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(BERRY_BUSH_SETTINGS, Berries.RAINBERRY,
-            4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
+            4, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 2);
     public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.LINGONBERRIES,
             4, SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
 
