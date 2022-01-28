@@ -2,6 +2,7 @@ package io.ix0rai.bodaciousberries.registry;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
+import io.ix0rai.bodaciousberries.block.BerryVine;
 import io.ix0rai.bodaciousberries.block.ChorusBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
@@ -40,6 +41,7 @@ public class Bushes {
             4, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 2);
     public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.LINGONBERRIES,
             4, SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
+    public static final BerryVine GRAPEVINE = new BerryVine(BERRY_BUSH_SETTINGS, Berries.GRAPES);
 
     public static void registerBushes() {
         SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
@@ -50,6 +52,7 @@ public class Bushes {
         CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
         RAINBERRY_BUSH.setBerryType(Berries.RAINBERRY);
         LINGONBERRY_BUSH.setBerryType(Berries.LINGONBERRIES);
+        GRAPEVINE.setBerryType(Berries.GRAPES);
 
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
         register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
@@ -59,6 +62,7 @@ public class Bushes {
         register("chorus_berry_bush", CHORUS_BERRY_BUSH);
         register("rainberry_bush", RAINBERRY_BUSH);
         register("lingonberry_bush", LINGONBERRY_BUSH);
+        register("grapevine", GRAPEVINE);
     }
 
     private static void register(String name, Block block) {

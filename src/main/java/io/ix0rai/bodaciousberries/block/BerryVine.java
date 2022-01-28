@@ -4,10 +4,8 @@ import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.TallPlantBlock;
+import net.minecraft.block.VineBlock;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,25 +17,22 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
-    protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
-    //berry age is hard capped at 3 for double bushes
+public class BerryVine extends VineBlock implements BerryBush {
     protected static final int MAX_AGE = 3;
-    protected static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
-    protected static final int MAX_BERRY_AMOUNT = 6;
+    public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
+    protected static final int MAX_BERRY_AMOUNT = 3;
 
     protected Item berryType;
 
-    public DoubleBerryBush(Settings settings, Item berryType) {
+    public BerryVine(Settings settings, Item berry) {
         super(settings.nonOpaque());
-        this.berryType = berryType;
+        this.berryType = berry;
         //ensure cutout texture is rendered
         BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
     }
@@ -53,17 +48,8 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && !BasicBerryBush.SMALL_ENTITIES.contains(entity.getType())) {
-            entity.slowMovement(state, DOUBLE_BUSH_SLOWING_VECTOR);
-        }
-    }
-
-    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        //I spent about an hour and a half debugging a crash before realising it originated from this property not existing
-        //yay me
-        builder.add(AGE).add(HALF);
+        builder.add(AGE, UP, NORTH, EAST, SOUTH, WEST);
     }
 
     @Override
@@ -73,6 +59,8 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        super.randomTick(state, world, pos, random);
+
         int age = state.get(AGE);
         //if the age isn't maximum and the light level is high enough grow the bush
         if (age < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
