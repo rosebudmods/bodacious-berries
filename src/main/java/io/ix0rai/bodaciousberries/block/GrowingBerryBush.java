@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
+import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,8 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 
@@ -23,8 +21,7 @@ public class GrowingBerryBush extends BasicBerryBush {
         this.futureBush = bush;
     }
 
-    @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, int newAge) {
+    public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
         if (newAge < maxAge) {
             world.setBlockState(pos, state.with(AGE, newAge), 2);
         } else {
@@ -34,9 +31,7 @@ public class GrowingBerryBush extends BasicBerryBush {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (berryType == null) {
-            throw new ImproperConfigurationException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
-        }
+        BerryTypeConfigurationException.check(berryType);
 
         //a GrowingBerryBush cannot produce berries until it grows to its double bush state
 

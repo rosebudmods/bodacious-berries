@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.mixin;
+package io.ix0rai.bodaciousberries.mixin.accessors;
 
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.particle.WaterSuspendParticle;

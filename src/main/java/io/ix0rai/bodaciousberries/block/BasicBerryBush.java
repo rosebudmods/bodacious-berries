@@ -1,7 +1,7 @@
 package io.ix0rai.bodaciousberries.block;
 
 import io.ix0rai.bodaciousberries.registry.Sounds;
-import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
+import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -161,9 +161,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (berryType == null) {
-            throw new ImproperConfigurationException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
-        }
+        BerryTypeConfigurationException.check(berryType);
 
         final int currentAge = state.get(AGE);
         //if bone meal is allowed to be used, pass action
@@ -214,26 +212,10 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         int newAge = Math.min(maxAge, state.get(AGE) + 1);
-        grow(world, random, pos, state, newAge);
+        grow(world, pos, state, newAge);
     }
 
-    @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, int newAge) {
+    public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
         world.setBlockState(pos, state.with(AGE, newAge), 2);
-    }
-
-    @Override
-    public Item getBerryType() {
-        return berryType;
-    }
-
-    @Override
-    public IntProperty getAge() {
-        return AGE;
-    }
-
-    @Override
-    public int getMaxAge() {
-        return maxAge;
     }
 }

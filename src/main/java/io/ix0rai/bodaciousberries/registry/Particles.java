@@ -1,8 +1,8 @@
 package io.ix0rai.bodaciousberries.registry;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
-import io.ix0rai.bodaciousberries.mixin.DefaultParticleTypeAccessor;
-import io.ix0rai.bodaciousberries.mixin.WaterSuspendParticleAccessor;
+import io.ix0rai.bodaciousberries.mixin.accessors.DefaultParticleTypeAccessor;
+import io.ix0rai.bodaciousberries.mixin.accessors.WaterSuspendParticleAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;

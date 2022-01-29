@@ -1,6 +1,7 @@
-package io.ix0rai.bodaciousberries.registry.items;
+package io.ix0rai.bodaciousberries.registry;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.registry.items.ChorusBerryJuice;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Settings;
@@ -22,16 +23,14 @@ public class BodaciousItems {
     public static void registerItems() {
         Berries.registerBerries();
 
-        List<RegistryKey<Biome>> biomes = List.of(JUNGLE,
+        createChorusBerryJuice(List.of(JUNGLE,
                 PLAINS, SNOWY_SLOPES, SWAMP,
                 DESERT, TAIGA, BIRCH_FOREST,
                 OCEAN, MUSHROOM_FIELDS, SUNFLOWER_PLAINS,
                 FOREST, FLOWER_FOREST, DARK_FOREST,
                 SAVANNA, BADLANDS, MEADOW,
                 GROVE, LUSH_CAVES, DRIPSTONE_CAVES
-        );
-        register("chorus_berry_juice", CHORUS_BERRY_JUICE);
-        createChorusBerryJuice(biomes);
+        ));
     }
 
     private static void register(String name, Item item) {
@@ -39,6 +38,8 @@ public class BodaciousItems {
     }
 
     private static void createChorusBerryJuice(List<RegistryKey<Biome>> biomes) {
+        register("chorus_berry_juice", CHORUS_BERRY_JUICE);
+
         for (RegistryKey<Biome> key : biomes) {
             String name = "chorus_berry_juice_" + key.getValue().getPath();
             register(name, chorusBerryJuice(key));

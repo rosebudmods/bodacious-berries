@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.mixin;
+package io.ix0rai.bodaciousberries.mixin.accessors;
 
 import net.minecraft.particle.DefaultParticleType;
 import org.spongepowered.asm.mixin.Mixin;

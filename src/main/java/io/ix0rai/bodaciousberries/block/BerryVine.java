@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.util.ImproperConfigurationException;
+import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -81,19 +81,16 @@ public class BerryVine extends VineBlock implements BerryBush {
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         int newBerryAge = Math.min(MAX_AGE, state.get(AGE) + 1);
-        grow(world, random, pos, state, newBerryAge);
+        grow(world, pos, state, newBerryAge);
     }
 
-    @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, int newAge) {
+    public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
         world.setBlockState(pos, state.with(AGE, newAge), 2);
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (berryType == null) {
-            throw new ImproperConfigurationException("parameter berryType is null, use method setBerryType(Item) to ensure that it is set before the berry bush is registered");
-        }
+        BerryTypeConfigurationException.check(berryType);
 
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
@@ -102,20 +99,5 @@ public class BerryVine extends VineBlock implements BerryBush {
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
-    }
-
-    @Override
-    public Item getBerryType() {
-        return berryType;
-    }
-
-    @Override
-    public IntProperty getAge() {
-        return AGE;
-    }
-
-    @Override
-    public int getMaxAge() {
-        return MAX_AGE;
     }
 }

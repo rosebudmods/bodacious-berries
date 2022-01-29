@@ -1,9 +1,9 @@
 package io.ix0rai.bodaciousberries;
 
+import io.ix0rai.bodaciousberries.registry.BodaciousItems;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import io.ix0rai.bodaciousberries.registry.Particles;
 import io.ix0rai.bodaciousberries.registry.Sounds;
-import io.ix0rai.bodaciousberries.registry.items.BodaciousItems;
 import io.ix0rai.bodaciousberries.worldgen.BerryBushPatchGen;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;

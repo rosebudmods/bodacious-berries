@@ -4,9 +4,9 @@
   "package": "io.ix0rai.bodaciousberries.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "DefaultParticleTypeAccessor",
+    "accessors.DefaultParticleTypeAccessor",
     "VineDecoratorOverwrite",
-    "WaterSuspendParticleAccessor"
+    "accessors.WaterSuspendParticleAccessor"
   ],
   "client": [
   ],

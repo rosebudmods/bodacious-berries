@@ -7,7 +7,6 @@ import io.ix0rai.bodaciousberries.block.ChorusBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.block.RainberryBush;
-import io.ix0rai.bodaciousberries.registry.items.Berries;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -41,7 +40,8 @@ public class Bushes {
             4, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 2);
     public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.LINGONBERRIES,
             4, SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
-    public static final BerryVine GRAPEVINE = new BerryVine(BERRY_BUSH_SETTINGS, Berries.GRAPES);
+    public static final BerryVine GRAPEVINE = new BerryVine(BERRY_BUSH_SETTINGS,
+            Berries.GRAPES);
 
     public static void registerBushes() {
         SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
