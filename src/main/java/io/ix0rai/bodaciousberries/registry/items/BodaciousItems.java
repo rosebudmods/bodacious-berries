@@ -22,8 +22,6 @@ public class BodaciousItems {
     public static void registerItems() {
         Berries.registerBerries();
 
-
-
         List<RegistryKey<Biome>> biomes = List.of(JUNGLE,
                 PLAINS, SNOWY_SLOPES, SWAMP,
                 DESERT, TAIGA, BIRCH_FOREST,
