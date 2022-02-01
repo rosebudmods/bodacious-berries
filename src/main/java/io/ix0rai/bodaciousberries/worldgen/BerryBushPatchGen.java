@@ -56,7 +56,7 @@ public class BerryBushPatchGen {
     public static void registerFeatures() {
         GRAPEVINE_FEATURE = Registry.register(Registry.FEATURE, Bodaciousberries.getIdentifier("grapevines"), new GrapevineFeature(DefaultFeatureConfig.CODEC));
 
-        PATCH_SASKATOON_BERRY = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, 3, Blocks.GRASS_BLOCK);
+        PATCH_SASKATOON_BERRY = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, 2, Blocks.GRASS_BLOCK);
         PATCH_STRAWBERRY = berryPatchConfiguredFeature("patch_strawberry", Bushes.STRAWBERRY_BUSH, 3, Blocks.GRASS_BLOCK);
         PATCH_BLACKBERRY = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
         PATCH_RASPBERRY = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
