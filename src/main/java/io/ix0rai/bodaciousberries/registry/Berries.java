@@ -3,7 +3,9 @@ package io.ix0rai.bodaciousberries.registry;
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
+import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.registry.items.ChorusBerries;
+import io.ix0rai.bodaciousberries.registry.items.GojiBerries;
 import io.ix0rai.bodaciousberries.registry.items.Rainberry;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
@@ -26,6 +28,7 @@ public class Berries {
     public static Item RAINBERRY;
     public static Item LINGONBERRIES;
     public static Item GRAPES;
+    public static Item GOJI_BERRIES;
 
     public static void registerBerries() {
         //create items for each berry
@@ -37,18 +40,20 @@ public class Berries {
         RAINBERRY = new Rainberry(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
         LINGONBERRIES = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
         GRAPES = new AliasedBlockItem(Bushes.GRAPEVINE, settings(1, 2f));
+        GOJI_BERRIES = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(2, 2.5f));
 
         //automatic stuffs
-        Berries.addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
-        Berries.addToList(Bushes.STRAWBERRY_BUSH, STRAWBERRY);
-        Berries.addToList(Bushes.RASPBERRY_BUSH, RASPBERRIES);
-        Berries.addToList(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
-        Berries.addToList(Bushes.CHORUS_BERRY_BUSH, CHORUS_BERRIES);
-        Berries.addToList(Bushes.RAINBERRY_BUSH, RAINBERRY);
-        Berries.addToList(Bushes.LINGONBERRY_BUSH, LINGONBERRIES);
-        Berries.addToList(Bushes.GRAPEVINE, GRAPES);
+        addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
+        addToList(Bushes.STRAWBERRY_BUSH, STRAWBERRY);
+        addToList(Bushes.RASPBERRY_BUSH, RASPBERRIES);
+        addToList(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
+        addToList(Bushes.CHORUS_BERRY_BUSH, CHORUS_BERRIES);
+        addToList(Bushes.RAINBERRY_BUSH, RAINBERRY);
+        addToList(Bushes.LINGONBERRY_BUSH, LINGONBERRIES);
+        addToList(Bushes.GRAPEVINE, GRAPES);
+        addDoubleBushToList(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, GOJI_BERRIES);
 
-        Berries.initialiseBerries();
+        initialiseBerries();
 
         //register
         register("saskatoon_berries", SASKATOON_BERRIES);
@@ -59,6 +64,7 @@ public class Berries {
         register("rainberry", RAINBERRY);
         register("lingonberries", LINGONBERRIES);
         register("grapes", GRAPES);
+        register("goji_berries", GOJI_BERRIES);
     }
 
     /**
@@ -96,7 +102,7 @@ public class Berries {
      * @param bigBush the double form of the berry bush
      * @param berries the base form of the berries to associate
      */
-    public static void addDoubleBushToList(BerryBush smallBush, DoubleBerryBush bigBush, Item berries) {
+    public static void addDoubleBushToList(GrowingBerryBush smallBush, DoubleBerryBush bigBush, Item berries) {
         BERRY_BUSHES.put(smallBush, berries);
         BERRY_BUSHES.put(bigBush, berries);
     }
