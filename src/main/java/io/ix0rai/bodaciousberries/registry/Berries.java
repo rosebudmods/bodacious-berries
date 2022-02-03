@@ -25,11 +25,7 @@ public class Berries {
     public static Item CHORUS_BERRIES;
     public static Item RAINBERRY;
     public static Item LINGONBERRIES;
-<<<<<<< Updated upstream:src/main/java/io/ix0rai/bodaciousberries/registry/Berries.java
     public static Item GRAPES;
-=======
-    public static Item GOOSEBERRIES;
->>>>>>> Stashed changes:src/main/java/io/ix0rai/bodaciousberries/registry/items/Berries.java
 
     public static void registerBerries() {
         //create items for each berry
@@ -40,11 +36,7 @@ public class Berries {
         CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(1, 2f));
         RAINBERRY = new Rainberry(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
         LINGONBERRIES = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
-<<<<<<< Updated upstream:src/main/java/io/ix0rai/bodaciousberries/registry/Berries.java
         GRAPES = new AliasedBlockItem(Bushes.GRAPEVINE, settings(1, 2f));
-=======
-        GOOSEBERRIES = new Item(settings(2, 1.5f));
->>>>>>> Stashed changes:src/main/java/io/ix0rai/bodaciousberries/registry/items/Berries.java
 
         //automatic stuffs
         Berries.addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
@@ -67,11 +59,7 @@ public class Berries {
         register("chorus_berries", CHORUS_BERRIES);
         register("rainberry", RAINBERRY);
         register("lingonberries", LINGONBERRIES);
-<<<<<<< Updated upstream:src/main/java/io/ix0rai/bodaciousberries/registry/Berries.java
         register("grapes", GRAPES);
-=======
-        register("gooseberries", GOOSEBERRIES);
->>>>>>> Stashed changes:src/main/java/io/ix0rai/bodaciousberries/registry/items/Berries.java
     }
 
     /**
