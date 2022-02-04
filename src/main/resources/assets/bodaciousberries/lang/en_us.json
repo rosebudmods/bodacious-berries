@@ -7,6 +7,7 @@
   "item.bodaciousberries.rainberries": "Rainberries",
   "item.bodaciousberries.lingonberries": "Lingonberries",
   "item.bodaciousberries.grapes": "Grapes",
+  "item.bodaciousberries.goji_berries": "Goji Berries",
   "item.bodaciousberries.chorus_berry_juice": "Chorus Berry Juice",
   "item.bodaciousberries.chorus_berry_juice_badlands": "Badlands Chorus Berry Juice",
   "item.bodaciousberries.chorus_berry_juice_birch_forest": "Birch Forest Chorus Berry Juice",
@@ -37,6 +38,8 @@
   "blocks.bodaciousberries.rainberry_bush": "Rainberry Bush",
   "blocks.bodaciousberries.lingonberry_bush": "Lingonberry Bush",
   "blocks.bodaciousberries.grapevine": "Grapevine",
+  "blocks.bodaciousberries.goji_berry_bush": "Goji Berry Bush",
+  "blocks.bodaciousberries.double_goji_berry_bush": "Double Goji Berry Bush",
   "sound_event.bodaciousberries.berry_pick_1": "Bodacious berries pop",
   "sound_event.bodaciousberries.berry_pick_2": "Bodacious berries pop",
   "sound_event.bodaciousberries.berry_pick_3": "Bodacious berries pop"

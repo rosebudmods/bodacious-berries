@@ -42,6 +42,10 @@ public class Bushes {
             4, SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
     public static final BerryVine GRAPEVINE = new BerryVine(BERRY_BUSH_SETTINGS,
             Berries.GRAPES);
+    public static final DoubleBerryBush DOUBLE_GOJI_BERRY_BUSH = new DoubleBerryBush(BERRY_BUSH_SETTINGS,
+            Berries.GOJI_BERRIES);
+    public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
+            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_GOJI_BERRY_BUSH);
 
     public static void registerBushes() {
         SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
@@ -53,6 +57,8 @@ public class Bushes {
         RAINBERRY_BUSH.setBerryType(Berries.RAINBERRY);
         LINGONBERRY_BUSH.setBerryType(Berries.LINGONBERRIES);
         GRAPEVINE.setBerryType(Berries.GRAPES);
+        GOJI_BERRY_BUSH.setBerryType(Berries.GOJI_BERRIES);
+        DOUBLE_GOJI_BERRY_BUSH.setBerryType(Berries.GOJI_BERRIES);
 
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
         register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
@@ -63,6 +69,8 @@ public class Bushes {
         register("rainberry_bush", RAINBERRY_BUSH);
         register("lingonberry_bush", LINGONBERRY_BUSH);
         register("grapevine", GRAPEVINE);
+        register("goji_berry_bush", GOJI_BERRY_BUSH);
+        register("double_goji_berry_bush", DOUBLE_GOJI_BERRY_BUSH);
     }
 
     private static void register(String name, Block block) {
