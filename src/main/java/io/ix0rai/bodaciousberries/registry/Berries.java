@@ -29,6 +29,8 @@ public class Berries {
     public static Item LINGONBERRIES;
     public static Item GRAPES;
     public static Item GOJI_BERRIES;
+    public static Item GOOSEBERRIES;
+
 
     public static void registerBerries() {
         //create items for each berry
@@ -41,6 +43,8 @@ public class Berries {
         LINGONBERRIES = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
         GRAPES = new AliasedBlockItem(Bushes.GRAPEVINE, settings(1, 2f));
         GOJI_BERRIES = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(2, 2.5f));
+        GOOSEBERRIES = new AliasedBlockItem(Bushes.GOOSEBERRY_BUSH, settings(2, 2f));
+
 
         //automatic stuffs
         addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
@@ -52,6 +56,7 @@ public class Berries {
         addToList(Bushes.LINGONBERRY_BUSH, LINGONBERRIES);
         addToList(Bushes.GRAPEVINE, GRAPES);
         addDoubleBushToList(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, GOJI_BERRIES);
+        addToList(Bushes.GOOSEBERRY_BUSH, GOOSEBERRIES);
 
         initialiseBerries();
 
@@ -65,6 +70,7 @@ public class Berries {
         register("lingonberries", LINGONBERRIES);
         register("grapes", GRAPES);
         register("goji_berries", GOJI_BERRIES);
+        register("gooseberries", GOOSEBERRIES);
     }
 
     /**
