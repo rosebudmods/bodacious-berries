@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "bodaciousberries:block/double_goji_bush_stage3"
+    "cross": "bodaciousberries:block/goj_bewwy_vine_stage3"
   }
 }
