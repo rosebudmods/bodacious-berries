@@ -50,19 +50,6 @@ public class Bushes {
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
 
     public static void registerBushes() {
-        SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
-        DOUBLE_SASKATOON_BERRY_BUSH.setBerryType(Berries.SASKATOON_BERRIES);
-        STRAWBERRY_BUSH.setBerryType(Berries.STRAWBERRY);
-        RASPBERRY_BUSH.setBerryType(Berries.RASPBERRIES);
-        BLACKBERRY_BUSH.setBerryType(Berries.BLACKBERRIES);
-        CHORUS_BERRY_BUSH.setBerryType(Berries.CHORUS_BERRIES);
-        RAINBERRY_BUSH.setBerryType(Berries.RAINBERRY);
-        LINGONBERRY_BUSH.setBerryType(Berries.LINGONBERRIES);
-        GRAPEVINE.setBerryType(Berries.GRAPES);
-        GOJI_BERRY_BUSH.setBerryType(Berries.GOJI_BERRIES);
-        DOUBLE_GOJI_BERRY_BUSH.setBerryType(Berries.GOJI_BERRIES);
-        GOOSEBERRY_BUSH.setBerryType(Berries.GOOSEBERRIES);
-
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
         register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
         register("strawberry_bush", STRAWBERRY_BUSH);
