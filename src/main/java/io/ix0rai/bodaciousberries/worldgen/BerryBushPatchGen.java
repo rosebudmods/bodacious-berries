@@ -54,6 +54,8 @@ public class BerryBushPatchGen {
     public static PlacedFeature PATCH_GRAPEVINE_PLACED;
     public static ConfiguredFeature<?, ?> PATCH_GOJI_BERRY;
     public static PlacedFeature PATCH_GOJI_BERRY_PLACED;
+    public static ConfiguredFeature<?, ?> PATCH_GOOSEBERRY;
+    public static PlacedFeature PATCH_GOOSEBERRY_PLACED;
 
     public static void registerFeatures() {
         //features
@@ -71,6 +73,7 @@ public class BerryBushPatchGen {
                 GRAPEVINE_FEATURE.configure(DefaultFeatureConfig.INSTANCE)
         );
         PATCH_GOJI_BERRY = berryPatchConfiguredFeature("patch_goji_berry", Bushes.GOJI_BERRY_BUSH, 4, Blocks.GRASS_BLOCK);
+        PATCH_GOOSEBERRY = berryPatchConfiguredFeature("patch_gooseberry", Bushes.GOOSEBERRY_BUSH, 3, Blocks.GRASS_BLOCK);
 
         //placed features
         PATCH_SASKATOON_BERRY_PLACED = berryPatchPlacedFeature("patch_saskatoon_berry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_SASKATOON_BERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
@@ -84,12 +87,14 @@ public class BerryBushPatchGen {
                 PATCH_GRAPEVINE.withPlacement(CountPlacementModifier.of(127), HeightRangePlacementModifier.uniform(YOffset.fixed(50), YOffset.fixed(255)), BiomePlacementModifier.of(), RarityFilterPlacementModifier.of(MEDIUM_BERRY_BUSH_RARITY))
         );
         PATCH_GOJI_BERRY_PLACED = berryPatchPlacedFeature("patch_goji_berry_placed", RARE_BERRY_BUSH_RARITY, PATCH_GOJI_BERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
+        PATCH_GOOSEBERRY_PLACED = berryPatchPlacedFeature("patch_gooseberry_placed", MEDIUM_BERRY_BUSH_RARITY, PATCH_GOOSEBERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
 
         //register them for generation
         final List<Biome.Category> saskatoonBerryCategories = List.of(Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.MOUNTAIN);
         final List<Biome.Category> strawberryCategories = List.of(Biome.Category.PLAINS, Biome.Category.FOREST, Biome.Category.SWAMP);
         final List<Biome.Category> lingonberryCategories = List.of(Biome.Category.TAIGA, Biome.Category.FOREST);
         final List<Biome.Category> gojiBerryCategories = List.of(Biome.Category.MOUNTAIN, Biome.Category.EXTREME_HILLS);
+        final List<Biome.Category> gooseberryCategories = List.of(Biome.Category.FOREST, Biome.Category.MOUNTAIN);
 
         generateBerryPatches("add_saskatoon_berry_patches", saskatoonBerryCategories, PATCH_SASKATOON_BERRY_PLACED);
         generateBerryPatches("add_strawberry_patches", strawberryCategories, PATCH_STRAWBERRY_PLACED);
@@ -100,6 +105,7 @@ public class BerryBushPatchGen {
         generateBerryPatches("add_lingonberry_patches", lingonberryCategories, PATCH_LINGONBERRY_PLACED);
         generateBerryPatches("add_grapevine_patches", List.of(Biome.Category.JUNGLE), PATCH_GRAPEVINE_PLACED);
         generateBerryPatches("add_goji_berry_patches", gojiBerryCategories, PATCH_GOJI_BERRY_PLACED);
+        generateBerryPatches("add_gooseberry_patches", gooseberryCategories, PATCH_GOOSEBERRY_PLACED);
     }
 
     /**
