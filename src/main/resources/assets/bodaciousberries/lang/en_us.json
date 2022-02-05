@@ -42,5 +42,6 @@
   "blocks.bodaciousberries.double_goji_berry_bush": "Double Goji Berry Bush",
   "sound_event.bodaciousberries.berry_pick_1": "Bodacious berries pop",
   "sound_event.bodaciousberries.berry_pick_2": "Bodacious berries pop",
-  "sound_event.bodaciousberries.berry_pick_3": "Bodacious berries pop"
+  "sound_event.bodaciousberries.berry_pick_3": "Bodacious berries pop",
+  "item.bodaciousberries.gooseberries": "Gooseberies"
 }

@@ -29,6 +29,8 @@ public class Berries {
     public static Item LINGONBERRIES;
     public static Item GRAPES;
     public static Item GOJI_BERRIES;
+    public static Item GOOSEBERRIES;
+
 
     public static void registerBerries() {
         //create items for each berry
@@ -41,17 +43,19 @@ public class Berries {
         LINGONBERRIES = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
         GRAPES = new AliasedBlockItem(Bushes.GRAPEVINE, settings(1, 2f));
         GOJI_BERRIES = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(2, 2.5f));
+        GOOSEBERRIES = new AliasedBlockItem(Bushes.GOOSEBERRY_BUSH, settings(2, 2f));
 
         //automatic stuffs
-        addDoubleBushToList(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
-        addToList(Bushes.STRAWBERRY_BUSH, STRAWBERRY);
-        addToList(Bushes.RASPBERRY_BUSH, RASPBERRIES);
-        addToList(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
-        addToList(Bushes.CHORUS_BERRY_BUSH, CHORUS_BERRIES);
-        addToList(Bushes.RAINBERRY_BUSH, RAINBERRY);
-        addToList(Bushes.LINGONBERRY_BUSH, LINGONBERRIES);
-        addToList(Bushes.GRAPEVINE, GRAPES);
-        addDoubleBushToList(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, GOJI_BERRIES);
+        initialise(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
+        initialise(Bushes.STRAWBERRY_BUSH, STRAWBERRY);
+        initialise(Bushes.RASPBERRY_BUSH, RASPBERRIES);
+        initialise(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
+        initialise(Bushes.CHORUS_BERRY_BUSH, CHORUS_BERRIES);
+        initialise(Bushes.RAINBERRY_BUSH, RAINBERRY);
+        initialise(Bushes.LINGONBERRY_BUSH, LINGONBERRIES);
+        initialise(Bushes.GRAPEVINE, GRAPES);
+        initialise(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, GOJI_BERRIES);
+        initialise(Bushes.GOOSEBERRY_BUSH, GOOSEBERRIES);
 
         initialiseBerries();
 
@@ -65,11 +69,12 @@ public class Berries {
         register("lingonberries", LINGONBERRIES);
         register("grapes", GRAPES);
         register("goji_berries", GOJI_BERRIES);
+        register("gooseberries", GOOSEBERRIES);
     }
 
     /**
      * map containing a berry bush, its associated berry, and unripe form if applicable
-     * <br> should not be directly added to, use {@link #addToList(BerryBush, Item)}
+     * <br> should not be directly added to, use {@link #initialise(BerryBush, Item)}
      */
     private static final Map<BerryBush, Item> BERRY_BUSHES = new HashMap<>();
 
@@ -92,17 +97,17 @@ public class Berries {
      * @param bush the berry bush you wish to associate your berries with
      * @param berries the base form of the berries to associate
      */
-    public static void addToList(BerryBush bush, Item berries) {
+    public static void initialise(BerryBush bush, Item berries) {
         BERRY_BUSHES.put(bush, berries);
     }
 
     /**
-     * uses {@link #addToList(BerryBush, Item)} to add both forms of a double berry bush to the automatic registration list
+     * uses {@link #initialise(BerryBush, Item)} to add both forms of a double berry bush to the automatic registration list
      * @param smallBush the small form of the berry bush
      * @param bigBush the double form of the berry bush
      * @param berries the base form of the berries to associate
      */
-    public static void addDoubleBushToList(GrowingBerryBush smallBush, DoubleBerryBush bigBush, Item berries) {
+    public static void initialise(GrowingBerryBush smallBush, DoubleBerryBush bigBush, Item berries) {
         BERRY_BUSHES.put(smallBush, berries);
         BERRY_BUSHES.put(bigBush, berries);
     }

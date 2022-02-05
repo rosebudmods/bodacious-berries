@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bodaciousberries:block/gooseberry_bush_stage2"
+  }
+}
