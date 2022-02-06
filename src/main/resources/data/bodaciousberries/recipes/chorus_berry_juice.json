@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "bodaciousberries:chorus_berries"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "bodaciousberries:chorus_berries"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    }
+  ],
+  "result": {
+    "item": "bodaciousberries:chorus_berry_juice",
+    "count": 1
+  }
+}

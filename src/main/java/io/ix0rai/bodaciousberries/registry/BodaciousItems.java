@@ -23,13 +23,13 @@ public class BodaciousItems {
     public static void registerItems() {
         Berries.registerBerries();
 
-        createChorusBerryJuice(List.of(JUNGLE,
+        createChorusBerryJuice(List.of(
                 PLAINS, SNOWY_SLOPES, SWAMP,
                 DESERT, TAIGA, BIRCH_FOREST,
                 OCEAN, MUSHROOM_FIELDS, SUNFLOWER_PLAINS,
                 FOREST, FLOWER_FOREST, DARK_FOREST,
                 SAVANNA, BADLANDS, MEADOW,
-                GROVE, LUSH_CAVES, DRIPSTONE_CAVES
+                LUSH_CAVES, DRIPSTONE_CAVES, JUNGLE
         ));
     }
 
