@@ -31,9 +31,9 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import java.util.List;
 
 public class BerryBushPatchGen {
-    private static final int RARE_BERRY_BUSH_RARITY = 20;
-    private static final int MEDIUM_BERRY_BUSH_RARITY = 16;
-    private static final int COMMON_BERRY_BUSH_RARITY = 10;
+    private static final int RARE_BERRY_BUSH_RARITY = 80;
+    private static final int MEDIUM_BERRY_BUSH_RARITY = 64;
+    private static final int COMMON_BERRY_BUSH_RARITY = 40;
 
     public static ConfiguredFeature<?, ?> PATCH_SASKATOON_BERRY;
     public static PlacedFeature PATCH_SASKATOON_BERRY_PLACED;
