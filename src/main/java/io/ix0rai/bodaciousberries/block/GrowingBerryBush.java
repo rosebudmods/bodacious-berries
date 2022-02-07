@@ -30,6 +30,12 @@ public class GrowingBerryBush extends BasicBerryBush {
     }
 
     @Override
+    public boolean hasRandomTicks(BlockState state) {
+        //workaround for GrowingBerryBushes generating above their configured max age
+        return true;
+    }
+
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         BerryTypeConfigurationException.check(berryType);
 
@@ -38,7 +44,7 @@ public class GrowingBerryBush extends BasicBerryBush {
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             final int newAge = Math.min(maxAge, state.get(AGE) + 1);
             if (newAge < maxAge) {
-                world.setBlockState(pos, state.with(AGE, newAge), 2);
+                return ActionResult.PASS;
             } else {
                 TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, 2);
             }
