@@ -117,6 +117,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         return this.berryType;
     }
 
+    @Override
     public int getMaxAge() {
         return MAX_AGE;
     }

@@ -218,4 +218,9 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
         world.setBlockState(pos, state.with(AGE, newAge), 2);
     }
+
+    @Override
+    public int getMaxAge() {
+        return maxAge;
+    }
 }

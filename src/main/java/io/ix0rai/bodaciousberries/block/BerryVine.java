@@ -100,4 +100,9 @@ public class BerryVine extends VineBlock implements BerryBush {
             return super.onUse(state, world, pos, player, hand, hit);
         }
     }
+
+    @Override
+    public int getMaxAge() {
+        return MAX_AGE;
+    }
 }

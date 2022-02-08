@@ -2,6 +2,7 @@ package io.ix0rai.bodaciousberries.worldgen;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
+import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
@@ -63,17 +64,17 @@ public class BerryBushPatchGen {
 
         //configured features
         PATCH_SASKATOON_BERRY = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, 2, Blocks.GRASS_BLOCK);
-        PATCH_STRAWBERRY = berryPatchConfiguredFeature("patch_strawberry", Bushes.STRAWBERRY_BUSH, 3, Blocks.GRASS_BLOCK);
-        PATCH_BLACKBERRY = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
-        PATCH_RASPBERRY = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
-        PATCH_CHORUS_BERRY = berryPatchConfiguredFeature("patch_chorus_berry", Bushes.CHORUS_BERRY_BUSH, 3, Blocks.END_STONE);
-        PATCH_RAINBERRY = berryPatchConfiguredFeature("patch_rainberry", Bushes.RAINBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
-        PATCH_LINGONBERRY = berryPatchConfiguredFeature("patch_lingonberry", Bushes.LINGONBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
+        PATCH_STRAWBERRY = berryPatchConfiguredFeature("patch_strawberry", Bushes.STRAWBERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_BLACKBERRY = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_RASPBERRY = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_CHORUS_BERRY = berryPatchConfiguredFeature("patch_chorus_berry", Bushes.CHORUS_BERRY_BUSH, Blocks.END_STONE);
+        PATCH_RAINBERRY = berryPatchConfiguredFeature("patch_rainberry", Bushes.RAINBERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_LINGONBERRY = berryPatchConfiguredFeature("patch_lingonberry", Bushes.LINGONBERRY_BUSH, Blocks.GRASS_BLOCK);
         PATCH_GRAPEVINE = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, "bodaciousberries:patch_grapevine",
                 GRAPEVINE_FEATURE.configure(DefaultFeatureConfig.INSTANCE)
         );
-        PATCH_GOJI_BERRY = berryPatchConfiguredFeature("patch_goji_berry", Bushes.GOJI_BERRY_BUSH, 4, Blocks.GRASS_BLOCK);
-        PATCH_GOOSEBERRY = berryPatchConfiguredFeature("patch_gooseberry", Bushes.GOOSEBERRY_BUSH, 3, Blocks.GRASS_BLOCK);
+        PATCH_GOJI_BERRY = berryPatchConfiguredFeature("patch_goji_berry", Bushes.GOJI_BERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_GOOSEBERRY = berryPatchConfiguredFeature("patch_gooseberry", Bushes.GOOSEBERRY_BUSH, Blocks.GRASS_BLOCK);
 
         //placed features
         PATCH_SASKATOON_BERRY_PLACED = berryPatchPlacedFeature("patch_saskatoon_berry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_SASKATOON_BERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
@@ -109,13 +110,23 @@ public class BerryBushPatchGen {
     }
 
     /**
+     * creates and registers a berry patch feature, with the default age of the berry bush being the maximum age of said berry bush
+     * @param name the name of the feature
+     * @param bush the bush to generate
+     * @return a berry patch configured feature
+     */
+    public static ConfiguredFeature<RandomPatchFeatureConfig, ?> berryPatchConfiguredFeature(String name, BerryBush bush, Block placedOn) {
+        return berryPatchConfiguredFeature(name, bush, bush.getMaxAge(), placedOn);
+    }
+
+    /**
      * creates and registers a berry patch feature
      * @param name the name of the feature
      * @param bush the bush to generate
      * @param defaultAge the default age of the bush
      * @return a berry patch configured feature
      */
-    public static ConfiguredFeature<RandomPatchFeatureConfig, ?> berryPatchConfiguredFeature(String name, BasicBerryBush bush, int defaultAge, Block placedOn) {
+    public static ConfiguredFeature<RandomPatchFeatureConfig, ?> berryPatchConfiguredFeature(String name, BerryBush bush, int defaultAge, Block placedOn) {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Bodaciousberries.getIdentifier(name),
                 Feature.RANDOM_PATCH.configure(ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK.configure(
                                 new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getDefaultState().with(BasicBerryBush.AGE, defaultAge)))),
