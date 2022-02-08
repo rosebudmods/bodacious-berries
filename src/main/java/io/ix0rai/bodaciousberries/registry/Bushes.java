@@ -47,7 +47,7 @@ public class Bushes {
     public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_GOJI_BERRY_BUSH);
     public static final BasicBerryBush GOOSEBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.GOOSEBERRIES, 3,
-            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
+            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1);
 
     public static void registerBushes() {
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
