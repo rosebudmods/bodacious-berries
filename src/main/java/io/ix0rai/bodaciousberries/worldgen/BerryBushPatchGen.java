@@ -63,7 +63,7 @@ public class BerryBushPatchGen {
         GRAPEVINE_FEATURE = Registry.register(Registry.FEATURE, Bodaciousberries.getIdentifier("grapevines"), new GrapevineFeature(DefaultFeatureConfig.CODEC));
 
         //configured features
-        PATCH_SASKATOON_BERRY = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, 2, Blocks.GRASS_BLOCK);
+        PATCH_SASKATOON_BERRY = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, Blocks.GRASS_BLOCK);
         PATCH_STRAWBERRY = berryPatchConfiguredFeature("patch_strawberry", Bushes.STRAWBERRY_BUSH, Blocks.GRASS_BLOCK);
         PATCH_BLACKBERRY = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, Blocks.GRASS_BLOCK);
         PATCH_RASPBERRY = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, Blocks.GRASS_BLOCK);
@@ -116,20 +116,9 @@ public class BerryBushPatchGen {
      * @return a berry patch configured feature
      */
     public static ConfiguredFeature<RandomPatchFeatureConfig, ?> berryPatchConfiguredFeature(String name, BerryBush bush, Block placedOn) {
-        return berryPatchConfiguredFeature(name, bush, bush.getMaxAge(), placedOn);
-    }
-
-    /**
-     * creates and registers a berry patch feature
-     * @param name the name of the feature
-     * @param bush the bush to generate
-     * @param defaultAge the default age of the bush
-     * @return a berry patch configured feature
-     */
-    public static ConfiguredFeature<RandomPatchFeatureConfig, ?> berryPatchConfiguredFeature(String name, BerryBush bush, int defaultAge, Block placedOn) {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Bodaciousberries.getIdentifier(name),
                 Feature.RANDOM_PATCH.configure(ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK.configure(
-                                new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getDefaultState().with(BasicBerryBush.AGE, defaultAge)))),
+                                new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getDefaultState().with(BasicBerryBush.AGE, bush.getMaxAge())))),
                         List.of(placedOn)
                 ))
         );
