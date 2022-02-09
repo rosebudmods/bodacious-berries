@@ -35,9 +35,9 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BasicBerryBush extends PlantBlock implements BerryBush {
-    private static final Vec3d BERRY_BUSH_SLOWING_VECTOR = new Vec3d(0.5D, 0.25D, 0.5D);
+    protected static final Vec3d BERRY_BUSH_SLOWING_VECTOR = new Vec3d(0.5D, 0.25D, 0.5D);
     //chance to grow is one in growChance
-    private static final int GROW_CHANCE = 5;
+    protected static final int GROW_CHANCE = 5;
     protected static final int MAX_BERRY_AMOUNT = 3;
 
     protected Item berryType;
@@ -127,7 +127,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         int age = state.get(AGE);
         //if the age isn't maximum and the light level is high enough grow the bush
         if (age <= maxAge && random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
-            world.setBlockState(pos, state.with(AGE, age + 1), 2);
+            grow(world, pos, state, age + 1);
         }
     }
 
