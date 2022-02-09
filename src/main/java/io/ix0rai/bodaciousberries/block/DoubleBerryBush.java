@@ -30,7 +30,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
     //berry age is hard capped at 3 for double bushes
     protected static final int MAX_AGE = 3;
-    protected static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
+    public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
     protected static final int MAX_BERRY_AMOUNT = 6;
 
     protected Item berryType;
