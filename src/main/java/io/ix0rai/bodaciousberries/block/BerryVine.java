@@ -64,7 +64,7 @@ public class BerryVine extends VineBlock implements BerryBush {
         int age = state.get(AGE);
         //if the age isn't maximum and the light level is high enough grow the bush
         if (age < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
-            world.setBlockState(pos, state.with(AGE, age + 1), 2);
+            world.setBlockState(pos, state.with(AGE, age + 1), Block.NOTIFY_LISTENERS);
         }
     }
 
@@ -85,7 +85,7 @@ public class BerryVine extends VineBlock implements BerryBush {
     }
 
     public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
-        world.setBlockState(pos, state.with(AGE, newAge), 2);
+        world.setBlockState(pos, state.with(AGE, newAge), Block.NOTIFY_LISTENERS);
     }
 
     @Override

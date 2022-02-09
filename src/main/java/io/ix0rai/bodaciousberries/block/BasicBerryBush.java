@@ -188,7 +188,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         world.playSound(null, pos, selectPickSound(world), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 
         //reset berry growth; they were just picked
-        world.setBlockState(pos, state.with(berryAge, sizeChangeAge), 2);
+        world.setBlockState(pos, state.with(berryAge, sizeChangeAge), Block.NOTIFY_LISTENERS);
         return ActionResult.success(world.isClient);
     }
 
@@ -216,7 +216,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
-        world.setBlockState(pos, state.with(AGE, newAge), 2);
+        world.setBlockState(pos, state.with(AGE, newAge), Block.NOTIFY_LISTENERS);
     }
 
     @Override
