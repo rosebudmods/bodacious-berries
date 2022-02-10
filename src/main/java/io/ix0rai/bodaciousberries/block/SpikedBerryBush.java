@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -39,7 +40,7 @@ public class SpikedBerryBush extends BasicBerryBush {
         entity.slowMovement(state, BERRY_BUSH_SLOWING_VECTOR);
 
         boolean entityDidNotMove = entity.lastRenderX == entity.getX() && entity.lastRenderZ == entity.getZ();
-        if (!(world.isClient || entityDidNotMove)) {
+        if (!(world.isClient || entityDidNotMove) && entity instanceof PlayerEntity) {
             //the entity must move a minimum distance to be damaged
             //this is implemented so if you accidentally touch the keyboard for a millisecond, you won't be damaged
             double distanceMovedX = Math.abs(entity.getX() - entity.lastRenderX);
@@ -50,7 +51,6 @@ public class SpikedBerryBush extends BasicBerryBush {
         }
     }
 
-    //TODO: for some reason returning false on this method DOES NOT STOP MOBS FROM PATHFINDING THROUGH
     @Override
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return state.get(AGE) < sizeChangeAge;
