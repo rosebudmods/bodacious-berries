@@ -1,5 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
+import io.ix0rai.bodaciousberries.registry.Bushes;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
@@ -30,8 +31,8 @@ public class BerryVine extends VineBlock implements BerryBush {
 
     protected Item berryType;
 
-    public BerryVine(Settings settings, Item berry) {
-        super(settings.nonOpaque());
+    public BerryVine(Item berry) {
+        super(Bushes.BERRY_BUSH_SETTINGS);
         this.berryType = berry;
         //ensure cutout texture is rendered
         BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());

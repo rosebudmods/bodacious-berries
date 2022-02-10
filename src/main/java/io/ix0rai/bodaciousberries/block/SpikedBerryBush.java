@@ -23,8 +23,8 @@ public class SpikedBerryBush extends BasicBerryBush {
      * derived from {@link BasicBerryBush}
      * @param damage the amount of damage the berry bush does on contact
      */
-    public SpikedBerryBush(Settings settings, Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
-        super(settings, berryType, maxAge, smallShape, largeShape, sizeChangeAge);
+    public SpikedBerryBush(Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
+        super(berryType, maxAge, smallShape, largeShape, sizeChangeAge);
         if (damage < 1.0f) {
             throw new IllegalArgumentException("damage must be greater than or equal to 1");
         }

@@ -1,5 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
+import io.ix0rai.bodaciousberries.registry.Bushes;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
@@ -35,8 +36,8 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     protected Item berryType;
 
-    public DoubleBerryBush(Settings settings, Item berryType) {
-        super(settings.nonOpaque());
+    public DoubleBerryBush(Item berryType) {
+        super(Bushes.BERRY_BUSH_SETTINGS);
         this.berryType = berryType;
         //ensure cutout texture is rendered
         BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
