@@ -61,7 +61,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     });
 
     /**
-     * secondary berry bush constructor
+     * berry bush constructor
      * @param settings block settings for this berry bush
      * @param berryType which berries will be given when this bush is picked from
      * @param maxAge maximum age bush can grow to

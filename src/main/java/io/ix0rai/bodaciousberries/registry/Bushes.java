@@ -7,6 +7,7 @@ import io.ix0rai.bodaciousberries.block.ChorusBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.block.RainberryBush;
+import io.ix0rai.bodaciousberries.block.SpikedBerryBush;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -32,10 +33,10 @@ public class Bushes {
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_SASKATOON_BERRY_BUSH);
     public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.STRAWBERRY,
             3, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
-    public static final BasicBerryBush RASPBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.RASPBERRIES,
-            4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1);
-    public static final BasicBerryBush BLACKBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.BLACKBERRIES,
-            4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1);
+    public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush(BERRY_BUSH_SETTINGS, Berries.RASPBERRIES,
+            4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
+    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush(BERRY_BUSH_SETTINGS, Berries.BLACKBERRIES,
+            4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
     public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(BERRY_BUSH_SETTINGS, Berries.RAINBERRY,
             4, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 2);
     public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.LINGONBERRIES,
@@ -46,8 +47,8 @@ public class Bushes {
             Berries.GOJI_BERRIES);
     public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(BERRY_BUSH_SETTINGS,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2, DOUBLE_GOJI_BERRY_BUSH);
-    public static final BasicBerryBush GOOSEBERRY_BUSH = new BasicBerryBush(BERRY_BUSH_SETTINGS, Berries.GOOSEBERRIES, 3,
-            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1);
+    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush(BERRY_BUSH_SETTINGS, Berries.GOOSEBERRIES, 3,
+            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
 
     public static void registerBushes() {
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
