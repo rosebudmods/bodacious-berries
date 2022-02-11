@@ -3,6 +3,7 @@ package io.ix0rai.bodaciousberries.worldgen;
 import com.mojang.serialization.Codec;
 import io.ix0rai.bodaciousberries.block.BerryVine;
 import io.ix0rai.bodaciousberries.registry.Bushes;
+import net.minecraft.block.Block;
 import net.minecraft.block.VineBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -27,7 +28,7 @@ public class GrapevineFeature extends VinesFeature implements FeatureConfig {
             for (Direction direction : Direction.values()) {
                 //generate vines after checking if the vine can connect
                 if (direction != Direction.DOWN && VineBlock.shouldConnectTo(structureWorldAccess, blockPos.offset(direction), direction)) {
-                    structureWorldAccess.setBlockState(blockPos, Bushes.GRAPEVINE.getDefaultState().with(VineBlock.getFacingProperty(direction), true).with(BerryVine.AGE, 3), 2);
+                    structureWorldAccess.setBlockState(blockPos, Bushes.GRAPEVINE.getDefaultState().with(VineBlock.getFacingProperty(direction), true).with(BerryVine.AGE, 3), Block.NOTIFY_LISTENERS);
                     return true;
                 }
             }

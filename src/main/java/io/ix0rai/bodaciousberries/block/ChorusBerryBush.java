@@ -8,8 +8,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 public class ChorusBerryBush extends BasicBerryBush {
-    public ChorusBerryBush(Settings settings, Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        super(settings, berryType, maxAge, smallShape, largeShape, sizeChangeAge);
+    public ChorusBerryBush(Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        super(berryType, maxAge, smallShape, largeShape, sizeChangeAge);
     }
 
     @Override

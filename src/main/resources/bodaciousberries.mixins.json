@@ -6,7 +6,7 @@
   "mixins": [
     "accessors.DefaultParticleTypeAccessor",
     "accessors.WaterSuspendParticleAccessor",
-    "FireBlockInjector",
+    "accessors.DamageSourceAccessor",
     "VineDecoratorOverwrite"
   ],
   "client": [

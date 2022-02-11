@@ -26,7 +26,7 @@ public class DoubleBushFeature extends Feature<DoubleBushFeatureConfig> {
         BlockState babyState = config.babyForm().getBlockState(random, pos);
 
         if (random.nextBoolean() && tallState.canPlaceAt(access, pos) && access.isAir(pos.up())) {
-            TallPlantBlock.placeAt(access, tallState, pos, 2);
+            TallPlantBlock.placeAt(access, tallState, pos, Block.NOTIFY_LISTENERS);
             access.setBlockState(pos, tallState, Block.NOTIFY_LISTENERS);
         } else {
             access.setBlockState(pos, babyState, Block.NOTIFY_LISTENERS);

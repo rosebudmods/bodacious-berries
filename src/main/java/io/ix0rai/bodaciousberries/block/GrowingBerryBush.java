@@ -1,6 +1,7 @@
 package io.ix0rai.bodaciousberries.block;
 
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,17 +19,17 @@ import java.util.Random;
 public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 
-    public GrowingBerryBush(Settings settings, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DoubleBerryBush bush) {
-        super(settings, bush.getBerryType(), sizeChangeAge, smallShape, largeShape, sizeChangeAge);
+    public GrowingBerryBush(VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DoubleBerryBush bush) {
+        super(bush.getBerryType(), sizeChangeAge, smallShape, largeShape, sizeChangeAge);
         this.futureBush = bush;
     }
 
     @Override
     public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
         if (newAge < maxAge) {
-            world.setBlockState(pos, state.with(AGE, newAge), 2);
+            world.setBlockState(pos, state.with(AGE, newAge), Block.NOTIFY_LISTENERS);
         } else {
-            TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, 2);
+            TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, Block.NOTIFY_LISTENERS);
         }
     }
 
@@ -53,9 +54,9 @@ public class GrowingBerryBush extends BasicBerryBush {
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             final int newAge = Math.min(maxAge, state.get(AGE) + 1);
             if (newAge < maxAge) {
-                world.setBlockState(pos, state.with(AGE, newAge), 2);
+                world.setBlockState(pos, state.with(AGE, newAge), Block.NOTIFY_LISTENERS);
             } else {
-                TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, 2);
+                TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, Block.NOTIFY_LISTENERS);
             }
             return ActionResult.PASS;
         } else {
