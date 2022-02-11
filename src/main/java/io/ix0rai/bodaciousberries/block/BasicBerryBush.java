@@ -1,5 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
+import io.ix0rai.bodaciousberries.registry.Bushes;
 import io.ix0rai.bodaciousberries.registry.Sounds;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -61,17 +62,16 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     });
 
     /**
-     * secondary berry bush constructor
-     * @param settings block settings for this berry bush
+     * berry bush constructor
      * @param berryType which berries will be given when this bush is picked from
      * @param maxAge maximum age bush can grow to
      * @param smallShape small voxel shape for the bush
      * @param largeShape large voxel shape for the bush
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
-    public BasicBerryBush(Settings settings, Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+    public BasicBerryBush(Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         //add nonOpaque to settings to ensure that the bush isn't considered a solid block when rendering
-        super(settings.nonOpaque());
+        super(Bushes.BERRY_BUSH_SETTINGS);
         this.berryType = berryType;
         this.maxAge = maxAge;
         this.smallShape = smallShape;
@@ -188,7 +188,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         world.playSound(null, pos, selectPickSound(world), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 
         //reset berry growth; they were just picked
-        world.setBlockState(pos, state.with(berryAge, sizeChangeAge), 2);
+        world.setBlockState(pos, state.with(berryAge, sizeChangeAge), Block.NOTIFY_LISTENERS);
         return ActionResult.success(world.isClient);
     }
 
@@ -216,7 +216,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
-        world.setBlockState(pos, state.with(AGE, newAge), 2);
+        world.setBlockState(pos, state.with(AGE, newAge), Block.NOTIFY_LISTENERS);
     }
 
     @Override

@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class RainberryBush extends BasicBerryBush {
-    public RainberryBush(Settings settings, Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        super(settings, berryType, maxAge, smallShape, largeShape, sizeChangeAge);
+    public RainberryBush(Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        super(berryType, maxAge, smallShape, largeShape, sizeChangeAge);
     }
 
     @Override
