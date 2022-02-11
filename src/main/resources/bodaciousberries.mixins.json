@@ -7,7 +7,8 @@
     "accessors.DefaultParticleTypeAccessor",
     "accessors.WaterSuspendParticleAccessor",
     "accessors.DamageSourceAccessor",
-    "VineDecoratorOverwrite"
+    "VineDecoratorOverwrite",
+    "FireBlockInjector"
   ],
   "client": [
   ],
