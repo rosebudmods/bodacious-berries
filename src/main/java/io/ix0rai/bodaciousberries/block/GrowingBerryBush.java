@@ -47,12 +47,6 @@ public class GrowingBerryBush extends BasicBerryBush {
     }
 
     @Override
-    public boolean hasRandomTicks(BlockState state) {
-        //workaround for GrowingBerryBushes generating above their configured max age
-        return true;
-    }
-
-    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         BerryTypeConfigurationException.check(berryType);
 
