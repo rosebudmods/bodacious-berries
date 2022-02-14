@@ -34,16 +34,16 @@ public class Berries {
 
     public static void registerBerries() {
         //create items for each berry
-        SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(2, 2f));
+        SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 2f));
         STRAWBERRY = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
-        RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(1, 4f));
-        BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(1, 3.5f));
-        CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(1, 2f));
+        RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(2, 3f));
+        BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(2, 3.5f));
+        CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(2, 2.5f));
         RAINBERRY = new Rainberry(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
         LINGONBERRIES = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
-        GRAPES = new AliasedBlockItem(Bushes.GRAPEVINE, settings(1, 2f));
+        GRAPES = new AliasedBlockItem(Bushes.GRAPEVINE, settings(2, 2f));
         GOJI_BERRIES = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(2, 2.5f));
-        GOOSEBERRIES = new AliasedBlockItem(Bushes.GOOSEBERRY_BUSH, settings(2, 2f));
+        GOOSEBERRIES = new AliasedBlockItem(Bushes.GOOSEBERRY_BUSH, settings(2, 1f));
 
         //automatic stuffs
         initialise(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);

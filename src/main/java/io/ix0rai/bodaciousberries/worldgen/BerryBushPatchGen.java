@@ -2,6 +2,9 @@ package io.ix0rai.bodaciousberries.worldgen;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
+import io.ix0rai.bodaciousberries.block.BerryBush;
+import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
+import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
@@ -35,6 +38,9 @@ public class BerryBushPatchGen {
     private static final int MEDIUM_BERRY_BUSH_RARITY = 64;
     private static final int COMMON_BERRY_BUSH_RARITY = 40;
 
+    public static Feature<DefaultFeatureConfig> GRAPEVINE_FEATURE;
+    public static Feature<DoubleBushFeatureConfig> DOUBLE_BUSH_FEATURE;
+
     public static ConfiguredFeature<?, ?> PATCH_SASKATOON_BERRY;
     public static PlacedFeature PATCH_SASKATOON_BERRY_PLACED;
     public static ConfiguredFeature<?, ?> PATCH_STRAWBERRY;
@@ -49,7 +55,6 @@ public class BerryBushPatchGen {
     public static PlacedFeature PATCH_RAINBERRY_PLACED;
     public static ConfiguredFeature<?, ?> PATCH_LINGONBERRY;
     public static PlacedFeature PATCH_LINGONBERRY_PLACED;
-    public static Feature<DefaultFeatureConfig> GRAPEVINE_FEATURE;
     public static ConfiguredFeature<?, ?> PATCH_GRAPEVINE;
     public static PlacedFeature PATCH_GRAPEVINE_PLACED;
     public static ConfiguredFeature<?, ?> PATCH_GOJI_BERRY;
@@ -60,20 +65,21 @@ public class BerryBushPatchGen {
     public static void registerFeatures() {
         //features
         GRAPEVINE_FEATURE = Registry.register(Registry.FEATURE, Bodaciousberries.getIdentifier("grapevines"), new GrapevineFeature(DefaultFeatureConfig.CODEC));
+        DOUBLE_BUSH_FEATURE = Registry.register(Registry.FEATURE, Bodaciousberries.getIdentifier("double_bush"), new DoubleBushFeature(DoubleBushFeatureConfig.CODEC));
 
         //configured features
-        PATCH_SASKATOON_BERRY = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, 2, Blocks.GRASS_BLOCK);
-        PATCH_STRAWBERRY = berryPatchConfiguredFeature("patch_strawberry", Bushes.STRAWBERRY_BUSH, 3, Blocks.GRASS_BLOCK);
-        PATCH_BLACKBERRY = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
-        PATCH_RASPBERRY = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
-        PATCH_CHORUS_BERRY = berryPatchConfiguredFeature("patch_chorus_berry", Bushes.CHORUS_BERRY_BUSH, 3, Blocks.END_STONE);
-        PATCH_RAINBERRY = berryPatchConfiguredFeature("patch_rainberry", Bushes.RAINBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
-        PATCH_LINGONBERRY = berryPatchConfiguredFeature("patch_lingonberry", Bushes.LINGONBERRY_BUSH, 4, Blocks.GRASS_BLOCK);
+        PATCH_SASKATOON_BERRY = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_STRAWBERRY = berryPatchConfiguredFeature("patch_strawberry", Bushes.STRAWBERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_BLACKBERRY = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_RASPBERRY = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_CHORUS_BERRY = berryPatchConfiguredFeature("patch_chorus_berry", Bushes.CHORUS_BERRY_BUSH, Blocks.END_STONE);
+        PATCH_RAINBERRY = berryPatchConfiguredFeature("patch_rainberry", Bushes.RAINBERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_LINGONBERRY = berryPatchConfiguredFeature("patch_lingonberry", Bushes.LINGONBERRY_BUSH, Blocks.GRASS_BLOCK);
         PATCH_GRAPEVINE = Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, "bodaciousberries:patch_grapevine",
                 GRAPEVINE_FEATURE.configure(DefaultFeatureConfig.INSTANCE)
         );
-        PATCH_GOJI_BERRY = berryPatchConfiguredFeature("patch_goji_berry", Bushes.GOJI_BERRY_BUSH, 4, Blocks.GRASS_BLOCK);
-        PATCH_GOOSEBERRY = berryPatchConfiguredFeature("patch_gooseberry", Bushes.GOOSEBERRY_BUSH, 3, Blocks.GRASS_BLOCK);
+        PATCH_GOJI_BERRY = berryPatchConfiguredFeature("patch_goji_berry", Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, Blocks.GRASS_BLOCK);
+        PATCH_GOOSEBERRY = berryPatchConfiguredFeature("patch_gooseberry", Bushes.GOOSEBERRY_BUSH, Blocks.GRASS_BLOCK);
 
         //placed features
         PATCH_SASKATOON_BERRY_PLACED = berryPatchPlacedFeature("patch_saskatoon_berry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_SASKATOON_BERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
@@ -109,16 +115,35 @@ public class BerryBushPatchGen {
     }
 
     /**
-     * creates and registers a berry patch feature
+     * creates and registers a berry patch feature, with the default age of the berry bush being the maximum age of said berry bush
      * @param name the name of the feature
      * @param bush the bush to generate
-     * @param defaultAge the default age of the bush
+     * @param placedOn which block the bush should be placed on
      * @return a berry patch configured feature
      */
-    public static ConfiguredFeature<RandomPatchFeatureConfig, ?> berryPatchConfiguredFeature(String name, BasicBerryBush bush, int defaultAge, Block placedOn) {
+    public static ConfiguredFeature<RandomPatchFeatureConfig, ?> berryPatchConfiguredFeature(String name, BerryBush bush, Block placedOn) {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Bodaciousberries.getIdentifier(name),
                 Feature.RANDOM_PATCH.configure(ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK.configure(
-                                new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getDefaultState().with(BasicBerryBush.AGE, defaultAge)))),
+                                new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getDefaultState().with(BasicBerryBush.AGE, bush.getMaxAge())))),
+                        List.of(placedOn)
+                ))
+        );
+    }
+
+    /**
+     * creates and registers a berry patch feature, with the default age of the berry bush being the maximum age of said berry bush
+     * <br>also generates the double version of said berry bush alongside it
+     * @param name the name of the feature
+     * @param bush the bush to generate
+     * @param tallBush the tall version of the bush
+     * @param placedOn which block the bush should be placed on
+     * @return a berry patch configured feature
+     */
+    public static ConfiguredFeature<RandomPatchFeatureConfig, ?> berryPatchConfiguredFeature(String name, GrowingBerryBush bush, DoubleBerryBush tallBush, Block placedOn) {
+        return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Bodaciousberries.getIdentifier(name),
+                Feature.RANDOM_PATCH.configure(ConfiguredFeatures.createRandomPatchFeatureConfig(DOUBLE_BUSH_FEATURE.configure(
+                                new DoubleBushFeatureConfig(BlockStateProvider.of(tallBush.getDefaultState().with(DoubleBerryBush.AGE, tallBush.getMaxAge())),
+                                        BlockStateProvider.of(bush.getDefaultState().with(BasicBerryBush.AGE, bush.getMaxAge())))),
                         List.of(placedOn)
                 ))
         );

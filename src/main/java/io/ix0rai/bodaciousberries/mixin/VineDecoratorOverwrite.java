@@ -20,7 +20,7 @@ import java.util.function.BiConsumer;
 @Mixin(LeavesVineTreeDecorator.class)
 public class VineDecoratorOverwrite {
     /**
-     * reason: get grapevines to spawn on trees more naturally
+     * @reason get grapevines to spawn on trees more naturally
      * @author ix0rai
      */
     @Overwrite

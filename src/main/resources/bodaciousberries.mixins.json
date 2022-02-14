@@ -5,8 +5,10 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "accessors.DefaultParticleTypeAccessor",
+    "accessors.WaterSuspendParticleAccessor",
+    "accessors.DamageSourceAccessor",
     "VineDecoratorOverwrite",
-    "accessors.WaterSuspendParticleAccessor"
+    "FireBlockInjector"
   ],
   "client": [
   ],

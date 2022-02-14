@@ -1,5 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
+import io.ix0rai.bodaciousberries.registry.Bushes;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
@@ -30,13 +31,13 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
     //berry age is hard capped at 3 for double bushes
     protected static final int MAX_AGE = 3;
-    protected static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
+    public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
     protected static final int MAX_BERRY_AMOUNT = 6;
 
     protected Item berryType;
 
-    public DoubleBerryBush(Settings settings, Item berryType) {
-        super(settings.nonOpaque());
+    public DoubleBerryBush(Item berryType) {
+        super(Bushes.BERRY_BUSH_SETTINGS);
         this.berryType = berryType;
         //ensure cutout texture is rendered
         BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
@@ -76,7 +77,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         int age = state.get(AGE);
         //if the age isn't maximum and the light level is high enough grow the bush
         if (age < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
-            world.setBlockState(pos, state.with(AGE, age + 1), 2);
+            world.setBlockState(pos, state.with(AGE, age + 1), Block.NOTIFY_LISTENERS);
         }
     }
 
@@ -97,7 +98,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     }
 
     public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
-        world.setBlockState(pos, state.with(AGE, newAge), 2);
+        world.setBlockState(pos, state.with(AGE, newAge), Block.NOTIFY_LISTENERS);
     }
 
     @Override
@@ -117,6 +118,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         return this.berryType;
     }
 
+    @Override
     public int getMaxAge() {
         return MAX_AGE;
     }
