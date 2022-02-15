@@ -124,7 +124,7 @@ public class BerryBushPatchGen {
     public static ConfiguredFeature<RandomPatchFeatureConfig, ?> berryPatchConfiguredFeature(String name, BerryBush bush, Block placedOn) {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Bodaciousberries.getIdentifier(name),
                 Feature.RANDOM_PATCH.configure(ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK.configure(
-                                new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getDefaultState().with(BasicBerryBush.AGE, bush.getMaxAge())))),
+                                new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getBaseState().with(BasicBerryBush.AGE, bush.getMaxAge())))),
                         List.of(placedOn)
                 ))
         );
@@ -143,7 +143,7 @@ public class BerryBushPatchGen {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Bodaciousberries.getIdentifier(name),
                 Feature.RANDOM_PATCH.configure(ConfiguredFeatures.createRandomPatchFeatureConfig(DOUBLE_BUSH_FEATURE.configure(
                                 new DoubleBushFeatureConfig(BlockStateProvider.of(tallBush.getDefaultState().with(DoubleBerryBush.AGE, tallBush.getMaxAge())),
-                                        BlockStateProvider.of(bush.getDefaultState().with(BasicBerryBush.AGE, bush.getMaxAge())))),
+                                        BlockStateProvider.of(bush.getBaseState().with(BasicBerryBush.AGE, bush.getMaxAge())))),
                         List.of(placedOn)
                 ))
         );

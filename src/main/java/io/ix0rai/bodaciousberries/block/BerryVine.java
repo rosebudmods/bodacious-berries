@@ -106,4 +106,9 @@ public class BerryVine extends VineBlock implements BerryBush {
     public int getMaxAge() {
         return MAX_AGE;
     }
+
+    @Override
+    public BlockState getBaseState() {
+        return super.getDefaultState().with(AGE, 0);
+    }
 }

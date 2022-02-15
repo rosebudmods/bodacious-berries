@@ -7,5 +7,5 @@ import net.minecraft.item.Item;
 public interface BerryBush extends Fertilizable {
     void setBerryType(Item berryType);
     int getMaxAge();
-    BlockState getDefaultState();
+    BlockState getBaseState();
 }

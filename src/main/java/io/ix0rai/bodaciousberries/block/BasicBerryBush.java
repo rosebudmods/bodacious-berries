@@ -223,4 +223,9 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     public int getMaxAge() {
         return maxAge;
     }
+
+    @Override
+    public BlockState getBaseState() {
+        return super.getDefaultState().with(AGE, 0);
+    }
 }
