@@ -2,11 +2,9 @@ package io.ix0rai.bodaciousberries.block;
 
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,10 +26,11 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
-    protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
     //berry age is hard capped at 3 for double bushes
-    protected static final int MAX_AGE = 3;
+    public static final int MAX_AGE = 3;
     public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
+
+    protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
     protected static final int MAX_BERRY_AMOUNT = 6;
 
     protected Item berryType;
@@ -39,8 +38,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     public DoubleBerryBush(Item berryType) {
         super(Bushes.BERRY_BUSH_SETTINGS);
         this.berryType = berryType;
-        //ensure cutout texture is rendered
-        BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
     }
 
     @Override

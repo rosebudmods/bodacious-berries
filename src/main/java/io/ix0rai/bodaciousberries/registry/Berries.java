@@ -7,6 +7,8 @@ import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.registry.items.ChorusBerries;
 import io.ix0rai.bodaciousberries.registry.items.GojiBerries;
 import io.ix0rai.bodaciousberries.registry.items.Rainberry;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
@@ -129,6 +131,9 @@ public class Berries {
             //set berry types
             Item berryType = entry.getValue();
             bush.setBerryType(berryType);
+
+            //ensure bush is rendered with a cutout
+            BlockRenderLayerMap.INSTANCE.putBlock(bush.getBaseState().getBlock(), RenderLayer.getCutout());
 
             //register as compostable
             registerCompostableBerry(berryType);

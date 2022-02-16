@@ -3,12 +3,10 @@ package io.ix0rai.bodaciousberries.block;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import io.ix0rai.bodaciousberries.registry.Sounds;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PlantBlock;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -41,8 +39,9 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected static final int GROW_CHANCE = 5;
     protected static final int MAX_BERRY_AMOUNT = 3;
 
-    protected Item berryType;
     public static final IntProperty AGE = IntProperty.of("age", 0 ,10);
+
+    protected Item berryType;
     protected final int maxAge;
     protected final VoxelShape smallShape;
     protected final VoxelShape largeShape;
@@ -70,17 +69,12 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
     public BasicBerryBush(Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        //add nonOpaque to settings to ensure that the bush isn't considered a solid block when rendering
         super(Bushes.BERRY_BUSH_SETTINGS);
         this.berryType = berryType;
         this.maxAge = maxAge;
         this.smallShape = smallShape;
         this.largeShape = largeShape;
         this.sizeChangeAge = sizeChangeAge;
-        //set default age to 0
-        this.setDefaultState((this.stateManager.getDefaultState()).with(AGE, 0));
-        //ensure cutout texture is rendered
-        BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
     }
 
     /**
