@@ -1,6 +1,7 @@
 package io.ix0rai.bodaciousberries;
 
-import io.ix0rai.bodaciousberries.registry.BodaciousItems;
+import io.ix0rai.bodaciousberries.registry.Berries;
+import io.ix0rai.bodaciousberries.registry.BodaciousThings;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import io.ix0rai.bodaciousberries.registry.Particles;
 import io.ix0rai.bodaciousberries.registry.Sounds;
@@ -18,7 +19,8 @@ public class Bodaciousberries implements ModInitializer {
     @Override
     public void onInitialize() {
         Bushes.registerBushes();
-        BodaciousItems.registerItems();
+        Berries.registerBerries();
+        BodaciousThings.registerThings();
         Sounds.registerSounds();
         BerryBushPatchGen.registerFeatures();
         Particles.registerParticles();
