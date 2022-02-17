@@ -3,9 +3,11 @@ package io.ix0rai.bodaciousberries.registry;
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.harvester.BerryHarvesterBlock;
 import io.ix0rai.bodaciousberries.block.harvester.BerryHarvesterBlockEntity;
+import io.ix0rai.bodaciousberries.block.harvester.BerryHarvesterScreenHandler;
 import io.ix0rai.bodaciousberries.registry.items.ChorusBerryJuice;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
@@ -14,6 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
+import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -27,14 +31,17 @@ public class BodaciousThings {
 
     public static final Item CHORUS_BERRY_JUICE = chorusBerryJuice(null);
 
+    private static final Identifier HARVESTER = Bodaciousberries.getIdentifier("berry_harvester");
     public static BerryHarvesterBlock BERRY_HARVESTER;
     public static BlockEntityType<BerryHarvesterBlockEntity> BERRY_HARVESTER_ENTITY;
 
+    public static final ScreenHandlerType<BerryHarvesterScreenHandler> BERRY_HARVESTER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(HARVESTER, BerryHarvesterScreenHandler::new);
+
     public static void registerThings() {
-        BERRY_HARVESTER = Registry.register(Registry.BLOCK, Bodaciousberries.getIdentifier("berry_harvester"),
+        BERRY_HARVESTER = Registry.register(Registry.BLOCK, HARVESTER,
                 new BerryHarvesterBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f)));
 
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier("berry_harvester"), new BlockItem(BERRY_HARVESTER, new Settings().group(ItemGroup.REDSTONE)));
+        Registry.register(Registry.ITEM, HARVESTER, new BlockItem(BERRY_HARVESTER, new Settings().group(ItemGroup.REDSTONE)));
 
         BERRY_HARVESTER_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Bodaciousberries.getIdentifier("berry_harvester_entity"),
                 FabricBlockEntityTypeBuilder.create(BerryHarvesterBlockEntity::new, BERRY_HARVESTER).build(null));

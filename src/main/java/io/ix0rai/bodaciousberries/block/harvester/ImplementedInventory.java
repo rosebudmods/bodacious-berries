@@ -7,9 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 
 /**
- * A simple {@code Inventory} implementation with only default methods + an item list getter.
+ * a simple {@code Inventory} implementation with only default methods + an item list getter.
  *
- * Originally by Juuz
+ * originally by juuz
  */
 public interface ImplementedInventory extends Inventory {
 
@@ -18,20 +18,6 @@ public interface ImplementedInventory extends Inventory {
      * Must return the same instance every time it's called.
      */
     DefaultedList<ItemStack> getItems();
-
-    /**
-     * Creates an inventory from the item list.
-     */
-    static ImplementedInventory of(DefaultedList<ItemStack> items) {
-        return () -> items;
-    }
-
-    /**
-     * Creates a new inventory with the specified size.
-     */
-    static ImplementedInventory ofSize(int size) {
-        return of(DefaultedList.ofSize(size, ItemStack.EMPTY));
-    }
 
     /**
      * Returns the inventory size.
@@ -118,7 +104,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default void markDirty() {
-        // Override if you want behavior.
+        // no behaviour for now
     }
 
     /**
