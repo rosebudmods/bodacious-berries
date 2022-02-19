@@ -2,11 +2,9 @@ package io.ix0rai.bodaciousberries.block;
 
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.VineBlock;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,16 +24,15 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class BerryVine extends VineBlock implements BerryBush {
     protected static final int MAX_AGE = 3;
-    public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
     protected static final int MAX_BERRY_AMOUNT = 3;
+
+    public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
 
     protected Item berryType;
 
     public BerryVine(Item berry) {
         super(Bushes.BERRY_BUSH_SETTINGS);
         this.berryType = berry;
-        //ensure cutout texture is rendered
-        BlockRenderLayerMap.INSTANCE.putBlock(this, RenderLayer.getCutout());
     }
 
     @Override

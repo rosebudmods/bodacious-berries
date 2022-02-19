@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "io.ix0rai.bodaciousberries.Bodaciousberries"
+    ],
+    "client": [
+      "io.ix0rai.bodaciousberries.client.BodaciousberriesClient"
     ]
   },
   "mixins": [

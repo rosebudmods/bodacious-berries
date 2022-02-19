@@ -7,6 +7,8 @@ import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.registry.items.ChorusBerries;
 import io.ix0rai.bodaciousberries.registry.items.GojiBerries;
 import io.ix0rai.bodaciousberries.registry.items.Rainberry;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
@@ -76,7 +78,7 @@ public class Berries {
      * map containing a berry bush, its associated berry, and unripe form if applicable
      * <br> should not be directly added to, use {@link #initialise(BerryBush, Item)}
      */
-    private static final Map<BerryBush, Item> BERRY_BUSHES = new HashMap<>();
+    public static final Map<BerryBush, Item> BERRY_BUSHES = new HashMap<>();
 
     /**
      * the chance that a berry will raise the level of compost in a composter
