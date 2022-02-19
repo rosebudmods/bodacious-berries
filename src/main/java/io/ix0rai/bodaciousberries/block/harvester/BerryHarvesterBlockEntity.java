@@ -66,21 +66,8 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
             if (bush.getBlock() instanceof BerryBush berryBush && berryBush.isFullyGrown(bush)) {
                 ItemStack berries = new ItemStack(berryBush.getBerryType(), berryBush.getMaxBerryAmount());
 
-                //find an open slot and insert it
-                for (int i = 0; i < harvester.getItems().size(); i++) {
-                    ItemStack stack = harvester.getItems().get(i);
-                    if ((stack.isEmpty() || stack.getItem().equals(berries.getItem())) && stack.getCount() <= 64) {
-                        berries.setCount(stack.getCount() + berries.getCount());
-                        if (berries.getCount() > 64) {
-                            //split the stack, inserting one stack of 64 and running the remainder back through the loop
-                            harvester.setStack(i, new ItemStack(berries.getItem(), 64));
-                            berries.decrement(64);
-                        } else {
-                            harvester.setStack(i, berries);
-                            break;
-                        }
-                    }
-                }
+                //insert items
+                harvester.insert(berries);
 
                 //play pick sound and reset bush growth
                 world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.0F);
@@ -88,6 +75,32 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
             }
 
             harvester.tickCounter = 0;
+        }
+    }
+
+    /**
+     * inserts an {@link ItemStack} into the inventory
+     * <br> WARNING: this method will ignore items that do not fit
+     * @param stack the items to insert
+     */
+    public void insert(ItemStack stack) {
+        //find an open slot and insert items
+        for (int i = 0; i < this.getItems().size(); i++) {
+            //get items currently in slot
+            ItemStack inSlot = this.getItems().get(i);
+            if ((inSlot.isEmpty() || inSlot.getItem().equals(stack.getItem())) && inSlot.getCount() <= 64) {
+                stack.setCount(inSlot.getCount() + stack.getCount());
+                //if stack overflows available space
+                if (stack.getCount() > 64) {
+                    //split the stack, inserting one stack of 64 and running the remainder back through the loop
+                    this.setStack(i, new ItemStack(stack.getItem(), 64));
+                    stack.decrement(64);
+                } else {
+                    //if stack fits, insert it
+                    this.setStack(i, stack);
+                    break;
+                }
+            }
         }
     }
 
