@@ -22,7 +22,6 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,9 +70,15 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
                 for (int i = 0; i < harvester.getItems().size(); i++) {
                     ItemStack stack = harvester.getItems().get(i);
                     if ((stack.isEmpty() || stack.getItem().equals(berries.getItem())) && stack.getCount() <= 64) {
-                        berries = new ItemStack(berries.getItem(), MathHelper.clamp(stack.getCount() + berries.getCount(), 0 ,64));
-                        harvester.setStack(i, berries);
-                        break;
+                        berries.setCount(stack.getCount() + berries.getCount());
+                        if (berries.getCount() > 64) {
+                            //split the stack, inserting one stack of 64 and running the remainder back through the loop
+                            harvester.setStack(i, new ItemStack(berries.getItem(), 64));
+                            berries.decrement(64);
+                        } else {
+                            harvester.setStack(i, berries);
+                            break;
+                        }
                     }
                 }
 
