@@ -16,6 +16,9 @@ public interface BerryBush extends Fertilizable {
     int getSizeChangeAge();
     IntProperty getAge();
     int getMaxBerryAmount();
+    default boolean isFullyGrown(BlockState state) {
+        return state.get(getAge()) == getMaxAge();
+    }
     default void resetAge(World world, BlockPos pos, BlockState state) {
         IntProperty age = getAge();
         int currentAge = state.get(age);

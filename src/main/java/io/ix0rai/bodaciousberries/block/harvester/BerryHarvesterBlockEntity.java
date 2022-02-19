@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 public class BerryHarvesterBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
     private int tickCounter;
-    private static final int ATTEMPT_HARVEST_ON = 500;
+    private static final int ATTEMPT_HARVEST_ON = 100;
 
     public BerryHarvesterBlockEntity(BlockPos pos, BlockState state) {
         super(BodaciousThings.BERRY_HARVESTER_ENTITY, pos, state);
@@ -58,26 +58,27 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
 
     public static void tick(World world, BlockPos pos, BlockState state, BerryHarvesterBlockEntity harvester) {
         harvester.tickCounter++;
-        if (harvester.tickCounter == ATTEMPT_HARVEST_ON) {
+        if (harvester.tickCounter >= ATTEMPT_HARVEST_ON) {
             //block the harvester is facing must be a berry bush
             BlockPos bushPos = pos.offset(state.get(BerryHarvesterBlock.FACING));
             BlockState bush = world.getBlockState(bushPos);
+
             //also ensure bush is ready to harvest
-            if (bush.getBlock() instanceof BerryBush berryBush && bush.get(berryBush.getAge()) == berryBush.getMaxAge()) {
+            if (bush.getBlock() instanceof BerryBush berryBush && berryBush.isFullyGrown(bush)) {
                 ItemStack berries = new ItemStack(berryBush.getBerryType(), berryBush.getMaxBerryAmount());
-                boolean notHarvested = true;
+
+                //find an open slot and insert it
                 for (int i = 0; i < harvester.getItems().size(); i++) {
                     ItemStack stack = harvester.getItems().get(i);
-                    if ((stack.isEmpty() || stack.getItem().equals(berries.getItem())) && notHarvested) {
-                        if (stack.getCount() >= 64) {
-                            continue;
-                        }
+                    if ((stack.isEmpty() || stack.getItem().equals(berries.getItem())) && stack.getCount() <= 64) {
                         berries = new ItemStack(berries.getItem(), MathHelper.clamp(stack.getCount() + berries.getCount(), 0 ,64));
                         harvester.setStack(i, berries);
-                        notHarvested = false;
+                        break;
                     }
                 }
-                world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+                //play pick sound and reset bush growth
+                world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.0F);
                 berryBush.resetAge(world, bushPos, bush);
             }
 
