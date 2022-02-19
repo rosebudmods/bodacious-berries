@@ -78,7 +78,7 @@ public class Berries {
      * map containing a berry bush, its associated berry, and unripe form if applicable
      * <br> should not be directly added to, use {@link #initialise(BerryBush, Item)}
      */
-    private static final Map<BerryBush, Item> BERRY_BUSHES = new HashMap<>();
+    public static final Map<BerryBush, Item> BERRY_BUSHES = new HashMap<>();
 
     /**
      * the chance that a berry will raise the level of compost in a composter
@@ -131,9 +131,6 @@ public class Berries {
             //set berry types
             Item berryType = entry.getValue();
             bush.setBerryType(berryType);
-
-            //ensure bush is rendered with a cutout
-            BlockRenderLayerMap.INSTANCE.putBlock(bush.getBaseState().getBlock(), RenderLayer.getCutout());
 
             //register as compostable
             registerCompostableBerry(berryType);
