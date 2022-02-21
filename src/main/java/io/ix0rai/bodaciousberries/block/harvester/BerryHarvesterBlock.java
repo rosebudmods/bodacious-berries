@@ -40,7 +40,13 @@ public class BerryHarvesterBlock extends BlockWithEntity {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         //ensure when placed the block faces the player
-        return this.getDefaultState().with(Properties.FACING, ctx.getPlayerFacing().getOpposite());
+        Direction facing = ctx.getPlayerFacing();
+        if (facing == Direction.UP || facing == Direction.DOWN) {
+            facing = Direction.NORTH;
+        } else {
+            facing = facing.getOpposite();
+        }
+        return this.getDefaultState().with(Properties.FACING, facing);
     }
 
     @Override
