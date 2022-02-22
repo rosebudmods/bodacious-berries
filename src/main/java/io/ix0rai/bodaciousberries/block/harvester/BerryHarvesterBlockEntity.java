@@ -63,7 +63,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
             BlockState bush = world.getBlockState(bushPos);
 
             //also ensure bush is ready to harvest
-            if (bush.getBlock() instanceof BerryBush berryBush && berryBush.isFullyGrown(bush)) {
+            if (bush.getBlock() instanceof BerryBush berryBush && berryBush.isFullyGrown(bush) && !harvester.isInventoryFull()) {
                 ItemStack berries = new ItemStack(berryBush.getBerryType(), berryBush.getMaxBerryAmount());
 
                 //insert items
@@ -79,6 +79,16 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
 
             harvester.tickCounter = 0;
         }
+    }
+
+    public boolean isInventoryFull() {
+        for (ItemStack stack : inventory) {
+            if (stack.getCount() <= stack.getMaxCount()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
