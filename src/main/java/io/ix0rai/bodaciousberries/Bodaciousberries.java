@@ -3,7 +3,7 @@ package io.ix0rai.bodaciousberries;
 import io.ix0rai.bodaciousberries.registry.Berries;
 import io.ix0rai.bodaciousberries.registry.BodaciousThings;
 import io.ix0rai.bodaciousberries.registry.Bushes;
-import io.ix0rai.bodaciousberries.registry.Particles;
+import io.ix0rai.bodaciousberries.registry.particles.Particles;
 import io.ix0rai.bodaciousberries.registry.Sounds;
 import io.ix0rai.bodaciousberries.worldgen.BerryBushPatchGen;
 import net.fabricmc.api.ModInitializer;

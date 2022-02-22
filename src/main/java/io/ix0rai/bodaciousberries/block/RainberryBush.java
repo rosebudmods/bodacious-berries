@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.registry.Particles;
+import io.ix0rai.bodaciousberries.registry.particles.Particles;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +23,7 @@ public class RainberryBush extends BasicBerryBush {
             double d = i + random.nextDouble();
             double e = j + 0.7D;
             double f = k + random.nextDouble();
-            world.addParticle(Particles.RAINBOW_PARTICLE_TYPE, d, e, f, 0.0D, 0.0D, 0.0D);
+            world.addParticle(Particles.RAINBOW_PARTICLE, d, e, f, 0.0D, 0.0D, 0.0D);
         }
     }
 }

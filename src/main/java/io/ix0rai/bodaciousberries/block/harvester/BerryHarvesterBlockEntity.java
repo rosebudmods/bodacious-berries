@@ -3,6 +3,7 @@ package io.ix0rai.bodaciousberries.block.harvester;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.registry.BodaciousThings;
+import io.ix0rai.bodaciousberries.registry.particles.Particles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -56,8 +57,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, BerryHarvesterBlockEntity harvester) {
-        harvester.tickCounter++;
-        if (harvester.tickCounter >= ATTEMPT_HARVEST_ON) {
+        if (harvester.tickCounter++ >= ATTEMPT_HARVEST_ON) {
             //block the harvester is facing must be a berry bush
             BlockPos bushPos = pos.offset(state.get(BerryHarvesterBlock.FACING));
             BlockState bush = world.getBlockState(bushPos);
@@ -70,7 +70,10 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
                 harvester.insert(berries);
 
                 //play pick sound and reset bush growth
-                world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.0F);
+                world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.5F);
+                for (int i = 0; i < 6; i++) {
+                    world.addParticle(Particles.SLICEY_PARTICLE, bushPos.getX() + 0.5D, bushPos.getY() + 0.3D, bushPos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
+                }
                 berryBush.resetAge(world, bushPos, bush);
             }
 
