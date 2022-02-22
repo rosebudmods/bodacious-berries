@@ -98,16 +98,6 @@ public interface ImplementedInventory extends Inventory {
     }
 
     /**
-     * Marks the state as dirty.
-     * Must be called after changes in the inventory, so that the game can properly save
-     * the inventory contents and notify neighboring blocks of inventory changes.
-     */
-    @Override
-    default void markDirty() {
-        // no behaviour for now
-    }
-
-    /**
      * @return true if the player can use the inventory, false otherwise.
      */
     @Override
