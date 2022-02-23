@@ -17,8 +17,8 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-**screenshots**
-if applicable, add screenshots to help explain your problem
+**screenshots or logs**
+if applicable, add screenshots/logs to help explain your problem
 
 **version**
 add the mod version you're using here, e.g. bodaciousberries-1.0.1-mc1.18.2
