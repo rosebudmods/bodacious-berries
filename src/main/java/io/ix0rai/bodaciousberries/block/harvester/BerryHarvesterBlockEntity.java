@@ -4,13 +4,16 @@ import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.registry.BodaciousThings;
 import io.ix0rai.bodaciousberries.registry.particles.Particles;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -58,26 +61,44 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
 
     public static void tick(World world, BlockPos pos, BlockState state, BerryHarvesterBlockEntity harvester) {
         if (harvester.tickCounter++ >= ATTEMPT_HARVEST_ON) {
-            //block the harvester is facing must be a berry bush
-            BlockPos bushPos = pos.offset(state.get(BerryHarvesterBlock.FACING));
-            BlockState bush = world.getBlockState(bushPos);
+            if (!harvester.isInventoryFull()) {
+                //block the harvester is facing must be a berry bush
+                BlockPos bushPos = pos.offset(state.get(BerryHarvesterBlock.FACING));
+                BlockState bush = world.getBlockState(bushPos);
+                Block block = bush.getBlock();
 
-            //also ensure bush is ready to harvest
-            if (bush.getBlock() instanceof BerryBush berryBush && berryBush.isFullyGrown(bush) && !harvester.isInventoryFull()) {
-                ItemStack berries = new ItemStack(berryBush.getBerryType(), berryBush.getMaxBerryAmount());
+                //also ensure bush is ready to harvest
+                if (block instanceof BerryBush berryBush && berryBush.isFullyGrown(bush)) {
+                    //insert items
+                    harvester.insert(new ItemStack(berryBush.getBerryType(), berryBush.getMaxBerryAmount()));
 
-                //insert items
-                harvester.insert(berries);
-
-                //play pick sound and reset bush growth
-                world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.5F);
-                for (int i = 0; i < 6; i++) {
-                    world.addParticle(Particles.SLICEY_PARTICLE, bushPos.getX() + 0.5D, bushPos.getY() + 0.3D, bushPos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
+                    //play pick sound and reset bush growth
+                    world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.5F);
+                    for (int i = 0; i < 6; i++) {
+                        world.addParticle(Particles.SLICEY_PARTICLE, bushPos.getX() + 0.5D, bushPos.getY() + 0.3D, bushPos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
+                    }
+                    berryBush.resetAge(world, bushPos, bush);
+                } else if (block instanceof SweetBerryBushBlock) {
+                    handleSweetBerry(world, bushPos, bush, harvester);
                 }
-                berryBush.resetAge(world, bushPos, bush);
             }
 
             harvester.tickCounter = 0;
+        }
+    }
+
+    private static void handleSweetBerry(World world, BlockPos bushPos, BlockState bushState, BerryHarvesterBlockEntity harvester) {
+        //is fully grown
+        if (bushState.get(SweetBerryBushBlock.AGE) >= 3) {
+            harvester.insert(new ItemStack(Items.SWEET_BERRIES, 3));
+
+            world.playSound(null, bushPos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.5F);
+            for (int i = 0; i < 6; i++) {
+                world.addParticle(Particles.SLICEY_PARTICLE, bushPos.getX() + 0.5D, bushPos.getY() + 0.3D, bushPos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
+            }
+
+            //reset bush
+            world.setBlockState(bushPos, bushState.with(SweetBerryBushBlock.AGE, 1));
         }
     }
 

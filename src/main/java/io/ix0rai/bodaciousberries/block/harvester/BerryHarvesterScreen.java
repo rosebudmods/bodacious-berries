@@ -9,7 +9,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class BerryHarvesterScreen extends HandledScreen<BerryHarvesterScreenHandler> {
-    //dispenser texture for now
     private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
 
     public BerryHarvesterScreen(BerryHarvesterScreenHandler handler, PlayerInventory inventory, Text title) {
