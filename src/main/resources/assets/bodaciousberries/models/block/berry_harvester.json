@@ -3,6 +3,6 @@
   "textures": {
     "top": "bodaciousberries:block/berry_harvester_top",
     "front": "bodaciousberries:block/berry_harvester_front",
-    "side": "boda:block/berry_harvester_side"
+    "side": "bodaciousberries:block/berry_harvester_side"
   }
 }
