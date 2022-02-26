@@ -28,16 +28,16 @@ import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class BodaciousThings {
     private static final Settings CHORUS_JUICE_SETTINGS = new Settings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(2).saturationModifier(4F).build()).group(ItemGroup.FOOD).maxCount(16);
-
     public static final Item CHORUS_BERRY_JUICE = chorusBerryJuice(null);
 
-    private static final Identifier HARVESTER = Bodaciousberries.getIdentifier("berry_harvester");
+    public static final Identifier HARVESTER = Bodaciousberries.getIdentifier("berry_harvester");
     public static BerryHarvesterBlock BERRY_HARVESTER;
     public static BlockEntityType<BerryHarvesterBlockEntity> BERRY_HARVESTER_ENTITY;
-
-    public static final ScreenHandlerType<BerryHarvesterScreenHandler> BERRY_HARVESTER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(HARVESTER, BerryHarvesterScreenHandler::new);
+    public static ScreenHandlerType<BerryHarvesterScreenHandler> BERRY_HARVESTER_SCREEN_HANDLER;
 
     public static void registerThings() {
+        BERRY_HARVESTER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(HARVESTER, BerryHarvesterScreenHandler::new);
+
         BERRY_HARVESTER = Registry.register(Registry.BLOCK, HARVESTER,
                 new BerryHarvesterBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f)));
 
