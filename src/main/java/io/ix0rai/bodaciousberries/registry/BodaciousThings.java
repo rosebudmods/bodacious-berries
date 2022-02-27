@@ -1,12 +1,23 @@
 package io.ix0rai.bodaciousberries.registry;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.block.harvester.BerryHarvesterBlock;
+import io.ix0rai.bodaciousberries.block.harvester.BerryHarvesterBlockEntity;
+import io.ix0rai.bodaciousberries.block.harvester.BerryHarvesterScreenHandler;
 import io.ix0rai.bodaciousberries.registry.items.ChorusBerryJuice;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.minecraft.block.Material;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Settings;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
+import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -15,13 +26,25 @@ import java.util.List;
 
 import static net.minecraft.world.biome.BiomeKeys.*;
 
-public class BodaciousItems {
+public class BodaciousThings {
     private static final Settings CHORUS_JUICE_SETTINGS = new Settings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(2).saturationModifier(4F).build()).group(ItemGroup.FOOD).maxCount(16);
-
     public static final Item CHORUS_BERRY_JUICE = chorusBerryJuice(null);
 
-    public static void registerItems() {
-        Berries.registerBerries();
+    public static final Identifier HARVESTER = Bodaciousberries.getIdentifier("berry_harvester");
+    public static BerryHarvesterBlock BERRY_HARVESTER;
+    public static BlockEntityType<BerryHarvesterBlockEntity> BERRY_HARVESTER_ENTITY;
+    public static ScreenHandlerType<BerryHarvesterScreenHandler> BERRY_HARVESTER_SCREEN_HANDLER;
+
+    public static void registerThings() {
+        BERRY_HARVESTER_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(HARVESTER, BerryHarvesterScreenHandler::new);
+
+        BERRY_HARVESTER = Registry.register(Registry.BLOCK, HARVESTER,
+                new BerryHarvesterBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f)));
+
+        Registry.register(Registry.ITEM, HARVESTER, new BlockItem(BERRY_HARVESTER, new Settings().group(ItemGroup.REDSTONE)));
+
+        BERRY_HARVESTER_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Bodaciousberries.getIdentifier("berry_harvester_entity"),
+                FabricBlockEntityTypeBuilder.create(BerryHarvesterBlockEntity::new, BERRY_HARVESTER).build(null));
 
         createChorusBerryJuice(List.of(
                 PLAINS, SNOWY_SLOPES, SWAMP,
