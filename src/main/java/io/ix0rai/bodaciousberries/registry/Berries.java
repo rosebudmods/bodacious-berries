@@ -7,8 +7,6 @@ import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.registry.items.ChorusBerries;
 import io.ix0rai.bodaciousberries.registry.items.GojiBerries;
 import io.ix0rai.bodaciousberries.registry.items.Rainberry;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
