@@ -31,7 +31,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
 
     protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
-    protected static final int MAX_BERRY_AMOUNT = 6;
+    protected static final int MAX_BERRY_AMOUNT = 5;
 
     protected Item berryType;
 
@@ -105,14 +105,10 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (state.get(AGE) == MAX_AGE) {
-            return BasicBerryBush.pickBerries(pos, world, state, berryType, MAX_BERRY_AMOUNT, 0, AGE);
+            return BasicBerryBush.pickBerries(pos, world, state);
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
-    }
-
-    public Item getBerryType() {
-        return this.berryType;
     }
 
     @Override
@@ -123,5 +119,25 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public BlockState getBaseState() {
         return super.getDefaultState().with(AGE, 0);
+    }
+
+    @Override
+    public int getSizeChangeAge() {
+        return 0;
+    }
+
+    @Override
+    public IntProperty getAge() {
+        return AGE;
+    }
+
+    @Override
+    public Item getBerryType() {
+        return berryType;
+    }
+
+    @Override
+    public int getMaxBerryAmount() {
+        return MAX_BERRY_AMOUNT;
     }
 }

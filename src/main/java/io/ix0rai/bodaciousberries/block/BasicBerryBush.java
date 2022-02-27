@@ -163,7 +163,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             return ActionResult.PASS;
         } else if (currentAge == maxAge) {
             //otherwise, give berries/unripe berries
-            return pickBerries(pos, world, state, berryType, MAX_BERRY_AMOUNT, sizeChangeAge, AGE);
+            return pickBerries(pos, world, state);
         } else {
             //otherwise, do default use action from superclass
             return super.onUse(state, world, pos, player, hand, hit);
@@ -174,15 +174,18 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * handles berries being picked
      * <br> this method is static so that it can be used in {@link DoubleBerryBush}
      */
-    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType, int maxBerryAmount, int sizeChangeAge, IntProperty berryAge) {
-        int berryAmount = world.random.nextInt(maxBerryAmount + 1) + 2;
-        dropStack(world, pos, new ItemStack(berryType, berryAmount));
+    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state) {
+        //we can assume the state to be a berry bush
+        BerryBush bush = (BerryBush) state.getBlock();
+
+        int berryAmount = world.random.nextInt(bush.getMaxBerryAmount() + 1) + 1;
+        dropStack(world, pos, new ItemStack(bush.getBerryType(), berryAmount));
 
         //play randomly picked sound
         world.playSound(null, pos, selectPickSound(world), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 
         //reset berry growth; they were just picked
-        world.setBlockState(pos, state.with(berryAge, sizeChangeAge), Block.NOTIFY_LISTENERS);
+        bush.resetAge(world, pos, state);
         return ActionResult.success(world.isClient);
     }
 
@@ -221,5 +224,25 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public BlockState getBaseState() {
         return super.getDefaultState().with(AGE, 0);
+    }
+
+    @Override
+    public int getSizeChangeAge() {
+        return sizeChangeAge;
+    }
+
+    @Override
+    public IntProperty getAge() {
+        return AGE;
+    }
+
+    @Override
+    public Item getBerryType() {
+        return berryType;
+    }
+
+    @Override
+    public int getMaxBerryAmount() {
+        return MAX_BERRY_AMOUNT;
     }
 }
