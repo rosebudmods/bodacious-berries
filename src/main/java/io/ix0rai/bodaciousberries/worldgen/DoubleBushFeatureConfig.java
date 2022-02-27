@@ -15,8 +15,12 @@ public record DoubleBushFeatureConfig(BlockStateProvider tallForm, BlockStatePro
     );
 
     public DoubleBushFeatureConfig {
-        if (!(tallForm.getBlockState(null, null).getBlock() instanceof DoubleBerryBush && babyForm.getBlockState(null, null).getBlock() instanceof GrowingBerryBush)) {
-            throw new IllegalArgumentException("DoubleBushFeature requires a DoubleBerryBush and a GrowingBerryBush");
+        try {
+            if (!(tallForm.getBlockState(null, null).getBlock() instanceof DoubleBerryBush && babyForm.getBlockState(null, null).getBlock() instanceof GrowingBerryBush)) {
+                throw new IllegalArgumentException("DoubleBushFeature requires a DoubleBerryBush and a GrowingBerryBush");
+            }
+        } catch (NullPointerException ignored) {
+            //avert a game crash if the check above fails but doesn't return false
         }
     }
 }
