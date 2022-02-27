@@ -93,7 +93,7 @@ public class BerryVine extends VineBlock implements BerryBush {
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (state.get(AGE) == MAX_AGE) {
-            return BasicBerryBush.pickBerries(pos, world, state, berryType, MAX_BERRY_AMOUNT, 0, AGE);
+            return BasicBerryBush.pickBerries(pos, world, state);
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
@@ -107,5 +107,25 @@ public class BerryVine extends VineBlock implements BerryBush {
     @Override
     public BlockState getBaseState() {
         return super.getDefaultState().with(AGE, 0);
+    }
+
+    @Override
+    public int getSizeChangeAge() {
+        return 0;
+    }
+
+    @Override
+    public IntProperty getAge() {
+        return AGE;
+    }
+
+    @Override
+    public Item getBerryType() {
+        return berryType;
+    }
+
+    @Override
+    public int getMaxBerryAmount() {
+        return MAX_BERRY_AMOUNT;
     }
 }

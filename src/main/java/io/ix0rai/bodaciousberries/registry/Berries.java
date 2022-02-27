@@ -31,7 +31,6 @@ public class Berries {
     public static Item GOJI_BERRIES;
     public static Item GOOSEBERRIES;
 
-
     public static void registerBerries() {
         //create items for each berry
         SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 2f));
