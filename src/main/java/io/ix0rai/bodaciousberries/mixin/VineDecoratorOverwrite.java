@@ -1,6 +1,7 @@
 package io.ix0rai.bodaciousberries.mixin;
 
 import io.ix0rai.bodaciousberries.block.BerryVine;
+import io.ix0rai.bodaciousberries.mixin.accessors.BiomeCategoryAccessor;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -48,7 +49,7 @@ public class VineDecoratorOverwrite {
             block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
         } else if (reallyIncrediblyStupidAwfulHorrendousDumbCheck(access, pos)) {
             //otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
-            if (access.getBiome(pos).getCategory() == Biome.Category.JUNGLE && access.getRandom().nextInt(6) == 0) {
+            if (((BiomeCategoryAccessor) (Object) access.getBiome(pos).value()).getCategory() == Biome.Category.JUNGLE && access.getRandom().nextInt(6) == 0) {
                 block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
             } else if (access.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
                 block = Blocks.VINE.getDefaultState().with(facing, true);

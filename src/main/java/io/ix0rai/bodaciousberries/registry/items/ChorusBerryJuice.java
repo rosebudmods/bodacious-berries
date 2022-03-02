@@ -1,5 +1,6 @@
 package io.ix0rai.bodaciousberries.registry.items;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,7 +21,9 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
 
 public class ChorusBerryJuice extends Item {
@@ -44,20 +47,24 @@ public class ChorusBerryJuice extends Item {
                 DynamicRegistryManager registryManager = server.getRegistryManager();
                 if (world.getDimension().equals(registryManager.get(Registry.DIMENSION_TYPE_KEY).get(DimensionType.OVERWORLD_ID))) {
                     ServerWorld serverWorld = server.getOverworld();
+                    RegistryEntry<Biome> biomeEntry = RegistryEntry.of(server.getRegistryManager().get(Registry.BIOME_KEY).get(biome));
 
                     //locate the biome to teleport to
-                    BlockPos teleportTo = serverWorld.locateBiome(
-                            server.getRegistryManager().get(Registry.BIOME_KEY).getOrEmpty(biome).orElseThrow(),
+                    Pair<BlockPos, RegistryEntry<Biome>> teleportTo = serverWorld.locateBiome(
+                            entry -> (entry.value().equals(biomeEntry.value())),
                             user.getBlockPos(),
-                            5000,
-                            25
+                            6400,
+                            8
                     );
 
                     if (teleportTo != null) {
-                        user.teleport(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ(), true);
+                        System.out.println("non-null");
+                        BlockPos pos = teleportTo.getFirst();
+
+                        user.teleport(pos.getX(), pos.getY(), pos.getZ(), true);
                         //teleport occasionally silently fails
-                        if (!user.getBlockPos().equals(teleportTo)) {
-                            user.requestTeleport(teleportTo.getX(), teleportTo.getY(), teleportTo.getZ());
+                        if (!user.getBlockPos().equals(pos)) {
+                            user.requestTeleport(pos.getX(), pos.getY(), pos.getZ());
                         }
 
                         //sending entity status 46 causes ender pearl particles to appear
@@ -76,6 +83,7 @@ public class ChorusBerryJuice extends Item {
         }
 
         if (!success) {
+            System.out.println("was null");
             //sending entity status 43 causes the player to emit some particles similar to the ones an explosion would emit
             world.sendEntityStatus(user, (byte) 43);
         }
