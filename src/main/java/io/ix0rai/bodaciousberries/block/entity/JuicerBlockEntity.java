@@ -6,6 +6,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -21,10 +22,11 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-//TODO: hoppers can bypass slot item limit
-public class JuicerBlockEntity extends BlockEntity implements ImplementedInventory, NamedScreenHandlerFactory {
+public class JuicerBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory {
     private final DefaultedList<ItemStack> inventory;
     private int brewTime;
     private Item itemBrewing;
@@ -157,5 +159,31 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     @Override
     public Text getDisplayName() {
         return new TranslatableText(getCachedState().getBlock().getTranslationKey());
+    }
+
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        int[] slots = new int[getItems().size()];
+        for (int i = 0; i < slots.length; i++) {
+            slots[i] = i;
+        }
+
+        return slots;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        if (slot < 3) {
+            return this.inventory.get(slot).isEmpty();
+        } else if (slot <= 5) {
+            return JuicerRecipes.isIngredient(stack.getItem());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return slot < 3 && !stack.getItem().equals(Items.GLASS_BOTTLE);
     }
 }
