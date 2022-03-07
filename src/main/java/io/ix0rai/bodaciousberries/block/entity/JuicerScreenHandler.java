@@ -17,6 +17,7 @@ import net.minecraft.screen.slot.Slot;
 public class JuicerScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate brewTime;
+    private final Slot[] inputSlots = new Slot[3];
 
     public JuicerScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(9), new ArrayPropertyDelegate(1));
@@ -43,9 +44,9 @@ public class JuicerScreenHandler extends ScreenHandler {
         this.addSlot(new JuicerOutputSlot(inventory, 1, 79, 58));
         this.addSlot(new JuicerOutputSlot(inventory, 2, 102, 51));
         //ingredient slots
-        this.addSlot(new JuicerIngredientSlot(inventory, 3, 56, 17));
-        this.addSlot(new JuicerIngredientSlot(inventory, 4, 79, 17));
-        this.addSlot(new JuicerIngredientSlot(inventory, 5, 102, 17));
+        this.inputSlots[0] = this.addSlot(new JuicerIngredientSlot(inventory, 3, 56, 17));
+        this.inputSlots[1] = this.addSlot(new JuicerIngredientSlot(inventory, 4, 79, 17));
+        this.inputSlots[2] = this.addSlot(new JuicerIngredientSlot(inventory, 5, 102, 17));
 
         //player inventory
         int i;
@@ -69,30 +70,63 @@ public class JuicerScreenHandler extends ScreenHandler {
         return this.brewTime.get(0);
     }
 
-    //todo: when shift clicking, you can put more than one item into an output slot
+    //TODO: split stacks so that juice can be stackable again
     @Override
-    public ItemStack transferSlot(PlayerEntity player, int invSlot) {
-        ItemStack newStack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(invSlot);
+    public ItemStack transferSlot(PlayerEntity player, int index) {
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
         if (slot.hasStack()) {
-            ItemStack originalStack = slot.getStack();
-            newStack = originalStack.copy();
-            if (invSlot < this.inventory.size()) {
-                if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
+            ItemStack itemStack2 = slot.getStack();
+            itemStack = itemStack2.copy();
+            if ((index < 0 || index > 2) && index != 3 && index != 4) {
+                boolean isInputItem = false;
+                for (Slot inputSlot : inputSlots) {
+                    if (inputSlot.canInsert(itemStack2)) {
+                        isInputItem = true;
+                    }
+                }
+
+                if (isInputItem) {
+                    if (!this.insertItem(itemStack2, 3, 5, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (JuicerOutputSlot.matches(itemStack) && itemStack.getCount() == 1) {
+                    if (!this.insertItem(itemStack2, 0, 3, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index >= 5 && index < 32) {
+                    if (!this.insertItem(itemStack2, 32, 41, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index >= 32 && index < 41) {
+                    if (!this.insertItem(itemStack2, 5, 32, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (!this.insertItem(itemStack2, 5, 41, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
-                return ItemStack.EMPTY;
+            } else {
+                if (!this.insertItem(itemStack2, 5, 41, true)) {
+                    return ItemStack.EMPTY;
+                }
+
+                slot.onQuickTransfer(itemStack2, itemStack);
             }
 
-            if (originalStack.isEmpty()) {
+            if (itemStack2.isEmpty()) {
                 slot.setStack(ItemStack.EMPTY);
             } else {
                 slot.markDirty();
             }
+
+            if (itemStack2.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTakeItem(player, itemStack2);
         }
 
-        return newStack;
+        return itemStack;
     }
 
     public static class JuicerIngredientSlot extends Slot {
@@ -118,8 +152,12 @@ public class JuicerScreenHandler extends ScreenHandler {
 
         @Override
         public boolean canInsert(ItemStack stack) {
+            return matches(stack);
+        }
+
+        public static boolean matches(ItemStack stack) {
             Item item = stack.getItem();
-            return this.getStack().isEmpty() && (item instanceof Juice || item.equals(Items.GLASS_BOTTLE) || JuicerRecipes.isOutput(item));
+            return item instanceof Juice || item.equals(Items.GLASS_BOTTLE) || JuicerRecipes.isOutput(item);
         }
     }
 }

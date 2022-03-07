@@ -23,7 +23,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-//TODO: test hopper compatibility
+//TODO: hoppers can bypass slot item limit
 public class JuicerBlockEntity extends BlockEntity implements ImplementedInventory, NamedScreenHandlerFactory {
     private final DefaultedList<ItemStack> inventory;
     private int brewTime;
