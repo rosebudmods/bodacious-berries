@@ -1,23 +1,15 @@
 package io.ix0rai.bodaciousberries.registry.items;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
@@ -26,10 +18,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
 
-public class ChorusBerryJuice extends Item {
+public class ChorusBerryJuice extends Juice {
     private final Identifier biome;
 
-    public ChorusBerryJuice(Settings settings, Identifier biome) {
+    public ChorusBerryJuice(Item.Settings settings, Identifier biome) {
         super(settings);
         this.biome = biome;
     }
@@ -58,7 +50,6 @@ public class ChorusBerryJuice extends Item {
                     );
 
                     if (teleportTo != null) {
-                        System.out.println("non-null");
                         BlockPos pos = teleportTo.getFirst();
 
                         user.teleport(pos.getX(), pos.getY(), pos.getZ(), true);
@@ -83,54 +74,11 @@ public class ChorusBerryJuice extends Item {
         }
 
         if (!success) {
-            System.out.println("was null");
             //sending entity status 43 causes the player to emit some particles similar to the ones an explosion would emit
             world.sendEntityStatus(user, (byte) 43);
         }
 
         //consume item
-        super.finishUsing(stack, world, user);
-        if (user instanceof ServerPlayerEntity serverPlayerEntity) {
-            Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
-        }
-
-        //return empty bottle
-        if (stack.isEmpty()) {
-            return new ItemStack(Items.GLASS_BOTTLE);
-        } else {
-            if (user instanceof PlayerEntity playerEntity && !((PlayerEntity)user).getAbilities().creativeMode) {
-                ItemStack serverPlayerEntity = new ItemStack(Items.GLASS_BOTTLE);
-                if (!playerEntity.getInventory().insertStack(serverPlayerEntity)) {
-                    playerEntity.dropItem(serverPlayerEntity, false);
-                }
-            }
-
-            return stack;
-        }
-    }
-
-    @Override
-    public int getMaxUseTime(ItemStack stack) {
-        return 40;
-    }
-
-    @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.DRINK;
-    }
-
-    @Override
-    public SoundEvent getDrinkSound() {
-        return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
-    }
-
-    @Override
-    public SoundEvent getEatSound() {
-        return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
-    }
-
-    @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        return ItemUsage.consumeHeldItem(world, user, hand);
+        return super.finishUsing(stack, world, user);
     }
 }

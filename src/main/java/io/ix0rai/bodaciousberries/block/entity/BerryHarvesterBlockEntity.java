@@ -1,8 +1,9 @@
-package io.ix0rai.bodaciousberries.block.harvester;
+package io.ix0rai.bodaciousberries.block.entity;
 
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryBush;
-import io.ix0rai.bodaciousberries.registry.BodaciousThings;
+import io.ix0rai.bodaciousberries.block.BerryHarvesterBlock;
+import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
 import io.ix0rai.bodaciousberries.registry.particles.Particles;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -35,7 +36,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     private static final int ATTEMPT_HARVEST_ON = 100;
 
     public BerryHarvesterBlockEntity(BlockPos pos, BlockState state) {
-        super(BodaciousThings.BERRY_HARVESTER_ENTITY, pos, state);
+        super(BodaciousBlocks.BERRY_HARVESTER_ENTITY, pos, state);
     }
 
     @Override

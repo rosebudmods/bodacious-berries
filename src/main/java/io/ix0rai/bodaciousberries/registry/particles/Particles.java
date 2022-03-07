@@ -2,24 +2,10 @@ package io.ix0rai.bodaciousberries.registry.particles;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.mixin.accessors.DefaultParticleTypeAccessor;
-import io.ix0rai.bodaciousberries.mixin.accessors.WaterSuspendParticleAccessor;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.impl.client.particle.ParticleFactoryRegistryImpl;
-import net.minecraft.client.particle.ExplosionLargeParticle;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.SpellParticle;
-import net.minecraft.client.particle.SpriteProvider;
-import net.minecraft.client.particle.WaterSuspendParticle;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Particles {
     public static final DefaultParticleType RAINBOW_PARTICLE = DefaultParticleTypeAccessor.create(false);

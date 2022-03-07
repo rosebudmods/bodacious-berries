@@ -1,6 +1,6 @@
-package io.ix0rai.bodaciousberries.block.harvester;
+package io.ix0rai.bodaciousberries.block.entity;
 
-import io.ix0rai.bodaciousberries.registry.BodaciousThings;
+import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -17,11 +17,12 @@ public class BerryHarvesterScreenHandler extends ScreenHandler {
     }
 
     public BerryHarvesterScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(BodaciousThings.BERRY_HARVESTER_SCREEN_HANDLER, syncId);
+        super(BodaciousBlocks.BERRY_HARVESTER_SCREEN_HANDLER, syncId);
         checkSize(inventory, 9);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
 
+        //harvester inventory
         int m;
         int l;
         for (m = 0; m < 3; ++m) {
@@ -29,6 +30,8 @@ public class BerryHarvesterScreenHandler extends ScreenHandler {
                 this.addSlot(new Slot(inventory, l + m * 3, 62 + l * 18, 17 + m * 18));
             }
         }
+
+        //player inventory
         for (m = 0; m < 3; ++m) {
             for (l = 0; l < 9; ++l) {
                 this.addSlot(new Slot(playerInventory, l + m * 9 + 9, 8 + l * 18, 84 + m * 18));

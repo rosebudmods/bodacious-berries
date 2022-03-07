@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.block.harvester;
+package io.ix0rai.bodaciousberries.block.entity;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
