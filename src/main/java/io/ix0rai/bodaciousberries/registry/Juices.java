@@ -18,10 +18,10 @@ import java.util.List;
 import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class Juices {
-    private static final Item.Settings CHORUS_JUICE_SETTINGS = new Item.Settings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(2).saturationModifier(4F).build()).group(ItemGroup.FOOD).maxCount(1);
+    private static final Item.Settings CHORUS_JUICE_SETTINGS = new Item.Settings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(2).saturationModifier(4F).build()).group(ItemGroup.FOOD).maxCount(16);
 
     public static final Juice CHORUS_BERRY_JUICE = chorusBerryJuice(null);
-    private static final Juice SASKATOON_BERRY_JUICE = new Juice(new Item.Settings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(2).saturationModifier(4F).build()).group(ItemGroup.FOOD).maxCount(1));
+    private static final Juice SASKATOON_BERRY_JUICE = new Juice(new Item.Settings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(2).saturationModifier(4F).build()).group(ItemGroup.FOOD).maxCount(16));
 
     public static void registerJuice() {
         register(Bodaciousberries.getIdentifier("saskatoon_berry_juice"), SASKATOON_BERRY_JUICE, Berries.SASKATOON_BERRIES);

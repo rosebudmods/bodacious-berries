@@ -70,9 +70,9 @@ public class JuicerScreenHandler extends ScreenHandler {
         return this.brewTime.get(0);
     }
 
-    //TODO: split stacks so that juice can be stackable again
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
+        //index: index of slot being transferred out of
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot.hasStack()) {
@@ -90,9 +90,14 @@ public class JuicerScreenHandler extends ScreenHandler {
                     if (!this.insertItem(itemStack2, 3, 5, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (JuicerOutputSlot.matches(itemStack) && itemStack.getCount() == 1) {
-                    if (!this.insertItem(itemStack2, 0, 3, false)) {
-                        return ItemStack.EMPTY;
+                } else if (JuicerOutputSlot.matches(itemStack)) {
+                    for (int i = 0; i < 3; i++) {
+                        if (this.slots.get(i).getStack().isEmpty()) {
+                            if (this.insertItem(new ItemStack(itemStack2.getItem()), i, i + 1, false)) {
+                                itemStack2.decrement(1);
+                            }
+                            return ItemStack.EMPTY;
+                        }
                     }
                 } else if (index >= 5 && index < 32) {
                     if (!this.insertItem(itemStack2, 32, 41, false)) {
