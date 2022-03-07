@@ -72,66 +72,65 @@ public class JuicerScreenHandler extends ScreenHandler {
 
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
-        //index: index of slot being transferred out of
-        ItemStack itemStack = ItemStack.EMPTY;
+        ItemStack stack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot.hasStack()) {
-            ItemStack itemStack2 = slot.getStack();
-            itemStack = itemStack2.copy();
+            ItemStack slotItems = slot.getStack();
+            stack = slotItems.copy();
             if ((index < 0 || index > 2) && index != 3 && index != 4) {
                 boolean isInputItem = false;
                 for (Slot inputSlot : inputSlots) {
-                    if (inputSlot.canInsert(itemStack2)) {
+                    if (inputSlot.canInsert(slotItems)) {
                         isInputItem = true;
                     }
                 }
 
                 if (isInputItem) {
-                    if (!this.insertItem(itemStack2, 3, 5, false)) {
+                    if (!this.insertItem(slotItems, 3, 5, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (JuicerOutputSlot.matches(itemStack)) {
+                } else if (JuicerOutputSlot.matches(stack)) {
                     for (int i = 0; i < 3; i++) {
                         if (this.slots.get(i).getStack().isEmpty()) {
-                            if (this.insertItem(new ItemStack(itemStack2.getItem()), i, i + 1, false)) {
-                                itemStack2.decrement(1);
+                            if (this.insertItem(new ItemStack(slotItems.getItem()), i, i + 1, false)) {
+                                slotItems.decrement(1);
                             }
                             return ItemStack.EMPTY;
                         }
                     }
                 } else if (index >= 5 && index < 32) {
-                    if (!this.insertItem(itemStack2, 32, 41, false)) {
+                    if (!this.insertItem(slotItems, 32, 41, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (index >= 32 && index < 41) {
-                    if (!this.insertItem(itemStack2, 5, 32, false)) {
+                    if (!this.insertItem(slotItems, 5, 32, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (!this.insertItem(itemStack2, 5, 41, false)) {
+                } else if (!this.insertItem(slotItems, 5, 41, false)) {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (!this.insertItem(itemStack2, 5, 41, true)) {
+                if (!this.insertItem(slotItems, 5, 41, true)) {
                     return ItemStack.EMPTY;
                 }
 
-                slot.onQuickTransfer(itemStack2, itemStack);
+                slot.onQuickTransfer(slotItems, stack);
             }
 
-            if (itemStack2.isEmpty()) {
+            if (slotItems.isEmpty()) {
                 slot.setStack(ItemStack.EMPTY);
             } else {
                 slot.markDirty();
             }
 
-            if (itemStack2.getCount() == itemStack.getCount()) {
+            if (slotItems.getCount() == stack.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTakeItem(player, itemStack2);
+            slot.onTakeItem(player, slotItems);
         }
 
-        return itemStack;
+        return stack;
     }
 
     public static class JuicerIngredientSlot extends Slot {
