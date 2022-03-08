@@ -174,7 +174,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
         if (slot < 3) {
-            return this.inventory.get(slot).isEmpty() && JuicerRecipes.isOutput(stack.getItem());
+            return this.inventory.get(slot).isEmpty() && JuicerScreenHandler.JuicerOutputSlot.matches(stack);
         } else if (slot <= 5) {
             return JuicerRecipes.isIngredient(stack.getItem());
         } else {
