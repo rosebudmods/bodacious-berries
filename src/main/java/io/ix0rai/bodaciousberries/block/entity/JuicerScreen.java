@@ -37,10 +37,6 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
         this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
-        this.drawTexture(matrices, x + 60, y + 44, 176, 29, 50, 4);
-
-        //debug: render brew time
-        textRenderer.draw(matrices, Integer.toString(this.handler.getBrewTime()), 0, 0, 65280);
 
         int m = this.handler.getBrewTime();
         if (m > 0) {
