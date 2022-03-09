@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 
 public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
     private static final Identifier TEXTURE = new Identifier("bodaciousberries:textures/gui/juicer.png");
-    private static final int[] BUBBLE_PROGRESS = new int[]{29, 24, 20, 16, 11, 6, 0};
+    private static final int[] BUBBLE_PROGRESS = new int[]{29, 29, 25, 17, 11, 6, 0};
 
     public JuicerScreen(JuicerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -32,17 +32,17 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
         int y = (this.height - this.backgroundHeight) / 2;
         this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
-        //TODO: two bubble columns, figure out what to do with the progress bar
         int m = this.handler.getBrewTime();
         if (m > 0) {
-            int n = (int)(28.0F * (1.0F - m / 400.0F));
-            if (n > 0) {
-                this.drawTexture(matrices, x + 97, y + 16, 176, 0, 9, n);
-            }
+//            int n = (int)(28.0F * (1.0F - m / 400.0F));
+//            if (n > 0) {
+//                this.drawTexture(matrices, x + 97, y + 16, 176, 0, 9, n);
+//            }
 
-            n = BUBBLE_PROGRESS[m / 2 % 7];
+            int n = BUBBLE_PROGRESS[m / 2 % 7];
             if (n > 0) {
-                this.drawTexture(matrices, x + 63, y + 14 + 29 - n, 185, 29 - n, 12, n);
+                this.drawTexture(matrices, x + 58, y + 63 - n, 185, 29 - n, 12, n);
+                this.drawTexture(matrices, x + 104, y + 63 - n, 185, 29 - n, 12, n);
             }
         }
     }
