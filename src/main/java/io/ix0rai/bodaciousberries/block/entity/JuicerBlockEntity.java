@@ -27,8 +27,9 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class JuicerBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory {
-    private final DefaultedList<ItemStack> inventory;
-    private int brewTime;
+    private static final Item RECEPTACLE = Items.GLASS_BOTTLE;
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
+    private int brewTime = 0;
     private Item itemBrewing;
 
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
@@ -50,8 +51,6 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
 
     public JuicerBlockEntity(BlockPos pos, BlockState state) {
         super(BodaciousBlocks.JUICER_ENTITY, pos, state);
-        this.inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
-        this.brewTime = 0;
     }
 
     @Override
@@ -75,7 +74,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
 
         //craft items for all three slots - as long as there's a bottle to contain the juice
         for(int i = 0; i < 3; i ++) {
-            if (slots.get(i).getItem().equals(Items.GLASS_BOTTLE)) {
+            if (slots.get(i).getItem().equals(RECEPTACLE)) {
                 slots.set(i, JuicerRecipes.craft(ingredients[0], ingredients[1], ingredients[2], slots.get(i)));
             }
         }
@@ -130,14 +129,14 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     private static boolean canCraft(DefaultedList<ItemStack> slots) {
-        Item ingredient1 = slots.get(3).getItem();
-        Item ingredient2 = slots.get(4).getItem();
-        Item ingredient3 = slots.get(5).getItem();
+        ItemStack ingredient1 = slots.get(3);
+        ItemStack ingredient2 = slots.get(4);
+        ItemStack ingredient3 = slots.get(5);
 
         if (JuicerRecipes.isIngredient(ingredient1) && JuicerRecipes.isIngredient(ingredient2) && JuicerRecipes.isIngredient(ingredient3)) {
             for (int i = 0; i < 3; i ++) {
-                ItemStack stack = slots.get(i);
-                if (!stack.isEmpty() && stack.getItem().equals(Items.GLASS_BOTTLE) && JuicerRecipes.hasRecipeFor(ingredient1, ingredient2, ingredient3)) {
+                ItemStack slotItems = slots.get(i);
+                if (!slotItems.isEmpty() && slotItems.getItem().equals(RECEPTACLE) && JuicerRecipes.hasRecipeFor(ingredient1, ingredient2, ingredient3)) {
                     return true;
                 }
             }
@@ -176,7 +175,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         if (slot < 3) {
             return this.inventory.get(slot).isEmpty() && JuicerScreenHandler.JuicerOutputSlot.matches(stack);
         } else if (slot <= 5) {
-            return JuicerRecipes.isIngredient(stack.getItem());
+            return JuicerRecipes.isIngredient(stack);
         } else {
             return false;
         }
@@ -184,6 +183,6 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return slot < 3 && !stack.getItem().equals(Items.GLASS_BOTTLE);
+        return slot < 3 && !stack.getItem().equals(RECEPTACLE);
     }
 }

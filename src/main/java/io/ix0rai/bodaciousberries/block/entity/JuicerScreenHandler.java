@@ -1,12 +1,10 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
-import io.ix0rai.bodaciousberries.registry.items.Juice;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ArrayPropertyDelegate;
@@ -83,7 +81,7 @@ public class JuicerScreenHandler extends ScreenHandler {
 
             if (index > finalJuicerSlot) {
                 //ingredient item
-                if (JuicerIngredientSlot.matches(stack)) {
+                if (JuicerRecipes.isIngredient(stack)) {
                     if (!this.insertItem(slotItems, 3, finalJuicerSlot + 1, false)) {
                         return empty;
                     }
@@ -135,11 +133,7 @@ public class JuicerScreenHandler extends ScreenHandler {
 
         @Override
         public boolean canInsert(ItemStack stack) {
-            return matches(stack);
-        }
-
-        public static boolean matches(ItemStack stack) {
-            return JuicerRecipes.isIngredient(stack.getItem());
+            return JuicerRecipes.isIngredient(stack);
         }
     }
 
@@ -159,8 +153,7 @@ public class JuicerScreenHandler extends ScreenHandler {
         }
 
         public static boolean matches(ItemStack stack) {
-            Item item = stack.getItem();
-            return item instanceof Juice || item.equals(Items.GLASS_BOTTLE) || JuicerRecipes.isOutput(item);
+            return stack.getItem().equals(Items.GLASS_BOTTLE) || JuicerRecipes.isOutput(stack);
         }
     }
 }

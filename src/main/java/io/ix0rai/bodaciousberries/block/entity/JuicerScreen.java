@@ -28,17 +28,21 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
+
+        //draw background
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
         this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
         int brewTime = this.handler.getBrewTime();
         if (brewTime > 0) {
+            //draw progress bar
             int progress = Math.round(28.0F * (1.0F - brewTime / 400.0F));
             if (progress > 0) {
                 this.drawTexture(matrices, x + 73, y + 34, 197, 0, 28, progress);
             }
 
+            //draw bubbles
             progress = BUBBLE_PROGRESS[brewTime / 2 % 7];
             if (progress > 0) {
                 this.drawTexture(matrices, x + 58, y + 63 - progress, 185, 29 - progress, 12, progress);

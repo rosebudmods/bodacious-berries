@@ -19,7 +19,7 @@ public class JuicerRecipes {
         addRecipe(input, input, input, output);
     }
 
-    public static boolean hasRecipeFor(Item input1, Item input2, Item input3) {
+    public static boolean hasRecipeFor(ItemStack input1, ItemStack input2, ItemStack input3) {
         for (Recipe<Juice> recipe : JUICER_RECIPES) {
             if (recipe.ingredientsMatch(input1, input2, input3)) {
                 return true;
@@ -29,8 +29,10 @@ public class JuicerRecipes {
         return false;
     }
 
-    public static boolean isIngredient(Item item) {
-        if (item != null) {
+    public static boolean isIngredient(ItemStack stack) {
+        if (stack != null) {
+            final Item item = stack.getItem();
+
             for (Recipe<Juice> recipe : JUICER_RECIPES) {
                 if (recipe.isIngredient(item)) {
                     return true;
@@ -41,8 +43,10 @@ public class JuicerRecipes {
         return false;
     }
 
-    public static boolean isOutput(Item item) {
-        if (item != null) {
+    public static boolean isOutput(ItemStack stack) {
+        if (stack != null) {
+            final Item item = stack.getItem();
+
             for (Recipe<Juice> recipe : JUICER_RECIPES) {
                 if (recipe.isOutput(item)) {
                     return true;
@@ -84,11 +88,7 @@ public class JuicerRecipes {
         }
 
         public boolean ingredientsMatch(ItemStack ingredient1, ItemStack ingredient2, ItemStack ingredient3) {
-            return ingredientsMatch(ingredient1.getItem(), ingredient2.getItem(), ingredient3.getItem());
-        }
-
-        public boolean ingredientsMatch(Item ingredient1, Item ingredient2, Item ingredient3) {
-            return input1.equals(ingredient1) && input2.equals(ingredient2) && input3.equals(ingredient3);
+            return input1.equals(ingredient1.getItem()) && input2.equals(ingredient2.getItem()) && input3.equals(ingredient3.getItem());
         }
     }
 }
