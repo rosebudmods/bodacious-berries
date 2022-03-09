@@ -18,10 +18,13 @@ import java.util.List;
 import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class Juices {
-    private static final Item.Settings CHORUS_JUICE_SETTINGS = new Item.Settings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(2).saturationModifier(4F).build()).group(ItemGroup.FOOD).maxCount(16);
+    public static final Item RECEPTACLE = Items.GLASS_BOTTLE;
+
+    private static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
+    private static final Item.Settings CHORUS_JUICE_SETTINGS = settings(2, 4f);
 
     public static final Juice CHORUS_BERRY_JUICE = chorusBerryJuice(null);
-    private static final Juice SASKATOON_BERRY_JUICE = new Juice(new Item.Settings().recipeRemainder(Items.GLASS_BOTTLE).food(new FoodComponent.Builder().hunger(2).saturationModifier(4F).build()).group(ItemGroup.FOOD).maxCount(16));
+    private static final Juice SASKATOON_BERRY_JUICE = new Juice(settings(3, 4f));
 
     public static void registerJuice() {
         register(Bodaciousberries.getIdentifier("saskatoon_berry_juice"), SASKATOON_BERRY_JUICE, Berries.SASKATOON_BERRIES);
@@ -41,6 +44,14 @@ public class Juices {
         Registry.register(Registry.ITEM, id, juice);
     }
 
+    private static Item.Settings settings(int hunger, float saturation) {
+        return JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(hunger).saturationModifier(saturation).build());
+    }
+
+    private static void register(Identifier id, Juice juice){
+        Registry.register(Registry.ITEM, id, juice);
+    }
+
     private static void createChorusBerryJuice(List<RegistryKey<Biome>> biomes) {
         register(Bodaciousberries.getIdentifier("chorus_berry_juice"), CHORUS_BERRY_JUICE, Berries.CHORUS_BERRIES);
 
@@ -48,7 +59,7 @@ public class Juices {
             ChorusBerryJuice juice = chorusBerryJuice(key);
             JuicerRecipes.addRecipe(Berries.CHORUS_BERRIES, juice);
             String name = "chorus_berry_juice_" + key.getValue().getPath();
-            register(Bodaciousberries.getIdentifier(name), juice, Berries.CHORUS_BERRIES);
+            register(Bodaciousberries.getIdentifier(name), juice);
         }
     }
 

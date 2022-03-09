@@ -1,12 +1,12 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
+import io.ix0rai.bodaciousberries.registry.Juices;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -153,7 +153,7 @@ public class JuicerScreenHandler extends ScreenHandler {
         }
 
         public static boolean matches(ItemStack stack) {
-            return stack.getItem().equals(Items.GLASS_BOTTLE) || JuicerRecipes.isOutput(stack);
+            return stack.getItem().equals(Juices.RECEPTACLE) || JuicerRecipes.isOutput(stack);
         }
     }
 }

@@ -1,12 +1,12 @@
 package io.ix0rai.bodaciousberries.registry.items;
 
+import io.ix0rai.bodaciousberries.registry.Juices;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -34,10 +34,10 @@ public class Juice extends Item {
         //return empty bottle, or throw it away if it does not fit
         //also decrement the stack size if it will not be entirely consumed
         if (stack.isEmpty()) {
-            return new ItemStack(Items.GLASS_BOTTLE);
+            return new ItemStack(Juices.RECEPTACLE);
         } else {
             if (user instanceof PlayerEntity playerEntity && !playerEntity.getAbilities().creativeMode) {
-                ItemStack glassBottle = new ItemStack(Items.GLASS_BOTTLE);
+                ItemStack glassBottle = new ItemStack(Juices.RECEPTACLE);
                 if (!playerEntity.getInventory().insertStack(glassBottle)) {
                     playerEntity.dropItem(glassBottle, false);
                 }
