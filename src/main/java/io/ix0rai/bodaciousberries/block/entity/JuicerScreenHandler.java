@@ -17,7 +17,6 @@ import net.minecraft.screen.slot.Slot;
 public class JuicerScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate brewTime;
-    private final Slot[] inputSlots = new Slot[3];
 
     public JuicerScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(9), new ArrayPropertyDelegate(1));
@@ -44,9 +43,9 @@ public class JuicerScreenHandler extends ScreenHandler {
         this.addSlot(new JuicerOutputSlot(inventory, 1, 79, 58));
         this.addSlot(new JuicerOutputSlot(inventory, 2, 102, 51));
         //ingredient slots
-        this.inputSlots[0] = this.addSlot(new JuicerIngredientSlot(inventory, 3, 59, 10));
-        this.inputSlots[1] = this.addSlot(new JuicerIngredientSlot(inventory, 4, 79, 18));
-        this.inputSlots[2] = this.addSlot(new JuicerIngredientSlot(inventory, 5, 99, 10));
+        this.addSlot(new JuicerIngredientSlot(inventory, 3, 59, 10));
+        this.addSlot(new JuicerIngredientSlot(inventory, 4, 79, 18));
+        this.addSlot(new JuicerIngredientSlot(inventory, 5, 99, 10));
 
         //player inventory
         int i;
@@ -72,62 +71,58 @@ public class JuicerScreenHandler extends ScreenHandler {
 
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
+        final ItemStack empty = ItemStack.EMPTY;
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
+
         if (slot.hasStack()) {
             ItemStack slotItems = slot.getStack();
             stack = slotItems.copy();
-            if ((index < 0 || index > 2) && index != 3 && index != 4) {
-                boolean isInputItem = false;
-                for (Slot inputSlot : inputSlots) {
-                    if (inputSlot.canInsert(slotItems)) {
-                        isInputItem = true;
-                    }
-                }
+            int finalJuicerSlot = 5;
+            int finalInventorySlot = 41;
 
-                if (isInputItem) {
-                    if (!this.insertItem(slotItems, 3, 5, false)) {
-                        return ItemStack.EMPTY;
+            if (index > finalJuicerSlot) {
+                //ingredient item
+                if (JuicerIngredientSlot.matches(stack)) {
+                    if (!this.insertItem(slotItems, 3, finalJuicerSlot + 1, false)) {
+                        return empty;
                     }
+                //output item
                 } else if (JuicerOutputSlot.matches(stack)) {
                     for (int i = 0; i < 3; i++) {
                         if (this.slots.get(i).getStack().isEmpty()) {
                             if (this.insertItem(new ItemStack(slotItems.getItem()), i, i + 1, false)) {
                                 slotItems.decrement(1);
                             }
-                            return ItemStack.EMPTY;
+                            return empty;
                         }
                     }
-                } else if (index >= 5 && index < 32) {
-                    if (!this.insertItem(slotItems, 32, 41, false)) {
-                        return ItemStack.EMPTY;
+                } else if (index < 32) {
+                    if (!this.insertItem(slotItems, 32, finalInventorySlot, false)) {
+                        return empty;
                     }
-                } else if (index >= 32 && index < 41) {
-                    if (!this.insertItem(slotItems, 5, 32, false)) {
-                        return ItemStack.EMPTY;
+                } else if (index < 41) {
+                    if (!this.insertItem(slotItems, finalJuicerSlot, 32, false)) {
+                        return empty;
                     }
-                } else if (!this.insertItem(slotItems, 5, 41, false)) {
-                    return ItemStack.EMPTY;
+                } else if (!this.insertItem(slotItems, finalJuicerSlot, finalInventorySlot, false)) {
+                    return empty;
                 }
             } else {
-                if (!this.insertItem(slotItems, 5, 41, true)) {
-                    return ItemStack.EMPTY;
+                if (!this.insertItem(slotItems, finalJuicerSlot, finalInventorySlot, true)) {
+                    return empty;
                 }
 
                 slot.onQuickTransfer(slotItems, stack);
             }
 
             if (slotItems.isEmpty()) {
-                slot.setStack(ItemStack.EMPTY);
-            } else {
-                slot.markDirty();
+                slot.setStack(empty);
             }
 
             if (slotItems.getCount() == stack.getCount()) {
-                return ItemStack.EMPTY;
+                return empty;
             }
-
-            slot.onTakeItem(player, slotItems);
         }
 
         return stack;
@@ -140,6 +135,10 @@ public class JuicerScreenHandler extends ScreenHandler {
 
         @Override
         public boolean canInsert(ItemStack stack) {
+            return matches(stack);
+        }
+
+        public static boolean matches(ItemStack stack) {
             return JuicerRecipes.isIngredient(stack.getItem());
         }
     }
