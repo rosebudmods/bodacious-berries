@@ -32,17 +32,17 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
         int y = (this.height - this.backgroundHeight) / 2;
         this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
-        int m = this.handler.getBrewTime();
-        if (m > 0) {
-//            int n = (int)(28.0F * (1.0F - m / 400.0F));
-//            if (n > 0) {
-//                this.drawTexture(matrices, x + 97, y + 16, 176, 0, 9, n);
-//            }
+        int brewTime = this.handler.getBrewTime();
+        if (brewTime > 0) {
+            int progress = Math.round(28.0F * (1.0F - brewTime / 400.0F));
+            if (progress > 0) {
+                this.drawTexture(matrices, x + 73, y + 34, 197, 0, 28, progress);
+            }
 
-            int n = BUBBLE_PROGRESS[m / 2 % 7];
-            if (n > 0) {
-                this.drawTexture(matrices, x + 58, y + 63 - n, 185, 29 - n, 12, n);
-                this.drawTexture(matrices, x + 104, y + 63 - n, 185, 29 - n, 12, n);
+            progress = BUBBLE_PROGRESS[brewTime / 2 % 7];
+            if (progress > 0) {
+                this.drawTexture(matrices, x + 58, y + 63 - progress, 185, 29 - progress, 12, progress);
+                this.drawTexture(matrices, x + 104, y + 63 - progress, 185, 29 - progress, 12, progress);
             }
         }
     }
