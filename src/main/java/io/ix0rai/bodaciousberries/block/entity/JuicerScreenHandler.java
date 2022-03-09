@@ -44,9 +44,9 @@ public class JuicerScreenHandler extends ScreenHandler {
         this.addSlot(new JuicerOutputSlot(inventory, 1, 79, 58));
         this.addSlot(new JuicerOutputSlot(inventory, 2, 102, 51));
         //ingredient slots
-        this.inputSlots[0] = this.addSlot(new JuicerIngredientSlot(inventory, 3, 56, 17));
-        this.inputSlots[1] = this.addSlot(new JuicerIngredientSlot(inventory, 4, 79, 17));
-        this.inputSlots[2] = this.addSlot(new JuicerIngredientSlot(inventory, 5, 102, 17));
+        this.inputSlots[0] = this.addSlot(new JuicerIngredientSlot(inventory, 3, 59, 10));
+        this.inputSlots[1] = this.addSlot(new JuicerIngredientSlot(inventory, 4, 79, 18));
+        this.inputSlots[2] = this.addSlot(new JuicerIngredientSlot(inventory, 5, 99, 10));
 
         //player inventory
         int i;

@@ -9,17 +9,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("textures/gui/container/brewing_stand.png");
+    private static final Identifier TEXTURE = new Identifier("bodaciousberries:textures/gui/juicer.png");
     private static final int[] BUBBLE_PROGRESS = new int[]{29, 24, 20, 16, 11, 6, 0};
 
     public JuicerScreen(JuicerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
-    }
-
-    @Override
-    protected void init() {
-        super.init();
-        this.titleX = (this.backgroundWidth - this.textRenderer.getWidth(this.title)) / 2;
     }
 
     @Override
@@ -38,6 +32,7 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
         int y = (this.height - this.backgroundHeight) / 2;
         this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
+        //TODO: two bubble columns, figure out what to do with the progress bar
         int m = this.handler.getBrewTime();
         if (m > 0) {
             int n = (int)(28.0F * (1.0F - m / 400.0F));
