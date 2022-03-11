@@ -8,7 +8,6 @@ import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -19,15 +18,18 @@ import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class Juices {
     public static final Item RECEPTACLE = Items.GLASS_BOTTLE;
-
     private static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
-    private static final Item.Settings CHORUS_JUICE_SETTINGS = settings(2, 4f);
-
-    public static final Juice CHORUS_BERRY_JUICE = chorusBerryJuice(null);
-    private static final Juice SASKATOON_BERRY_JUICE = new Juice(settings(3, 4f));
 
     public static void registerJuice() {
-        register(Bodaciousberries.getIdentifier("saskatoon_berry_juice"), SASKATOON_BERRY_JUICE, Berries.SASKATOON_BERRIES);
+        register("saskatoon_berry_juice", new Juice(Berries.SASKATOON_BERRIES));
+        register("strawberry_juice", new Juice(Berries.STRAWBERRY));
+        register("raspberry_juice", new Juice(Berries.RASPBERRIES));
+        register("blackberry_juice", new Juice(Berries.BLACKBERRIES));
+        register("rainberry_juice", new Juice(Berries.RAINBERRY));
+        register("lingonberry_juice", new Juice(Berries.LINGONBERRIES));
+        register("grape_juice", new Juice(Berries.GRAPES));
+        register("goji_berry_juice", new Juice(Berries.GOJI_BERRIES));
+        register("gooseberry_juice", new Juice(Berries.GOOSEBERRIES));
 
         createChorusBerryJuice(List.of(
                 PLAINS, SNOWY_SLOPES, SWAMP,
@@ -39,34 +41,26 @@ public class Juices {
         ));
     }
 
-    private static void register(Identifier id, Juice juice, Item berry) {
-        JuicerRecipes.addRecipe(berry, juice);
-        Registry.register(Registry.ITEM, id, juice);
+    private static void register(String name, Juice juice) {
+        JuicerRecipes.addRecipe(juice.getBerry(), juice);
+        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
     }
 
-    private static Item.Settings settings(int hunger, float saturation) {
+    public static Item.Settings settings(int hunger, float saturation) {
         return JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(hunger).saturationModifier(saturation).build());
     }
 
-    private static void register(Identifier id, Juice juice){
-        Registry.register(Registry.ITEM, id, juice);
-    }
-
     private static void createChorusBerryJuice(List<RegistryKey<Biome>> biomes) {
-        register(Bodaciousberries.getIdentifier("chorus_berry_juice"), CHORUS_BERRY_JUICE, Berries.CHORUS_BERRIES);
+        register("chorus_berry_juice", new ChorusBerryJuice(Berries.CHORUS_BERRIES, null));
 
         for (RegistryKey<Biome> key : biomes) {
             ChorusBerryJuice juice = chorusBerryJuice(key);
-            JuicerRecipes.addRecipe(Berries.CHORUS_BERRIES, juice);
             String name = "chorus_berry_juice_" + key.getValue().getPath();
-            register(Bodaciousberries.getIdentifier(name), juice);
+            Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
         }
     }
 
     private static ChorusBerryJuice chorusBerryJuice(RegistryKey<Biome> biome) {
-        if (biome == null) {
-            return new ChorusBerryJuice(CHORUS_JUICE_SETTINGS, null);
-        }
-        return new ChorusBerryJuice(CHORUS_JUICE_SETTINGS, biome.getValue());
+        return new ChorusBerryJuice(Berries.CHORUS_BERRIES, biome.getValue());
     }
 }

@@ -9,6 +9,7 @@
     "accessors.BiomeCategoryAccessor",
     "accessors.DamageSourceAccessor",
     "accessors.DefaultParticleTypeAccessor",
+    "accessors.FoodEffectAccessor",
     "accessors.WaterSuspendParticleAccessor"
   ],
   "client": [

@@ -21,8 +21,8 @@ import net.minecraft.world.dimension.DimensionType;
 public class ChorusBerryJuice extends Juice {
     private final Identifier biome;
 
-    public ChorusBerryJuice(Item.Settings settings, Identifier biome) {
-        super(settings);
+    public ChorusBerryJuice(Item berry, Identifier biome) {
+        super(berry);
         this.biome = biome;
     }
 
