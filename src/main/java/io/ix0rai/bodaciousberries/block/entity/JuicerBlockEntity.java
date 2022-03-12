@@ -1,7 +1,9 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
+import io.ix0rai.bodaciousberries.block.JuicerBlock;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
 import io.ix0rai.bodaciousberries.registry.Juices;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -114,16 +116,19 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
             if (juicer.brewTime == 0 && canCraft) {
                 craft(world, pos, juicer.inventory);
                 markDirty(world, pos, state);
+                world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
             } else if (!canCraft || !ingredient.isOf(juicer.itemBrewing)) {
                 //if we cannot craft, the ingredient has been removed/changed, and we should stop brewing without giving a result
                 juicer.brewTime = 0;
                 markDirty(world, pos, state);
+                world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
             }
         } else if (canCraft) {
             //if we're not currently brewing, start brewing with the ingredient
             juicer.brewTime = 400;
             juicer.itemBrewing = ingredient.getItem();
             markDirty(world, pos, state);
+            world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
         }
     }
 

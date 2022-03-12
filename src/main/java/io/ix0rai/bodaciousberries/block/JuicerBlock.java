@@ -2,6 +2,7 @@ package io.ix0rai.bodaciousberries.block;
 
 import io.ix0rai.bodaciousberries.block.entity.JuicerBlockEntity;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -10,6 +11,8 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -19,13 +22,20 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
 public class JuicerBlock extends BlockWithEntity {
+    public static final BooleanProperty RUNNING = BooleanProperty.of("running");
     public JuicerBlock(Settings settings) {
         super(settings);
+        this.setDefaultState(this.getDefaultState().with(RUNNING, false));
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new JuicerBlockEntity(pos, state);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(RUNNING);
     }
 
     @Override

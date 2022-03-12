@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "bodaciousberries:block/juicer_top_spinning",
+    "north": "bodaciousberries:block/juicer_side",
+    "south": "bodaciousberries:block/juicer_side",
+    "east": "bodaciousberries:block/juicer_side",
+    "west": "bodaciousberries:block/juicer_side",
+    "down": "bodaciousberries:block/juicer_bottom"
+  }
+}

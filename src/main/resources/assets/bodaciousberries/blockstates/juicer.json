@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "running=true": {
+      "model": "bodaciousberries:block/juicer_running"
+    },
+    "running=false": {
+      "model": "bodaciousberries:block/juicer"
+    }
+  }
+}
