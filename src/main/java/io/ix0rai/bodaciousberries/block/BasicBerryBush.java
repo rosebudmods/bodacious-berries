@@ -29,7 +29,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -46,7 +45,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected final int sizeChangeAge;
 
     //animals that can move through bushes without being slowed
-    public static final List<EntityType<?>> SMALL_ENTITIES = Arrays.asList(new EntityType<?>[]{
+    public static final List<EntityType<?>> SMALL_ENTITIES = List.of(
             EntityType.FOX,
             EntityType.BEE,
             EntityType.RABBIT,
@@ -56,7 +55,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             EntityType.SILVERFISH,
             EntityType.OCELOT,
             EntityType.PARROT
-    });
+    );
 
     /**
      * berry bush constructor
