@@ -5,17 +5,23 @@ import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryVine;
 import io.ix0rai.bodaciousberries.block.ChorusBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
+import io.ix0rai.bodaciousberries.block.FourStageBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.block.RainberryBush;
-import io.ix0rai.bodaciousberries.block.SpikedBerryBush;
+import io.ix0rai.bodaciousberries.block.SpikyFourStageBush;
+import io.ix0rai.bodaciousberries.block.SpikyThreeStageBush;
+import io.ix0rai.bodaciousberries.block.ThreeStageBush;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 
 public class Bushes {
+    public static final IntProperty AGE_4 = IntProperty.of("age", 0, 4);
+
     private static final VoxelShape SMALL_SWEET_BERRY = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
     private static final VoxelShape LARGE_SWEET_BERRY = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
     private static final VoxelShape SMALL_LINGONBERRY = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 6.0D, 13.0D);
@@ -26,28 +32,28 @@ public class Bushes {
 
     //bushes
     public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berries.CHORUS_BERRIES,
-            4, SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
+            SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
     public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(
             Berries.SASKATOON_BERRIES);
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, LARGE_SWEET_BERRY,
-            2, DOUBLE_SASKATOON_BERRY_BUSH);
-    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush(Berries.STRAWBERRY,
-            3, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
-    public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush(Berries.RASPBERRIES,
-            4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
-    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush(Berries.BLACKBERRIES,
-            4, SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
+            DOUBLE_SASKATOON_BERRY_BUSH);
+    public static final BasicBerryBush STRAWBERRY_BUSH = new ThreeStageBush(Berries.STRAWBERRY,
+            SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
+    public static final BasicBerryBush RASPBERRY_BUSH = new SpikyFourStageBush(Berries.RASPBERRIES,
+            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
+    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikyFourStageBush(Berries.BLACKBERRIES,
+            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
     public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berries.RAINBERRY,
-            4, SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 2);
-    public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush(Berries.LINGONBERRIES,
-            4, SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
+            SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 2);
+    public static final BasicBerryBush LINGONBERRY_BUSH = new FourStageBush(Berries.LINGONBERRIES,
+            SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
     public static final BerryVine GRAPEVINE = new BerryVine(
             Berries.GRAPES);
     public static final DoubleBerryBush DOUBLE_GOJI_BERRY_BUSH = new DoubleBerryBush(
             Berries.GOJI_BERRIES);
     public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, LARGE_SWEET_BERRY,
-            2, DOUBLE_GOJI_BERRY_BUSH);
-    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush(Berries.GOOSEBERRIES, 3,
+            DOUBLE_GOJI_BERRY_BUSH);
+    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikyThreeStageBush(Berries.GOOSEBERRIES,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
 
     public static void registerBushes() {

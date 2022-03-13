@@ -33,7 +33,7 @@ public class SpikedBerryBush extends BasicBerryBush {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity) || SMALL_ENTITIES.contains(entity.getType()) || state.get(AGE) < sizeChangeAge) {
+        if (!(entity instanceof LivingEntity) || SMALL_ENTITIES.contains(entity.getType()) || state.get(getAge()) < sizeChangeAge) {
             return;
         }
 
@@ -53,6 +53,6 @@ public class SpikedBerryBush extends BasicBerryBush {
 
     @Override
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return state.get(AGE) < sizeChangeAge;
+        return state.get(getAge()) < sizeChangeAge;
     }
 }
