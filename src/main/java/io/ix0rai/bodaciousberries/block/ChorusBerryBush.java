@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
-public class ChorusBerryBush extends FourStageBush {
+public class ChorusBerryBush extends BasicBerryBush.FourStageBush {
     public ChorusBerryBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         super(berryType, smallShape, largeShape, sizeChangeAge);
     }

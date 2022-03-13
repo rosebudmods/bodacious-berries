@@ -1,6 +1,7 @@
 package io.ix0rai.bodaciousberries.block;
 
 import io.ix0rai.bodaciousberries.mixin.accessors.DamageSourceAccessor;
+import io.ix0rai.bodaciousberries.registry.Bushes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -8,6 +9,8 @@ import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -54,5 +57,27 @@ public class SpikedBerryBush extends BasicBerryBush {
     @Override
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return state.get(getAge()) < sizeChangeAge;
+    }
+
+    public static class SpikyFourStageBush extends SpikedBerryBush {
+        public SpikyFourStageBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
+            super(berryType, 4, smallShape, largeShape, sizeChangeAge, damage);
+        }
+
+        @Override
+        public IntProperty getAge() {
+            return Bushes.AGE_4;
+        }
+    }
+
+    public static class SpikyThreeStageBush extends SpikedBerryBush {
+        public SpikyThreeStageBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
+            super(berryType, 3, smallShape, largeShape, sizeChangeAge, damage);
+        }
+
+        @Override
+        public IntProperty getAge() {
+            return Properties.AGE_3;
+        }
     }
 }

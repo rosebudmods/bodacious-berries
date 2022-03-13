@@ -19,6 +19,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -241,5 +242,27 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public int getMaxBerryAmount() {
         return MAX_BERRY_AMOUNT;
+    }
+
+    public static class FourStageBush extends BasicBerryBush {
+        public FourStageBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+            super(berryType, 4, smallShape, largeShape, sizeChangeAge);
+        }
+
+        @Override
+        public IntProperty getAge() {
+            return Bushes.AGE_4;
+        }
+    }
+
+    public static class ThreeStageBush extends BasicBerryBush {
+        public ThreeStageBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+            super(berryType, 3, smallShape, largeShape, sizeChangeAge);
+        }
+
+        @Override
+        public IntProperty getAge() {
+            return Properties.AGE_3;
+        }
     }
 }

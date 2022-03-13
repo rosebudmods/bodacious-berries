@@ -5,12 +5,9 @@ import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryVine;
 import io.ix0rai.bodaciousberries.block.ChorusBerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
-import io.ix0rai.bodaciousberries.block.FourStageBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.block.RainberryBush;
-import io.ix0rai.bodaciousberries.block.SpikyFourStageBush;
-import io.ix0rai.bodaciousberries.block.SpikyThreeStageBush;
-import io.ix0rai.bodaciousberries.block.ThreeStageBush;
+import io.ix0rai.bodaciousberries.block.SpikedBerryBush;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -37,15 +34,15 @@ public class Bushes {
             Berries.SASKATOON_BERRIES);
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, LARGE_SWEET_BERRY,
             DOUBLE_SASKATOON_BERRY_BUSH);
-    public static final BasicBerryBush STRAWBERRY_BUSH = new ThreeStageBush(Berries.STRAWBERRY,
+    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush.ThreeStageBush(Berries.STRAWBERRY,
             SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
-    public static final BasicBerryBush RASPBERRY_BUSH = new SpikyFourStageBush(Berries.RASPBERRIES,
+    public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.RASPBERRIES,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
-    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikyFourStageBush(Berries.BLACKBERRIES,
+    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.BLACKBERRIES,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
     public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berries.RAINBERRY,
             SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 2);
-    public static final BasicBerryBush LINGONBERRY_BUSH = new FourStageBush(Berries.LINGONBERRIES,
+    public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(Berries.LINGONBERRIES,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
     public static final BerryVine GRAPEVINE = new BerryVine(
             Berries.GRAPES);
@@ -53,7 +50,7 @@ public class Bushes {
             Berries.GOJI_BERRIES);
     public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, LARGE_SWEET_BERRY,
             DOUBLE_GOJI_BERRY_BUSH);
-    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikyThreeStageBush(Berries.GOOSEBERRIES,
+    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyThreeStageBush(Berries.GOOSEBERRIES,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
 
     public static void registerBushes() {
