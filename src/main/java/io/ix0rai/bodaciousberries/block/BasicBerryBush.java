@@ -19,6 +19,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -28,18 +29,14 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected static final Vec3d BERRY_BUSH_SLOWING_VECTOR = new Vec3d(0.5D, 0.25D, 0.5D);
-    //chance to grow is one in growChance
     protected static final int GROW_CHANCE = 5;
     protected static final int MAX_BERRY_AMOUNT = 3;
-
-    public static final IntProperty AGE = IntProperty.of("age", 0 ,10);
 
     protected Item berryType;
     protected final int maxAge;
@@ -48,7 +45,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected final int sizeChangeAge;
 
     //animals that can move through bushes without being slowed
-    public static final List<EntityType<?>> SMALL_ENTITIES = Arrays.asList(new EntityType<?>[]{
+    public static final List<EntityType<?>> SMALL_ENTITIES = List.of(
             EntityType.FOX,
             EntityType.BEE,
             EntityType.RABBIT,
@@ -58,7 +55,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             EntityType.SILVERFISH,
             EntityType.OCELOT,
             EntityType.PARROT
-    });
+    );
 
     /**
      * berry bush constructor
@@ -101,7 +98,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return state.get(AGE) < sizeChangeAge ? smallShape : largeShape;
+        return state.get(getAge()) < sizeChangeAge ? smallShape : largeShape;
     }
 
     /**
@@ -109,7 +106,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return state.get(AGE) < maxAge;
+        return state.get(getAge()) < maxAge;
     }
 
     /**
@@ -118,7 +115,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int age = state.get(AGE);
+        int age = state.get(getAge());
         //if the age isn't maximum and the light level is high enough grow the bush
         if (age <= maxAge && random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             grow(world, pos, state, age + 1);
@@ -157,7 +154,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         BerryTypeConfigurationException.check(berryType);
 
-        final int currentAge = state.get(AGE);
+        final int currentAge = state.get(getAge());
         //if bone meal is allowed to be used, pass action
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
@@ -191,7 +188,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(AGE);
+        builder.add(getAge());
     }
 
     @Override
@@ -208,12 +205,12 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-        int newAge = Math.min(maxAge, state.get(AGE) + 1);
+        int newAge = Math.min(maxAge, state.get(getAge()) + 1);
         grow(world, pos, state, newAge);
     }
 
     public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
-        world.setBlockState(pos, state.with(AGE, newAge), Block.NOTIFY_LISTENERS);
+        world.setBlockState(pos, state.with(getAge(), newAge), Block.NOTIFY_LISTENERS);
     }
 
     @Override
@@ -223,7 +220,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     @Override
     public BlockState getBaseState() {
-        return super.getDefaultState().with(AGE, 0);
+        return super.getDefaultState().with(getAge(), 0);
     }
 
     @Override
@@ -233,7 +230,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     @Override
     public IntProperty getAge() {
-        return AGE;
+        throw new AssertionError("getAge() should always be overridden");
     }
 
     @Override
@@ -244,5 +241,27 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public int getMaxBerryAmount() {
         return MAX_BERRY_AMOUNT;
+    }
+
+    public static class FourStageBush extends BasicBerryBush {
+        public FourStageBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+            super(berryType, 4, smallShape, largeShape, sizeChangeAge);
+        }
+
+        @Override
+        public IntProperty getAge() {
+            return Bushes.AGE_4;
+        }
+    }
+
+    public static class ThreeStageBush extends BasicBerryBush {
+        public ThreeStageBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+            super(berryType, 3, smallShape, largeShape, sizeChangeAge);
+        }
+
+        @Override
+        public IntProperty getAge() {
+            return Properties.AGE_3;
+        }
     }
 }
