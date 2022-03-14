@@ -4,6 +4,7 @@ import io.ix0rai.bodaciousberries.registry.Juices;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
@@ -22,6 +23,11 @@ public class Juice extends Item {
 
     public Juice(Item berry) {
         super(Juices.settings(Objects.requireNonNull(berry.getFoodComponent()).getHunger() * 2, berry.getFoodComponent().getSaturationModifier() * 2f));
+        this.berry = berry;
+    }
+
+    public Juice(Item berry, FoodComponent.Builder builder) {
+        super(Juices.JUICE_SETTINGS.food(builder.hunger(Objects.requireNonNull(berry.getFoodComponent()).getHunger() * 2).saturationModifier(berry.getFoodComponent().getSaturationModifier() * 2f).build()));
         this.berry = berry;
     }
 

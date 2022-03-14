@@ -4,6 +4,8 @@ import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipes;
 import io.ix0rai.bodaciousberries.registry.items.ChorusBerryJuice;
 import io.ix0rai.bodaciousberries.registry.items.Juice;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -18,7 +20,7 @@ import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class Juices {
     public static final Item RECEPTACLE = Items.GLASS_BOTTLE;
-    private static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
+    public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
 
     public static void registerJuice() {
         register("saskatoon_berry_juice", new Juice(Berries.SASKATOON_BERRIES));
@@ -30,6 +32,8 @@ public class Juices {
         register("grape_juice", new Juice(Berries.GRAPES));
         register("goji_berry_juice", new Juice(Berries.GOJI_BERRIES));
         register("gooseberry_juice", new Juice(Berries.GOOSEBERRIES));
+        register("glow_berry_juice", new Juice(Items.GLOW_BERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 90, 1), 1.0F)));
+        register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES));
 
         createChorusBerryJuice(List.of(
                 PLAINS, SNOWY_SLOPES, SWAMP,
