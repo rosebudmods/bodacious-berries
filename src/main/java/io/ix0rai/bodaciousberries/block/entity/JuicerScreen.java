@@ -37,7 +37,7 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
         int brewTime = this.handler.getBrewTime();
         if (brewTime > 0) {
             //draw progress bar
-            int progress = Math.round(28.0F * (1.0F - brewTime / 400.0F));
+            int progress = Math.round(28.0F * (1.0F - brewTime / (float) JuicerBlockEntity.TOTAL_BREW_TIME));
             if (progress > 0) {
                 this.drawTexture(matrices, x + 73, y + 34, 197, 0, 28, progress);
             }

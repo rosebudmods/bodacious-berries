@@ -29,6 +29,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class JuicerBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory {
+    public static final int TOTAL_BREW_TIME = 300;
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
     private int brewTime = 0;
     private Item itemBrewing;
@@ -125,7 +126,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
             }
         } else if (canCraft) {
             //if we're not currently brewing, start brewing with the ingredient
-            juicer.brewTime = 400;
+            juicer.brewTime = TOTAL_BREW_TIME;
             juicer.itemBrewing = ingredient.getItem();
             markDirty(world, pos, state);
             world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
