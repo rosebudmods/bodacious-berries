@@ -8,6 +8,16 @@
   "item.bodaciousberries.lingonberries": "Lingonberries",
   "item.bodaciousberries.grapes": "Grapes",
   "item.bodaciousberries.goji_berries": "Goji Berries",
+  "item.bodaciousberries.gooseberries": "Gooseberries",
+  "item.bodaciousberries.saskatoon_berry_juice": "Saskatoon Berry Juice",
+  "item.bodaciousberries.raspberry_juice": "Raspberry Juice",
+  "item.bodaciousberries.blackberry_juice": "Blackberry Juice",
+  "item.bodaciousberries.strawberry_juice": "Strawberry Juice",
+  "item.bodaciousberries.rainberry_juice": "Rainberry Juice",
+  "item.bodaciousberries.goji_berry_juice": "Goji Berry Juice",
+  "item.bodaciousberries.grape_juice": "Grape Juice",
+  "item.bodaciousberries.lingonberry_juice": "Lingonberry Juice",
+  "item.bodaciousberries.gooseberry_juice": "Gooseberry Juice",
   "item.bodaciousberries.chorus_berry_juice": "Chorus Berry Juice",
   "item.bodaciousberries.chorus_berry_juice_badlands": "Badlands Chorus Berry Juice",
   "item.bodaciousberries.chorus_berry_juice_birch_forest": "Birch Forest Chorus Berry Juice",
@@ -40,6 +50,5 @@
   "blocks.bodaciousberries.grapevine": "Grapevine",
   "blocks.bodaciousberries.goji_berry_bush": "Goji Berry Bush",
   "blocks.bodaciousberries.double_goji_berry_bush": "Double Goji Berry Bush",
-  "block.bodaciousberries.juicer": "Juicer",
-  "item.bodaciousberries.gooseberries": "Gooseberries"
+  "block.bodaciousberries.juicer": "Juicer"
 }
