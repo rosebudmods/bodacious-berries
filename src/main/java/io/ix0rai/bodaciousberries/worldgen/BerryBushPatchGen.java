@@ -1,7 +1,6 @@
 package io.ix0rai.bodaciousberries.worldgen;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
-import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
@@ -123,7 +122,7 @@ public class BerryBushPatchGen {
     public static RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> berryPatchConfiguredFeature(String name, BerryBush bush, Block placedOn) {
         return ConfiguredFeatures.register(Bodaciousberries.getId(name), Feature.RANDOM_PATCH,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getBaseState().with(BasicBerryBush.AGE, bush.getMaxAge()))),
+                        new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getBaseState().with(bush.getAge(), bush.getMaxAge()))),
                         List.of(placedOn)
                 )
         );
@@ -142,7 +141,7 @@ public class BerryBushPatchGen {
         return ConfiguredFeatures.register(Bodaciousberries.getId(name), Feature.RANDOM_PATCH,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(DOUBLE_BUSH_FEATURE,
                         new DoubleBushFeatureConfig(BlockStateProvider.of(tallBush.getDefaultState().with(DoubleBerryBush.AGE, tallBush.getMaxAge())),
-                                BlockStateProvider.of(bush.getBaseState().with(BasicBerryBush.AGE, bush.getMaxAge()))),
+                                BlockStateProvider.of(bush.getBaseState().with(bush.getAge(), bush.getMaxAge()))),
                         List.of(placedOn)
                 )
         );

@@ -7,6 +7,8 @@ import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -19,15 +21,15 @@ import java.util.Random;
 public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 
-    public GrowingBerryBush(VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, DoubleBerryBush bush) {
-        super(bush.getBerryType(), sizeChangeAge, smallShape, largeShape, sizeChangeAge);
+    public GrowingBerryBush(VoxelShape smallShape, VoxelShape largeShape, DoubleBerryBush bush) {
+        super(bush.getBerryType(), 2, smallShape, largeShape, 2);
         this.futureBush = bush;
     }
 
     @Override
     public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
         if (newAge < maxAge) {
-            world.setBlockState(pos, state.with(AGE, newAge), Block.NOTIFY_LISTENERS);
+            world.setBlockState(pos, state.with(getAge(), newAge), Block.NOTIFY_LISTENERS);
         } else {
             TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, Block.NOTIFY_LISTENERS);
         }
@@ -35,12 +37,12 @@ public class GrowingBerryBush extends BasicBerryBush {
 
     @Override
     public boolean hasRandomTicks(BlockState state) {
-        return state.get(AGE) <= maxAge;
+        return state.get(getAge()) <= maxAge;
     }
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        int age = state.get(AGE);
+        int age = state.get(getAge());
         if (random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             grow(world, pos, state, age + 1);
         }
@@ -52,7 +54,7 @@ public class GrowingBerryBush extends BasicBerryBush {
 
         //a GrowingBerryBush cannot produce berries until it grows to its double bush state
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-            final int newAge = Math.min(maxAge, state.get(AGE) + 1);
+            final int newAge = Math.min(maxAge, state.get(getAge()) + 1);
             if (newAge < maxAge) {
                 return ActionResult.PASS;
             } else {
@@ -62,5 +64,10 @@ public class GrowingBerryBush extends BasicBerryBush {
         } else {
             return ActionResult.FAIL;
         }
+    }
+
+    @Override
+    public IntProperty getAge() {
+        return Properties.AGE_2;
     }
 }
