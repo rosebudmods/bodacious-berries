@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.registry.items;
+package io.ix0rai.bodaciousberries.item;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.LivingEntity;

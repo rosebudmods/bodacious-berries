@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.registry.items;
+package io.ix0rai.bodaciousberries.item;
 
 import io.ix0rai.bodaciousberries.registry.Juices;
 import net.minecraft.advancement.criterion.Criteria;

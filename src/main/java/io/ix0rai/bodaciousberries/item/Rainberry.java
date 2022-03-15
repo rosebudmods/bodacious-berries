@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.registry.items;
+package io.ix0rai.bodaciousberries.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,7 +1,6 @@
-package io.ix0rai.bodaciousberries.registry.particles;
+package io.ix0rai.bodaciousberries.particle;
 
 import net.fabricmc.api.EnvType;
-
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.AnimatedParticle;
 import net.minecraft.client.particle.Particle;

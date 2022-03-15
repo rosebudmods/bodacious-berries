@@ -2,8 +2,8 @@ package io.ix0rai.bodaciousberries.registry;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipes;
-import io.ix0rai.bodaciousberries.registry.items.ChorusBerryJuice;
-import io.ix0rai.bodaciousberries.registry.items.Juice;
+import io.ix0rai.bodaciousberries.item.ChorusBerryJuice;
+import io.ix0rai.bodaciousberries.item.Juice;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
