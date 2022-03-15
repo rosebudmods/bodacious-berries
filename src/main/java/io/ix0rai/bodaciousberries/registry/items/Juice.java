@@ -22,7 +22,7 @@ public class Juice extends Item {
     private final Item berry;
 
     public Juice(Item berry) {
-        super(Juices.settings(Objects.requireNonNull(berry.getFoodComponent()).getHunger() * 2, berry.getFoodComponent().getSaturationModifier() * 2f));
+        super(Juices.JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(Objects.requireNonNull(berry.getFoodComponent()).getHunger() * 2).saturationModifier(berry.getFoodComponent().getSaturationModifier() * 2f).build()));
         this.berry = berry;
     }
 

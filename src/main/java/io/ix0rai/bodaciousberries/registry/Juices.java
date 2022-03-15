@@ -34,37 +34,26 @@ public class Juices {
         register("gooseberry_juice", new Juice(Berries.GOOSEBERRIES));
         register("glow_berry_juice", new Juice(Items.GLOW_BERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 90, 1), 1.0F)));
         register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES));
+        register("chorus_berry_juice", new ChorusBerryJuice(Berries.CHORUS_BERRIES, null));
 
-        createChorusBerryJuice(List.of(
+        List<RegistryKey<Biome>> biomes = List.of(
                 PLAINS, SNOWY_SLOPES, SWAMP,
                 DESERT, TAIGA, BIRCH_FOREST,
                 OCEAN, MUSHROOM_FIELDS, SUNFLOWER_PLAINS,
                 FOREST, FLOWER_FOREST, DARK_FOREST,
                 SAVANNA, BADLANDS, MEADOW,
                 LUSH_CAVES, DRIPSTONE_CAVES, JUNGLE
-        ));
-    }
-
-    public static void register(String name, Juice juice) {
-        JuicerRecipes.addRecipe(juice.getBerry(), juice);
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
-    }
-
-    public static Item.Settings settings(int hunger, float saturation) {
-        return JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(hunger).saturationModifier(saturation).build());
-    }
-
-    private static void createChorusBerryJuice(List<RegistryKey<Biome>> biomes) {
-        register("chorus_berry_juice", new ChorusBerryJuice(Berries.CHORUS_BERRIES, null));
+        );
 
         for (RegistryKey<Biome> key : biomes) {
-            ChorusBerryJuice juice = chorusBerryJuice(key);
+            ChorusBerryJuice juice = new ChorusBerryJuice(Berries.CHORUS_BERRIES, key.getValue());
             String name = "chorus_berry_juice_" + key.getValue().getPath();
             Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
         }
     }
 
-    private static ChorusBerryJuice chorusBerryJuice(RegistryKey<Biome> biome) {
-        return new ChorusBerryJuice(Berries.CHORUS_BERRIES, biome.getValue());
+    public static void register(String name, Juice juice) {
+        JuicerRecipes.addRecipe(juice.getBerry(), juice);
+        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
     }
 }
