@@ -132,16 +132,16 @@ public class BerryBushPatchGen {
      * creates and registers a berry patch feature, with the default age of the berry bush being the maximum age of said berry bush
      * <br>also generates the double version of said berry bush alongside it
      * @param name the name of the feature
-     * @param bush the bush to generate
+     * @param smallBush the bush to generate
      * @param tallBush the tall version of the bush
      * @param placedOn which block the bush should be placed on
      * @return a berry patch configured feature
      */
-    public static RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> berryPatchConfiguredFeature(String name, GrowingBerryBush bush, DoubleBerryBush tallBush, Block placedOn) {
+    public static RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> berryPatchConfiguredFeature(String name, GrowingBerryBush smallBush, DoubleBerryBush tallBush, Block placedOn) {
         return ConfiguredFeatures.register(Bodaciousberries.getId(name), Feature.RANDOM_PATCH,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(DOUBLE_BUSH_FEATURE,
-                        new DoubleBushFeatureConfig(BlockStateProvider.of(tallBush.getDefaultState().with(DoubleBerryBush.AGE, tallBush.getMaxAge())),
-                                BlockStateProvider.of(bush.getBaseState().with(bush.getAge(), bush.getMaxAge()))),
+                        new DoubleBushFeatureConfig(BlockStateProvider.of(smallBush.getBaseState().with(smallBush.getAge(), smallBush.getMaxAge())),
+                                BlockStateProvider.of(tallBush.getDefaultState().with(DoubleBerryBush.AGE, tallBush.getMaxAge()))),
                         List.of(placedOn)
                 )
         );
