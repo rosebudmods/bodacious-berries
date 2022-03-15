@@ -1,5 +1,6 @@
 package io.ix0rai.bodaciousberries;
 
+import io.ix0rai.bodaciousberries.compat.Compat;
 import io.ix0rai.bodaciousberries.registry.Berries;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
 import io.ix0rai.bodaciousberries.registry.Bushes;
@@ -30,5 +31,6 @@ public class Bodaciousberries implements ModInitializer {
         Sounds.registerSounds();
         BerryBushPatchGen.registerFeatures();
         Particles.registerParticles();
+        Compat.registerCompat();
     }
 }

@@ -1,6 +1,5 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
-import io.ix0rai.bodaciousberries.registry.items.Juice;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -8,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JuicerRecipes {
-    private static final List<Recipe<Juice>> JUICER_RECIPES = new ArrayList<>();
+    private static final List<Recipe<Item>> JUICER_RECIPES = new ArrayList<>();
 
-    public static void addRecipe(Item input1, Item input2, Item input3, Juice output) {
+    public static void addRecipe(Item input1, Item input2, Item input3, Item output) {
         JUICER_RECIPES.add(new Recipe<>(input1, input2, input3, output));
     }
 
-    public static void addRecipe(Item input, Juice output) {
+    public static void addRecipe(Item input, Item output) {
         //for recipes that only use one type of berry
         addRecipe(input, input, input, output);
     }
 
     public static boolean hasRecipeFor(ItemStack input1, ItemStack input2, ItemStack input3) {
-        for (Recipe<Juice> recipe : JUICER_RECIPES) {
+        for (Recipe<Item> recipe : JUICER_RECIPES) {
             if (recipe.ingredientsMatch(input1, input2, input3)) {
                 return true;
             }
@@ -33,7 +32,7 @@ public class JuicerRecipes {
         if (stack != null) {
             final Item item = stack.getItem();
 
-            for (Recipe<Juice> recipe : JUICER_RECIPES) {
+            for (Recipe<Item> recipe : JUICER_RECIPES) {
                 if (recipe.isIngredient(item)) {
                     return true;
                 }
@@ -47,7 +46,7 @@ public class JuicerRecipes {
         if (stack != null) {
             final Item item = stack.getItem();
 
-            for (Recipe<Juice> recipe : JUICER_RECIPES) {
+            for (Recipe<Item> recipe : JUICER_RECIPES) {
                 if (recipe.isOutput(item)) {
                     return true;
                 }
@@ -63,7 +62,7 @@ public class JuicerRecipes {
             int i = 0;
             //check all recipes against ingredients
             for(int j = JUICER_RECIPES.size(); i < j; ++i) {
-                Recipe<Juice> recipe = JUICER_RECIPES.get(i);
+                Recipe<Item> recipe = JUICER_RECIPES.get(i);
                 if (recipe.ingredientsMatch(ingredient1, ingredient2, ingredient3)) {
                     //if we have a recipe with the correct ingredients, return the output
                     return new ItemStack(recipe.output);

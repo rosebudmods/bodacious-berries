@@ -45,7 +45,7 @@ public class Juices {
         ));
     }
 
-    private static void register(String name, Juice juice) {
+    public static void register(String name, Juice juice) {
         JuicerRecipes.addRecipe(juice.getBerry(), juice);
         Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
     }
