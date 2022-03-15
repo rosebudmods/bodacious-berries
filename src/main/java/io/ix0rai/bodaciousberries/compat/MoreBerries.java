@@ -8,7 +8,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MoreBerries {
     //reference for ids: https://github.com/MarcusElg/More-Berries/blob/master/src/main/java/moreberries/MoreBerries.java
@@ -16,7 +17,7 @@ public class MoreBerries {
         String modId = "moreberries";
 
         if (FabricLoaderImpl.INSTANCE.isModLoaded(modId)) {
-            List<String> berryIds = List.of("purple", "yellow", "green", "black", "orange", "blue");
+            HashMap<String, Boolean> berryIds = new HashMap<>(Map.of("purple", false, "yellow", false, "green", false, "black", false, "orange", false, "blue", false));
 
             registerRecipes(berryIds, modId);
 
@@ -28,12 +29,16 @@ public class MoreBerries {
         }
     }
 
-    private static void registerRecipes(List<String> berryIds, String modId) {
-        for (String colour : berryIds) {
-            RegistryKey<Item> key = RegistryKey.of(Registry.ITEM_KEY, new Identifier(modId, colour + "_berries"));
-            RegistryKey<Item> juiceKey = RegistryKey.of(Registry.ITEM_KEY, new Identifier(modId, colour + "_berry_juice"));
-            if (Registry.ITEM.contains(key) && Registry.ITEM.contains(juiceKey)) {
-                JuicerRecipes.addRecipe(Registry.ITEM.get(key), Registry.ITEM.get(juiceKey));
+    private static void registerRecipes(HashMap<String, Boolean> berryIds, String modId) {
+        for (Map.Entry<String, Boolean> entry : berryIds.entrySet()) {
+            if (Boolean.FALSE.equals(entry.getValue())) {
+                RegistryKey<Item> itemKey = RegistryKey.of(Registry.ITEM_KEY, new Identifier(modId, entry.getKey() + "_berries"));
+                RegistryKey<Item> juiceKey = RegistryKey.of(Registry.ITEM_KEY, new Identifier(modId, entry.getKey() + "_berry_juice"));
+
+                if (Registry.ITEM.contains(itemKey) && Registry.ITEM.contains(juiceKey)) {
+                    JuicerRecipes.addRecipe(Registry.ITEM.get(itemKey), Registry.ITEM.get(juiceKey));
+                    berryIds.put(entry.getKey(), true);
+                }
             }
         }
     }
