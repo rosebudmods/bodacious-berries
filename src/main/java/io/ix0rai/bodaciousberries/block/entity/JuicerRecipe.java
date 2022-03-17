@@ -79,11 +79,11 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
         return Type.INSTANCE;
     }
 
-    static class JuicerRecipeJsonFormat {
-        JsonObject ingredient0;
-        JsonObject ingredient1;
-        JsonObject ingredient2;
-        String result;
+    private static class JuicerRecipeJsonFormat {
+        public JsonObject ingredient0;
+        public JsonObject ingredient1;
+        public JsonObject ingredient2;
+        public String result;
     }
 
     public static class JuicerRecipeSerializer implements RecipeSerializer<JuicerRecipe> {
@@ -114,7 +114,11 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
         }
 
         public JuicerRecipe read(JsonObject json) {
-            return read(new Identifier(json.get("result").getAsString().split(":")[1]), json);
+            return read(getIdFor(json), json);
+        }
+
+        public Identifier getIdFor(JsonObject json) {
+            return new Identifier(json.get("result").getAsString().split(":")[1]);
         }
 
         @Override

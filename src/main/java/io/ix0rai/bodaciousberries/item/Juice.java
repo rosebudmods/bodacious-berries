@@ -12,7 +12,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
@@ -20,18 +19,16 @@ import net.minecraft.world.World;
 import java.util.Objects;
 
 public class Juice extends Item {
-    private final Berry berry;
-    private Identifier id = null;
+    private final Item berry;
 
-    public Juice(Berry berry) {
+    public Juice(Item berry) {
         super(Juices.JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(Objects.requireNonNull(berry.getFoodComponent()).getHunger() * 2).saturationModifier(berry.getFoodComponent().getSaturationModifier() * 2f).build()));
         this.berry = berry;
     }
 
-    public Juice(Item item, String id, FoodComponent.Builder builder) {
-        super(Juices.JUICE_SETTINGS.food(builder.hunger(Objects.requireNonNull(item.getFoodComponent()).getHunger() * 2).saturationModifier(item.getFoodComponent().getSaturationModifier() * 2f).build()));
-        this.berry = null;
-        this.id = new Identifier(id);
+    public Juice(Item berry, FoodComponent.Builder builder) {
+        super(Juices.JUICE_SETTINGS.food(builder.hunger(Objects.requireNonNull(berry.getFoodComponent()).getHunger() * 2).saturationModifier(berry.getFoodComponent().getSaturationModifier() * 2f).build()));
+        this.berry = berry;
     }
 
     @Override
@@ -95,10 +92,5 @@ public class Juice extends Item {
 
     public Item getBerry() {
         return berry;
-    }
-
-    public Identifier getBerryId() {
-        if (this.id != null) return this.id;
-        return berry.getId();
     }
 }

@@ -2,6 +2,7 @@ package io.ix0rai.bodaciousberries.mixin;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.ix0rai.bodaciousberries.block.entity.JuicerRecipe;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipes;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.resource.ResourceManager;
@@ -19,7 +20,7 @@ public class RegistryManagerInjector {
     @Inject(method = "apply*", at = @At("HEAD"))
     public void interceptApply(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo info) {
         for (JsonObject jsonObject : JuicerRecipes.JUICER_RECIPES) {
-            map.put(new Identifier(jsonObject.get("result").getAsString().split(":")[1]), jsonObject);
+            map.put(JuicerRecipe.JuicerRecipeSerializer.INSTANCE.getIdFor(jsonObject), jsonObject);
         }
     }
 }
