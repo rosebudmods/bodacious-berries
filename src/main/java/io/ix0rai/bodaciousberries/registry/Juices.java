@@ -1,6 +1,7 @@
 package io.ix0rai.bodaciousberries.registry;
 
 import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.block.entity.JuicerRecipe;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipes;
 import io.ix0rai.bodaciousberries.item.ChorusBerryJuice;
 import io.ix0rai.bodaciousberries.item.Juice;
@@ -23,6 +24,9 @@ public class Juices {
     public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
 
     public static void registerJuice() {
+        Registry.register(Registry.RECIPE_SERIALIZER, JuicerRecipe.JuicerRecipeSerializer.ID, JuicerRecipe.JuicerRecipeSerializer.INSTANCE);
+        Registry.register(Registry.RECIPE_TYPE, JuicerRecipe.Type.ID, JuicerRecipe.Type.INSTANCE);
+
         register("saskatoon_berry_juice", new Juice(Berries.SASKATOON_BERRIES));
         register("strawberry_juice", new Juice(Berries.STRAWBERRY));
         register("raspberry_juice", new Juice(Berries.RASPBERRIES));
