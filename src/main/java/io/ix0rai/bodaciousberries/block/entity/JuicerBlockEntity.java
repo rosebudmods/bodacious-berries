@@ -10,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
@@ -28,11 +27,12 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 public class JuicerBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory {
     public static final int TOTAL_BREW_TIME = 300;
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
     private int brewTime = 0;
-    private Item itemBrewing;
 
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
@@ -71,13 +71,13 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
-    private static void craft(World world, BlockPos pos, DefaultedList<ItemStack> slots) {
+    private static void craft(World world, BlockPos pos, JuicerRecipe recipe, DefaultedList<ItemStack> slots) {
         ItemStack[] ingredients = getIngredients(slots);
 
         //craft items for all three slots - as long as there's a bottle to contain the juice
         for(int i = 0; i < 3; i ++) {
             if (slots.get(i).getItem().equals(Juices.RECEPTACLE)) {
-                slots.set(i, JuicerRecipes.craft(ingredients[0], ingredients[1], ingredients[2], slots.get(i)));
+                slots.set(i, recipe.getOutput());
             }
         }
 
@@ -106,48 +106,31 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
-        boolean canCraft = canCraft(juicer.inventory);
+        Optional<JuicerRecipe> recipe = world.getRecipeManager().getFirstMatch(JuicerRecipe.Type.INSTANCE, juicer, world);
         boolean isBrewing = juicer.brewTime > 0;
-        ItemStack ingredient = juicer.inventory.get(3);
 
         if (isBrewing) {
+            System.out.println(recipe);
             juicer.brewTime --;
 
             //if brewing is finished, craft the juices
-            if (juicer.brewTime == 0 && canCraft) {
-                craft(world, pos, juicer.inventory);
+            if (juicer.brewTime == 0 && recipe.isPresent()) {
+                craft(world, pos, recipe.get(), juicer.inventory);
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
-            } else if (!canCraft || !ingredient.isOf(juicer.itemBrewing)) {
+            } else if (recipe.isEmpty()) {
                 //if we cannot craft, the ingredient has been removed/changed, and we should stop brewing without giving a result
                 juicer.brewTime = 0;
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
             }
-        } else if (canCraft) {
+        } else if (recipe.isPresent()) {
+            System.out.println(recipe);
             //if we're not currently brewing, start brewing with the ingredient
             juicer.brewTime = TOTAL_BREW_TIME;
-            juicer.itemBrewing = ingredient.getItem();
             markDirty(world, pos, state);
             world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
         }
-    }
-
-    private static boolean canCraft(DefaultedList<ItemStack> slots) {
-        ItemStack ingredient1 = slots.get(3);
-        ItemStack ingredient2 = slots.get(4);
-        ItemStack ingredient3 = slots.get(5);
-
-        if (JuicerRecipes.isIngredient(ingredient1) && JuicerRecipes.isIngredient(ingredient2) && JuicerRecipes.isIngredient(ingredient3)) {
-            for (int i = 0; i < 3; i ++) {
-                ItemStack slotItems = slots.get(i);
-                if (!slotItems.isEmpty() && slotItems.getItem().equals(Juices.RECEPTACLE) && JuicerRecipes.hasRecipeFor(ingredient1, ingredient2, ingredient3)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     @Override

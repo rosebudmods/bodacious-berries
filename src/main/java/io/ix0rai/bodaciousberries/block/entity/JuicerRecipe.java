@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import io.ix0rai.bodaciousberries.Bodaciousberries;
-import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -16,21 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-public class JuicerRecipe implements Recipe<CraftingInventory> {
-    private final Ingredient ingredient1;
-    private final Ingredient ingredient2;
-    private final Ingredient ingredient3;
-    private final ItemStack result;
-    private final Identifier id;
-
-    public JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result) {
-        this.id = id;
-        this.ingredient1 = ingredient1;
-        this.ingredient2 = ingredient2;
-        this.ingredient3 = ingredient3;
-        this.result = result;
-    }
-
+public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result) implements Recipe<ImplementedInventory> {
     public Ingredient getIngredient1() {
         return this.ingredient1;
     }
@@ -44,13 +29,13 @@ public class JuicerRecipe implements Recipe<CraftingInventory> {
     }
 
     @Override
-    public boolean matches(CraftingInventory inv, World world) {
-        if(inv.size() < 3) return false;
-        return ingredient1.test(inv.getStack(0)) && ingredient2.test(inv.getStack(1)) && ingredient3.test(inv.getStack(2));
+    public boolean matches(ImplementedInventory inv, World world) {
+        if (inv.size() < 5) return false;
+        return ingredient1.test(inv.getStack(3)) && ingredient2.test(inv.getStack(4)) && ingredient3.test(inv.getStack(5));
     }
 
     @Override
-    public ItemStack craft(CraftingInventory inventory) {
+    public ItemStack craft(ImplementedInventory inventory) {
         return getOutput().copy();
     }
 
@@ -74,7 +59,9 @@ public class JuicerRecipe implements Recipe<CraftingInventory> {
     }
 
     public static class Type implements RecipeType<JuicerRecipe> {
-        private Type() {}
+        private Type() {
+        }
+
         public static final Type INSTANCE = new Type();
         public static final String ID = "juicer_recipe";
     }
@@ -85,9 +72,9 @@ public class JuicerRecipe implements Recipe<CraftingInventory> {
     }
 
     static class JuicerRecipeJsonFormat {
+        JsonObject ingredient0;
         JsonObject ingredient1;
         JsonObject ingredient2;
-        JsonObject ingredient3;
         String result;
     }
 
@@ -104,13 +91,13 @@ public class JuicerRecipe implements Recipe<CraftingInventory> {
         public JuicerRecipe read(Identifier id, JsonObject json) {
             JuicerRecipeJsonFormat recipeJson = new Gson().fromJson(json, JuicerRecipeJsonFormat.class);
 
-            if (recipeJson.ingredient1 == null || recipeJson.ingredient2 == null || recipeJson.ingredient3 == null || recipeJson.result == null) {
+            if (recipeJson.ingredient0 == null || recipeJson.ingredient1 == null || recipeJson.ingredient2 == null || recipeJson.result == null) {
                 throw new JsonSyntaxException("a required attribute is missing!");
             }
 
-            Ingredient input1 = Ingredient.fromJson(recipeJson.ingredient1);
-            Ingredient input2 = Ingredient.fromJson(recipeJson.ingredient2);
-            Ingredient input3 = Ingredient.fromJson(recipeJson.ingredient3);
+            Ingredient input1 = Ingredient.fromJson(recipeJson.ingredient0);
+            Ingredient input2 = Ingredient.fromJson(recipeJson.ingredient1);
+            Ingredient input3 = Ingredient.fromJson(recipeJson.ingredient2);
             Item outputItem = Registry.ITEM.getOrEmpty(new Identifier(recipeJson.result))
                     .orElseThrow(() -> new JsonSyntaxException("no such item: " + recipeJson.result));
             ItemStack output = new ItemStack(outputItem);

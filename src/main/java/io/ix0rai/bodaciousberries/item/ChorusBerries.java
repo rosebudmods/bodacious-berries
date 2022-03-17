@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -15,9 +14,9 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class ChorusBerries extends AliasedBlockItem {
-    public ChorusBerries(Block block, Settings settings) {
-        super(block, settings);
+public class ChorusBerries extends Berry {
+    public ChorusBerries(Block block, String name, Settings settings) {
+        super(block, name, settings);
     }
 
     @Override

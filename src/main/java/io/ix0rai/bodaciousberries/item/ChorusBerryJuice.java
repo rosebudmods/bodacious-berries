@@ -2,7 +2,6 @@ package io.ix0rai.bodaciousberries.item;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
@@ -21,7 +20,7 @@ import net.minecraft.world.dimension.DimensionType;
 public class ChorusBerryJuice extends Juice {
     private final Identifier biome;
 
-    public ChorusBerryJuice(Item berry, Identifier biome) {
+    public ChorusBerryJuice(Berry berry, Identifier biome) {
         super(berry);
         this.biome = biome;
     }

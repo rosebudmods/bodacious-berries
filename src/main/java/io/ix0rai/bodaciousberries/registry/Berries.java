@@ -1,13 +1,12 @@
 package io.ix0rai.bodaciousberries.registry;
 
-import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
+import io.ix0rai.bodaciousberries.item.Berry;
 import io.ix0rai.bodaciousberries.item.ChorusBerries;
 import io.ix0rai.bodaciousberries.item.GojiBerries;
 import io.ix0rai.bodaciousberries.item.Rainberry;
-import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -20,29 +19,29 @@ import static net.fabricmc.fabric.impl.content.registry.CompostingChanceRegistry
 
 public class Berries {
     //berry items
-    public static Item SASKATOON_BERRIES;
-    public static Item STRAWBERRY;
-    public static Item RASPBERRIES;
-    public static Item BLACKBERRIES;
-    public static Item CHORUS_BERRIES;
-    public static Item RAINBERRY;
-    public static Item LINGONBERRIES;
-    public static Item GRAPES;
-    public static Item GOJI_BERRIES;
-    public static Item GOOSEBERRIES;
+    public static Berry SASKATOON_BERRIES;
+    public static Berry STRAWBERRY;
+    public static Berry RASPBERRIES;
+    public static Berry BLACKBERRIES;
+    public static Berry CHORUS_BERRIES;
+    public static Berry RAINBERRY;
+    public static Berry LINGONBERRIES;
+    public static Berry GRAPES;
+    public static Berry GOJI_BERRIES;
+    public static Berry GOOSEBERRIES;
 
     public static void registerBerries() {
         //create items for each berry
-        SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 2f));
-        STRAWBERRY = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
-        RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(2, 3f));
-        BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(2, 3.5f));
-        CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(2, 2.5f));
-        RAINBERRY = new Rainberry(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
-        LINGONBERRIES = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
-        GRAPES = new AliasedBlockItem(Bushes.GRAPEVINE, settings(2, 2f));
-        GOJI_BERRIES = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(2, 2.5f));
-        GOOSEBERRIES = new AliasedBlockItem(Bushes.GOOSEBERRY_BUSH, settings(2, 1f));
+        SASKATOON_BERRIES = new Berry(Bushes.SASKATOON_BERRY_BUSH, "saskatoon_berries", settings(3, 2f));
+        STRAWBERRY = new Berry(Bushes.STRAWBERRY_BUSH, "strawberry", settings(3, 1.5f));
+        RASPBERRIES = new Berry(Bushes.RASPBERRY_BUSH, "raspberries", settings(2, 3f));
+        BLACKBERRIES = new Berry(Bushes.BLACKBERRY_BUSH, "blackberries", settings(2, 3.5f));
+        CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, "chorus_berries", settings(2, 2.5f));
+        RAINBERRY = new Rainberry(Bushes.RAINBERRY_BUSH, "rainberry", new Item.Settings().group(ItemGroup.MATERIALS));
+        LINGONBERRIES = new Berry(Bushes.LINGONBERRY_BUSH, "lingonberries", settings(2, 1.5f));
+        GRAPES = new Berry(Bushes.GRAPEVINE, "grapes", settings(2, 2f));
+        GOJI_BERRIES = new GojiBerries(Bushes.GOJI_BERRY_BUSH, "goji_berries", settings(2, 2.5f));
+        GOOSEBERRIES = new Berry(Bushes.GOOSEBERRY_BUSH, "gooseberries", settings(2, 1f));
 
         //automatic stuffs
         initialise(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
@@ -59,16 +58,16 @@ public class Berries {
         initialiseBerries();
 
         //register
-        register("saskatoon_berries", SASKATOON_BERRIES);
-        register("strawberry", STRAWBERRY);
-        register("raspberries", RASPBERRIES);
-        register("blackberries", BLACKBERRIES);
-        register("chorus_berries", CHORUS_BERRIES);
-        register("rainberry", RAINBERRY);
-        register("lingonberries", LINGONBERRIES);
-        register("grapes", GRAPES);
-        register("goji_berries", GOJI_BERRIES);
-        register("gooseberries", GOOSEBERRIES);
+        register(SASKATOON_BERRIES);
+        register(STRAWBERRY);
+        register(RASPBERRIES);
+        register(BLACKBERRIES);
+        register(CHORUS_BERRIES);
+        register(RAINBERRY);
+        register(LINGONBERRIES);
+        register(GRAPES);
+        register(GOJI_BERRIES);
+        register(GOOSEBERRIES);
     }
 
     /**
@@ -111,8 +110,8 @@ public class Berries {
         BERRY_BUSHES.put(bigBush, berries);
     }
 
-    private static void register(String name, Item item) {
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), item);
+    private static void register(Berry berry) {
+        Registry.register(Registry.ITEM, berry.getId(), berry);
     }
 
     private static Item.Settings settings(int hunger, float saturation) {

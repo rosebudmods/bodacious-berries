@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "FireBlockInjector",
+    "RegistryManagerInjector",
     "VineDecoratorOverwrite",
     "accessors.BiomeCategoryAccessor",
     "accessors.DamageSourceAccessor",

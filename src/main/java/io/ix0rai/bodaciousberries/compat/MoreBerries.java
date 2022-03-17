@@ -36,7 +36,7 @@ public class MoreBerries {
                 RegistryKey<Item> juiceKey = RegistryKey.of(Registry.ITEM_KEY, new Identifier(modId, entry.getKey() + "_berry_juice"));
 
                 if (Registry.ITEM.contains(itemKey) && Registry.ITEM.contains(juiceKey)) {
-                    JuicerRecipes.addRecipe(Registry.ITEM.get(itemKey), Registry.ITEM.get(juiceKey));
+                    JuicerRecipes.addRecipe(itemKey.getValue(), juiceKey.getValue());
                     berryIds.put(entry.getKey(), true);
                 }
             }

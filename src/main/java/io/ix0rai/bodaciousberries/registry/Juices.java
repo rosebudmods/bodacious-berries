@@ -11,6 +11,7 @@ import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
@@ -36,8 +37,8 @@ public class Juices {
         register("grape_juice", new Juice(Berries.GRAPES));
         register("goji_berry_juice", new Juice(Berries.GOJI_BERRIES));
         register("gooseberry_juice", new Juice(Berries.GOOSEBERRIES));
-        register("glow_berry_juice", new Juice(Items.GLOW_BERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 90, 1), 1.0F)));
-        register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES));
+        register("glow_berry_juice", new Juice(Items.GLOW_BERRIES, "minecraft:glow_berries", new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 90, 1), 1.0F)));
+        register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES, "minecraft:sweet_berries", new FoodComponent.Builder()));
         register("chorus_berry_juice", new ChorusBerryJuice(Berries.CHORUS_BERRIES, null));
 
         List<RegistryKey<Biome>> biomes = List.of(
@@ -57,7 +58,8 @@ public class Juices {
     }
 
     public static void register(String name, Juice juice) {
-        JuicerRecipes.addRecipe(juice.getBerry(), juice);
+        Identifier id = Bodaciousberries.getIdentifier(name);
+        JuicerRecipes.addRecipe(juice.getBerryId(), id);
         Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
     }
 }
