@@ -28,6 +28,14 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
         return this.ingredient3;
     }
 
+    public boolean isIngredient(ItemStack stack) {
+        return ingredient1.test(stack) || ingredient2.test(stack) || ingredient3.test(stack);
+    }
+
+    public boolean isResult(ItemStack stack) {
+        return result.getItem().equals(stack.getItem());
+    }
+
     @Override
     public boolean matches(ImplementedInventory inv, World world) {
         if (inv.size() < 5) return false;
@@ -103,6 +111,10 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
             ItemStack output = new ItemStack(outputItem);
 
             return new JuicerRecipe(id, input1, input2, input3, output);
+        }
+
+        public JuicerRecipe read(JsonObject json) {
+            return read(new Identifier(json.get("result").getAsString().split(":")[1]), json);
         }
 
         @Override

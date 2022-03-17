@@ -110,7 +110,6 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         boolean isBrewing = juicer.brewTime > 0;
 
         if (isBrewing) {
-            System.out.println(recipe);
             juicer.brewTime --;
 
             //if brewing is finished, craft the juices
@@ -125,7 +124,6 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
             }
         } else if (recipe.isPresent()) {
-            System.out.println(recipe);
             //if we're not currently brewing, start brewing with the ingredient
             juicer.brewTime = TOTAL_BREW_TIME;
             markDirty(world, pos, state);
