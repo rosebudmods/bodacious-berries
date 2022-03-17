@@ -10,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
@@ -32,7 +31,6 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     public static final int TOTAL_BREW_TIME = 300;
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
     private int brewTime = 0;
-    private Item itemBrewing;
 
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
@@ -72,7 +70,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     private static void craft(World world, BlockPos pos, DefaultedList<ItemStack> slots) {
-        ItemStack[] ingredients = getIngredients(slots);
+        ItemStack[] ingredients = new ItemStack[]{slots.get(3), slots.get(4), slots.get(5)};
 
         //craft items for all three slots - as long as there's a bottle to contain the juice
         for(int i = 0; i < 3; i ++) {
@@ -101,14 +99,9 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         slots.set(5, ingredients[2]);
     }
 
-    private static ItemStack[] getIngredients(DefaultedList<ItemStack> slots) {
-        return new ItemStack[]{slots.get(3), slots.get(4), slots.get(5)};
-    }
-
     public static void tick(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
         boolean canCraft = canCraft(juicer.inventory);
         boolean isBrewing = juicer.brewTime > 0;
-        ItemStack ingredient = juicer.inventory.get(3);
 
         if (isBrewing) {
             juicer.brewTime --;
@@ -118,7 +111,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 craft(world, pos, juicer.inventory);
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
-            } else if (!canCraft || !ingredient.isOf(juicer.itemBrewing)) {
+            } else if (!canCraft) {
                 //if we cannot craft, the ingredient has been removed/changed, and we should stop brewing without giving a result
                 juicer.brewTime = 0;
                 markDirty(world, pos, state);
@@ -127,7 +120,6 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         } else if (canCraft) {
             //if we're not currently brewing, start brewing with the ingredient
             juicer.brewTime = TOTAL_BREW_TIME;
-            juicer.itemBrewing = ingredient.getItem();
             markDirty(world, pos, state);
             world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
         }
@@ -138,10 +130,10 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         ItemStack ingredient2 = slots.get(4);
         ItemStack ingredient3 = slots.get(5);
 
-        if (JuicerRecipes.isIngredient(ingredient1) && JuicerRecipes.isIngredient(ingredient2) && JuicerRecipes.isIngredient(ingredient3)) {
+        if (JuicerRecipes.hasRecipeFor(ingredient1, ingredient2, ingredient3)) {
             for (int i = 0; i < 3; i ++) {
                 ItemStack slotItems = slots.get(i);
-                if (!slotItems.isEmpty() && slotItems.getItem().equals(Juices.RECEPTACLE) && JuicerRecipes.hasRecipeFor(ingredient1, ingredient2, ingredient3)) {
+                if (!slotItems.isEmpty() && slotItems.getItem().equals(Juices.RECEPTACLE)) {
                     return true;
                 }
             }
