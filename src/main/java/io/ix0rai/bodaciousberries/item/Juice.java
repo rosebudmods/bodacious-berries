@@ -16,19 +16,28 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
-import java.util.Objects;
+import java.security.InvalidParameterException;
 
 public class Juice extends Item {
     private final Item berry;
 
     public Juice(Item berry) {
-        super(Juices.JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(Objects.requireNonNull(berry.getFoodComponent()).getHunger() * 2).saturationModifier(berry.getFoodComponent().getSaturationModifier() * 2f).build()));
+        super(settings(berry, new FoodComponent.Builder()));
         this.berry = berry;
     }
 
     public Juice(Item berry, FoodComponent.Builder builder) {
-        super(Juices.JUICE_SETTINGS.food(builder.hunger(Objects.requireNonNull(berry.getFoodComponent()).getHunger() * 2).saturationModifier(berry.getFoodComponent().getSaturationModifier() * 2f).build()));
+        super(settings(berry, builder));
         this.berry = berry;
+    }
+
+    public static Settings settings(Item berry, FoodComponent.Builder builder) {
+        FoodComponent foodComponent = berry.getFoodComponent();
+        if (foodComponent != null) {
+            return Juices.JUICE_SETTINGS.food(builder.hunger(foodComponent.getHunger() * 2).saturationModifier(foodComponent.getSaturationModifier() * 2.5f).build());
+        }
+
+        throw new InvalidParameterException("item: " + berry + " does not have a food component");
     }
 
     @Override
