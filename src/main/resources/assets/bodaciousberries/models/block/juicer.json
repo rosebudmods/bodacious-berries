@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "up": "bodaciousberries:block/juicer_top",
-    "north": "bodaciousberries:block/juicer_side",
-    "south": "bodaciousberries:block/juicer_side",
-    "east": "bodaciousberries:block/juicer_side",
-    "west": "bodaciousberries:block/juicer_side",
-    "down": "bodaciousberries:block/juicer_bottom"
+    "up": "bodaciousberries:block/juicer_top_idle",
+    "north": "bodaciousberries:block/juicer_side_idle",
+    "south": "bodaciousberries:block/juicer_side_idle",
+    "east": "bodaciousberries:block/juicer_side_idle",
+    "west": "bodaciousberries:block/juicer_side_idle",
+    "down": "minecraft:block/furnace_top"
   }
 }
