@@ -22,8 +22,7 @@ public class Juice extends Item {
     private final Item berry;
 
     public Juice(Item berry) {
-        super(settings(berry, new FoodComponent.Builder()));
-        this.berry = berry;
+        this(berry, new FoodComponent.Builder());
     }
 
     public Juice(Item berry, FoodComponent.Builder builder) {
