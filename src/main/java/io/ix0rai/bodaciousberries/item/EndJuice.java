@@ -1,8 +1,6 @@
 package io.ix0rai.bodaciousberries.item;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -14,14 +12,13 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class ChorusBerries extends Berry {
-    public ChorusBerries(Block block, Settings settings) {
-        super(block, settings);
+public class EndJuice extends Juice {
+    public EndJuice(Settings settings) {
+        super(settings);
     }
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        //modified code from ChorusFruitItem
         if (!world.isClient) {
             Random random = user.getRandom();
 
@@ -30,16 +27,16 @@ public class ChorusBerries extends Berry {
             double originalZ = user.getZ();
 
             for (int i = 0; i < 16; i++) {
-                double x = user.getX() + (random.nextDouble() - 0.5D) * 8.0D;
+                double x = user.getX() + (random.nextDouble() - 0.5D) * 40.0D;
                 double y = MathHelper.clamp(user.getY() + (random.nextInt(16) - 8), world.getBottomY(), (world.getBottomY() + ((ServerWorld) world).getLogicalHeight() - 1));
-                double z = user.getZ() + (random.nextDouble() - 0.5D) * 8.0D;
+                double z = user.getZ() + (random.nextDouble() - 0.5D) * 40.0D;
 
                 if (user.hasVehicle()) {
                     user.stopRiding();
                 }
 
                 if (user.teleport(x, y, z, true)) {
-                    SoundEvent soundEvent = user instanceof FoxEntity ? SoundEvents.ENTITY_FOX_TELEPORT : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+                    SoundEvent soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
                     world.playSound(null, originalX, originalY, originalZ, soundEvent, SoundCategory.PLAYERS, 1.0F, 1.0F);
                     user.playSound(soundEvent, 1.0F, 1.0F);
                     break;

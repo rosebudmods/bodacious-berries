@@ -4,10 +4,10 @@ import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
+import io.ix0rai.bodaciousberries.item.Berry;
 import io.ix0rai.bodaciousberries.item.ChorusBerries;
 import io.ix0rai.bodaciousberries.item.GojiBerries;
 import io.ix0rai.bodaciousberries.item.Rainberry;
-import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -20,29 +20,29 @@ import static net.fabricmc.fabric.impl.content.registry.CompostingChanceRegistry
 
 public class Berries {
     //berry items
-    public static AliasedBlockItem SASKATOON_BERRIES;
-    public static AliasedBlockItem STRAWBERRY;
-    public static AliasedBlockItem RASPBERRIES;
-    public static AliasedBlockItem BLACKBERRIES;
-    public static AliasedBlockItem CHORUS_BERRIES;
-    public static AliasedBlockItem RAINBERRY;
-    public static AliasedBlockItem LINGONBERRIES;
-    public static AliasedBlockItem GRAPES;
-    public static AliasedBlockItem GOJI_BERRIES;
-    public static AliasedBlockItem GOOSEBERRIES;
+    public static Berry SASKATOON_BERRIES;
+    public static Berry STRAWBERRY;
+    public static Berry RASPBERRIES;
+    public static Berry BLACKBERRIES;
+    public static Berry CHORUS_BERRIES;
+    public static Berry RAINBERRY;
+    public static Berry LINGONBERRIES;
+    public static Berry GRAPES;
+    public static Berry GOJI_BERRIES;
+    public static Berry GOOSEBERRIES;
 
     public static void registerBerries() {
         //create items for each berry
-        SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 2f));
-        STRAWBERRY = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
-        RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(2, 3f));
-        BLACKBERRIES = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(2, 3.5f));
+        SASKATOON_BERRIES = new Berry(Bushes.SASKATOON_BERRY_BUSH, settings(3, 2f));
+        STRAWBERRY = new Berry(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
+        RASPBERRIES = new Berry(Bushes.RASPBERRY_BUSH, settings(2, 3f));
+        BLACKBERRIES = new Berry(Bushes.BLACKBERRY_BUSH, settings(2, 3.5f));
         CHORUS_BERRIES = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(2, 2.5f));
         RAINBERRY = new Rainberry(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
-        LINGONBERRIES = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
-        GRAPES = new AliasedBlockItem(Bushes.GRAPEVINE, settings(2, 2f));
+        LINGONBERRIES = new Berry(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
+        GRAPES = new Berry(Bushes.GRAPEVINE, settings(2, 2f));
         GOJI_BERRIES = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(2, 2.5f));
-        GOOSEBERRIES = new AliasedBlockItem(Bushes.GOOSEBERRY_BUSH, settings(2, 1f));
+        GOOSEBERRIES = new Berry(Bushes.GOOSEBERRY_BUSH, settings(2, 1f));
 
         //automatic stuffs
         initialise(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);

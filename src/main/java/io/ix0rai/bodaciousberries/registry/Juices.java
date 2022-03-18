@@ -5,6 +5,8 @@ import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipe;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipes;
 import io.ix0rai.bodaciousberries.item.ChorusBerryJuice;
+import io.ix0rai.bodaciousberries.item.EndJuice;
+import io.ix0rai.bodaciousberries.item.GojiBerryBlend;
 import io.ix0rai.bodaciousberries.item.Juice;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -27,11 +29,13 @@ public class Juices {
     public static final Item RECEPTACLE = Items.GLASS_BOTTLE;
     public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
     public static final List<JsonObject> RECIPES = new ArrayList<>();
+    public static final Juice DUBIOUS_JUICE = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturationModifier(3F).build()));
 
     public static void registerJuice() {
         Registry.register(Registry.RECIPE_SERIALIZER, JuicerRecipe.JuicerRecipeSerializer.ID, JuicerRecipe.JuicerRecipeSerializer.INSTANCE);
         Registry.register(Registry.RECIPE_TYPE, JuicerRecipe.Type.ID, JuicerRecipe.Type.INSTANCE);
 
+        registerSimple("dubious_juice", DUBIOUS_JUICE);
         register("saskatoon_berry_juice", new Juice(Berries.SASKATOON_BERRIES));
         register("strawberry_juice", new Juice(Berries.STRAWBERRY));
         register("raspberry_juice", new Juice(Berries.RASPBERRIES));
@@ -44,6 +48,34 @@ public class Juices {
         register("glow_berry_juice", new Juice(Items.GLOW_BERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 90, 1), 1.0F)));
         register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES, new FoodComponent.Builder()));
         register("chorus_berry_juice", new ChorusBerryJuice(Berries.CHORUS_BERRIES, null));
+
+        Juice gojiBerryBlend = new GojiBerryBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(6.0F).statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F).build()));
+        registerSimple("goji_berry_blend", gojiBerryBlend);
+        JuicerRecipes.addRecipe(Berries.GOJI_BERRIES, Berries.GOJI_BERRIES, Items.SUGAR_CANE, gojiBerryBlend);
+        Juice oppositeJuice = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(5.0F).build()));
+        registerSimple("opposite_juice", oppositeJuice);
+        JuicerRecipes.addRecipe(Berries.RASPBERRIES, Berries.BLACKBERRIES, Items.SUGAR_CANE, oppositeJuice);
+        Juice rainberryBlend = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(8).saturationModifier(10.0F).build()));
+        registerSimple("rainberry_blend", rainberryBlend);
+        JuicerRecipes.addRecipe(Berries.RAINBERRY, Berries.GOJI_BERRIES, Items.GOLDEN_APPLE, rainberryBlend);
+        Juice gooseberryRum = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(4.0f).build()));
+        registerSimple("gooseberry_rum", gooseberryRum);
+        JuicerRecipes.addRecipe(Berries.GOOSEBERRIES, Berries.GOOSEBERRIES, Items.WHEAT, gooseberryRum);
+        Juice redJuice = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(6.0F).build()));
+        registerSimple("red_juice", redJuice);
+        JuicerRecipes.addRecipe(Berries.STRAWBERRY, Items.SWEET_BERRIES, Berries.LINGONBERRIES, redJuice);
+        Juice endJuice = new EndJuice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(8.0F).build()));
+        registerSimple("end_juice", endJuice);
+        JuicerRecipes.addRecipe(Berries.CHORUS_BERRIES, Berries.RAINBERRY, Items.CHORUS_FRUIT, endJuice);
+        Juice purpleDelight = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(6.0F).build()));
+        registerSimple("purple_delight", purpleDelight);
+        JuicerRecipes.addRecipe(Berries.CHORUS_BERRIES, Berries.GRAPES, Berries.SASKATOON_BERRIES, purpleDelight);
+        Juice trafficLightJuice = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(8.0F).build()));
+        registerSimple("traffic_light_juice", trafficLightJuice);
+        JuicerRecipes.addRecipe(Berries.GOOSEBERRIES, Items.GLOW_BERRIES, Berries.RASPBERRIES, trafficLightJuice);
+        Juice vanillaDelight = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(5.0F).build()));
+        registerSimple("vanilla_delight", vanillaDelight);
+        JuicerRecipes.addRecipe(Items.GLOW_BERRIES, Items.SWEET_BERRIES, Items.APPLE, vanillaDelight);
 
         List<RegistryKey<Biome>> biomes = List.of(
                 PLAINS, SNOWY_SLOPES, SWAMP,
@@ -77,6 +109,10 @@ public class Juices {
     public static void register(String name, Juice juice) {
         Identifier id = Bodaciousberries.getIdentifier(name);
         JuicerRecipes.addRecipe(juice.getBerry().getRegistryEntry().registryKey().getValue(), id);
+        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
+    }
+
+    public static void registerSimple(String name, Juice juice) {
         Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
     }
 }

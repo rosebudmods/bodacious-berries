@@ -2,17 +2,28 @@ package io.ix0rai.bodaciousberries.block.entity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class JuicerRecipes {
     public static final List<JsonObject> JUICER_RECIPES = new ArrayList<>();
 
     public static void addRecipe(Identifier input1, Identifier input2, Identifier input3, Identifier output) {
         JUICER_RECIPES.add(createRecipeJson(List.of(input1, input2, input3), output));
+    }
+
+    public static void addRecipe(Item input1, Item input2, Item input3, Item output) {
+        Identifier id1 = input1.getRegistryEntry().registryKey().getValue();
+        Identifier id2 = input2.getRegistryEntry().registryKey().getValue();
+        Identifier id3 = input3.getRegistryEntry().registryKey().getValue();
+        Identifier id4 = output.getRegistryEntry().registryKey().getValue();
+
+        addRecipe(id1, id2, id3, id4);
     }
 
     public static void addRecipe(Identifier input, Identifier output) {

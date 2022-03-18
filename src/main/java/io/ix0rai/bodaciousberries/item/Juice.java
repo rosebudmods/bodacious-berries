@@ -30,6 +30,11 @@ public class Juice extends Item {
         this.berry = berry;
     }
 
+    public Juice(Item.Settings settings) {
+        super(settings);
+        this.berry = null;
+    }
+
     public static Settings settings(Item berry, FoodComponent.Builder builder) {
         FoodComponent foodComponent = berry.getFoodComponent();
         if (foodComponent != null) {
@@ -99,6 +104,9 @@ public class Juice extends Item {
     }
 
     public Item getBerry() {
+        if (berry == null) {
+            throw new IllegalStateException("this juice is a berry blend. shut up.");
+        }
         return berry;
     }
 }

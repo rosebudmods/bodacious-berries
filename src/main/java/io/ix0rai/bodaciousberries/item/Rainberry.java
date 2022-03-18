@@ -2,7 +2,6 @@ package io.ix0rai.bodaciousberries.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.ItemStack;
@@ -13,7 +12,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class Rainberry extends AliasedBlockItem {
+public class Rainberry extends Berry {
     private final FoodComponent foodComponent = new FoodComponent.Builder().hunger(3).saturationModifier(3.5F).build();
     public Rainberry(Block block, Settings settings) {
         super(block, settings);
