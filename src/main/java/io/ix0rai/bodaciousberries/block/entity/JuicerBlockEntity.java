@@ -71,8 +71,8 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
-    private static void craft(World world, BlockPos pos, JuicerRecipe recipe, DefaultedList<ItemStack> slots) {
-        ItemStack[] ingredients = getIngredients(slots);
+    private static void craft(World world, BlockPos pos, DefaultedList<ItemStack> slots) {
+        ItemStack[] ingredients = new ItemStack[]{slots.get(3), slots.get(4), slots.get(5)};
 
         //craft items for all three slots - as long as there's a bottle to contain the juice
         for(int i = 0; i < 3; i ++) {
@@ -99,10 +99,6 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         slots.set(3, ingredients[0]);
         slots.set(4, ingredients[1]);
         slots.set(5, ingredients[2]);
-    }
-
-    private static ItemStack[] getIngredients(DefaultedList<ItemStack> slots) {
-        return new ItemStack[]{slots.get(3), slots.get(4), slots.get(5)};
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
