@@ -1,5 +1,6 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -60,6 +61,32 @@ public class JuicerRecipes {
         //add result
         //adds: "result": "output"
         json.addProperty("result", output.toString());
+
+        return json;
+    }
+
+    public static JsonObject createShapelessJson(Identifier ingredient, Identifier output) {
+        JsonObject json = new JsonObject();
+
+        json.addProperty("type", "minecraft:crafting_shapeless");
+
+        JsonArray ingredientArray = new JsonArray();
+
+        JsonObject ingredientObject = new JsonObject();
+        ingredientObject.addProperty("item", ingredient.toString());
+        ingredientArray.add(ingredientObject);
+
+        JsonObject chorusBerryJuice = new JsonObject();
+        chorusBerryJuice.addProperty("item", "bodaciousberries:chorus_berry_juice");
+        ingredientArray.add(chorusBerryJuice);
+
+        json.add("ingredients", ingredientArray);
+
+        JsonObject result = new JsonObject();
+        result.addProperty("item", output.toString());
+        result.addProperty("count", 1);
+
+        json.add("result", result);
 
         return json;
     }

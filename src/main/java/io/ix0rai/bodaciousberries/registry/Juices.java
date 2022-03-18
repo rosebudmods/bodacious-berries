@@ -1,5 +1,6 @@
 package io.ix0rai.bodaciousberries.registry;
 
+import com.google.gson.JsonObject;
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipe;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipes;
@@ -16,6 +17,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static net.minecraft.world.biome.BiomeKeys.*;
@@ -24,6 +26,7 @@ import static net.minecraft.world.biome.BiomeKeys.*;
 public class Juices {
     public static final Item RECEPTACLE = Items.GLASS_BOTTLE;
     public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
+    public static final List<JsonObject> RECIPES = new ArrayList<>();
 
     public static void registerJuice() {
         Registry.register(Registry.RECIPE_SERIALIZER, JuicerRecipe.JuicerRecipeSerializer.ID, JuicerRecipe.JuicerRecipeSerializer.INSTANCE);
@@ -51,10 +54,23 @@ public class Juices {
                 LUSH_CAVES, DRIPSTONE_CAVES, JUNGLE
         );
 
-        for (RegistryKey<Biome> key : biomes) {
+        List<Item> biomeItems = List.of(
+                Items.CORNFLOWER, Items.SNOWBALL, Items.CLAY_BALL,
+                Items.SAND, Items.SWEET_BERRIES, Items.BIRCH_SAPLING,
+                Items.COD, Items.RED_MUSHROOM, Items.SUNFLOWER,
+                Items.OAK_SAPLING, Items.PEONY, Items.DARK_OAK_SAPLING,
+                Items.ACACIA_SAPLING, Items.RED_SAND, Items.POPPY,
+                Items.GLOW_BERRIES, Items.POINTED_DRIPSTONE, Items.COCOA_BEANS
+        );
+
+        for (int i = 0; i < biomes.size(); i++) {
+            RegistryKey<Biome> key = biomes.get(i);
             ChorusBerryJuice juice = new ChorusBerryJuice(Berries.CHORUS_BERRIES, key.getValue());
-            String name = "chorus_berry_juice_" + key.getValue().getPath();
-            Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
+            Identifier id = Bodaciousberries.getIdentifier("chorus_berry_juice_" + key.getValue().getPath());
+
+            RECIPES.add(JuicerRecipes.createShapelessJson(biomeItems.get(i).getRegistryEntry().registryKey().getValue(), id));
+
+            Registry.register(Registry.ITEM, id, juice);
         }
     }
 
