@@ -114,11 +114,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
         }
 
         public JuicerRecipe read(JsonObject json) {
-            return read(getIdFor(json), json);
-        }
-
-        public Identifier getIdFor(JsonObject json) {
-            return new Identifier(json.get("result").getAsString().split(":")[1]);
+            return read(Bodaciousberries.getIdentifier(json.get("result").getAsString().split(":")[1]), json);
         }
 
         @Override

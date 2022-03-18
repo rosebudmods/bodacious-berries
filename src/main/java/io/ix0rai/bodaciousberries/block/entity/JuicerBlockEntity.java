@@ -113,22 +113,26 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
             juicer.brewTime --;
 
             //if brewing is finished, craft the juices
-            if (juicer.brewTime == 0 && recipe.isPresent()) {
+            if (juicer.brewTime == 0 && recipe.isPresent() && juicer.hasBottles()) {
                 craft(world, pos, recipe.get(), juicer.inventory);
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
-            } else if (recipe.isEmpty()) {
+            } else if (recipe.isEmpty() || !juicer.hasBottles()) {
                 //if we cannot craft, the ingredient has been removed/changed, and we should stop brewing without giving a result
                 juicer.brewTime = 0;
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
             }
-        } else if (recipe.isPresent()) {
+        } else if (recipe.isPresent() && juicer.hasBottles()) {
             //if we're not currently brewing, start brewing with the ingredient
             juicer.brewTime = TOTAL_BREW_TIME;
             markDirty(world, pos, state);
             world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
         }
+    }
+
+    private boolean hasBottles() {
+        return inventory.get(0).getItem().equals(Juices.RECEPTACLE) || inventory.get(1).getItem().equals(Juices.RECEPTACLE) || inventory.get(2).getItem().equals(Juices.RECEPTACLE);
     }
 
     @Override
