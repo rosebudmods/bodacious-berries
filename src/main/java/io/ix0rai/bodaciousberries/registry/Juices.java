@@ -64,9 +64,9 @@ public class Juices {
         Juice redJuice = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(6.0F).build()));
         registerSimple("red_juice", redJuice);
         JuicerRecipes.addRecipe(Berries.STRAWBERRY, Items.SWEET_BERRIES, Berries.LINGONBERRIES, redJuice);
-        Juice endJuice = new EndJuice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(8.0F).build()));
-        registerSimple("end_juice", endJuice);
-        JuicerRecipes.addRecipe(Berries.CHORUS_BERRIES, Berries.RAINBERRY, Items.CHORUS_FRUIT, endJuice);
+        Juice endBlend = new EndJuice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(8.0F).build()));
+        registerSimple("end_blend", endBlend);
+        JuicerRecipes.addRecipe(Berries.CHORUS_BERRIES, Berries.RAINBERRY, Items.CHORUS_FRUIT, endBlend);
         Juice purpleDelight = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(6.0F).build()));
         registerSimple("purple_delight", purpleDelight);
         JuicerRecipes.addRecipe(Berries.CHORUS_BERRIES, Berries.GRAPES, Berries.SASKATOON_BERRIES, purpleDelight);
