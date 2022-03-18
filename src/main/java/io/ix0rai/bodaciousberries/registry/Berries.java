@@ -20,16 +20,16 @@ import static net.fabricmc.fabric.impl.content.registry.CompostingChanceRegistry
 
 public class Berries {
     //berry items
-    public static Item SASKATOON_BERRIES;
-    public static Item STRAWBERRY;
-    public static Item RASPBERRIES;
-    public static Item BLACKBERRIES;
-    public static Item CHORUS_BERRIES;
-    public static Item RAINBERRY;
-    public static Item LINGONBERRIES;
-    public static Item GRAPES;
-    public static Item GOJI_BERRIES;
-    public static Item GOOSEBERRIES;
+    public static AliasedBlockItem SASKATOON_BERRIES;
+    public static AliasedBlockItem STRAWBERRY;
+    public static AliasedBlockItem RASPBERRIES;
+    public static AliasedBlockItem BLACKBERRIES;
+    public static AliasedBlockItem CHORUS_BERRIES;
+    public static AliasedBlockItem RAINBERRY;
+    public static AliasedBlockItem LINGONBERRIES;
+    public static AliasedBlockItem GRAPES;
+    public static AliasedBlockItem GOJI_BERRIES;
+    public static AliasedBlockItem GOOSEBERRIES;
 
     public static void registerBerries() {
         //create items for each berry
@@ -59,16 +59,16 @@ public class Berries {
         initialiseBerries();
 
         //register
-        register("saskatoon_berries", SASKATOON_BERRIES);
-        register("strawberry", STRAWBERRY);
-        register("raspberries", RASPBERRIES);
-        register("blackberries", BLACKBERRIES);
-        register("chorus_berries", CHORUS_BERRIES);
-        register("rainberry", RAINBERRY);
-        register("lingonberries", LINGONBERRIES);
-        register("grapes", GRAPES);
-        register("goji_berries", GOJI_BERRIES);
-        register("gooseberries", GOOSEBERRIES);
+        register(SASKATOON_BERRIES, "saskatoon_berries");
+        register(STRAWBERRY, "strawberry");
+        register(RASPBERRIES, "raspberries");
+        register(BLACKBERRIES, "blackberries");
+        register(CHORUS_BERRIES, "chorus_berries");
+        register(RAINBERRY, "rainberry");
+        register(LINGONBERRIES, "lingonberries");
+        register(GRAPES, "grapes");
+        register(GOJI_BERRIES, "goji_berries");
+        register(GOOSEBERRIES, "gooseberries");
     }
 
     /**
@@ -111,8 +111,8 @@ public class Berries {
         BERRY_BUSHES.put(bigBush, berries);
     }
 
-    private static void register(String name, Item item) {
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), item);
+    private static void register(Item berry, String name) {
+        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), berry);
     }
 
     private static Item.Settings settings(int hunger, float saturation) {

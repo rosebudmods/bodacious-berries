@@ -27,6 +27,8 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+
 public class JuicerBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory {
     public static final int TOTAL_BREW_TIME = 300;
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
@@ -69,13 +71,13 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
-    private static void craft(World world, BlockPos pos, DefaultedList<ItemStack> slots) {
+    private static void craft(World world, BlockPos pos, JuicerRecipe recipe, DefaultedList<ItemStack> slots) {
         ItemStack[] ingredients = new ItemStack[]{slots.get(3), slots.get(4), slots.get(5)};
 
         //craft items for all three slots - as long as there's a bottle to contain the juice
         for(int i = 0; i < 3; i ++) {
             if (slots.get(i).getItem().equals(Juices.RECEPTACLE)) {
-                slots.set(i, JuicerRecipes.craft(ingredients[0], ingredients[1], ingredients[2], slots.get(i)));
+                slots.set(i, recipe.getOutput());
             }
         }
 
@@ -100,24 +102,24 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
-        boolean canCraft = canCraft(juicer.inventory);
+        Optional<JuicerRecipe> recipe = world.getRecipeManager().getFirstMatch(JuicerRecipe.Type.INSTANCE, juicer, world);
         boolean isBrewing = juicer.brewTime > 0;
 
         if (isBrewing) {
             juicer.brewTime --;
 
             //if brewing is finished, craft the juices
-            if (juicer.brewTime == 0 && canCraft) {
-                craft(world, pos, juicer.inventory);
+            if (juicer.brewTime == 0 && recipe.isPresent() && juicer.hasBottles()) {
+                craft(world, pos, recipe.get(), juicer.inventory);
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
-            } else if (!canCraft) {
+            } else if (recipe.isEmpty() || !juicer.hasBottles()) {
                 //if we cannot craft, the ingredient has been removed/changed, and we should stop brewing without giving a result
                 juicer.brewTime = 0;
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
             }
-        } else if (canCraft) {
+        } else if (recipe.isPresent() && juicer.hasBottles()) {
             //if we're not currently brewing, start brewing with the ingredient
             juicer.brewTime = TOTAL_BREW_TIME;
             markDirty(world, pos, state);
@@ -125,21 +127,8 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         }
     }
 
-    private static boolean canCraft(DefaultedList<ItemStack> slots) {
-        ItemStack ingredient1 = slots.get(3);
-        ItemStack ingredient2 = slots.get(4);
-        ItemStack ingredient3 = slots.get(5);
-
-        if (JuicerRecipes.hasRecipeFor(ingredient1, ingredient2, ingredient3)) {
-            for (int i = 0; i < 3; i ++) {
-                ItemStack slotItems = slots.get(i);
-                if (!slotItems.isEmpty() && slotItems.getItem().equals(Juices.RECEPTACLE)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+    private boolean hasBottles() {
+        return inventory.get(0).getItem().equals(Juices.RECEPTACLE) || inventory.get(1).getItem().equals(Juices.RECEPTACLE) || inventory.get(2).getItem().equals(Juices.RECEPTACLE);
     }
 
     @Override
