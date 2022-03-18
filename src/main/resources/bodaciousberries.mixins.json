@@ -6,6 +6,7 @@
   "mixins": [
     "FireBlockInjector",
     "RegistryManagerInjector",
+    "PathNodeMakerInjector",
     "VineDecoratorOverwrite",
     "accessors.BiomeCategoryAccessor",
     "accessors.DamageSourceAccessor",

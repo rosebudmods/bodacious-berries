@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class RainberryBush extends BasicBerryBush.ThreeStageBush {
+public class RainberryBush extends BasicBerryBush.FourStageBush {
     public RainberryBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         super(berryType, smallShape, largeShape, sizeChangeAge);
     }
