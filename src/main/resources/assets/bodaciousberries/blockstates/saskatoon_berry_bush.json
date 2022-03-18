@@ -1,13 +1,13 @@
 {
   "variants": {
     "age=0": {
-      "model": "bodaciousberries:block/berry_bush/saskatoon_berry_bush_stage0"
+      "model": "bodaciousberries:block/saskatoon_berry_bush_stage0"
     },
     "age=1": {
-      "model": "bodaciousberries:block/berry_bush/saskatoon_berry_bush_stage1"
+      "model": "bodaciousberries:block/saskatoon_berry_bush_stage1"
     },
     "age=2": {
-      "model": "bodaciousberries:block/berry_bush/saskatoon_berry_bush_stage2"
+      "model": "bodaciousberries:block/saskatoon_berry_bush_stage2"
     }
   }
 }

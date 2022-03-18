@@ -1,19 +1,19 @@
 {
   "variants": {
     "age=0": {
-      "model": "bodaciousberries:block/berry_bush/blackberry_bush_stage0"
+      "model": "bodaciousberries:block/blackberry_bush_stage0"
     },
     "age=1": {
-      "model": "bodaciousberries:block/berry_bush/blackberry_bush_stage1"
+      "model": "bodaciousberries:block/blackberry_bush_stage1"
     },
     "age=2": {
-      "model": "bodaciousberries:block/berry_bush/blackberry_bush_stage2"
+      "model": "bodaciousberries:block/blackberry_bush_stage2"
     },
     "age=3": {
-      "model": "bodaciousberries:block/berry_bush/blackberry_bush_stage3"
+      "model": "bodaciousberries:block/blackberry_bush_stage3"
     },
     "age=4": {
-      "model": "bodaciousberries:block/berry_bush/blackberry_bush_stage4"
+      "model": "bodaciousberries:block/blackberry_bush_stage4"
     }
   }
 }
