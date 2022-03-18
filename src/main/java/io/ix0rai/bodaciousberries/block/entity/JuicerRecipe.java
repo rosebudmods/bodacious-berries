@@ -79,6 +79,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
         return Type.INSTANCE;
     }
 
+    @SuppressWarnings("unused")
     private static class JuicerRecipeJsonFormat {
         public JsonObject ingredient0;
         public JsonObject ingredient1;
