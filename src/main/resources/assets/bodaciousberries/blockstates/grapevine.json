@@ -6,7 +6,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0",
+        "model": "bodaciousberries:block/grapevine_stage0",
         "x": 270,
         "uvlock": true
       }
@@ -21,7 +21,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0",
+        "model": "bodaciousberries:block/grapevine_stage0",
         "x": 270,
         "uvlock": true
       }
@@ -32,7 +32,7 @@
         "north": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0"
+        "model": "bodaciousberries:block/grapevine_stage0"
       }
     },
     {
@@ -45,7 +45,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0"
+        "model": "bodaciousberries:block/grapevine_stage0"
       }
     },
     {
@@ -54,7 +54,7 @@
         "west": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0",
+        "model": "bodaciousberries:block/grapevine_stage0",
         "y": 270,
         "uvlock": true
       }
@@ -69,7 +69,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0",
+        "model": "bodaciousberries:block/grapevine_stage0",
         "y": 270,
         "uvlock": true
       }
@@ -80,7 +80,7 @@
         "south": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0",
+        "model": "bodaciousberries:block/grapevine_stage0",
         "y": 180,
         "uvlock": true
       }
@@ -95,7 +95,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0",
+        "model": "bodaciousberries:block/grapevine_stage0",
         "y": 180,
         "uvlock": true
       }
@@ -106,7 +106,7 @@
         "east": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0",
+        "model": "bodaciousberries:block/grapevine_stage0",
         "y": 90,
         "uvlock": true
       }
@@ -121,7 +121,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage0",
+        "model": "bodaciousberries:block/grapevine_stage0",
         "y": 90,
         "uvlock": true
       }
@@ -135,7 +135,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1",
+        "model": "bodaciousberries:block/grapevine_stage1",
         "x": 270,
         "uvlock": true
       }
@@ -150,7 +150,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1",
+        "model": "bodaciousberries:block/grapevine_stage1",
         "x": 270,
         "uvlock": true
       }
@@ -161,7 +161,7 @@
         "north": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1"
+        "model": "bodaciousberries:block/grapevine_stage1"
       }
     },
     {
@@ -174,7 +174,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1"
+        "model": "bodaciousberries:block/grapevine_stage1"
       }
     },
     {
@@ -183,7 +183,7 @@
         "west": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1",
+        "model": "bodaciousberries:block/grapevine_stage1",
         "y": 270,
         "uvlock": true
       }
@@ -198,7 +198,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1",
+        "model": "bodaciousberries:block/grapevine_stage1",
         "y": 270,
         "uvlock": true
       }
@@ -209,7 +209,7 @@
         "south": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1",
+        "model": "bodaciousberries:block/grapevine_stage1",
         "y": 180,
         "uvlock": true
       }
@@ -224,7 +224,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1",
+        "model": "bodaciousberries:block/grapevine_stage1",
         "y": 180,
         "uvlock": true
       }
@@ -235,7 +235,7 @@
         "east": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1",
+        "model": "bodaciousberries:block/grapevine_stage1",
         "y": 90,
         "uvlock": true
       }
@@ -250,7 +250,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage1",
+        "model": "bodaciousberries:block/grapevine_stage1",
         "y": 90,
         "uvlock": true
       }
@@ -264,7 +264,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2",
+        "model": "bodaciousberries:block/grapevine_stage2",
         "x": 270,
         "uvlock": true
       }
@@ -279,7 +279,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2",
+        "model": "bodaciousberries:block/grapevine_stage2",
         "x": 270,
         "uvlock": true
       }
@@ -290,7 +290,7 @@
         "north": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2"
+        "model": "bodaciousberries:block/grapevine_stage2"
       }
     },
     {
@@ -303,7 +303,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2"
+        "model": "bodaciousberries:block/grapevine_stage2"
       }
     },
     {
@@ -312,7 +312,7 @@
         "west": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2",
+        "model": "bodaciousberries:block/grapevine_stage2",
         "y": 270,
         "uvlock": true
       }
@@ -327,7 +327,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2",
+        "model": "bodaciousberries:block/grapevine_stage2",
         "y": 270,
         "uvlock": true
       }
@@ -338,7 +338,7 @@
         "south": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2",
+        "model": "bodaciousberries:block/grapevine_stage2",
         "y": 180,
         "uvlock": true
       }
@@ -353,7 +353,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2",
+        "model": "bodaciousberries:block/grapevine_stage2",
         "y": 180,
         "uvlock": true
       }
@@ -364,7 +364,7 @@
         "east": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2",
+        "model": "bodaciousberries:block/grapevine_stage2",
         "y": 90,
         "uvlock": true
       }
@@ -379,7 +379,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage2",
+        "model": "bodaciousberries:block/grapevine_stage2",
         "y": 90,
         "uvlock": true
       }
@@ -393,7 +393,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3",
+        "model": "bodaciousberries:block/grapevine_stage3",
         "x": 270,
         "uvlock": true
       }
@@ -408,7 +408,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3",
+        "model": "bodaciousberries:block/grapevine_stage3",
         "x": 270,
         "uvlock": true
       }
@@ -419,7 +419,7 @@
         "north": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3"
+        "model": "bodaciousberries:block/grapevine_stage3"
       }
     },
     {
@@ -432,7 +432,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3"
+        "model": "bodaciousberries:block/grapevine_stage3"
       }
     },
     {
@@ -441,7 +441,7 @@
         "west": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3",
+        "model": "bodaciousberries:block/grapevine_stage3",
         "y": 270,
         "uvlock": true
       }
@@ -456,7 +456,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3",
+        "model": "bodaciousberries:block/grapevine_stage3",
         "y": 270,
         "uvlock": true
       }
@@ -467,7 +467,7 @@
         "south": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3",
+        "model": "bodaciousberries:block/grapevine_stage3",
         "y": 180,
         "uvlock": true
       }
@@ -482,7 +482,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3",
+        "model": "bodaciousberries:block/grapevine_stage3",
         "y": 180,
         "uvlock": true
       }
@@ -493,7 +493,7 @@
         "east": "true"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3",
+        "model": "bodaciousberries:block/grapevine_stage3",
         "y": 90,
         "uvlock": true
       }
@@ -508,7 +508,7 @@
         "east": "false"
       },
       "apply": {
-        "model": "bodaciousberries:block/berry_bush/grapevine_stage3",
+        "model": "bodaciousberries:block/grapevine_stage3",
         "y": 90,
         "uvlock": true
       }

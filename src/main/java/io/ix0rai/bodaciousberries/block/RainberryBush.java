@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.registry.particles.Particles;
+import io.ix0rai.bodaciousberries.particle.Particles;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
@@ -9,14 +9,14 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class RainberryBush extends BasicBerryBush {
-    public RainberryBush(Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        super(berryType, maxAge, smallShape, largeShape, sizeChangeAge);
+public class RainberryBush extends BasicBerryBush.FourStageBush {
+    public RainberryBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        super(berryType, smallShape, largeShape, sizeChangeAge);
     }
 
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.get(AGE) == maxAge) {
+        if (state.get(getAge()) == maxAge) {
             int i = pos.getX();
             int j = pos.getY();
             int k = pos.getZ();
