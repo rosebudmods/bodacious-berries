@@ -13,22 +13,25 @@ import java.util.List;
 public class JuicerRecipes {
     public static final List<JsonObject> JUICER_RECIPES = new ArrayList<>();
 
-    public static void addRecipe(Identifier input1, Identifier input2, Identifier input3, Identifier output) {
-        JUICER_RECIPES.add(createRecipeJson(List.of(input1, input2, input3), output));
+    public static void addRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier receptacle, Identifier output) {
+        JUICER_RECIPES.add(createRecipeJson(List.of(input0, input1, input2), receptacle, output));
     }
 
-    public static void addRecipe(Item input1, Item input2, Item input3, Item output) {
-        Identifier id1 = input1.getRegistryEntry().registryKey().getValue();
-        Identifier id2 = input2.getRegistryEntry().registryKey().getValue();
-        Identifier id3 = input3.getRegistryEntry().registryKey().getValue();
+    public static void addJuiceRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier output) {
+        addRecipe(input0, input1, input2, new Identifier("minecraft:glass_bottle"), output);
+    }
+
+    public static void addJuiceRecipe(Identifier input, Identifier output) {
+        addJuiceRecipe(input, input, input, output);
+    }
+
+    public static void addJuiceRecipe(Item input0, Item input1, Item input2, Item output) {
+        Identifier id1 = input0.getRegistryEntry().registryKey().getValue();
+        Identifier id2 = input1.getRegistryEntry().registryKey().getValue();
+        Identifier id3 = input2.getRegistryEntry().registryKey().getValue();
         Identifier id4 = output.getRegistryEntry().registryKey().getValue();
 
-        addRecipe(id1, id2, id3, id4);
-    }
-
-    public static void addRecipe(Identifier input, Identifier output) {
-        //for recipes that only use one type of berry
-        addRecipe(input, input, input, output);
+        addJuiceRecipe(id1, id2, id3, id4);
     }
 
     public static boolean isIngredient(ItemStack stack) {
@@ -55,7 +58,19 @@ public class JuicerRecipes {
         return false;
     }
 
-    public static JsonObject createRecipeJson(List<Identifier> ingredients, Identifier output) {
+    public static boolean isReceptacle(ItemStack stack) {
+        if (stack != null) {
+            for (JsonObject recipe : JUICER_RECIPES) {
+                if (JuicerRecipe.JuicerRecipeSerializer.INSTANCE.read(recipe).isReceptacle(stack)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static JsonObject createRecipeJson(List<Identifier> ingredients, Identifier receptacle, Identifier output) {
         JsonObject json = new JsonObject();
         //add type
         //adds: "type": "juicer_recipe"
@@ -68,6 +83,10 @@ public class JuicerRecipes {
             ingredient.addProperty("item", ingredients.get(i).toString());
             json.add("ingredient" + i, ingredient);
         }
+
+        JsonObject receptacleJson = new JsonObject();
+        receptacleJson.addProperty("item", receptacle.toString());
+        json.add("receptacle", receptacleJson);
 
         //add result
         //adds: "result": "output"

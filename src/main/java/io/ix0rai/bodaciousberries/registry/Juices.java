@@ -26,8 +26,8 @@ import static net.minecraft.world.biome.BiomeKeys.*;
 
 @SuppressWarnings("deprecation")
 public class Juices {
-    public static final Item RECEPTACLE = Items.GLASS_BOTTLE;
-    public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
+    public static final Item JUICE_RECEPTACLE = Items.GLASS_BOTTLE;
+    public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(JUICE_RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
     public static final List<JsonObject> RECIPES = new ArrayList<>();
     public static final Juice DUBIOUS_JUICE = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturationModifier(3F).build()));
 
@@ -51,31 +51,31 @@ public class Juices {
 
         Juice gojiBerryBlend = new GojiBerryBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(6.0F).statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F).build()));
         registerSimple("goji_berry_blend", gojiBerryBlend);
-        JuicerRecipes.addRecipe(Berries.GOJI_BERRIES, Berries.GOJI_BERRIES, Items.SUGAR_CANE, gojiBerryBlend);
+        JuicerRecipes.addJuiceRecipe(Berries.GOJI_BERRIES, Berries.GOJI_BERRIES, Items.SUGAR_CANE, gojiBerryBlend);
         Juice oppositeJuice = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(5.0F).build()));
         registerSimple("opposite_juice", oppositeJuice);
-        JuicerRecipes.addRecipe(Berries.RASPBERRIES, Berries.BLACKBERRIES, Items.SUGAR_CANE, oppositeJuice);
+        JuicerRecipes.addJuiceRecipe(Berries.RASPBERRIES, Berries.BLACKBERRIES, Items.SUGAR_CANE, oppositeJuice);
         Juice rainberryBlend = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(8).saturationModifier(10.0F).build()));
         registerSimple("rainberry_blend", rainberryBlend);
-        JuicerRecipes.addRecipe(Berries.RAINBERRY, Berries.GOJI_BERRIES, Items.GOLDEN_APPLE, rainberryBlend);
+        JuicerRecipes.addJuiceRecipe(Berries.RAINBERRY, Berries.GOJI_BERRIES, Items.GOLDEN_APPLE, rainberryBlend);
         Juice gooseberryRum = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(4.0f).build()));
         registerSimple("gooseberry_rum", gooseberryRum);
-        JuicerRecipes.addRecipe(Berries.GOOSEBERRIES, Berries.GOOSEBERRIES, Items.WHEAT, gooseberryRum);
+        JuicerRecipes.addJuiceRecipe(Berries.GOOSEBERRIES, Berries.GOOSEBERRIES, Items.WHEAT, gooseberryRum);
         Juice redJuice = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(6.0F).build()));
         registerSimple("red_juice", redJuice);
-        JuicerRecipes.addRecipe(Berries.STRAWBERRY, Items.SWEET_BERRIES, Berries.LINGONBERRIES, redJuice);
+        JuicerRecipes.addJuiceRecipe(Berries.STRAWBERRY, Items.SWEET_BERRIES, Berries.LINGONBERRIES, redJuice);
         Juice endBlend = new EndJuice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(8.0F).build()));
         registerSimple("end_blend", endBlend);
-        JuicerRecipes.addRecipe(Berries.CHORUS_BERRIES, Berries.RAINBERRY, Items.CHORUS_FRUIT, endBlend);
+        JuicerRecipes.addJuiceRecipe(Berries.CHORUS_BERRIES, Berries.RAINBERRY, Items.CHORUS_FRUIT, endBlend);
         Juice purpleDelight = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(6.0F).build()));
         registerSimple("purple_delight", purpleDelight);
-        JuicerRecipes.addRecipe(Berries.CHORUS_BERRIES, Berries.GRAPES, Berries.SASKATOON_BERRIES, purpleDelight);
+        JuicerRecipes.addJuiceRecipe(Berries.CHORUS_BERRIES, Berries.GRAPES, Berries.SASKATOON_BERRIES, purpleDelight);
         Juice trafficLightJuice = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(8.0F).build()));
         registerSimple("traffic_light_juice", trafficLightJuice);
-        JuicerRecipes.addRecipe(Berries.GOOSEBERRIES, Items.GLOW_BERRIES, Berries.RASPBERRIES, trafficLightJuice);
+        JuicerRecipes.addJuiceRecipe(Berries.GOOSEBERRIES, Items.GLOW_BERRIES, Berries.RASPBERRIES, trafficLightJuice);
         Juice vanillaDelight = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(5.0F).build()));
         registerSimple("vanilla_delight", vanillaDelight);
-        JuicerRecipes.addRecipe(Items.GLOW_BERRIES, Items.SWEET_BERRIES, Items.APPLE, vanillaDelight);
+        JuicerRecipes.addJuiceRecipe(Items.GLOW_BERRIES, Items.SWEET_BERRIES, Items.APPLE, vanillaDelight);
 
         List<RegistryKey<Biome>> biomes = List.of(
                 PLAINS, SNOWY_SLOPES, SWAMP,
@@ -108,7 +108,7 @@ public class Juices {
 
     public static void register(String name, Juice juice) {
         Identifier id = Bodaciousberries.getIdentifier(name);
-        JuicerRecipes.addRecipe(juice.getBerry().getRegistryEntry().registryKey().getValue(), id);
+        JuicerRecipes.addJuiceRecipe(juice.getBerry().getRegistryEntry().registryKey().getValue(), id);
         Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
     }
 

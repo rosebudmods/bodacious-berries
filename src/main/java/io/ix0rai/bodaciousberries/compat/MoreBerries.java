@@ -15,7 +15,7 @@ public class MoreBerries {
             List<String> berryIds = List.of("purple", "yellow", "green", "black", "orange", "blue");
 
             for (String berryId : berryIds) {
-                JuicerRecipes.addRecipe(new Identifier(modId, berryId + "_berries"), new Identifier(modId, berryId + "_berry_juice"));
+                JuicerRecipes.addJuiceRecipe(new Identifier(modId, berryId + "_berries"), new Identifier(modId, berryId + "_berry_juice"));
             }
         }
     }
