@@ -24,7 +24,6 @@ import java.util.List;
 
 import static net.minecraft.world.biome.BiomeKeys.*;
 
-@SuppressWarnings("deprecation")
 public class Juices {
     public static final Item JUICE_RECEPTACLE = Items.GLASS_BOTTLE;
     public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(JUICE_RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
@@ -100,7 +99,7 @@ public class Juices {
             ChorusBerryJuice juice = new ChorusBerryJuice(Berries.CHORUS_BERRIES, key.getValue());
             Identifier id = Bodaciousberries.getIdentifier("chorus_berry_juice_" + key.getValue().getPath());
 
-            RECIPES.add(JuicerRecipes.createShapelessJson(biomeItems.get(i).getRegistryEntry().registryKey().getValue(), id));
+            RECIPES.add(JuicerRecipes.createShapelessJson(Registry.ITEM.getId(biomeItems.get(i)), id));
 
             Registry.register(Registry.ITEM, id, juice);
         }
@@ -108,7 +107,7 @@ public class Juices {
 
     public static void register(String name, Juice juice) {
         Identifier id = Bodaciousberries.getIdentifier(name);
-        JuicerRecipes.addJuiceRecipe(juice.getBerry().getRegistryEntry().registryKey().getValue(), id);
+        JuicerRecipes.addJuiceRecipe(Registry.ITEM.getId(juice.getBerry()), id);
         Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), juice);
     }
 

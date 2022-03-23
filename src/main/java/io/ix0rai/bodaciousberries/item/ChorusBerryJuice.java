@@ -39,7 +39,7 @@ public class ChorusBerryJuice extends Juice {
                 DynamicRegistryManager registryManager = server.getRegistryManager();
                 if (world.getDimension().equals(registryManager.get(Registry.DIMENSION_TYPE_KEY).get(DimensionType.OVERWORLD_ID))) {
                     ServerWorld serverWorld = server.getOverworld();
-                    RegistryEntry<Biome> biomeEntry = RegistryEntry.of(server.getRegistryManager().get(Registry.BIOME_KEY).get(biome));
+                    RegistryEntry<Biome> biomeEntry = RegistryEntry.of(registryManager.get(Registry.BIOME_KEY).get(biome));
 
                     //locate the biome to teleport to
                     Pair<BlockPos, RegistryEntry<Biome>> teleportTo = serverWorld.locateBiome(
