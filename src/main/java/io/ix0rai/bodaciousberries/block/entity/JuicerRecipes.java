@@ -2,14 +2,17 @@ package io.ix0rai.bodaciousberries.block.entity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.registry.Juices;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
-@SuppressWarnings("deprecation")
 public class JuicerRecipes {
     public static final List<JsonObject> JUICER_RECIPES = new ArrayList<>();
 
@@ -18,7 +21,7 @@ public class JuicerRecipes {
     }
 
     public static void addJuiceRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier output) {
-        addRecipe(input0, input1, input2, new Identifier("minecraft:glass_bottle"), output);
+        addRecipe(input0, input1, input2, Registry.ITEM.getId(Juices.JUICE_RECEPTACLE), output);
     }
 
     public static void addJuiceRecipe(Identifier input, Identifier output) {
@@ -26,42 +29,25 @@ public class JuicerRecipes {
     }
 
     public static void addJuiceRecipe(Item input0, Item input1, Item input2, Item output) {
-        Identifier id1 = input0.getRegistryEntry().registryKey().getValue();
-        Identifier id2 = input1.getRegistryEntry().registryKey().getValue();
-        Identifier id3 = input2.getRegistryEntry().registryKey().getValue();
-        Identifier id4 = output.getRegistryEntry().registryKey().getValue();
-
-        addJuiceRecipe(id1, id2, id3, id4);
+        addJuiceRecipe(Registry.ITEM.getId(input0), Registry.ITEM.getId(input1), Registry.ITEM.getId(input2), Registry.ITEM.getId(output));
     }
 
     public static boolean isIngredient(ItemStack stack) {
-        if (stack != null) {
-            for (JsonObject recipe : JUICER_RECIPES) {
-                if (JuicerRecipe.JuicerRecipeSerializer.INSTANCE.read(recipe).isIngredient(stack)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return check(stack, juicerRecipe -> juicerRecipe.isIngredient(stack));
     }
 
-    public static boolean isOutput(ItemStack stack) {
-        if (stack != null) {
-            for (JsonObject recipe : JUICER_RECIPES) {
-                if (JuicerRecipe.JuicerRecipeSerializer.INSTANCE.read(recipe).isResult(stack)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+    public static boolean isResult(ItemStack stack) {
+        return check(stack, juicerRecipe -> juicerRecipe.isResult(stack));
     }
 
     public static boolean isReceptacle(ItemStack stack) {
+        return check(stack, juicerRecipe -> juicerRecipe.isReceptacle(stack));
+    }
+
+    public static boolean check(ItemStack stack, Function<JuicerRecipe, Boolean> function) {
         if (stack != null) {
             for (JsonObject recipe : JUICER_RECIPES) {
-                if (JuicerRecipe.JuicerRecipeSerializer.INSTANCE.read(recipe).isReceptacle(stack)) {
+                if (function.apply(JuicerRecipe.JuicerRecipeSerializer.INSTANCE.read(recipe))) {
                     return true;
                 }
             }
@@ -73,20 +59,16 @@ public class JuicerRecipes {
     public static JsonObject createRecipeJson(List<Identifier> ingredients, Identifier receptacle, Identifier output) {
         JsonObject json = new JsonObject();
         //add type
-        //adds: "type": "juicer_recipe"
+        //adds: "type": "bodaciousberries:juicer_recipe"
         json.addProperty("type", JuicerRecipe.JuicerRecipeSerializer.ID.toString());
 
         //add ingredients
         //adds: "ingredient(i)": {"item": "ingredients[i]"}
         for (int i = 0; i < ingredients.size(); i++) {
-            JsonObject ingredient = new JsonObject();
-            ingredient.addProperty("item", ingredients.get(i).toString());
-            json.add("ingredient" + i, ingredient);
+            json.add("ingredient" + i, getItemProperty(ingredients.get(i).toString()));
         }
 
-        JsonObject receptacleJson = new JsonObject();
-        receptacleJson.addProperty("item", receptacle.toString());
-        json.add("receptacle", receptacleJson);
+        json.add("receptacle", getItemProperty(receptacle.toString()));
 
         //add result
         //adds: "result": "output"
@@ -97,27 +79,29 @@ public class JuicerRecipes {
 
     public static JsonObject createShapelessJson(Identifier ingredient, Identifier output) {
         JsonObject json = new JsonObject();
-
+        //add type
+        //adds: "type": "minecraft:crafting_shapeless"
         json.addProperty("type", "minecraft:crafting_shapeless");
 
+        //add ingredients
+        //adds "ingredients": {"item": "ingredient", "item", "bodaciousberries:chorus_berry_juice}
         JsonArray ingredientArray = new JsonArray();
-
-        JsonObject ingredientObject = new JsonObject();
-        ingredientObject.addProperty("item", ingredient.toString());
-        ingredientArray.add(ingredientObject);
-
-        JsonObject chorusBerryJuice = new JsonObject();
-        chorusBerryJuice.addProperty("item", "bodaciousberries:chorus_berry_juice");
-        ingredientArray.add(chorusBerryJuice);
-
+        ingredientArray.add(getItemProperty(ingredient.toString()));
+        ingredientArray.add(getItemProperty(Bodaciousberries.getId("chorus_berry_juice")));
         json.add("ingredients", ingredientArray);
 
-        JsonObject result = new JsonObject();
-        result.addProperty("item", output.toString());
+        //add result
+        //adds: "result": {"item": "output", "count": 1}
+        JsonObject result = getItemProperty(output.toString());
         result.addProperty("count", 1);
-
         json.add("result", result);
 
         return json;
+    }
+
+    private static JsonObject getItemProperty(String string) {
+        JsonObject property = new JsonObject();
+        property.addProperty("item", string);
+        return property;
     }
 }

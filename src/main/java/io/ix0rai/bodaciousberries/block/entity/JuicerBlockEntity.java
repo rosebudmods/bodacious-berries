@@ -134,13 +134,15 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 juicer.makingDubiousJuice = false;
             }
         } else if (juicer.hasValidReceptacle()) {
+            DefaultedList<ItemStack> inventory = juicer.getItems();
+
             if (recipe.isPresent()) {
                 //if we're not currently brewing, start brewing with the ingredient
                 juicer.brewTime = TOTAL_BREW_TIME;
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
-            } else if (juicer.getItems().get(3).getItem() instanceof Berry && juicer.getItems().get(4).getItem() instanceof Berry && juicer.getItems().get(5).getItem() instanceof Berry
-                                && (juicer.getItems().get(0).getItem().equals(Juices.JUICE_RECEPTACLE) || juicer.getItems().get(1).getItem().equals(Juices.JUICE_RECEPTACLE) || juicer.getItems().get(2).getItem().equals(Juices.JUICE_RECEPTACLE))) {
+            } else if (inventory.get(3).getItem() instanceof Berry && inventory.get(4).getItem() instanceof Berry && inventory.get(5).getItem() instanceof Berry
+                                && (inventory.get(0).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(1).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(2).getItem().equals(Juices.JUICE_RECEPTACLE))) {
                 //everything in the juicer is a berry, so logically we can make something
                 juicer.brewTime = TOTAL_BREW_TIME;
                 markDirty(world, pos, state);
@@ -151,7 +153,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     public boolean hasValidReceptacle() {
-        return JuicerRecipes.isReceptacle(getItems().get(0)) || JuicerRecipes.isReceptacle(getItems().get(1)) || JuicerRecipes.isReceptacle(getItems().get(2));
+        return JuicerRecipes.isReceptacle(inventory.get(0)) || JuicerRecipes.isReceptacle(inventory.get(1)) || JuicerRecipes.isReceptacle(inventory.get(2));
     }
 
     @Override
@@ -171,7 +173,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
 
     @Override
     public int[] getAvailableSlots(Direction side) {
-        int[] slots = new int[getItems().size()];
+        int[] slots = new int[inventory.size()];
         for (int i = 0; i < slots.length; i++) {
             slots[i] = i;
         }

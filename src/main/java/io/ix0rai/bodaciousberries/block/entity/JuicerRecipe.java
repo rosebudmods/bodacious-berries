@@ -66,6 +66,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         return this.result;
     }
 
+    @Override
     public Identifier getId() {
         return this.id;
     }
@@ -75,20 +76,20 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         return JuicerRecipeSerializer.INSTANCE;
     }
 
+    @Override
+    public RecipeType<?> getType() {
+        return Type.INSTANCE;
+    }
+
     public static class Type implements RecipeType<JuicerRecipe> {
         private Type() {
+
         }
 
         public static final Type INSTANCE = new Type();
         public static final String ID = "juicer_recipe";
     }
 
-    @Override
-    public RecipeType<?> getType() {
-        return Type.INSTANCE;
-    }
-
-    @SuppressWarnings("unused")
     private static class JuicerRecipeJsonFormat {
         public JsonObject ingredient0;
         public JsonObject ingredient1;
@@ -104,7 +105,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
         public static final JuicerRecipeSerializer INSTANCE = new JuicerRecipeSerializer();
 
-        public static final Identifier ID = Bodaciousberries.getIdentifier("juicer_recipe");
+        public static final Identifier ID = Bodaciousberries.getIdentifier(Type.ID);
 
         @Override
         public JuicerRecipe read(Identifier id, JsonObject json) {
@@ -114,15 +115,15 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
                 throw new JsonSyntaxException("a required attribute is missing!");
             }
 
-            Ingredient input1 = Ingredient.fromJson(recipeJson.ingredient0);
-            Ingredient input2 = Ingredient.fromJson(recipeJson.ingredient1);
-            Ingredient input3 = Ingredient.fromJson(recipeJson.ingredient2);
+            Ingredient input0 = Ingredient.fromJson(recipeJson.ingredient0);
+            Ingredient input1 = Ingredient.fromJson(recipeJson.ingredient1);
+            Ingredient input2 = Ingredient.fromJson(recipeJson.ingredient2);
             Ingredient receptacle = Ingredient.fromJson(recipeJson.receptacle);
             Item outputItem = Registry.ITEM.getOrEmpty(new Identifier(recipeJson.result))
                     .orElseThrow(() -> new JsonSyntaxException("no such item: " + recipeJson.result));
             ItemStack output = new ItemStack(outputItem);
 
-            return new JuicerRecipe(id, input1, input2, input3, receptacle, output);
+            return new JuicerRecipe(id, input0, input1, input2, receptacle, output);
         }
 
         public JuicerRecipe read(JsonObject json) {
@@ -144,8 +145,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
             Ingredient input2 = Ingredient.fromPacket(packetData);
             Ingredient input3 = Ingredient.fromPacket(packetData);
             Ingredient receptacle = Ingredient.fromPacket(packetData);
-            ItemStack output = packetData.readItemStack();
-            return new JuicerRecipe(id, input1, input2, input3, receptacle, output);
+            return new JuicerRecipe(id, input1, input2, input3, receptacle, packetData.readItemStack());
         }
     }
 }

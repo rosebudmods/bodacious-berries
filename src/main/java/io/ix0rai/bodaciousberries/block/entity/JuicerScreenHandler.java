@@ -16,7 +16,7 @@ public class JuicerScreenHandler extends ScreenHandler {
     private final PropertyDelegate brewTime;
 
     public JuicerScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(9), new ArrayPropertyDelegate(1));
+        this(syncId, playerInventory, new SimpleInventory(6), new ArrayPropertyDelegate(1));
     }
 
     /**
@@ -77,6 +77,7 @@ public class JuicerScreenHandler extends ScreenHandler {
             stack = slotItems.copy();
             int finalJuicerSlot = 5;
             int finalInventorySlot = 41;
+            int firstInventorySlot = 32;
 
             if (index > finalJuicerSlot) {
                 //ingredient item
@@ -87,19 +88,19 @@ public class JuicerScreenHandler extends ScreenHandler {
                 //output item
                 } else if (JuicerOutputSlot.matches(stack)) {
                     for (int i = 0; i < 3; i++) {
-                        if (this.slots.get(i).getStack().isEmpty()) {
+                        if (slotItems.isEmpty()) {
                             if (this.insertItem(new ItemStack(slotItems.getItem()), i, i + 1, false)) {
                                 slotItems.decrement(1);
                             }
                             return empty;
                         }
                     }
-                } else if (index < 32) {
-                    if (!this.insertItem(slotItems, 32, finalInventorySlot, false)) {
+                } else if (index < firstInventorySlot) {
+                    if (!this.insertItem(slotItems, firstInventorySlot, finalInventorySlot, false)) {
                         return empty;
                     }
-                } else if (index < 41) {
-                    if (!this.insertItem(slotItems, finalJuicerSlot, 32, false)) {
+                } else if (index < finalInventorySlot) {
+                    if (!this.insertItem(slotItems, finalJuicerSlot, firstInventorySlot, false)) {
                         return empty;
                     }
                 } else if (!this.insertItem(slotItems, finalJuicerSlot, finalInventorySlot, false)) {
@@ -152,7 +153,7 @@ public class JuicerScreenHandler extends ScreenHandler {
         }
 
         public static boolean matches(ItemStack stack) {
-            return JuicerRecipes.isReceptacle(stack) || JuicerRecipes.isOutput(stack);
+            return JuicerRecipes.isReceptacle(stack) || JuicerRecipes.isResult(stack);
         }
     }
 }
