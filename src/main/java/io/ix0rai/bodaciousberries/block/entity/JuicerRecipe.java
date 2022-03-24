@@ -73,7 +73,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return JuicerRecipeSerializer.INSTANCE;
+        return Serializer.INSTANCE;
     }
 
     @Override
@@ -98,12 +98,12 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         public String result;
     }
 
-    public static class JuicerRecipeSerializer implements RecipeSerializer<JuicerRecipe> {
-        private JuicerRecipeSerializer() {
+    public static class Serializer implements RecipeSerializer<JuicerRecipe> {
+        private Serializer() {
 
         }
 
-        public static final JuicerRecipeSerializer INSTANCE = new JuicerRecipeSerializer();
+        public static final Serializer INSTANCE = new Serializer();
 
         public static final Identifier ID = Bodaciousberries.getIdentifier(Type.ID);
 

@@ -31,7 +31,7 @@ public class Juices {
     public static final Juice DUBIOUS_JUICE = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturationModifier(3F).build()));
 
     public static void registerJuice() {
-        Registry.register(Registry.RECIPE_SERIALIZER, JuicerRecipe.JuicerRecipeSerializer.ID, JuicerRecipe.JuicerRecipeSerializer.INSTANCE);
+        Registry.register(Registry.RECIPE_SERIALIZER, JuicerRecipe.Serializer.ID, JuicerRecipe.Serializer.INSTANCE);
         Registry.register(Registry.RECIPE_TYPE, JuicerRecipe.Type.ID, JuicerRecipe.Type.INSTANCE);
 
         registerSimple("dubious_juice", DUBIOUS_JUICE);
