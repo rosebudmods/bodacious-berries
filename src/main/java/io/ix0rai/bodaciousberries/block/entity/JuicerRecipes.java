@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.registry.Juices;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -26,10 +25,6 @@ public class JuicerRecipes {
 
     public static void addJuiceRecipe(Identifier input, Identifier output) {
         addJuiceRecipe(input, input, input, output);
-    }
-
-    public static void addJuiceRecipe(Item input0, Item input1, Item input2, Item output) {
-        addJuiceRecipe(Registry.ITEM.getId(input0), Registry.ITEM.getId(input1), Registry.ITEM.getId(input2), Registry.ITEM.getId(output));
     }
 
     public static boolean isIngredient(ItemStack stack) {
