@@ -15,6 +15,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 
 public class Bushes {
     public static final IntProperty AGE_4 = IntProperty.of("age", 0, 4);
@@ -24,6 +25,7 @@ public class Bushes {
     private static final VoxelShape SMALL_LINGONBERRY = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 6.0D, 13.0D);
     private static final VoxelShape LARGE_LINGONBERRY = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
     private static final VoxelShape LARGE_STRAWBERRY = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
+    private static final VoxelShape LARGE_RASPBERRY = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 13.0D, 15.0D);
 
     public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
 
@@ -37,9 +39,9 @@ public class Bushes {
     public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush.ThreeStageBush(Berries.STRAWBERRY,
             SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
     public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.RASPBERRIES,
-            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
+            SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
     public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.BLACKBERRIES,
-            SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 1.0f);
+            SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
     public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berries.RAINBERRY,
             SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 2);
     public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(Berries.LINGONBERRIES,
@@ -48,7 +50,7 @@ public class Bushes {
             Berries.GRAPES);
     public static final DoubleBerryBush DOUBLE_GOJI_BERRY_BUSH = new DoubleBerryBush(
             Berries.GOJI_BERRIES);
-    public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, LARGE_SWEET_BERRY,
+    public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, VoxelShapes.fullCube(),
             DOUBLE_GOJI_BERRY_BUSH);
     public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyThreeStageBush(Berries.GOOSEBERRIES,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
