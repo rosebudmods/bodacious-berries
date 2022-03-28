@@ -23,3 +23,6 @@ The berry harvester is a custom block centered around harvesting berries. It wil
 
 ### dependencies
 ![fabric api](https://i.imgur.com/HabVZJRm.png "kneecaps required")
+
+### join my discord please!
+https://discord.gg/TN9gaXJ6E8
