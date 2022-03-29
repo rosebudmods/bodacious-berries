@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MoreBerries {
     //reference for ids: https://github.com/MarcusElg/More-Berries/blob/master/src/main/java/moreberries/MoreBerries.java
-    public static void init() {
+    public static String init() {
         String modId = "moreberries";
 
         if (FabricLoaderImpl.INSTANCE.isModLoaded(modId)) {
@@ -17,6 +17,10 @@ public class MoreBerries {
             for (String berryId : berryIds) {
                 JuicerRecipes.addJuiceRecipe(new Identifier(modId, berryId + "_berries"), new Identifier(modId, berryId + "_berry_juice"));
             }
+
+            return modId + ", ";
         }
+
+        return "";
     }
 }

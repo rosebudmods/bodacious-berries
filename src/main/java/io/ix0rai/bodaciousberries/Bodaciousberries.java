@@ -10,9 +10,11 @@ import io.ix0rai.bodaciousberries.registry.Sounds;
 import io.ix0rai.bodaciousberries.worldgen.BerryBushPatchGen;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
 
 public class Bodaciousberries implements ModInitializer {
     public static final String MOD_ID = "bodaciousberries";
+    public static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(MOD_ID);
 
     public static Identifier getIdentifier(String path) {
         return new Identifier(getId(path));
