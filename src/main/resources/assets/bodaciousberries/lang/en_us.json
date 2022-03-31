@@ -9,6 +9,7 @@
   "item.bodaciousberries.grapes": "Grapes",
   "item.bodaciousberries.goji_berries": "Goji Berries",
   "item.bodaciousberries.gooseberries": "Gooseberries",
+  "item.bodaciousberries.cloudberries": "Cloudberries",
   "item.bodaciousberries.saskatoon_berry_juice": "Saskatoon Berry Juice",
   "item.bodaciousberries.raspberry_juice": "Raspberry Juice",
   "item.bodaciousberries.blackberry_juice": "Blackberry Juice",
@@ -31,6 +32,7 @@
   "item.bodaciousberries.rainberry_blend": "Rainberry Blend",
   "item.bodaciousberries.traffic_light_juice": "Traffic Light Juice",
   "item.bodaciousberries.dubious_juice": "Dubious Juice",
+  "item.bodaciousberries.cloudberry_juice": "Cloudberry Juice",
   "item.bodaciousberries.chorus_berry_juice_badlands": "Badlands Chorus Berry Juice",
   "item.bodaciousberries.chorus_berry_juice_birch_forest": "Birch Forest Chorus Berry Juice",
   "item.bodaciousberries.chorus_berry_juice_dark_forest": "Dark Forest Chorus Berry Juice",
@@ -62,5 +64,6 @@
   "block.bodaciousberries.grapevine": "Grapevine",
   "block.bodaciousberries.goji_berry_bush": "Goji Berry Bush",
   "block.bodaciousberries.double_goji_berry_bush": "Double Goji Berry Bush",
+  "block.bodaciousberries.cloudberry_bush": "Cloudberry Bush",
   "block.bodaciousberries.juicer": "Juicer"
 }
