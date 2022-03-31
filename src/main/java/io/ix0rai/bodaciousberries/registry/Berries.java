@@ -8,6 +8,8 @@ import io.ix0rai.bodaciousberries.item.Berry;
 import io.ix0rai.bodaciousberries.item.ChorusBerries;
 import io.ix0rai.bodaciousberries.item.GojiBerries;
 import io.ix0rai.bodaciousberries.item.Rainberry;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -19,6 +21,8 @@ import java.util.Map;
 import static net.fabricmc.fabric.impl.content.registry.CompostingChanceRegistryImpl.INSTANCE;
 
 public class Berries {
+    private static final Item.Settings berrySettings = new Item.Settings().group(ItemGroup.FOOD);
+
     //berry items
     public static Berry SASKATOON_BERRIES;
     public static Berry STRAWBERRY;
@@ -30,6 +34,7 @@ public class Berries {
     public static Berry GRAPES;
     public static Berry GOJI_BERRIES;
     public static Berry GOOSEBERRIES;
+    public static Berry CLOUDBERRIES;
 
     public static void registerBerries() {
         //create items for each berry
@@ -43,6 +48,7 @@ public class Berries {
         GRAPES = new Berry(Bushes.GRAPEVINE, settings(2, 2f));
         GOJI_BERRIES = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(2, 2.5f));
         GOOSEBERRIES = new Berry(Bushes.GOOSEBERRY_BUSH, settings(2, 1f));
+        CLOUDBERRIES = new Berry(Bushes.CLOUDBERRY_BUSH, berrySettings.food(new FoodComponent.Builder().hunger(2).saturationModifier(1.5f).statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600, 1), 1).snack().build()));
 
         //automatic stuffs
         initialise(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
@@ -55,6 +61,7 @@ public class Berries {
         initialise(Bushes.GRAPEVINE, GRAPES);
         initialise(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, GOJI_BERRIES);
         initialise(Bushes.GOOSEBERRY_BUSH, GOOSEBERRIES);
+        initialise(Bushes.CLOUDBERRY_BUSH, CLOUDBERRIES);
 
         initialiseBerries();
 
@@ -69,6 +76,7 @@ public class Berries {
         register(GRAPES, "grapes");
         register(GOJI_BERRIES, "goji_berries");
         register(GOOSEBERRIES, "gooseberries");
+        register(CLOUDBERRIES, "cloudberries");
     }
 
     /**

@@ -4,6 +4,7 @@ import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryVine;
 import io.ix0rai.bodaciousberries.block.ChorusBerryBush;
+import io.ix0rai.bodaciousberries.block.CloudberryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.block.RainberryBush;
@@ -26,6 +27,7 @@ public class Bushes {
     private static final VoxelShape LARGE_LINGONBERRY = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
     private static final VoxelShape LARGE_STRAWBERRY = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
     private static final VoxelShape LARGE_RASPBERRY = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 13.0D, 15.0D);
+    private static final VoxelShape LARGE_CLOUDBERRY = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 15.0D, 13.0D);
 
     public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
 
@@ -54,6 +56,8 @@ public class Bushes {
             DOUBLE_GOJI_BERRY_BUSH);
     public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyThreeStageBush(Berries.GOOSEBERRIES,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
+    public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(Berries.CLOUDBERRIES,
+            SMALL_SWEET_BERRY, LARGE_CLOUDBERRY, 1);
 
     public static void registerBushes() {
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
@@ -68,6 +72,7 @@ public class Bushes {
         register("goji_berry_bush", GOJI_BERRY_BUSH);
         register("double_goji_berry_bush", DOUBLE_GOJI_BERRY_BUSH);
         register("gooseberry_bush", GOOSEBERRY_BUSH);
+        register("cloudberry_bush", CLOUDBERRY_BUSH);
     }
 
     private static void register(String name, Block block) {
