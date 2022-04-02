@@ -5,6 +5,8 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import java.util.Iterator;
+
 public class GojiBerryBlend extends Juice {
     public GojiBerryBlend(Settings settings) {
         super(settings);
@@ -12,7 +14,11 @@ public class GojiBerryBlend extends Juice {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        for (StatusEffectInstance instance : user.getStatusEffects()) {
+        //note: a mod conflict causes a cme here, so we use an iterator over an enhanced for
+        Iterator<StatusEffectInstance> iterator = user.getStatusEffects().iterator();
+
+        while (iterator.hasNext()) {
+            StatusEffectInstance instance = iterator.next();
             user.removeStatusEffect(instance.getEffectType());
         }
 
