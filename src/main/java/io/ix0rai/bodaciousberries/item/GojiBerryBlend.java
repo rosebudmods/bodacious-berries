@@ -16,11 +16,10 @@ public class GojiBerryBlend extends Juice {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         //note: a mod conflict causes a cme here, so we use an iterator over an enhanced for
         Iterator<StatusEffectInstance> iterator = user.getStatusEffects().iterator();
-
-        while (iterator.hasNext()) {
+        do {
             StatusEffectInstance instance = iterator.next();
             user.removeStatusEffect(instance.getEffectType());
-        }
+        } while (iterator.hasNext());
 
         return super.finishUsing(stack, world, user);
     }
