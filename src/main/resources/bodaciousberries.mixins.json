@@ -5,16 +5,16 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "FireBlockInjector",
-    "RegistryManagerInjector",
     "PathNodeMakerInjector",
+    "RegistryManagerInjector",
     "VineDecoratorOverwrite",
     "accessors.BiomeCategoryAccessor",
     "accessors.DamageSourceAccessor",
-    "accessors.DefaultParticleTypeAccessor",
-    "accessors.FoodEffectAccessor",
-    "accessors.WaterSuspendParticleAccessor"
+    "accessors.FoodEffectAccessor"
   ],
   "client": [
+    "accessors.DefaultParticleTypeAccessor",
+    "accessors.WaterSuspendParticleAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
