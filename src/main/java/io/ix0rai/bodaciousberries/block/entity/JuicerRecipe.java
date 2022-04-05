@@ -15,7 +15,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, ItemStack result) implements Recipe<ImplementedInventory> {
+public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack result) implements Recipe<ImplementedInventory> {
+    public Ingredient getIngredient0() {
+        return this.ingredient0;
+    }
+
     public Ingredient getIngredient1() {
         return this.ingredient1;
     }
@@ -24,22 +28,27 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
         return this.ingredient2;
     }
 
-    public Ingredient getIngredient3() {
-        return this.ingredient3;
+    public Ingredient getReceptacle() {
+        return this.receptacle;
     }
 
     public boolean isIngredient(ItemStack stack) {
-        return ingredient1.test(stack) || ingredient2.test(stack) || ingredient3.test(stack);
+        return ingredient0.test(stack) || ingredient1.test(stack) || ingredient2.test(stack);
     }
 
     public boolean isResult(ItemStack stack) {
         return result.getItem().equals(stack.getItem());
     }
 
+    public boolean isReceptacle(ItemStack stack) {
+        return receptacle.test(stack);
+    }
+
     @Override
     public boolean matches(ImplementedInventory inv, World world) {
         if (inv.size() < 5) return false;
-        return ingredient1.test(inv.getStack(3)) && ingredient2.test(inv.getStack(4)) && ingredient3.test(inv.getStack(5));
+        return ingredient0.test(inv.getStack(3)) && ingredient1.test(inv.getStack(4)) && ingredient2.test(inv.getStack(5))
+                && (receptacle.test(inv.getStack(0)) || receptacle.test(inv.getStack(1)) || receptacle.test(inv.getStack(2)));
     }
 
     @Override
@@ -57,21 +66,14 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
         return this.result;
     }
 
+    @Override
     public Identifier getId() {
         return this.id;
     }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return JuicerRecipeSerializer.INSTANCE;
-    }
-
-    public static class Type implements RecipeType<JuicerRecipe> {
-        private Type() {
-        }
-
-        public static final Type INSTANCE = new Type();
-        public static final String ID = "juicer_recipe";
+        return Serializer.INSTANCE;
     }
 
     @Override
@@ -79,22 +81,31 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
         return Type.INSTANCE;
     }
 
-    @SuppressWarnings("unused")
+    public static class Type implements RecipeType<JuicerRecipe> {
+        private Type() {
+
+        }
+
+        public static final Type INSTANCE = new Type();
+        public static final String ID = "juicer_recipe";
+    }
+
     private static class JuicerRecipeJsonFormat {
         public JsonObject ingredient0;
         public JsonObject ingredient1;
         public JsonObject ingredient2;
+        public JsonObject receptacle;
         public String result;
     }
 
-    public static class JuicerRecipeSerializer implements RecipeSerializer<JuicerRecipe> {
-        private JuicerRecipeSerializer() {
+    public static class Serializer implements RecipeSerializer<JuicerRecipe> {
+        private Serializer() {
 
         }
 
-        public static final JuicerRecipeSerializer INSTANCE = new JuicerRecipeSerializer();
+        public static final Serializer INSTANCE = new Serializer();
 
-        public static final Identifier ID = Bodaciousberries.getIdentifier("juicer_recipe");
+        public static final Identifier ID = Bodaciousberries.getIdentifier(Type.ID);
 
         @Override
         public JuicerRecipe read(Identifier id, JsonObject json) {
@@ -104,14 +115,15 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
                 throw new JsonSyntaxException("a required attribute is missing!");
             }
 
-            Ingredient input1 = Ingredient.fromJson(recipeJson.ingredient0);
-            Ingredient input2 = Ingredient.fromJson(recipeJson.ingredient1);
-            Ingredient input3 = Ingredient.fromJson(recipeJson.ingredient2);
+            Ingredient input0 = Ingredient.fromJson(recipeJson.ingredient0);
+            Ingredient input1 = Ingredient.fromJson(recipeJson.ingredient1);
+            Ingredient input2 = Ingredient.fromJson(recipeJson.ingredient2);
+            Ingredient receptacle = Ingredient.fromJson(recipeJson.receptacle);
             Item outputItem = Registry.ITEM.getOrEmpty(new Identifier(recipeJson.result))
                     .orElseThrow(() -> new JsonSyntaxException("no such item: " + recipeJson.result));
             ItemStack output = new ItemStack(outputItem);
 
-            return new JuicerRecipe(id, input1, input2, input3, output);
+            return new JuicerRecipe(id, input0, input1, input2, receptacle, output);
         }
 
         public JuicerRecipe read(JsonObject json) {
@@ -120,9 +132,10 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
 
         @Override
         public void write(PacketByteBuf packetData, JuicerRecipe recipe) {
+            recipe.getIngredient0().write(packetData);
             recipe.getIngredient1().write(packetData);
             recipe.getIngredient2().write(packetData);
-            recipe.getIngredient3().write(packetData);
+            recipe.getReceptacle().write(packetData);
             packetData.writeItemStack(recipe.getOutput());
         }
 
@@ -131,8 +144,8 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient1, Ingredient ing
             Ingredient input1 = Ingredient.fromPacket(packetData);
             Ingredient input2 = Ingredient.fromPacket(packetData);
             Ingredient input3 = Ingredient.fromPacket(packetData);
-            ItemStack output = packetData.readItemStack();
-            return new JuicerRecipe(id, input1, input2, input3, output);
+            Ingredient receptacle = Ingredient.fromPacket(packetData);
+            return new JuicerRecipe(id, input1, input2, input3, receptacle, packetData.readItemStack());
         }
     }
 }

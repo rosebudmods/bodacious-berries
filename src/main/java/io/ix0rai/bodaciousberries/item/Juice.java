@@ -58,10 +58,10 @@ public class Juice extends Item {
         //return empty bottle, or throw it away if it does not fit
         //also decrement the stack size if it will not be entirely consumed
         if (stack.isEmpty()) {
-            return new ItemStack(Juices.RECEPTACLE);
+            return new ItemStack(Juices.JUICE_RECEPTACLE);
         } else {
             if (user instanceof PlayerEntity playerEntity && !playerEntity.getAbilities().creativeMode) {
-                ItemStack glassBottle = new ItemStack(Juices.RECEPTACLE);
+                ItemStack glassBottle = new ItemStack(Juices.JUICE_RECEPTACLE);
                 if (!playerEntity.getInventory().insertStack(glassBottle)) {
                     playerEntity.dropItem(glassBottle, false);
                 }

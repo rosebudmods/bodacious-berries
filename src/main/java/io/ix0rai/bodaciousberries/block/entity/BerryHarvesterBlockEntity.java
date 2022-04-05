@@ -122,14 +122,16 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
         //find an open slot and insert items
         for (int i = 0; i < this.getItems().size(); i++) {
             //get items currently in slot
-            ItemStack inSlot = this.getItems().get(i);
-            if ((inSlot.isEmpty() || inSlot.getItem().equals(stack.getItem())) && inSlot.getCount() <= 64) {
-                stack.setCount(inSlot.getCount() + stack.getCount());
+            ItemStack slot = this.getItems().get(i);
+            int maxAmount = slot.getMaxCount();
+
+            if ((slot.isEmpty() || slot.getItem().equals(stack.getItem())) && slot.getCount() <= maxAmount) {
+                stack.setCount(slot.getCount() + stack.getCount());
                 //if stack overflows available space
-                if (stack.getCount() > 64) {
+                if (stack.getCount() > maxAmount) {
                     //split the stack, inserting one stack of 64 and running the remainder back through the loop
-                    this.setStack(i, new ItemStack(stack.getItem(), 64));
-                    stack.decrement(64);
+                    this.setStack(i, new ItemStack(stack.getItem(), maxAmount));
+                    stack.decrement(maxAmount);
                 } else {
                     //if stack fits, insert it
                     this.setStack(i, stack);
