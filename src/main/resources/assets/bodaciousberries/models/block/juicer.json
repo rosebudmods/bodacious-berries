@@ -6,6 +6,7 @@
     "south": "bodaciousberries:block/juicer_side_idle",
     "east": "bodaciousberries:block/juicer_side_idle",
     "west": "bodaciousberries:block/juicer_side_idle",
-    "down": "minecraft:block/furnace_top"
+    "down": "minecraft:block/furnace_top",
+    "particle": "bodaciousberries:block/juicer_side"
   }
 }
