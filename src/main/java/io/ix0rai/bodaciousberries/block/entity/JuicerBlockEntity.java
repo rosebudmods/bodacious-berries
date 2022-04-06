@@ -80,7 +80,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         //craft items for all three slots - as long as there's a bottle to contain the juice
         for(int i = 0; i < 3; i ++) {
             if (receptacle.test(slots.get(i))) {
-                slots.set(i, result);
+                slots.set(i, new ItemStack(result.getItem()));
             }
         }
 
@@ -126,7 +126,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
                 juicer.makingDubiousJuice = false;
-            } else if (recipe.isEmpty() && !juicer.makingDubiousJuice || !juicer.hasValidReceptacle()) {
+            } else if (recipe.isEmpty() && !(juicer.makingDubiousJuice && juicer.hasAllIngredients()) || !juicer.hasValidReceptacle()) {
                 //if we cannot craft, the ingredient has been removed/changed, and we should stop brewing without giving a result
                 juicer.brewTime = 0;
                 markDirty(world, pos, state);
@@ -150,6 +150,10 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 juicer.makingDubiousJuice = true;
             }
         }
+    }
+
+    public boolean hasAllIngredients() {
+        return !inventory.get(3).isEmpty() && !inventory.get(4).isEmpty() && !inventory.get(5).isEmpty();
     }
 
     public boolean hasValidReceptacle() {

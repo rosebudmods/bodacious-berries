@@ -82,19 +82,24 @@ public class JuicerScreenHandler extends ScreenHandler {
             if (index > finalJuicerSlot) {
                 //ingredient item
                 if (JuicerRecipes.isIngredient(stack)) {
+                    //attempt to insert into any ingredient slot
                     if (!this.insertItem(slotItems, 3, finalJuicerSlot + 1, false)) {
                         return empty;
                     }
                 //output item
                 } else if (JuicerOutputSlot.matches(stack)) {
+                    //iterate over output slots
                     for (int i = 0; i < 3; i++) {
-                        if (slotItems.isEmpty()) {
+                        //check if tested output slot is empty
+                        if (this.slots.get(i).getStack().isEmpty()) {
+                            //if so, insert a single item and decrement stack sending the item by 1
                             if (this.insertItem(new ItemStack(slotItems.getItem()), i, i + 1, false)) {
                                 slotItems.decrement(1);
                             }
                             return empty;
                         }
                     }
+                //code for moving items around the vanilla inventory
                 } else if (index < firstInventorySlot) {
                     if (!this.insertItem(slotItems, firstInventorySlot, finalInventorySlot, false)) {
                         return empty;
