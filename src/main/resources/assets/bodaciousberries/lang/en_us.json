@@ -65,5 +65,8 @@
   "block.bodaciousberries.goji_berry_bush": "Goji Berry Bush",
   "block.bodaciousberries.double_goji_berry_bush": "Double Goji Berry Bush",
   "block.bodaciousberries.cloudberry_bush": "Cloudberry Bush",
-  "block.bodaciousberries.juicer": "Juicer"
+  "block.bodaciousberries.juicer": "Juicer",
+  "subtitles.bodaciousberries.block.berry_bush.pick_1": "Berry harvested",
+  "subtitles.bodaciousberries.block.berry_bush.pick_2": "Berry harvested",
+  "subtitles.bodaciousberries.block.berry_bush.pick_3": "Berry harvested"
 }

@@ -1,17 +1,20 @@
 {
-  "berry_pick_1": {
+  "block.berry_bush.pick_1": {
     "sounds": [
-      "bodaciousberries:berry_pick_1"
-    ]
+      "bodaciousberries:block/pick_1"
+    ],
+    "subtitle": "subtitles.bodaciousberries.block.berry_bush.pick_1"
   },
-  "berry_pick_2": {
+  "block.berry_bush.pick_2": {
     "sounds": [
-      "bodaciousberries:berry_pick_2"
-    ]
+      "bodaciousberries:block/pick_2"
+    ],
+    "subtitle": "subtitles.bodaciousberries.block.berry_bush.pick_2"
   },
-  "berry_pick_3": {
+  "block.berry_bush.pick_3": {
     "sounds": [
-      "bodaciousberries:berry_pick_3"
-    ]
+      "bodaciousberries:block/pick_3"
+    ],
+    "subtitle": "subtitles.bodaciousberries.block.berry_bush.pick_3"
   }
 }

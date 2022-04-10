@@ -5,21 +5,25 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class Sounds {
-    private static final Identifier BERRY_PICK_1_ID = Bodaciousberries.getIdentifier("berry_pick_1");
-    public static final SoundEvent BERRY_PICK_1 = new SoundEvent(BERRY_PICK_1_ID);
-    private static final Identifier BERRY_PICK_2_ID = Bodaciousberries.getIdentifier("berry_pick_2");
-    public static final SoundEvent BERRY_PICK_2 = new SoundEvent(BERRY_PICK_2_ID);
-    private static final Identifier BERRY_PICK_3_ID = Bodaciousberries.getIdentifier("berry_pick_3");
-    public static final SoundEvent BERRY_PICK_3 = new SoundEvent(BERRY_PICK_3_ID);
+import java.util.HashMap;
+import java.util.Map;
 
-    public static void registerSounds() {
-        register(BERRY_PICK_1_ID, BERRY_PICK_1);
-        register(BERRY_PICK_2_ID, BERRY_PICK_2);
-        register(BERRY_PICK_3_ID, BERRY_PICK_3);
+public class Sounds {
+    private static final HashMap<Identifier, SoundEvent> SOUND_EVENTS = new HashMap<>();
+
+    public static final SoundEvent BERRY_PICK_1 = create(Bodaciousberries.getIdentifier("block.berry_bush.pick_1"));
+    public static final SoundEvent BERRY_PICK_2 = create(Bodaciousberries.getIdentifier("block.berry_bush.pick_2"));
+    public static final SoundEvent BERRY_PICK_3 = create(Bodaciousberries.getIdentifier("block.berry_bush.pick_3"));
+
+    private static SoundEvent create(Identifier id) {
+        SoundEvent event = new SoundEvent(id);
+        SOUND_EVENTS.put(id, event);
+        return event;
     }
 
-    private static void register(Identifier identifier, SoundEvent soundEvent) {
-        Registry.register(Registry.SOUND_EVENT, identifier, soundEvent);
+    public static void registerSounds() {
+        for (Map.Entry<Identifier, SoundEvent> entry : SOUND_EVENTS.entrySet()) {
+            Registry.register(Registry.SOUND_EVENT, entry.getKey(), entry.getValue());
+        }
     }
 }
