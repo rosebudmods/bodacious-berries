@@ -6,6 +6,8 @@ public class Compat {
     public static void registerCompat() {
         String s = MoreBerries.init() +
                 ImprovedBerries.init();
-        Bodaciousberries.LOGGER.info("compat loaded with mods: " + s.replace(',', ' ').stripTrailing());
+        if (!s.isEmpty()) {
+            Bodaciousberries.LOGGER.info("compat loaded with mods: " + s.replace(',', ' ').stripTrailing());
+        }
     }
 }
