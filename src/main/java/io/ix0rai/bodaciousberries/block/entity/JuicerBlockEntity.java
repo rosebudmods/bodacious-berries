@@ -17,6 +17,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -37,20 +38,23 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     private int brewTime = 0;
     private boolean makingDubiousJuice = false;
 
-    private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
+    private final PropertyDelegate propertyDelegate = new ArrayPropertyDelegate(2) {
         @Override
         public int get(int index) {
-            return brewTime;
+            return switch (index) {
+                case 0 -> brewTime;
+                case 1 -> makingDubiousJuice ? 1 : 0;
+                default -> throw new IllegalArgumentException("invalid property index: " + index);
+            };
         }
 
         @Override
         public void set(int index, int value) {
-            brewTime = value;
-        }
-
-        @Override
-        public int size() {
-            return 1;
+            switch (index) {
+                case 0 -> brewTime = value;
+                case 1 -> makingDubiousJuice = value == 1;
+                default -> throw new IllegalArgumentException("invalid property index: " + index);
+            }
         }
     };
 

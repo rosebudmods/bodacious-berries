@@ -13,10 +13,10 @@ import net.minecraft.screen.slot.Slot;
 
 public class JuicerScreenHandler extends ScreenHandler {
     private final Inventory inventory;
-    private final PropertyDelegate brewTime;
+    private final PropertyDelegate propertyDelegate;
 
     public JuicerScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(6), new ArrayPropertyDelegate(1));
+        this(syncId, playerInventory, new SimpleInventory(6), new ArrayPropertyDelegate(2));
     }
 
     /**
@@ -28,12 +28,12 @@ public class JuicerScreenHandler extends ScreenHandler {
      * 4: ingredient slot 2
      * 5: ingredient slot 3
      */
-    public JuicerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate brewTime) {
+    public JuicerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
         super(BodaciousBlocks.JUICER_SCREEN_HANDLER, syncId);
         checkSize(inventory, 6);
         this.inventory = inventory;
-        this.brewTime = brewTime;
-        this.addProperties(brewTime);
+        this.propertyDelegate = propertyDelegate;
+        this.addProperties(propertyDelegate);
 
         //output slots
         this.addSlot(new JuicerOutputSlot(inventory, 0, 56, 51));
@@ -63,7 +63,11 @@ public class JuicerScreenHandler extends ScreenHandler {
     }
 
     public int getBrewTime() {
-        return this.brewTime.get(0);
+        return this.propertyDelegate.get(0);
+    }
+
+    public boolean brewingDubiously() {
+        return this.propertyDelegate.get(1) == 1;
     }
 
     @Override
