@@ -82,7 +82,7 @@ public class JuicerRecipes {
         //adds "ingredients": {"item": "ingredient", "item", "bodaciousberries:chorus_berry_juice}
         JsonArray ingredientArray = new JsonArray();
         ingredientArray.add(getItemProperty(ingredient.toString()));
-        ingredientArray.add(getItemProperty(Bodaciousberries.getId("chorus_berry_juice")));
+        ingredientArray.add(getItemProperty(Bodaciousberries.idString("chorus_berry_juice")));
         json.add("ingredients", ingredientArray);
 
         //add result

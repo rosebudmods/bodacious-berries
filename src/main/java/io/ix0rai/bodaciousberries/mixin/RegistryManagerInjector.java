@@ -21,11 +21,11 @@ public class RegistryManagerInjector {
     @Inject(method = "apply*", at = @At("HEAD"))
     public void interceptApply(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo info) {
         for (JsonObject jsonObject : JuicerRecipes.JUICER_RECIPES) {
-            map.put(Bodaciousberries.getIdentifier(jsonObject.get("result").getAsString().split(":")[1]), jsonObject);
+            map.put(Bodaciousberries.id(jsonObject.get("result").getAsString().split(":")[1]), jsonObject);
         }
 
         for (JsonObject jsonObject : Juices.RECIPES) {
-            map.put(Bodaciousberries.getIdentifier(jsonObject.get("result").getAsJsonObject().get("item").getAsString().split(":")[1]), jsonObject);
+            map.put(Bodaciousberries.id(jsonObject.get("result").getAsJsonObject().get("item").getAsString().split(":")[1]), jsonObject);
         }
     }
 }

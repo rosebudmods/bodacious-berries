@@ -109,7 +109,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
         public static final Serializer INSTANCE = new Serializer();
 
-        public static final Identifier ID = Bodaciousberries.getIdentifier(Type.ID);
+        public static final Identifier ID = Bodaciousberries.id(Type.ID);
 
         @Override
         public JuicerRecipe read(Identifier id, JsonObject json) {
@@ -131,7 +131,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         }
 
         public JuicerRecipe read(JsonObject json) {
-            return read(Bodaciousberries.getIdentifier(json.get("result").getAsString().split(":")[1]), json);
+            return read(Bodaciousberries.id(json.get("result").getAsString().split(":")[1]), json);
         }
 
         @Override

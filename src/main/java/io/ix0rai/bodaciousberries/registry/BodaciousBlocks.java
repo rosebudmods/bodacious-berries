@@ -21,12 +21,12 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class BodaciousBlocks {
-    public static final Identifier BERRY_HARVESTER = Bodaciousberries.getIdentifier("berry_harvester");
+    public static final Identifier BERRY_HARVESTER = Bodaciousberries.id("berry_harvester");
     public static final BerryHarvesterBlock BERRY_HARVESTER_BLOCK = new BerryHarvesterBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f));
     public static final BlockEntityType<BerryHarvesterBlockEntity> BERRY_HARVESTER_ENTITY = FabricBlockEntityTypeBuilder.create(BerryHarvesterBlockEntity::new, BERRY_HARVESTER_BLOCK).build(null);
     public static ScreenHandlerType<BerryHarvesterScreenHandler> BERRY_HARVESTER_SCREEN_HANDLER;
 
-    public static final Identifier JUICER = Bodaciousberries.getIdentifier("juicer");
+    public static final Identifier JUICER = Bodaciousberries.id("juicer");
     public static final JuicerBlock JUICER_BLOCK = new JuicerBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f));
     public static final BlockEntityType<JuicerBlockEntity> JUICER_ENTITY = FabricBlockEntityTypeBuilder.create(JuicerBlockEntity::new, JUICER_BLOCK).build(null);
     public static ScreenHandlerType<JuicerScreenHandler> JUICER_SCREEN_HANDLER;
@@ -42,6 +42,6 @@ public class BodaciousBlocks {
     private static void registerBlockEntity(Identifier id, Block block, BlockEntityType<?> entity, ItemGroup group) {
         Registry.register(Registry.BLOCK, id, block);
         Registry.register(Registry.ITEM, id, new BlockItem(block, new Settings().group(group)));
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, Bodaciousberries.getIdentifier(id.getPath() + "_entity"), entity);
+        Registry.register(Registry.BLOCK_ENTITY_TYPE, Bodaciousberries.id(id.getPath() + "_entity"), entity);
     }
 }

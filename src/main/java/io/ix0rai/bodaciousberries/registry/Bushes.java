@@ -76,6 +76,6 @@ public class Bushes {
     }
 
     private static void register(String name, Block block) {
-        Registry.register(Registry.BLOCK, Bodaciousberries.getIdentifier(name), block);
+        Registry.register(Registry.BLOCK, Bodaciousberries.id(name), block);
     }
 }

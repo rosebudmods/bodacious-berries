@@ -120,7 +120,7 @@ public class Berries {
     }
 
     private static void register(Item berry, String name) {
-        Registry.register(Registry.ITEM, Bodaciousberries.getIdentifier(name), berry);
+        Registry.register(Registry.ITEM, Bodaciousberries.id(name), berry);
     }
 
     private static Item.Settings settings(int hunger, float saturation) {

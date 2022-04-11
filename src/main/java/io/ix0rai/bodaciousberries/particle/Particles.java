@@ -17,7 +17,7 @@ public class Particles {
     }
 
     private static void registerParticle(String name, DefaultParticleType particle, ParticleFactoryRegistry.PendingParticleFactory<DefaultParticleType> constructor) {
-        Registry.register(Registry.PARTICLE_TYPE, Bodaciousberries.getIdentifier(name), particle);
+        Registry.register(Registry.PARTICLE_TYPE, Bodaciousberries.id(name), particle);
         ParticleFactoryRegistryImpl.INSTANCE.register(particle, constructor);
     }
 }

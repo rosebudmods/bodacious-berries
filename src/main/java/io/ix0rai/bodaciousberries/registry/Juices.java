@@ -34,7 +34,7 @@ public class Juices {
         Registry.register(Registry.RECIPE_SERIALIZER, JuicerRecipe.Serializer.ID, JuicerRecipe.Serializer.INSTANCE);
         Registry.register(Registry.RECIPE_TYPE, JuicerRecipe.Type.ID, JuicerRecipe.Type.INSTANCE);
 
-        register(Bodaciousberries.getIdentifier("dubious_juice"), DUBIOUS_JUICE);
+        register(Bodaciousberries.id("dubious_juice"), DUBIOUS_JUICE);
 
         register("saskatoon_berry_juice", new Juice(Berries.SASKATOON_BERRIES));
         register("strawberry_juice", new Juice(Berries.STRAWBERRY));
@@ -90,7 +90,7 @@ public class Juices {
         for (int i = 0; i < biomes.size(); i++) {
             RegistryKey<Biome> key = biomes.get(i);
             ChorusBerryJuice juice = new ChorusBerryJuice(Berries.CHORUS_BERRIES, key.getValue());
-            Identifier id = Bodaciousberries.getIdentifier("chorus_berry_juice_" + key.getValue().getPath());
+            Identifier id = Bodaciousberries.id("chorus_berry_juice_" + key.getValue().getPath());
 
             RECIPES.add(JuicerRecipes.createShapelessJson(Registry.ITEM.getId(biomeItems.get(i)), id));
 
@@ -99,13 +99,13 @@ public class Juices {
     }
 
     private static void register(String name, Juice juice) {
-        Identifier id = Bodaciousberries.getIdentifier(name);
+        Identifier id = Bodaciousberries.id(name);
         JuicerRecipes.addJuiceRecipe(Registry.ITEM.getId(juice.getBerry()), id);
         register(id, juice);
     }
 
     private static void registerBlend(Item input0, Item input1, Item input2, String name, Juice juice) {
-        Identifier id = Bodaciousberries.getIdentifier(name);
+        Identifier id = Bodaciousberries.id(name);
         register(id, juice);
         JuicerRecipes.addJuiceRecipe(Registry.ITEM.getId(input0), Registry.ITEM.getId(input1), Registry.ITEM.getId(input2), id);
     }

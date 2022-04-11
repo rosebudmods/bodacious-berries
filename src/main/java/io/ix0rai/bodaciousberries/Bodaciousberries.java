@@ -16,11 +16,11 @@ public class Bodaciousberries implements ModInitializer {
     public static final String MOD_ID = "bodaciousberries";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-    public static Identifier getIdentifier(String path) {
-        return new Identifier(getId(path));
+    public static Identifier id(String path) {
+        return new Identifier(idString(path));
     }
 
-    public static String getId(String path) {
+    public static String idString(String path) {
         return MOD_ID + ":" + path;
     }
 

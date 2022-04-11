@@ -11,9 +11,9 @@ import java.util.Map;
 public class Sounds {
     private static final HashMap<Identifier, SoundEvent> SOUND_EVENTS = new HashMap<>();
 
-    public static final SoundEvent BERRY_PICK_1 = create(Bodaciousberries.getIdentifier("block.berry_bush.pick_1"));
-    public static final SoundEvent BERRY_PICK_2 = create(Bodaciousberries.getIdentifier("block.berry_bush.pick_2"));
-    public static final SoundEvent BERRY_PICK_3 = create(Bodaciousberries.getIdentifier("block.berry_bush.pick_3"));
+    public static final SoundEvent BERRY_PICK_1 = create(Bodaciousberries.id("block.berry_bush.pick_1"));
+    public static final SoundEvent BERRY_PICK_2 = create(Bodaciousberries.id("block.berry_bush.pick_2"));
+    public static final SoundEvent BERRY_PICK_3 = create(Bodaciousberries.id("block.berry_bush.pick_3"));
 
     private static SoundEvent create(Identifier id) {
         SoundEvent event = new SoundEvent(id);
