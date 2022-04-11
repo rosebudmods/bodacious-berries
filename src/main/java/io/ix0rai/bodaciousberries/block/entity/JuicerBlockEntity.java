@@ -37,13 +37,15 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
     private int brewTime = 0;
     private boolean makingDubiousJuice = false;
+    private boolean makingBerryBlend = false;
 
-    private final PropertyDelegate propertyDelegate = new ArrayPropertyDelegate(2) {
+    private final PropertyDelegate propertyDelegate = new ArrayPropertyDelegate(3) {
         @Override
         public int get(int index) {
             return switch (index) {
                 case 0 -> brewTime;
                 case 1 -> makingDubiousJuice ? 1 : 0;
+                case 2 -> makingBerryBlend ? 1 : 0;
                 default -> throw new IllegalArgumentException("invalid property index: " + index);
             };
         }
@@ -53,6 +55,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
             switch (index) {
                 case 0 -> brewTime = value;
                 case 1 -> makingDubiousJuice = value == 1;
+                case 2 -> makingBerryBlend = value == 1;
                 default -> throw new IllegalArgumentException("invalid property index: " + index);
             }
         }
@@ -136,11 +139,16 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
                 juicer.makingDubiousJuice = false;
+                juicer.makingBerryBlend = false;
             }
         } else if (juicer.hasValidReceptacle()) {
             DefaultedList<ItemStack> inventory = juicer.getItems();
 
             if (recipe.isPresent()) {
+                if (!recipe.get().ingredientsMatch(inventory.get(3))) {
+                    juicer.makingBerryBlend = true;
+                }
+
                 //if we're not currently brewing, start brewing with the ingredient
                 juicer.brewTime = TOTAL_BREW_TIME;
                 markDirty(world, pos, state);

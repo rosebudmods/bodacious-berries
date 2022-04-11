@@ -16,7 +16,7 @@ public class JuicerScreenHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;
 
     public JuicerScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(6), new ArrayPropertyDelegate(2));
+        this(syncId, playerInventory, new SimpleInventory(6), new ArrayPropertyDelegate(3));
     }
 
     /**
@@ -64,6 +64,10 @@ public class JuicerScreenHandler extends ScreenHandler {
 
     public int getBrewTime() {
         return this.propertyDelegate.get(0);
+    }
+
+    public boolean brewingBlend() {
+        return this.propertyDelegate.get(2) == 1;
     }
 
     public boolean brewingDubiously() {

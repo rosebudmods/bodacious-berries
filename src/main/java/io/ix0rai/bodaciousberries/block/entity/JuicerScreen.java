@@ -15,6 +15,10 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
     private static final int DUBIOUS_PROGRESS_BAR_X = 227;
     private static final int BUBBLE_X = 176;
     private static final int PROGRESS_BAR_X = 200;
+    private static final int BUBBLE_Y = 29;
+    private static final int PROGRESS_BAR_Y = 0;
+    private static final int BLEND_BUBBLE_Y = 59;
+    private static final int BLEND_PROGRESS_BAR_Y = 31;
 
     public JuicerScreen(JuicerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -40,19 +44,20 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
 
         int brewTime = this.handler.getBrewTime();
         boolean dubious = this.handler.brewingDubiously();
+        boolean blend = this.handler.brewingBlend();
 
         if (brewTime > 0) {
             //draw progress bar
             int progress = Math.round(28.0F * (1.0F - brewTime / (float) JuicerBlockEntity.TOTAL_BREW_TIME));
             if (progress > 0) {
-                this.drawTexture(matrices, x + 73, y + 34, dubious ? DUBIOUS_PROGRESS_BAR_X : PROGRESS_BAR_X, 0, 28, progress);
+                this.drawTexture(matrices, x + 73, y + 35, dubious ? DUBIOUS_PROGRESS_BAR_X : PROGRESS_BAR_X, blend ? BLEND_PROGRESS_BAR_Y : PROGRESS_BAR_Y, 28, progress);
             }
 
             //draw bubbles
             progress = BUBBLE_PROGRESS[brewTime / 2 % 7];
             if (progress > 0) {
-                this.drawTexture(matrices, x + 58, y + 63 - progress, dubious ? DUBIOUS_BUBBLE_X : BUBBLE_X, 29 - progress, 12, progress);
-                this.drawTexture(matrices, x + 104, y + 63 - progress, dubious ? DUBIOUS_BUBBLE_X : BUBBLE_X, 29 - progress, 12, progress);
+                this.drawTexture(matrices, x + 58, y + 63 - progress, dubious ? DUBIOUS_BUBBLE_X : BUBBLE_X, (blend ? BLEND_BUBBLE_Y : BUBBLE_Y) - progress, 12, progress);
+                this.drawTexture(matrices, x + 104, y + 63 - progress, dubious ? DUBIOUS_BUBBLE_X : BUBBLE_X, (blend ? BLEND_BUBBLE_Y : BUBBLE_Y) - progress, 12, progress);
             }
         }
     }

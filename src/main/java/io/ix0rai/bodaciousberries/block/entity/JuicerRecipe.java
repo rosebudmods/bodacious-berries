@@ -36,6 +36,10 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         return ingredient0.test(stack) || ingredient1.test(stack) || ingredient2.test(stack);
     }
 
+    public boolean ingredientsMatch(ItemStack ingredient) {
+        return ingredient0.test(ingredient) && ingredient1.test(ingredient) && ingredient2.test(ingredient);
+    }
+
     public boolean isResult(ItemStack stack) {
         return result.getItem().equals(stack.getItem());
     }
