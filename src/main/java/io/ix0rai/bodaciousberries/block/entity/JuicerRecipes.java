@@ -28,23 +28,21 @@ public class JuicerRecipes {
     }
 
     public static boolean isIngredient(ItemStack stack) {
-        return check(stack, juicerRecipe -> juicerRecipe.isIngredient(stack));
+        return check(juicerRecipe -> juicerRecipe.isIngredient(stack));
     }
 
     public static boolean isResult(ItemStack stack) {
-        return check(stack, juicerRecipe -> juicerRecipe.isResult(stack));
+        return check(juicerRecipe -> juicerRecipe.isResult(stack));
     }
 
     public static boolean isReceptacle(ItemStack stack) {
-        return check(stack, juicerRecipe -> juicerRecipe.isReceptacle(stack));
+        return check(juicerRecipe -> juicerRecipe.isReceptacle(stack));
     }
 
-    public static boolean check(ItemStack stack, Function<JuicerRecipe, Boolean> function) {
-        if (stack != null) {
-            for (JsonObject recipe : JUICER_RECIPES) {
-                if (function.apply(JuicerRecipe.Serializer.INSTANCE.read(recipe))) {
-                    return true;
-                }
+    public static boolean check(Function<JuicerRecipe, Boolean> function) {
+        for (JsonObject recipe : JUICER_RECIPES) {
+            if (function.apply(JuicerRecipe.Serializer.INSTANCE.read(recipe))) {
+                return true;
             }
         }
 

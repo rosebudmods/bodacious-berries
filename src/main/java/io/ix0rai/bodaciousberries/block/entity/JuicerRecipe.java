@@ -41,6 +41,9 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
     }
 
     public boolean isResult(ItemStack stack) {
+        if (stack.isEmpty()) {
+            return false;
+        }
         return result.getItem().equals(stack.getItem());
     }
 
