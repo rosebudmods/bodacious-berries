@@ -1,16 +1,15 @@
 package io.ix0rai.bodaciousberries.mixin;
 
 import io.ix0rai.bodaciousberries.block.BerryVine;
-import io.ix0rai.bodaciousberries.mixin.accessors.BiomeCategoryAccessor;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.tag.BiomeTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.treedecorator.LeavesVineTreeDecorator;
 import org.spongepowered.asm.mixin.Mixin;
@@ -49,7 +48,7 @@ public class VineDecoratorOverwrite {
             block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
         } else if (reallyIncrediblyStupidAwfulHorrendousDumbCheck(access, pos)) {
             //otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
-            if (((BiomeCategoryAccessor) (Object) access.getBiome(pos).value()).getCategory() == Biome.Category.JUNGLE && access.getRandom().nextInt(6) == 0) {
+            if (access.getBiome(pos).isIn(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
                 block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
             } else if (access.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
                 block = Blocks.VINE.getDefaultState().with(facing, true);

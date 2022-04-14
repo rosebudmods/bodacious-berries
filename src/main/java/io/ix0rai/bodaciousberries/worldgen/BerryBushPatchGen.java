@@ -4,12 +4,14 @@ import io.ix0rai.bodaciousberries.Bodaciousberries;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
-import io.ix0rai.bodaciousberries.mixin.accessors.BiomeCategoryAccessor;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.tag.BiomeTags;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.Biome;
@@ -32,6 +34,7 @@ import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class BerryBushPatchGen {
     private static final int RARE_BERRY_BUSH_RARITY = 80;
@@ -98,24 +101,23 @@ public class BerryBushPatchGen {
         PATCH_CLOUDBERRY_PLACED = berryPatchPlacedFeature("patch_cloudberry_placed", RARE_BERRY_BUSH_RARITY, PATCH_CLOUDBERRY, PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP);
 
         //register them for generation
-        final List<Biome.Category> saskatoonBerryCategories = List.of(Biome.Category.FOREST, Biome.Category.TAIGA, Biome.Category.MOUNTAIN);
-        final List<Biome.Category> strawberryCategories = List.of(Biome.Category.PLAINS, Biome.Category.FOREST, Biome.Category.SWAMP);
-        final List<Biome.Category> lingonberryCategories = List.of(Biome.Category.TAIGA, Biome.Category.FOREST);
-        final List<Biome.Category> gojiBerryCategories = List.of(Biome.Category.MOUNTAIN, Biome.Category.EXTREME_HILLS);
-        final List<Biome.Category> gooseberryCategories = List.of(Biome.Category.FOREST, Biome.Category.MOUNTAIN);
+        final List<TagKey<Biome>> saskatoonBerryCategories = List.of(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA, BiomeTags.IS_MOUNTAIN);
+        final List<TagKey<Biome>> strawberryCategories = List.of(BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE, BiomeTags.IS_FOREST, BiomeTags.SWAMP_HUT_HAS_STRUCTURE);
+        final List<TagKey<Biome>> lingonberryCategories = List.of(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA);
+        final List<TagKey<Biome>> gooseberryCategories = List.of(BiomeTags.IS_FOREST, BiomeTags.IS_MOUNTAIN);
 
         generateBerryPatches("add_saskatoon_berry_patches", saskatoonBerryCategories, PATCH_SASKATOON_BERRY_PLACED);
         generateBerryPatches("add_strawberry_patches", strawberryCategories, PATCH_STRAWBERRY_PLACED);
         generateBerryPatches("add_raspberry_patches", saskatoonBerryCategories, PATCH_RASPBERRY_PLACED);
         generateBerryPatches("add_blackberry_patches", saskatoonBerryCategories, PATCH_BLACKBERRY_PLACED);
-        generateBerryPatches("add_chorus_berry_patches", List.of(Biome.Category.THEEND), PATCH_CHORUS_BERRY_PLACED);
+        generateBerryPatches("add_chorus_berry_patches", BiomeTags.END_CITY_HAS_STRUCTURE, PATCH_CHORUS_BERRY_PLACED);
         generateBerryPatches("add_rainberry_patches", strawberryCategories, PATCH_RAINBERRY_PLACED);
         generateBerryPatches("add_lingonberry_patches", lingonberryCategories, PATCH_LINGONBERRY_PLACED);
-        generateBerryPatches("add_grapevine_patches", List.of(Biome.Category.JUNGLE), PATCH_GRAPEVINE_PLACED);
-        generateBerryPatches("add_goji_berry_patches", gojiBerryCategories, PATCH_GOJI_BERRY_PLACED);
+        generateBerryPatches("add_grapevine_patches", BiomeTags.IS_JUNGLE, PATCH_GRAPEVINE_PLACED);
+        generateBerryPatches("add_goji_berry_patches", BiomeTags.IS_MOUNTAIN, PATCH_GOJI_BERRY_PLACED);
         generateBerryPatches("add_gooseberry_patches", gooseberryCategories, PATCH_GOOSEBERRY_PLACED);
         //cloudberries generated below the minimum height will just die :(
-        generateBerryPatches("add_cloudberry_patches", List.of(Biome.Category.MOUNTAIN), PATCH_CLOUDBERRY_PLACED);
+        generateBerryPatches("add_cloudberry_patches", BiomeTags.IS_MOUNTAIN, PATCH_CLOUDBERRY_PLACED);
     }
 
     /**
@@ -173,17 +175,42 @@ public class BerryBushPatchGen {
     /**
      * generates the placed berry patch feature in the specified biomes
      * @param name the name of the feature
-     * @param categories the biomes to generate the feature in
+     * @param tag the biome tag to generate the feature in
      * @param placedFeature the feature to place
      */
-    public static void generateBerryPatches(String name, List<Biome.Category> categories, RegistryEntry<PlacedFeature> placedFeature) {
+    public static void generateBerryPatches(String name, TagKey<Biome> tag, RegistryEntry<PlacedFeature> placedFeature) {
+        generateBerryPatches(name, context -> context.getBiomeRegistryEntry().isIn(tag), placedFeature);
+    }
+
+    /**
+     * generates the placed berry patch feature in the specified biomes
+     * @param name the name of the feature
+     * @param tags the biome tags to generate the feature in
+     * @param placedFeature the feature to place
+     */
+    public static void generateBerryPatches(String name, List<TagKey<Biome>> tags, RegistryEntry<PlacedFeature> placedFeature) {
+        generateBerryPatches(
+                name,
+                //check all tags
+                context -> {
+                    RegistryEntry<Biome> entry = context.getBiomeRegistryEntry();
+                    for (TagKey<Biome> tag : tags) {
+                        if (entry.isIn(tag)) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                },
+                placedFeature
+        );
+    }
+
+    private static void generateBerryPatches(String name, Predicate<BiomeSelectionContext> predicate, RegistryEntry<PlacedFeature> placedFeature) {
         BiomeModifications.create(Bodaciousberries.id(name)).add(
                 ModificationPhase.ADDITIONS,
                 //decide if the biome should receive our feature
-                context -> {
-                    Biome.Category category = ((BiomeCategoryAccessor) (Object) context.getBiome()).getCategory();
-                    return categories.contains(category) && category != Biome.Category.NONE;
-                },
+                predicate,
                 //add feature to the biome under the step vegetal decoration
                 context -> context.getGenerationSettings().addBuiltInFeature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeature.value())
         );

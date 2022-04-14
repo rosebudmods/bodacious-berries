@@ -8,9 +8,7 @@
     "PathNodeMakerInjector",
     "RegistryManagerInjector",
     "VineDecoratorOverwrite",
-    "accessors.BiomeCategoryAccessor",
-    "accessors.DamageSourceAccessor",
-    "accessors.FoodEffectAccessor"
+    "accessors.DamageSourceAccessor"
   ],
   "client": [
     "accessors.DefaultParticleTypeAccessor",
