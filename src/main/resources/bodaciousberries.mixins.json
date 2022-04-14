@@ -7,7 +7,7 @@
     "FireBlockInjector",
     "PathNodeMakerInjector",
     "RegistryManagerInjector",
-    "VineDecoratorOverwrite",
+    "VineDecoratorRedirect",
     "accessors.DamageSourceAccessor"
   ],
   "client": [
