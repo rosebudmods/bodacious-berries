@@ -8,11 +8,9 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
-public class JuicerScreenHandler extends ScreenHandler {
-    private final Inventory inventory;
+public class JuicerScreenHandler extends DefaultScreenHandler {
     private final PropertyDelegate propertyDelegate;
 
     public JuicerScreenHandler(int syncId, PlayerInventory playerInventory) {
@@ -29,9 +27,8 @@ public class JuicerScreenHandler extends ScreenHandler {
      * 5: ingredient slot 3
      */
     public JuicerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
-        super(BodaciousBlocks.JUICER_SCREEN_HANDLER, syncId);
+        super(BodaciousBlocks.JUICER_SCREEN_HANDLER, syncId, playerInventory);
         checkSize(inventory, 6);
-        this.inventory = inventory;
         this.propertyDelegate = propertyDelegate;
         this.addProperties(propertyDelegate);
 
@@ -43,23 +40,6 @@ public class JuicerScreenHandler extends ScreenHandler {
         this.addSlot(new JuicerIngredientSlot(inventory, 3, 59, 10));
         this.addSlot(new JuicerIngredientSlot(inventory, 4, 79, 18));
         this.addSlot(new JuicerIngredientSlot(inventory, 5, 99, 10));
-
-        //player inventory
-        int i;
-        for(i = 0; i < 3; ++i) {
-            for(int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
-
-        for(i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
-        }
-    }
-
-    @Override
-    public boolean canUse(PlayerEntity player) {
-        return this.inventory.canPlayerUse(player);
     }
 
     public int getBrewTime() {
