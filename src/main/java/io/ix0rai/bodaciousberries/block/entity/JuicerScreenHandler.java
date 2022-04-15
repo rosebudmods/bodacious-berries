@@ -58,40 +58,45 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
 
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
-        final ItemStack empty = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
+        ItemStack slotItems = ItemStack.EMPTY;
 
         if (slot.hasStack()) {
-            ItemStack slotItems = slot.getStack();
-            ItemStack stack = slotItems.copy();
-            int finalInventorySlot = 41;
+            slotItems = slot.getStack();
+            ItemStack copy = slotItems.copy();
 
             if (index > 5) {
-                if (insertToJuicer(slotItems)
-                        || index < 32 && this.insertItem(slotItems, 32, finalInventorySlot, false)
-                        || index < finalInventorySlot && this.insertItem(slotItems, 5, 32, false)
-                        || this.insertItem(slotItems, 5, finalInventorySlot, false)) {
-                    return empty;
+                if (attemptInsertToJuicer(slotItems)
+                        || attemptInsertToHotbar(slotItems, index)
+                        || attemptInsertToInventory(slotItems)) {
+                    return ItemStack.EMPTY;
                 }
-            } else {
-                if (!this.insertItem(slotItems, 5, finalInventorySlot, true)) {
-                    return empty;
-                }
+            } else if (!attemptInsertToInventory(slotItems)) {
+                return ItemStack.EMPTY;
             }
 
             if (slotItems.isEmpty()) {
-                slot.setStack(empty);
+                slot.setStack(ItemStack.EMPTY);
             }
 
-            if (slotItems.getCount() == stack.getCount()) {
-                return empty;
+            if (slotItems.getCount() == copy.getCount()) {
+                return ItemStack.EMPTY;
             }
         }
 
-        return empty;
+        return slotItems;
     }
 
-    private boolean insertToJuicer(ItemStack stack) {
+    private boolean attemptInsertToInventory(ItemStack stack) {
+        return this.insertItem(stack, 5, 41, false);
+    }
+
+    private boolean attemptInsertToHotbar(ItemStack stack, int index) {
+        return index < 32 && this.insertItem(stack, 32, 41, false)
+                || index < 41 && this.insertItem(stack, 5, 32, false);
+    }
+
+    private boolean attemptInsertToJuicer(ItemStack stack) {
         //ingredient item
         if (JuicerRecipes.isIngredient(stack)) {
             //attempt to insert into any ingredient slot
@@ -101,11 +106,10 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
             //iterate over output slots
             for (int i = 0; i < 3; i++) {
                 //check if tested output slot is empty
-                if (this.slots.get(i).getStack().isEmpty()) {
-                    //if so, insert a single item and decrement stack sending the item by 1
-                    if (this.insertItem(new ItemStack(stack.getItem()), i, i + 1, false)) {
-                        stack.decrement(1);
-                    }
+                if (this.slots.get(i).getStack().isEmpty()
+                        && this.insertItem(new ItemStack(stack.getItem()), i, i + 1, false)) {
+                    //if so, insert a single item and decrement the stack sending the item by 1
+                    stack.decrement(1);
                     return true;
                 }
             }
