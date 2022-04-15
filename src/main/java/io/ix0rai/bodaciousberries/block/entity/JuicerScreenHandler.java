@@ -67,18 +67,10 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
             int finalInventorySlot = 41;
 
             if (index > 5) {
-                if (insertToJuicer(slotItems)) {
-                    return empty;
-                //handle hotbar priority
-                } else if (index < 32) {
-                    if (!this.insertItem(slotItems, 32, finalInventorySlot, false)) {
-                        return empty;
-                    }
-                } else if (index < finalInventorySlot) {
-                    if (!this.insertItem(slotItems, 5, 32, false)) {
-                        return empty;
-                    }
-                } else if (!this.insertItem(slotItems, 5, finalInventorySlot, false)) {
+                if (insertToJuicer(slotItems)
+                        || index < 32 && this.insertItem(slotItems, 32, finalInventorySlot, false)
+                        || index < finalInventorySlot && this.insertItem(slotItems, 5, 32, false)
+                        || this.insertItem(slotItems, 5, finalInventorySlot, false)) {
                     return empty;
                 }
             } else {
