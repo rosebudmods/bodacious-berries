@@ -55,15 +55,15 @@ public class GrowingBerryBush extends BasicBerryBush {
         //a GrowingBerryBush cannot produce berries until it grows to its double bush state
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             final int newAge = Math.min(maxAge, state.get(getAge()) + 1);
-            if (newAge < maxAge) {
-                return ActionResult.PASS;
-            } else {
+            //grow to a double bush if new age exceeds maximum
+            if (newAge > maxAge) {
                 TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, Block.NOTIFY_LISTENERS);
             }
+
             return ActionResult.PASS;
-        } else {
-            return ActionResult.FAIL;
         }
+
+        return ActionResult.FAIL;
     }
 
     @Override
