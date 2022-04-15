@@ -27,6 +27,8 @@ public class BerryHarvesterScreenHandler extends DefaultScreenHandler {
                 this.addSlot(new Slot(inventory, l + m * 3, 62 + l * 18, 17 + m * 18));
             }
         }
+
+        addPlayerInventory(playerInventory);
     }
 
     @Override

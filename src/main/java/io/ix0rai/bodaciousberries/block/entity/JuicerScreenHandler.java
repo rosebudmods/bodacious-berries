@@ -40,6 +40,8 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
         this.addSlot(new JuicerIngredientSlot(inventory, 3, 59, 10));
         this.addSlot(new JuicerIngredientSlot(inventory, 4, 79, 18));
         this.addSlot(new JuicerIngredientSlot(inventory, 5, 99, 10));
+
+        addPlayerInventory(playerInventory);
     }
 
     public int getBrewTime() {

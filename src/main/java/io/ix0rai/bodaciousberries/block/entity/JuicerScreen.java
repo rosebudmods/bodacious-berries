@@ -12,14 +12,16 @@ import net.minecraft.util.Identifier;
 public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
     private static final Identifier TEXTURE = Bodaciousberries.id("textures/gui/juicer.png");
     private static final int[] BUBBLE_PROGRESS = new int[]{29, 29, 25, 17, 11, 6, 0};
-    private static final int DUBIOUS_BUBBLE_X = 188;
-    private static final int DUBIOUS_PROGRESS_BAR_X = 227;
-    private static final int BUBBLE_X = 176;
-    private static final int PROGRESS_BAR_X = 200;
-    private static final int BUBBLE_Y = 29;
-    private static final int PROGRESS_BAR_Y = 0;
-    private static final int BLEND_BUBBLE_Y = 59;
-    private static final int BLEND_PROGRESS_BAR_Y = 31;
+    private static final int DUBIOUS_BUBBLE_UV_X = 188;
+    private static final int DUBIOUS_PROGRESS_BAR_UV_X = 227;
+    private static final int BUBBLE_UV_X = 176;
+    private static final int PROGRESS_BAR_UV_X = 200;
+    private static final int BUBBLE_UV_Y = 29;
+    private static final int PROGRESS_BAR_UV_Y = 0;
+    private static final int BLEND_BUBBLE_UV_Y = 59;
+    private static final int BLEND_PROGRESS_BAR_UV_Y = 31;
+    private static final int LEFT_BUBBLE_X = 58;
+    private static final int RIGHT_BUBBLE_X = 104;
 
     public JuicerScreen(JuicerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -51,14 +53,15 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
             //draw progress bar
             int progress = Math.round(28.0F * (1.0F - brewTime / (float) JuicerBlockEntity.TOTAL_BREW_TIME));
             if (progress > 0) {
-                this.drawTexture(matrices, x + 73, y + 35, dubious ? DUBIOUS_PROGRESS_BAR_X : PROGRESS_BAR_X, blend ? BLEND_PROGRESS_BAR_Y : PROGRESS_BAR_Y, 28, progress);
+                this.drawTexture(matrices, x + 73, y + 35, dubious ? DUBIOUS_PROGRESS_BAR_UV_X : PROGRESS_BAR_UV_X, blend ? BLEND_PROGRESS_BAR_UV_Y : PROGRESS_BAR_UV_Y, 28, progress);
             }
 
             //draw bubbles
             progress = BUBBLE_PROGRESS[brewTime / 2 % 7];
             if (progress > 0) {
-                this.drawTexture(matrices, x + 58, y + 63 - progress, dubious ? DUBIOUS_BUBBLE_X : BUBBLE_X, (blend ? BLEND_BUBBLE_Y : BUBBLE_Y) - progress, 12, progress);
-                this.drawTexture(matrices, x + 104, y + 63 - progress, dubious ? DUBIOUS_BUBBLE_X : BUBBLE_X, (blend ? BLEND_BUBBLE_Y : BUBBLE_Y) - progress, 12, progress);
+                for (int i = 0; i < 2; i++) {
+                    this.drawTexture(matrices,  x + (i == 0 ? LEFT_BUBBLE_X : RIGHT_BUBBLE_X), y + 63 - progress, dubious ? DUBIOUS_BUBBLE_UV_X : BUBBLE_UV_X, (blend ? BLEND_BUBBLE_UV_Y : BUBBLE_UV_Y) - progress, 12, progress);
+                }
             }
         }
     }

@@ -13,8 +13,9 @@ public class DefaultScreenHandler extends ScreenHandler {
     public DefaultScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory) {
         super(type, syncId);
         this.inventory = playerInventory;
+    }
 
-        //player inventory
+    protected void addPlayerInventory(PlayerInventory playerInventory) {
         int m;
         int l;
         for (m = 0; m < 3; m ++) {
