@@ -59,54 +59,32 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
         final ItemStack empty = ItemStack.EMPTY;
-        ItemStack stack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
 
         if (slot.hasStack()) {
             ItemStack slotItems = slot.getStack();
-            stack = slotItems.copy();
-            int finalJuicerSlot = 5;
+            ItemStack stack = slotItems.copy();
             int finalInventorySlot = 41;
-            int firstInventorySlot = 32;
 
-            if (index > finalJuicerSlot) {
-                //ingredient item
-                if (JuicerRecipes.isIngredient(stack)) {
-                    //attempt to insert into any ingredient slot
-                    if (!this.insertItem(slotItems, 3, finalJuicerSlot + 1, false)) {
-                        return empty;
-                    }
-                //output item
-                } else if (JuicerOutputSlot.matches(stack)) {
-                    //iterate over output slots
-                    for (int i = 0; i < 3; i++) {
-                        //check if tested output slot is empty
-                        if (this.slots.get(i).getStack().isEmpty()) {
-                            //if so, insert a single item and decrement stack sending the item by 1
-                            if (this.insertItem(new ItemStack(slotItems.getItem()), i, i + 1, false)) {
-                                slotItems.decrement(1);
-                            }
-                            return empty;
-                        }
-                    }
-                //code for moving items around the vanilla inventory
-                } else if (index < firstInventorySlot) {
-                    if (!this.insertItem(slotItems, firstInventorySlot, finalInventorySlot, false)) {
+            if (index > 5) {
+                if (insertToJuicer(slotItems)) {
+                    return empty;
+                //handle hotbar priority
+                } else if (index < 32) {
+                    if (!this.insertItem(slotItems, 32, finalInventorySlot, false)) {
                         return empty;
                     }
                 } else if (index < finalInventorySlot) {
-                    if (!this.insertItem(slotItems, finalJuicerSlot, firstInventorySlot, false)) {
+                    if (!this.insertItem(slotItems, 5, 32, false)) {
                         return empty;
                     }
-                } else if (!this.insertItem(slotItems, finalJuicerSlot, finalInventorySlot, false)) {
+                } else if (!this.insertItem(slotItems, 5, finalInventorySlot, false)) {
                     return empty;
                 }
             } else {
-                if (!this.insertItem(slotItems, finalJuicerSlot, finalInventorySlot, true)) {
+                if (!this.insertItem(slotItems, 5, finalInventorySlot, true)) {
                     return empty;
                 }
-
-                slot.onQuickTransfer(slotItems, stack);
             }
 
             if (slotItems.isEmpty()) {
@@ -118,7 +96,30 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
             }
         }
 
-        return stack;
+        return empty;
+    }
+
+    private boolean insertToJuicer(ItemStack stack) {
+        //ingredient item
+        if (JuicerRecipes.isIngredient(stack)) {
+            //attempt to insert into any ingredient slot
+            return !this.insertItem(stack, 3, 6, false);
+            //output item
+        } else if (JuicerOutputSlot.matches(stack)) {
+            //iterate over output slots
+            for (int i = 0; i < 3; i++) {
+                //check if tested output slot is empty
+                if (this.slots.get(i).getStack().isEmpty()) {
+                    //if so, insert a single item and decrement stack sending the item by 1
+                    if (this.insertItem(new ItemStack(stack.getItem()), i, i + 1, false)) {
+                        stack.decrement(1);
+                    }
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public static class JuicerIngredientSlot extends Slot {
