@@ -49,6 +49,11 @@ public class Juices {
         register("chorus_berry_juice", new ChorusBerryJuice(Berries.CHORUS_BERRIES, null));
         register("cloudberry_juice", new Juice(Berries.CLOUDBERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 1200, 1), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 600, 1), 1.0f)));
 
+        createBiomeChorusJuice();
+        registerBlends();
+    }
+
+    private static void createBiomeChorusJuice() {
         RegistryKey<?>[] biomes = new RegistryKey<>[]{
                 PLAINS, SNOWY_SLOPES, SWAMP,
                 DESERT, TAIGA, BIRCH_FOREST,
@@ -76,8 +81,6 @@ public class Juices {
 
             Registry.register(Registry.ITEM, id, juice);
         }
-
-        registerBlends();
     }
 
     private static void registerBlends() {
