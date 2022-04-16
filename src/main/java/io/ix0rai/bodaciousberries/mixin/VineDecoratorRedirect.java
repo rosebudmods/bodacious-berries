@@ -46,31 +46,33 @@ public class VineDecoratorRedirect {
     }
 
     private static void placeVine(StructureWorldAccess access, BiConsumer<BlockPos, BlockState> replacer, BlockPos pos, BooleanProperty facing) {
-        BlockState block;
+        BlockState block = matchBlockAbove(access, pos, facing);
 
-        //if the block above is a vine, return the corresponding vine
-        if (access.getBlockState(pos.up()).getBlock() == Blocks.VINE) {
-            block = Blocks.VINE.getDefaultState().with(facing, true);
-        } else if (access.getBlockState(pos.up()).getBlock() == Bushes.GRAPEVINE){
-            block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
-        } else if (reallyIncrediblyStupidAwfulHorrendousTerribleHorribleDumbCheck(access, pos)) {
+        if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDumbCheck(access, pos)) {
             //otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
             if (access.getBiome(pos).isIn(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
                 block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
             } else if (access.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
                 block = Blocks.VINE.getDefaultState().with(facing, true);
-            } else {
-                return;
             }
-        //any other case would leave our newly created vine floating
-        } else {
-            return;
         }
 
-        replacer.accept(pos, block);
+        if (block != null) {
+            replacer.accept(pos, block);
+        }
     }
 
-    private static boolean reallyIncrediblyStupidAwfulHorrendousTerribleHorribleDumbCheck(StructureWorldAccess access, BlockPos pos) {
+    private static BlockState matchBlockAbove(StructureWorldAccess access, BlockPos pos, BooleanProperty facing) {
+        if (access.getBlockState(pos.up()).getBlock() == Blocks.VINE) {
+            return Blocks.VINE.getDefaultState().with(facing, true);
+        } else if (access.getBlockState(pos.up()).getBlock() == Bushes.GRAPEVINE) {
+            return Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(Bushes.GRAPEVINE.getAge(), Bushes.GRAPEVINE.getMaxAge());
+        }
+
+        return null;
+    }
+
+    private static boolean reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDumbCheck(StructureWorldAccess access, BlockPos pos) {
         final Block east = access.getBlockState(pos.east()).getBlock();
         final Block west = access.getBlockState(pos.west()).getBlock();
         final Block north = access.getBlockState(pos.north()).getBlock();

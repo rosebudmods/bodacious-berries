@@ -44,10 +44,13 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
         this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        this.drawProgress(matrices);
+    }
 
-        int brewTime = this.handler.getBrewTime();
-        boolean dubious = this.handler.brewingDubiously();
-        boolean blend = this.handler.brewingBlend();
+    private void drawProgress(MatrixStack matrices) {
+        final int brewTime = this.handler.getBrewTime();
+        final boolean dubious = this.handler.brewingDubiously();
+        final boolean blend = this.handler.brewingBlend();
 
         if (brewTime > 0) {
             //draw progress bar

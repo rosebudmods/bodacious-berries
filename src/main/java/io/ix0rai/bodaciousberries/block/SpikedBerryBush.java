@@ -39,16 +39,17 @@ public class SpikedBerryBush extends BasicBerryBush {
 
         entity.slowMovement(state, BERRY_BUSH_SLOWING_VECTOR);
 
-        boolean entityDidNotMove = entity.lastRenderX == entity.getX() && entity.lastRenderZ == entity.getZ();
-        if (!(world.isClient || entityDidNotMove)) {
-            //the entity must move a minimum distance to be damaged
-            //this is implemented so if you accidentally touch the keyboard for a millisecond, you won't be damaged
-            double distanceMovedX = Math.abs(entity.getX() - entity.lastRenderX);
-            double distanceMovedZ = Math.abs(entity.getZ() - entity.lastRenderZ);
-            if (distanceMovedX >= MINIMUM_DAMAGE_DISTANCE || distanceMovedZ >= MINIMUM_DAMAGE_DISTANCE) {
-                entity.damage(BERRY_BUSH, damage);
-            }
+        if (!(world.isClient) && movedMinDistance(entity)) {
+            entity.damage(BERRY_BUSH, damage);
         }
+    }
+
+    private boolean movedMinDistance(Entity entity) {
+        //the entity must move a minimum distance to be damaged
+        //this is implemented so if you accidentally touch the keyboard for a millisecond, you won't be damaged
+        return !(entity.lastRenderX == entity.getX() && entity.lastRenderZ == entity.getZ())
+                && (Math.abs(entity.getX() - entity.lastRenderX) >= MINIMUM_DAMAGE_DISTANCE
+                || Math.abs(entity.getZ() - entity.lastRenderZ) >= MINIMUM_DAMAGE_DISTANCE);
     }
 
     public static class SpikyFourStageBush extends SpikedBerryBush {

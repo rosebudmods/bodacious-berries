@@ -65,13 +65,7 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
             slotItems = slot.getStack();
             ItemStack copy = slotItems.copy();
 
-            if (index > 5) {
-                if (attemptInsertToJuicer(slotItems)
-                        || attemptInsertToHotbar(slotItems, index)
-                        || attemptInsertToInventory(slotItems)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!attemptInsertToInventory(slotItems)) {
+            if (attemptInsert(slotItems, index)) {
                 return ItemStack.EMPTY;
             }
 
@@ -87,6 +81,16 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
         return slotItems;
     }
 
+    private boolean attemptInsert(ItemStack stack, int index) {
+        if (index > 5) {
+            return attemptInsertToJuicer(stack)
+                    || attemptInsertToHotbar(stack, index)
+                    || attemptInsertToInventory(stack);
+        } else {
+            return !attemptInsertToInventory(stack);
+        }
+    }
+
     private boolean attemptInsertToInventory(ItemStack stack) {
         return this.insertItem(stack, 5, 41, false);
     }
@@ -97,21 +101,19 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
     }
 
     private boolean attemptInsertToJuicer(ItemStack stack) {
-        //ingredient item
-        if (JuicerRecipes.isIngredient(stack)) {
-            //attempt to insert into any ingredient slot
-            return !this.insertItem(stack, 3, 6, false);
-            //output item
-        } else if (JuicerOutputSlot.matches(stack)) {
-            //iterate over output slots
-            for (int i = 0; i < 3; i++) {
-                //check if tested output slot is empty
-                if (this.slots.get(i).getStack().isEmpty()
-                        && this.insertItem(new ItemStack(stack.getItem()), i, i + 1, false)) {
-                    //if so, insert a single item and decrement the stack sending the item by 1
-                    stack.decrement(1);
-                    return true;
-                }
+        return JuicerRecipes.isIngredient(stack) && !this.insertItem(stack, 3, 5, false)
+                || JuicerOutputSlot.matches(stack) && attemptInsertToOutputSlot(stack);
+    }
+
+    private boolean attemptInsertToOutputSlot(ItemStack stack) {
+        //iterate over output slots
+        for (int i = 0; i < 3; i++) {
+            //check if tested output slot is empty
+            if (this.slots.get(i).getStack().isEmpty()
+                    && this.insertItem(new ItemStack(stack.getItem()), i, i + 1, false)) {
+                //if so, insert a single item and decrement the stack sending the item by 1
+                stack.decrement(1);
+                return true;
             }
         }
 
