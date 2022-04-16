@@ -17,7 +17,6 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,30 +68,30 @@ public class Juices {
         Juice vanillaDelight = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(5.0F).build()));
         registerBlend(Items.GLOW_BERRIES, Items.SWEET_BERRIES, Items.APPLE, "vanilla_delight", vanillaDelight);
 
-        List<RegistryKey<Biome>> biomes = List.of(
+        RegistryKey<?>[] biomes = new RegistryKey<>[]{
                 PLAINS, SNOWY_SLOPES, SWAMP,
                 DESERT, TAIGA, BIRCH_FOREST,
                 OCEAN, MUSHROOM_FIELDS, SUNFLOWER_PLAINS,
                 FOREST, FLOWER_FOREST, DARK_FOREST,
                 SAVANNA, BADLANDS, MEADOW,
                 LUSH_CAVES, DRIPSTONE_CAVES, JUNGLE
-        );
+        };
 
-        List<Item> biomeItems = List.of(
+        Item[] biomeItems = new Item[]{
                 Items.CORNFLOWER, Items.SNOWBALL, Items.CLAY_BALL,
                 Items.SAND, Items.SWEET_BERRIES, Items.BIRCH_SAPLING,
                 Items.COD, Items.RED_MUSHROOM, Items.SUNFLOWER,
                 Items.OAK_SAPLING, Items.PEONY, Items.DARK_OAK_SAPLING,
                 Items.ACACIA_SAPLING, Items.RED_SAND, Items.POPPY,
                 Items.GLOW_BERRIES, Items.POINTED_DRIPSTONE, Items.COCOA_BEANS
-        );
+        };
 
-        for (int i = 0; i < biomes.size(); i++) {
-            RegistryKey<Biome> key = biomes.get(i);
+        for (int i = 0; i < biomes.length; i++) {
+            RegistryKey<?> key = biomes[i];
             ChorusBerryJuice juice = new ChorusBerryJuice(Berries.CHORUS_BERRIES, key.getValue());
             Identifier id = Bodaciousberries.id("chorus_berry_juice_" + key.getValue().getPath());
 
-            RECIPES.add(JuicerRecipes.createShapelessJson(Registry.ITEM.getId(biomeItems.get(i)), id));
+            RECIPES.add(JuicerRecipes.createShapelessJson(Registry.ITEM.getId(biomeItems[i]), id));
 
             Registry.register(Registry.ITEM, id, juice);
         }

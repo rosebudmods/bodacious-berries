@@ -24,7 +24,7 @@ public class Compat {
 
         String id = "moreberries";
         if (FabricLoaderImpl.INSTANCE.isModLoaded(id)) {
-            List<String> berryIds = List.of("purple", "yellow", "green", "black", "orange", "blue");
+            String[] berryIds = new String[]{"purple", "yellow", "green", "black", "orange", "blue"};
 
             for (String berryId : berryIds) {
                 JuicerRecipes.addJuiceRecipe(new Identifier(id, berryId + "_berries"), new Identifier(id, berryId + "_berry_juice"));

@@ -15,12 +15,12 @@ import java.util.function.Function;
 public class JuicerRecipes {
     public static final List<JsonObject> JUICER_RECIPES = new ArrayList<>();
 
-    public static void addRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier receptacle, Identifier output) {
-        JUICER_RECIPES.add(createRecipeJson(List.of(input0, input1, input2), receptacle, output));
+    private static void addRecipe(Identifier[] ids, Identifier receptacle, Identifier output) {
+        JUICER_RECIPES.add(createRecipeJson(ids, receptacle, output));
     }
 
     public static void addJuiceRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier output) {
-        addRecipe(input0, input1, input2, Registry.ITEM.getId(Juices.JUICE_RECEPTACLE), output);
+        addRecipe(new Identifier[]{input0, input1, input2}, Registry.ITEM.getId(Juices.JUICE_RECEPTACLE), output);
     }
 
     public static void addJuiceRecipe(Identifier input, Identifier output) {
@@ -49,7 +49,7 @@ public class JuicerRecipes {
         return false;
     }
 
-    public static JsonObject createRecipeJson(List<Identifier> ingredients, Identifier receptacle, Identifier output) {
+    public static JsonObject createRecipeJson(Identifier[] ingredients, Identifier receptacle, Identifier output) {
         JsonObject json = new JsonObject();
         //add type
         //adds: "type": "bodaciousberries:juicer_recipe"
@@ -57,8 +57,8 @@ public class JuicerRecipes {
 
         //add ingredients
         //adds: "ingredient(i)": {"item": "ingredients[i]"}
-        for (int i = 0; i < ingredients.size(); i++) {
-            json.add("ingredient" + i, getItemProperty(ingredients.get(i).toString()));
+        for (int i = 0; i < ingredients.length; i++) {
+            json.add("ingredient" + i, getItemProperty(ingredients[i].toString()));
         }
 
         json.add("receptacle", getItemProperty(receptacle.toString()));
