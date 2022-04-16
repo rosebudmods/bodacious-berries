@@ -50,19 +50,6 @@ public class Berries {
         GOOSEBERRIES = new Berry(Bushes.GOOSEBERRY_BUSH, settings(2, 1f));
         CLOUDBERRIES = new Berry(Bushes.CLOUDBERRY_BUSH, berrySettings.food(new FoodComponent.Builder().hunger(2).saturationModifier(1.5f).statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600, 1), 1).snack().build()));
 
-        //automatic stuffs
-        initialise(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
-        initialise(Bushes.STRAWBERRY_BUSH, STRAWBERRY);
-        initialise(Bushes.RASPBERRY_BUSH, RASPBERRIES);
-        initialise(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
-        initialise(Bushes.CHORUS_BERRY_BUSH, CHORUS_BERRIES);
-        initialise(Bushes.RAINBERRY_BUSH, RAINBERRY);
-        initialise(Bushes.LINGONBERRY_BUSH, LINGONBERRIES);
-        initialise(Bushes.GRAPEVINE, GRAPES);
-        initialise(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, GOJI_BERRIES);
-        initialise(Bushes.GOOSEBERRY_BUSH, GOOSEBERRIES);
-        initialise(Bushes.CLOUDBERRY_BUSH, CLOUDBERRIES);
-
         initialiseBerries();
 
         //register
@@ -131,6 +118,18 @@ public class Berries {
      * sets the berry type of each bush in the list and registers all berries as compostable
      */
     public static void initialiseBerries() {
+        initialise(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, SASKATOON_BERRIES);
+        initialise(Bushes.STRAWBERRY_BUSH, STRAWBERRY);
+        initialise(Bushes.RASPBERRY_BUSH, RASPBERRIES);
+        initialise(Bushes.BLACKBERRY_BUSH, BLACKBERRIES);
+        initialise(Bushes.CHORUS_BERRY_BUSH, CHORUS_BERRIES);
+        initialise(Bushes.RAINBERRY_BUSH, RAINBERRY);
+        initialise(Bushes.LINGONBERRY_BUSH, LINGONBERRIES);
+        initialise(Bushes.GRAPEVINE, GRAPES);
+        initialise(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, GOJI_BERRIES);
+        initialise(Bushes.GOOSEBERRY_BUSH, GOOSEBERRIES);
+        initialise(Bushes.CLOUDBERRY_BUSH, CLOUDBERRIES);
+
         for (var entry : BERRY_BUSHES.entrySet()) {
             BerryBush bush = entry.getKey();
             //set berry types

@@ -31,7 +31,7 @@ public class Bodaciousberries implements ModInitializer {
         BodaciousBlocks.registerBlocks();
         Juices.registerJuice();
         Sounds.registerSounds();
-        BerryBushPatchGen.registerFeatures();
+        BerryBushPatchGen.register();
         Compat.registerCompat();
     }
 }
