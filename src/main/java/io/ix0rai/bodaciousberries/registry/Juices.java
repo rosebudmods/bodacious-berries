@@ -54,7 +54,7 @@ public class Juices {
     }
 
     private static void createBiomeChorusJuice() {
-        RegistryKey<?>[] biomes = new RegistryKey<>[]{
+        RegistryKey<?>[] biomes = new RegistryKey<?>[]{
                 PLAINS, SNOWY_SLOPES, SWAMP,
                 DESERT, TAIGA, BIRCH_FOREST,
                 OCEAN, MUSHROOM_FIELDS, SUNFLOWER_PLAINS,
