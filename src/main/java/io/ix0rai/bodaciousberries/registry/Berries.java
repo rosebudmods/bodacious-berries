@@ -13,6 +13,8 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.tag.TagKey;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;
@@ -21,6 +23,8 @@ import java.util.Map;
 import static net.fabricmc.fabric.impl.content.registry.CompostingChanceRegistryImpl.INSTANCE;
 
 public class Berries {
+    public static final TagKey<Item> BERRY_TAG = TagKey.of(Registry.ITEM_KEY, new Identifier("c", "berries"));
+
     private static final Item.Settings berrySettings = new Item.Settings().group(ItemGroup.FOOD);
 
     //berry items

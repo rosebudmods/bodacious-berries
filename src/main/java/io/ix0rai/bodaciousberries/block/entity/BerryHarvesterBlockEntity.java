@@ -74,10 +74,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
                     harvester.insert(new ItemStack(berryBush.getBerryType(), berryBush.getMaxBerryAmount()));
 
                     //play pick sound and reset bush growth
-                    world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.5F);
-                    for (int i = 0; i < 6; i++) {
-                        world.addParticle(Particles.SLICEY_PARTICLE, bushPos.getX() + 0.5D, bushPos.getY() + 0.3D, bushPos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
-                    }
+                    addPickEffects(world, bushPos);
                     berryBush.resetAge(world, bushPos, bush);
                 } else if (block instanceof SweetBerryBushBlock) {
                     handleSweetBerry(world, bushPos, bush, harvester);
@@ -92,14 +89,17 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
         //is fully grown
         if (bushState.get(SweetBerryBushBlock.AGE) >= 3) {
             harvester.insert(new ItemStack(Items.SWEET_BERRIES, 3));
-
-            world.playSound(null, bushPos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.5F);
-            for (int i = 0; i < 6; i++) {
-                world.addParticle(Particles.SLICEY_PARTICLE, bushPos.getX() + 0.5D, bushPos.getY() + 0.3D, bushPos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
-            }
+            addPickEffects(world, bushPos);
 
             //reset bush
             world.setBlockState(bushPos, bushState.with(SweetBerryBushBlock.AGE, 1));
+        }
+    }
+
+    private static void addPickEffects(World world, BlockPos pos) {
+        world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.5F);
+        for (int i = 0; i < 6; i++) {
+            world.addParticle(Particles.SLICEY_PARTICLE, pos.getX() + 0.5D, pos.getY() + 0.3D, pos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
         }
     }
 

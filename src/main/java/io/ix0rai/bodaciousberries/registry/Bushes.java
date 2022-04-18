@@ -14,11 +14,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.tag.TagKey;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
 public class Bushes {
+    public static final TagKey<Block> BERRY_BUSHES = TagKey.of(Registry.BLOCK_KEY, new Identifier("c:berry_bushes"));
     public static final IntProperty AGE_4 = IntProperty.of("age", 0, 4);
 
     private static final VoxelShape SMALL_SWEET_BERRY = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);

@@ -1,7 +1,7 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
 import io.ix0rai.bodaciousberries.block.JuicerBlock;
-import io.ix0rai.bodaciousberries.item.Berry;
+import io.ix0rai.bodaciousberries.registry.Berries;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
 import io.ix0rai.bodaciousberries.registry.Juices;
 import net.minecraft.block.Block;
@@ -153,7 +153,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 juicer.brewTime = TOTAL_BREW_TIME;
                 markDirty(world, pos, state);
                 world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
-            } else if (inventory.get(3).getItem() instanceof Berry && inventory.get(4).getItem() instanceof Berry && inventory.get(5).getItem() instanceof Berry
+            } else if (inventory.get(3).isIn(Berries.BERRY_TAG) && inventory.get(4).isIn(Berries.BERRY_TAG) && inventory.get(5).isIn(Berries.BERRY_TAG)
                                 && (inventory.get(0).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(1).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(2).getItem().equals(Juices.JUICE_RECEPTACLE))) {
                 //everything in the juicer is a berry, so logically we can make something
                 juicer.brewTime = TOTAL_BREW_TIME;
