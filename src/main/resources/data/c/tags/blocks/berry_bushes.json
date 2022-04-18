@@ -1,6 +1,7 @@
 {
   "replace": "false",
   "values": [
+    "minecraft:sweet_berry_bush",
     "bodaciousberries:strawberry_bush",
     "bodaciousberries:double_saskatoon_berry_bush",
     "bodaciousberries:saskatoon_berry_bush",

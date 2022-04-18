@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "bodaciousberries:saskatoon_berries",
+    "bodaciousberries:raspberries",
+    "bodaciousberries:strawberry",
+    "bodaciousberries:blackberries",
+    "bodaciousberries:chorus_berries",
+    "bodaciousberries:rainberry",
+    "bodaciousberries:lingonberries",
+    "bodaciousberries:grapes",
+    "bodaciousberries:goji_berries",
+    "bodaciousberries:gooseberries",
+    "bodaciousberries:cloudberries"
+  ]
+}

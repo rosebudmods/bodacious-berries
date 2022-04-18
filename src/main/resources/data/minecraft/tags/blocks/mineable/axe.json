@@ -1,7 +1,7 @@
 {
   "replace": "false",
   "values": [
-    "#bodaciousberries:berry_bushes",
+    "#c:berry_bushes",
     "bodaciousberries:berry_harvester"
   ]
 }
