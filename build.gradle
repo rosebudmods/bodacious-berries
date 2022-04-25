@@ -7,10 +7,8 @@ sourceCompatibility = JavaVersion.toVersion(project.java_version)
 targetCompatibility = JavaVersion.toVersion(project.java_version)
 
 repositories {
-    maven {
-        name = "gegy's maven"
-        url = 'https://maven.gegy.dev/releases'
-    }
+    maven { url = "https://maven.gegy.dev/releases" }
+    maven { url = "https://maven.shedaniel.me/" }
 }
 
 archivesBaseName = project.archives_base_name
@@ -21,7 +19,10 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
     modLocalRuntime "supercoder79:databreaker:${project.databreaker_version}"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 }
