@@ -11,7 +11,6 @@ public class ReiClientPlugin implements REIClientPlugin {
         registry.registerFiller(JuicerRecipe.class, JuicerDisplay::new);
     }
 
-
     @Override
     public void registerCategories(CategoryRegistry registry) {
         registry.add(new JuicerDisplayCategory());
