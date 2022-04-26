@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.List;
 public class JuicerDisplayCategory implements DisplayCategory<JuicerDisplay> {
     public static final MutableText TITLE = new TranslatableText("rei.bodaciousberries.juicer");
     public static final EntryStack<ItemStack> ICON = EntryStacks.of(BodaciousBlocks.JUICER_BLOCK);
+    private static final Identifier TEXTURE = Bodaciousberries.id("textures/gui/juicer_rei.png");
 
     @Override
     public Renderer getIcon() {
@@ -47,11 +49,17 @@ public class JuicerDisplayCategory implements DisplayCategory<JuicerDisplay> {
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
 
-        //add juicer UI texture as well as animated bubbles
         widgets.add(Widgets.createDrawableWidget((helper, matrices, mouseX, mouseY, delta) -> {
-            RenderSystem.setShaderTexture(0, Bodaciousberries.id("textures/gui/juicer_rei.png"));
+            //add juicer background
+            RenderSystem.setShaderTexture(0, TEXTURE);
             helper.drawTexture(matrices, startPoint.x + 20, startPoint.y, 55, 17, 64, 59);
-            int height = MathHelper.floor(System.currentTimeMillis() / 250d % 9d);
+
+            //add progress bar
+            int progress = MathHelper.floor(System.currentTimeMillis() / 250d % 16);
+            helper.drawTexture(matrices, startPoint.x + 38, startPoint.y + 24, 187, 0, 28, progress);
+
+            //add animated bubbles
+            int height = MathHelper.floor(System.currentTimeMillis() / 250d % 9);
             helper.drawTexture(matrices, startPoint.x + 24, startPoint.y + 24 + height, 176, height, 11, 9 - height);
             helper.drawTexture(matrices, startPoint.x + 70, startPoint.y + 24 + height, 176, height, 11, 9 - height);
         }));
