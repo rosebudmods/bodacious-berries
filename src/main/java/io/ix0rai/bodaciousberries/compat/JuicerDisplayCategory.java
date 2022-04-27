@@ -57,11 +57,13 @@ public class JuicerDisplayCategory implements DisplayCategory<JuicerDisplay> {
             helper.drawTexture(matrices, startPoint.x + 20, startPoint.y, 55, 17, 64, 59);
 
             //add progress bar
-            int progress = MathHelper.floor(System.currentTimeMillis() / 250d % 16);
+            final double time = System.currentTimeMillis() / 250d;
+
+            int progress = MathHelper.floor(time % 16);
             helper.drawTexture(matrices, startPoint.x + 38, startPoint.y + 24, 187, 0, 28, progress);
 
             //add animated bubbles
-            int height = MathHelper.floor(System.currentTimeMillis() / 250d % 9);
+            int height = MathHelper.floor(time % 9);
             helper.drawTexture(matrices, startPoint.x + 24, startPoint.y + 24 + height, 176, height, 11, 9 - height);
             helper.drawTexture(matrices, startPoint.x + 70, startPoint.y + 24 + height, 176, height, 11, 9 - height);
         }));
