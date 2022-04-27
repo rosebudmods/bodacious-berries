@@ -5,7 +5,7 @@ import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 
-public class ReiClientPlugin implements REIClientPlugin {
+public class JuicerReiPlugin implements REIClientPlugin {
     @Override
     public void registerDisplays(DisplayRegistry registry) {
         registry.registerFiller(JuicerRecipe.class, JuicerDisplay::new);

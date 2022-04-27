@@ -39,6 +39,11 @@ public class Compat {
             loadedCompat.add(id);
         }
 
+        id = "roughlyenoughitems";
+        if (FabricLoader.getInstance().isModLoaded(id)) {
+            loadedCompat.add(id);
+        }
+
         return loadedCompat;
     }
 }

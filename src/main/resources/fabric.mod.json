@@ -25,7 +25,7 @@
       "io.ix0rai.bodaciousberries.client.BodaciousberriesClient"
     ],
     "rei": [
-      "io.ix0rai.bodaciousberries.compat.ReiClientPlugin"
+      "io.ix0rai.bodaciousberries.compat.JuicerReiPlugin"
     ]
   },
   "mixins": [
