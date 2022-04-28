@@ -15,7 +15,7 @@ The juicer is a unique machine that will create juice out of your berries when g
 *the juicer's crafting recipe*
 
 ### the berry harvester
-The berry harvester is a custom block centered around harvesting berries. It will automatically pick berries from any bodaciousberries bush and more!  
+The berry harvester is a custom block centered around harvesting berries. It will automatically pick berries from any bodaciousberries bush and more! The berry harvester will stop running if powered by redstone.  
 ![output](https://user-images.githubusercontent.com/66223394/160307760-c71bd218-7655-4f07-96a9-c41cf4c28577.gif)  
 *the berry harvester at work*  
 ![2022-03-27_19 33 04](https://user-images.githubusercontent.com/66223394/160308361-4b4689cb-3531-4201-8e09-26748738a999.png)  

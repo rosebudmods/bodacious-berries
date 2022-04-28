@@ -61,7 +61,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, BerryHarvesterBlockEntity harvester) {
-        if (harvester.tickCounter++ >= ATTEMPT_HARVEST_ON) {
+        if (harvester.tickCounter++ >= ATTEMPT_HARVEST_ON && !world.isReceivingRedstonePower(pos)) {
             if (!harvester.isInventoryFull()) {
                 //block the harvester is facing must be a berry bush
                 BlockPos bushPos = pos.offset(state.get(BerryHarvesterBlock.FACING));
