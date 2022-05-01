@@ -15,7 +15,7 @@ import java.util.function.Function;
 public class JuicerRecipes {
     public static final List<JsonObject> JUICER_RECIPES = new ArrayList<>();
 
-    private static void addRecipe(Identifier[] ids, Identifier receptacle, Identifier output) {
+    public static void addRecipe(Identifier[] ids, Identifier receptacle, Identifier output) {
         JUICER_RECIPES.add(createRecipeJson(ids, receptacle, output));
     }
 
