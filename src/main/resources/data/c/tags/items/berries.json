@@ -13,6 +13,86 @@
     "bodaciousberries:grapes",
     "bodaciousberries:goji_berries",
     "bodaciousberries:gooseberries",
-    "bodaciousberries:cloudberries"
+    "bodaciousberries:cloudberries",
+    {
+      "id": "ecotones:blueberries",
+      "required": false
+    },
+    {
+      "id": "alaskanativecraft:blueberries",
+      "required": false
+    },
+    {
+      "id": "alaskanativecraft:salmonberries",
+      "required": false
+    },
+    {
+      "id": "alaskanativecraft:raspberries",
+      "required": false
+    },
+    {
+      "id": "alaskanativecraft:cloudberries",
+      "required": false
+    },
+    {
+      "id": "sandwichmod:grapes",
+      "required": false
+    },
+    {
+      "id": "moreberries:yellow_berries",
+      "required": false
+    },
+    {
+      "id": "moreberries:purple_berries",
+      "required": false
+    },
+    {
+      "id": "moreberries:green_berries",
+      "required": false
+    },
+    {
+      "id": "moreberries:black_berries",
+      "required": false
+    },
+    {
+      "id": "moreberries:orange_berries",
+      "required": false
+    },
+    {
+      "id": "moreberries:blue_berries",
+      "required": false
+    },
+    {
+      "id": "promenade:blueberries",
+      "required": false
+    },
+    {
+      "id": "croptopia:cherry",
+      "required": false
+    },
+    {
+      "id": "croptopia:blackberry",
+      "required": false
+    },
+    {
+      "id": "croptopia:blueberry",
+      "required": false
+    },
+    {
+      "id": "croptopia:elderberry",
+      "required": false
+    },
+    {
+      "id": "croptopia:raspberry",
+      "required": false
+    },
+    {
+      "id": "croptopia:strawberry",
+      "required": false
+    },
+    {
+      "id": "croptopia:grape",
+      "required": false
+    }
   ]
 }
