@@ -39,7 +39,7 @@ public class JuicerRecipes {
         return check(juicerRecipe -> juicerRecipe.isReceptacle(stack));
     }
 
-    public static boolean check(Function<JuicerRecipe, Boolean> function) {
+    private static boolean check(Function<JuicerRecipe, Boolean> function) {
         for (JsonObject recipe : JUICER_RECIPES) {
             if (function.apply(JuicerRecipe.Serializer.INSTANCE.read(recipe))) {
                 return true;
@@ -61,10 +61,12 @@ public class JuicerRecipes {
             json.add("ingredient" + i, getItemProperty(ingredients[i].toString()));
         }
 
+        //add receptacle
+        //adds: "receptacle": {"item": "receptacle_id"}
         json.add("receptacle", getItemProperty(receptacle.toString()));
 
         //add result
-        //adds: "result": "output"
+        //adds: "result": "output_id"
         json.addProperty("result", output.toString());
 
         return json;

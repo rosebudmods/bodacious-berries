@@ -92,16 +92,16 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
     }
 
     private boolean attemptInsertToInventory(ItemStack stack) {
-        return this.insertItem(stack, 5, 41, false);
+        return this.insertItem(stack, 6, 41, false);
     }
 
     private boolean attemptInsertToHotbar(ItemStack stack, int index) {
         return index < 32 && this.insertItem(stack, 32, 41, false)
-                || index < 41 && this.insertItem(stack, 5, 32, false);
+                || index < 41 && this.insertItem(stack, 6, 32, false);
     }
 
     private boolean attemptInsertToJuicer(ItemStack stack) {
-        return JuicerRecipes.isIngredient(stack) && !this.insertItem(stack, 3, 5, false)
+        return JuicerRecipes.isIngredient(stack) && !this.insertItem(stack, 3, 6, false)
                 || JuicerOutputSlot.matches(stack) && attemptInsertToOutputSlot(stack);
     }
 

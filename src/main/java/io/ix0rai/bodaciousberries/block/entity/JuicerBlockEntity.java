@@ -130,38 +130,41 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                     craft(world, pos, new ItemStack(Juices.DUBIOUS_JUICE), Ingredient.ofItems(Juices.JUICE_RECEPTACLE), juicer.inventory);
                 }
 
-                markDirty(world, pos, state);
-                world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
-                juicer.makingDubiousJuice = false;
+                stopJuicer(world, pos, state, juicer);
             } else if (recipe.isEmpty() && !(juicer.makingDubiousJuice && juicer.hasAllIngredients()) || !juicer.hasValidReceptacle()) {
                 //if we cannot craft, the ingredient has been removed/changed, and we should stop brewing without giving a result
-                juicer.brewTime = 0;
-                markDirty(world, pos, state);
-                world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
-                juicer.makingDubiousJuice = false;
-                juicer.makingBerryBlend = false;
+                stopJuicer(world, pos, state, juicer);
             }
         } else if (juicer.hasValidReceptacle()) {
             DefaultedList<ItemStack> inventory = juicer.getItems();
 
             if (recipe.isPresent()) {
-                if (!recipe.get().ingredientsMatch(inventory.get(3))) {
-                    juicer.makingBerryBlend = true;
-                }
+                juicer.makingBerryBlend = recipe.get().ingredientsMatch(inventory.get(3));
 
                 //if we're not currently brewing, start brewing with the ingredient
-                juicer.brewTime = TOTAL_BREW_TIME;
-                markDirty(world, pos, state);
-                world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
+                startJuicer(world, pos, state, juicer);
             } else if (inventory.get(3).isIn(Berries.BERRY_TAG) && inventory.get(4).isIn(Berries.BERRY_TAG) && inventory.get(5).isIn(Berries.BERRY_TAG)
                                 && (inventory.get(0).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(1).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(2).getItem().equals(Juices.JUICE_RECEPTACLE))) {
                 //everything in the juicer is a berry, so logically we can make something
-                juicer.brewTime = TOTAL_BREW_TIME;
-                markDirty(world, pos, state);
-                world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
+                //of course, that doesn't mean it'll be good!
+                startJuicer(world, pos, state, juicer);
                 juicer.makingDubiousJuice = true;
             }
         }
+    }
+
+    private static void startJuicer(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
+        juicer.brewTime = TOTAL_BREW_TIME;
+        markDirty(world, pos, state);
+        world.setBlockState(pos, state.with(JuicerBlock.RUNNING, true), Block.NOTIFY_LISTENERS);
+    }
+
+    private static void stopJuicer(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
+        juicer.brewTime = 0;
+        markDirty(world, pos, state);
+        world.setBlockState(pos, state.with(JuicerBlock.RUNNING, false), Block.NOTIFY_LISTENERS);
+        juicer.makingDubiousJuice = false;
+        juicer.makingBerryBlend = false;
     }
 
     public boolean hasAllIngredients() {
