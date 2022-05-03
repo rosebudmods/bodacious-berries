@@ -15,8 +15,8 @@ public class JuicerDisplay extends BasicDisplay {
     private final EntryIngredient receptacleEntry;
 
     public JuicerDisplay(JuicerRecipe recipe) {
-        super(EntryIngredients.ofIngredients(List.of(recipe.getIngredient0(), recipe.getIngredient1(), recipe.getIngredient2())), Collections.singletonList(EntryIngredients.of(recipe.getOutput())));
-        this.receptacleEntry = EntryIngredients.ofIngredient(recipe.getReceptacle());
+        super(EntryIngredients.ofIngredients(List.of(recipe.ingredient0(), recipe.ingredient1(), recipe.ingredient2())), Collections.singletonList(EntryIngredients.of(recipe.getOutput())));
+        this.receptacleEntry = EntryIngredients.ofIngredient(recipe.receptacle());
     }
    public EntryIngredient getReceptacleEntry() {
         return this.receptacleEntry;

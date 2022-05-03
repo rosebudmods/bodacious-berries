@@ -15,23 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack result) implements Recipe<ImplementedInventory> {
-    public Ingredient getIngredient0() {
-        return this.ingredient0;
-    }
-
-    public Ingredient getIngredient1() {
-        return this.ingredient1;
-    }
-
-    public Ingredient getIngredient2() {
-        return this.ingredient2;
-    }
-
-    public Ingredient getReceptacle() {
-        return this.receptacle;
-    }
-
+public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack output) implements Recipe<ImplementedInventory> {
     public boolean isIngredient(ItemStack stack) {
         return ingredient0.test(stack) || ingredient1.test(stack) || ingredient2.test(stack);
     }
@@ -44,7 +28,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         if (stack.isEmpty()) {
             return false;
         }
-        return result.getItem().equals(stack.getItem());
+        return output.getItem().equals(stack.getItem());
     }
 
     public boolean isReceptacle(ItemStack stack) {
@@ -70,7 +54,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
     @Override
     public ItemStack getOutput() {
-        return this.result;
+        return this.output;
     }
 
     @Override
@@ -97,6 +81,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         public static final String ID = "juicer_recipe";
     }
 
+    @SuppressWarnings("unused")
     private static class JuicerRecipeJsonFormat {
         public JsonObject ingredient0;
         public JsonObject ingredient1;
@@ -139,10 +124,10 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
         @Override
         public void write(PacketByteBuf packetData, JuicerRecipe recipe) {
-            recipe.getIngredient0().write(packetData);
-            recipe.getIngredient1().write(packetData);
-            recipe.getIngredient2().write(packetData);
-            recipe.getReceptacle().write(packetData);
+            recipe.ingredient0().write(packetData);
+            recipe.ingredient1().write(packetData);
+            recipe.ingredient2().write(packetData);
+            recipe.receptacle().write(packetData);
             packetData.writeItemStack(recipe.getOutput());
         }
 

@@ -112,7 +112,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     public static void craft(World world, BlockPos pos, JuicerRecipe recipe, DefaultedList<ItemStack> slots) {
-        craft(world, pos, recipe.getOutput(), recipe.getReceptacle(), slots);
+        craft(world, pos, recipe.getOutput(), recipe.receptacle(), slots);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
