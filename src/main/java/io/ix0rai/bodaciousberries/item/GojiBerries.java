@@ -4,10 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class GojiBerries extends Berry {
+public class GojiBerries extends AliasedBlockItem {
     public GojiBerries(Block block, Settings settings) {
         super(block, settings);
     }
