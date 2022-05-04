@@ -78,7 +78,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
 
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+        return BlockEntityUpdateS2CPacket.of(this);
     }
 
     private static void craft(World world, BlockPos pos, ItemStack result, Ingredient receptacle, DefaultedList<ItemStack> slots) {

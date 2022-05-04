@@ -31,7 +31,7 @@ public class VineDecoratorRedirect {
         final StructureWorldAccess access = (StructureWorldAccess) world;
 
         //only redirect the method if we're in a jungle biome
-        if (access.getBiome(pos).isIn(BiomeTags.IS_JUNGLE)) {
+        if (access.getBiome(pos).hasTag(BiomeTags.IS_JUNGLE)) {
             placeVine(access, replacer, pos, facing);
 
             //place vines that are hanging down from other vines
@@ -50,7 +50,7 @@ public class VineDecoratorRedirect {
 
         if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDumbCheck(access, pos)) {
             //otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
-            if (access.getBiome(pos).isIn(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
+            if (access.getBiome(pos).hasTag(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
                 block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
             } else if (access.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
                 block = Blocks.VINE.getDefaultState().with(facing, true);

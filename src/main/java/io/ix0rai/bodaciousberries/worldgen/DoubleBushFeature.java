@@ -17,7 +17,7 @@ public class DoubleBushFeature extends Feature<DoubleBushFeatureConfig> {
     }
 
     @Override
-    public boolean generate(FeatureContext<DoubleBushFeatureConfig> context) {
+    public boolean place(FeatureContext<DoubleBushFeatureConfig> context) {
         DoubleBushFeatureConfig config = context.getConfig();
         StructureWorldAccess access = context.getWorld();
         BlockPos pos = context.getOrigin();

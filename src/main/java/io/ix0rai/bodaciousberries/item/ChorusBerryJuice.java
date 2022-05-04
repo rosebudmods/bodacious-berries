@@ -9,10 +9,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Holder;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.dimension.DimensionType;
@@ -67,8 +67,8 @@ public class ChorusBerryJuice extends Juice {
     }
 
     private Pair<BlockPos, Boolean> locateBiome(MinecraftServer server, BlockPos pos, LivingEntity user) {
-        Pair<BlockPos, RegistryEntry<Biome>> pair = server.getOverworld().locateBiome(
-                entry -> (entry.value().equals(RegistryEntry.of(server.getRegistryManager().get(Registry.BIOME_KEY).get(biome)).value())),
+        Pair<BlockPos, Holder<Biome>> pair = server.getOverworld().locateBiome(
+                entry -> (entry.value().equals(Holder.createDirect(server.getRegistryManager().get(Registry.BIOME_KEY).get(biome)).value())),
                 user.getBlockPos(),
                 6400,
                 8

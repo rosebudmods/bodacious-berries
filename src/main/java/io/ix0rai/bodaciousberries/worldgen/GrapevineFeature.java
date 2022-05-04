@@ -18,7 +18,7 @@ public class GrapevineFeature extends VinesFeature implements FeatureConfig {
     }
 
     @Override
-    public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
+    public boolean place(FeatureContext<DefaultFeatureConfig> context) {
         StructureWorldAccess structureWorldAccess = context.getWorld();
         BlockPos blockPos = context.getOrigin();
 

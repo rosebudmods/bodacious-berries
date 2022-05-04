@@ -5,7 +5,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -31,7 +30,7 @@ public class ChorusBerries extends Berry {
 
             for (int i = 0; i < 16; i++) {
                 double x = user.getX() + (random.nextDouble() - 0.5D) * 8.0D;
-                double y = MathHelper.clamp(user.getY() + (random.nextInt(16) - 8), world.getBottomY(), (world.getBottomY() + ((ServerWorld) world).getLogicalHeight() - 1));
+                double y = MathHelper.clamp(user.getY() + (random.nextInt(16) - 8), world.getBottomY(), (world.getBottomY() + world.getHeight() - 1));
                 double z = user.getZ() + (random.nextDouble() - 0.5D) * 8.0D;
 
                 if (user.hasVehicle()) {
