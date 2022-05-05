@@ -71,7 +71,7 @@ public class BerryBushPatchGen {
     public static void register() {
         registerFeatures();
         registerConfiguredFeatures();
-        registerPlacedFeatureUtil();
+        registerPlacedFeatures();
         placePatches();
     }
 
@@ -94,7 +94,7 @@ public class BerryBushPatchGen {
         PATCH_CLOUDBERRY = berryPatchConfiguredFeature("patch_cloudberry", Bushes.CLOUDBERRY_BUSH, Blocks.GRASS_BLOCK);
     }
 
-    private static void registerPlacedFeatureUtil() {
+    private static void registerPlacedFeatures() {
         PATCH_SASKATOON_BERRY_PLACED = berryPatchPlacedFeature("patch_saskatoon_berry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_SASKATOON_BERRY, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
         PATCH_STRAWBERRY_PLACED = berryPatchPlacedFeature("patch_strawberry_placed", COMMON_BERRY_BUSH_RARITY, PATCH_STRAWBERRY, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
         PATCH_BLACKBERRY_PLACED = berryPatchPlacedFeature("patch_blackberry_placed", MEDIUM_BERRY_BUSH_RARITY, PATCH_BLACKBERRY, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
