@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "bodaciousberries:strawberry",
+    {
+      "id": "croptopia:strawberry",
+      "required": false
+    }
+  ]
+}

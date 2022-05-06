@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "bodaciousberries:raspberries",
+    {
+      "id": "alaskanativecraft:raspberries",
+      "required": false
+    },
+    {
+      "id": "croptopia:raspberry",
+      "required": false
+    }
+  ]
+}
