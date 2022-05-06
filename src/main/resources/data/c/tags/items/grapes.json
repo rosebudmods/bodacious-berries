@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "bodaciousberries:grapes",
+    {
+      "id": "croptopia:grape",
+      "required": false
+    },
+    {
+      "id": "sandwichmod:grapes",
+      "required": false
+    }
+  ]
+}
