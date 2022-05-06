@@ -139,7 +139,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
             DefaultedList<ItemStack> inventory = juicer.getItems();
 
             if (recipe.isPresent()) {
-                juicer.makingBerryBlend = recipe.get().ingredientsMatch(inventory.get(3));
+                juicer.makingBerryBlend = !recipe.get().ingredientsMatch(inventory.get(3));
 
                 //if we're not currently brewing, start brewing with the ingredient
                 startJuicer(world, pos, state, juicer);
