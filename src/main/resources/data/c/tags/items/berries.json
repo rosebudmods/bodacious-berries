@@ -1,98 +1,26 @@
 {
   "replace": false,
   "values": [
-    "minecraft:sweet_berries",
-    "minecraft:glow_berries",
-    "bodaciousberries:saskatoon_berries",
-    "bodaciousberries:raspberries",
-    "bodaciousberries:strawberry",
-    "bodaciousberries:blackberries",
-    "bodaciousberries:chorus_berries",
-    "bodaciousberries:rainberry",
-    "bodaciousberries:lingonberries",
-    "bodaciousberries:grapes",
-    "bodaciousberries:goji_berries",
-    "bodaciousberries:gooseberries",
-    "bodaciousberries:cloudberries",
-    {
-      "id": "ecotones:blueberries",
-      "required": false
-    },
-    {
-      "id": "alaskanativecraft:blueberries",
-      "required": false
-    },
-    {
-      "id": "alaskanativecraft:salmonberries",
-      "required": false
-    },
-    {
-      "id": "alaskanativecraft:raspberries",
-      "required": false
-    },
-    {
-      "id": "alaskanativecraft:cloudberries",
-      "required": false
-    },
-    {
-      "id": "sandwichmod:grapes",
-      "required": false
-    },
-    {
-      "id": "moreberries:yellow_berries",
-      "required": false
-    },
-    {
-      "id": "moreberries:purple_berries",
-      "required": false
-    },
-    {
-      "id": "moreberries:green_berries",
-      "required": false
-    },
-    {
-      "id": "moreberries:black_berries",
-      "required": false
-    },
-    {
-      "id": "moreberries:orange_berries",
-      "required": false
-    },
-    {
-      "id": "moreberries:blue_berries",
-      "required": false
-    },
-    {
-      "id": "promenade:blueberries",
-      "required": false
-    },
-    {
-      "id": "croptopia:cherry",
-      "required": false
-    },
-    {
-      "id": "croptopia:blackberry",
-      "required": false
-    },
-    {
-      "id": "croptopia:blueberry",
-      "required": false
-    },
-    {
-      "id": "croptopia:elderberry",
-      "required": false
-    },
-    {
-      "id": "croptopia:raspberry",
-      "required": false
-    },
-    {
-      "id": "croptopia:strawberry",
-      "required": false
-    },
-    {
-      "id": "croptopia:grape",
-      "required": false
-    }
+    "#c:sweet_berries",
+    "#c:glow_berries",
+    "#c:saskatoon_berries",
+    "#c:raspberries",
+    "#c:strawberries",
+    "#c:blackberries",
+    "#c:chorus_berries",
+    "#c:rainberries",
+    "#c:lingonberries",
+    "#c:grapes",
+    "#c:goji_berries",
+    "#c:gooseberries",
+    "#c:cloudberries",
+    "#c:blueberries",
+    "#c:elderberries",
+    "#c:salmonberries",
+    "#c:yellow_berries",
+    "#c:green_berries",
+    "#c:purple_berries",
+    "#c:orange_berries",
+    "#c:green_berries"
   ]
 }

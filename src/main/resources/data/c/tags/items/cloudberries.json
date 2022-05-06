@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "bodaciousberries:cloudberries",
+    {
+      "id": "alaskanativecraft:cloudberries",
+      "required": false
+    }
+  ]
+}

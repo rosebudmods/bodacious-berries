@@ -35,7 +35,8 @@ public class Compat {
         id = "improved_berries";
         if (checkCompat(id)) {
             //sweet berries and sugar cane -> improved berries sweet berry wine
-            JuicerRecipes.addJuiceRecipe(Registry.ITEM.getId(Items.SWEET_BERRIES), Registry.ITEM.getId(Items.SWEET_BERRIES), Registry.ITEM.getId(Items.SUGAR_CANE), new Identifier(id, "sweet_berry_wine"));
+            JuicerRecipes.Id sweetBerryId = new JuicerRecipes.Id(Registry.ITEM.getId(Items.SWEET_BERRIES), true);
+            JuicerRecipes.addJuiceRecipe(sweetBerryId, sweetBerryId, new JuicerRecipes.Id(Registry.ITEM.getId(Items.SUGAR_CANE), false), new Identifier(id, "sweet_berry_wine"));
         }
 
         id = "croptopia";
@@ -50,8 +51,9 @@ public class Compat {
             JuicerRecipes.addJuiceRecipe(new Identifier(id, "cranberry"), new Identifier(id, "cranberry_juice"));
             //croptopia jam
             String[] berriesWithJam = new String[]{"blueberry", "grape", "strawberry", "peach", "apricot", "blackberry", "raspberry", "elderberry", "cherry"};
-            for (String berryId : berriesWithJam) {
-                JuicerRecipes.addRecipe(new Identifier[]{new Identifier(id, berryId), new Identifier(id, berryId), Registry.ITEM.getId(Items.SUGAR)}, Registry.ITEM.getId(Items.GLASS_BOTTLE), new Identifier(id, berryId + "_jam"));
+            for (String berryIdString : berriesWithJam) {
+                JuicerRecipes.Id berryId = new JuicerRecipes.Id(new Identifier(id, berryIdString), false);
+                JuicerRecipes.addRecipe(new JuicerRecipes.Id[]{berryId, berryId, new JuicerRecipes.Id(Registry.ITEM.getId(Items.SUGAR), false)}, new JuicerRecipes.Id(Registry.ITEM.getId(Items.GLASS_BOTTLE), false), new Identifier(id, berryIdString + "_jam"));
             }
         }
 

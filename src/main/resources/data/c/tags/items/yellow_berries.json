@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "moreberries:yellow_berries",
+      "required": false
+    }
+  ]
+}
