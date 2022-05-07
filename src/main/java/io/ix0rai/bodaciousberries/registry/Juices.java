@@ -77,7 +77,7 @@ public class Juices {
             ChorusBerryJuice juice = new ChorusBerryJuice(Berries.CHORUS_BERRIES, key.getValue());
             Identifier id = Bodaciousberries.id("chorus_berry_juice_" + key.getValue().getPath());
 
-            RECIPES.add(JuicerRecipes.createShapelessJson(new JuicerRecipes.Id(Registry.ITEM.getId(biomeItems[i]), false), id));
+            RECIPES.add(JuicerRecipes.createShapelessJson(Registry.ITEM.getId(biomeItems[i]), id));
 
             Registry.register(Registry.ITEM, id, juice);
         }
@@ -106,14 +106,14 @@ public class Juices {
 
     private static void register(String name, Juice juice) {
         Identifier id = Bodaciousberries.id(name);
-        JuicerRecipes.addJuiceRecipeByTag(new Identifier("c", Registry.ITEM.getId(juice.getBerry()).getPath()), id);
+        JuicerRecipes.addJuiceRecipe(new Identifier("c", Registry.ITEM.getId(juice.getBerry()).getPath()), id);
         register(id, juice);
     }
 
     private static void registerBlend(String name, Blend blend) {
         Identifier id = Bodaciousberries.id(name);
         register(id, blend);
-        JuicerRecipes.addJuiceRecipe(new JuicerRecipes.Id(Registry.ITEM.getId(blend.getIngredient0()), false), new JuicerRecipes.Id(Registry.ITEM.getId(blend.getIngredient1()), false), new JuicerRecipes.Id(Registry.ITEM.getId(blend.getIngredient2()), false), id);
+        JuicerRecipes.addJuiceRecipe(Registry.ITEM.getId(blend.getIngredient0()), Registry.ITEM.getId(blend.getIngredient1()), Registry.ITEM.getId(blend.getIngredient2()), id);
     }
 
     private static void register(Identifier id, Juice juice) {
