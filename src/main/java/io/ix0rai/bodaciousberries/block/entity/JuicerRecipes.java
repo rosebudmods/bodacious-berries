@@ -15,22 +15,16 @@ import java.util.function.Function;
 public class JuicerRecipes {
     public static final List<JsonObject> JUICER_RECIPES = new ArrayList<>();
 
-    public static void addRecipe(Id[] ids, Id receptacle, Identifier output) {
+    public static void addRecipe(Identifier[] ids, Identifier receptacle, Identifier output) {
         JUICER_RECIPES.add(createRecipeJson(ids, receptacle, output));
     }
 
-    public static void addJuiceRecipe(Id input0, Id input1, Id input2, Identifier output) {
-        addRecipe(new Id[]{input0, input1, input2}, new Id(Registry.ITEM.getId(Juices.JUICE_RECEPTACLE), false), output);
+    public static void addJuiceRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier output) {
+        addRecipe(new Identifier[]{input0, input1, input2}, Registry.ITEM.getId(Juices.JUICE_RECEPTACLE), output);
     }
 
     public static void addJuiceRecipe(Identifier input, Identifier output) {
-        Id id = new Id(input, false);
-        addJuiceRecipe(id, id, id, output);
-    }
-
-    public static void addJuiceRecipeByTag(Identifier input, Identifier output) {
-        Id id = new Id(input, true);
-        addJuiceRecipe(id, id, id, output);
+        addJuiceRecipe(input, input, input, output);
     }
 
     public static boolean isIngredient(ItemStack stack) {
@@ -55,7 +49,7 @@ public class JuicerRecipes {
         return false;
     }
 
-    public static JsonObject createRecipeJson(Id[] ingredients, Id receptacle, Identifier output) {
+    public static JsonObject createRecipeJson(Identifier[] ingredients, Identifier receptacle, Identifier output) {
         JsonObject json = new JsonObject();
         //add type
         //adds: "type": "bodaciousberries:juicer_recipe"
@@ -64,12 +58,12 @@ public class JuicerRecipes {
         //add ingredients
         //adds: "ingredient(i)": {"item || tag": "ingredients[i]"}
         for (int i = 0; i < ingredients.length; i++) {
-            json.add("ingredient" + i, ingredients[i].getAsProperty());
+            json.add("ingredient" + i, getAsProperty(ingredients[i]));
         }
 
         //add receptacle
         //adds: "receptacle": {"item": "receptacle_id"}
-        json.add("receptacle", receptacle.getAsProperty());
+        json.add("receptacle", getAsProperty(receptacle));
 
         //add result
         //adds: "result": "output_id"
@@ -78,7 +72,7 @@ public class JuicerRecipes {
         return json;
     }
 
-    public static JsonObject createShapelessJson(Id ingredient, Identifier output) {
+    public static JsonObject createShapelessJson(Identifier ingredient, Identifier output) {
         JsonObject json = new JsonObject();
         //add type
         //adds: "type": "minecraft:crafting_shapeless"
@@ -87,41 +81,34 @@ public class JuicerRecipes {
         //add ingredients
         //adds "ingredients": {"item": "ingredient", "item", "bodaciousberries:chorus_berry_juice}
         JsonArray ingredientArray = new JsonArray();
-        ingredientArray.add(ingredient.getAsProperty());
-        ingredientArray.add(new Id(Bodaciousberries.id("chorus_berry_juice"), false).getAsProperty());
+        ingredientArray.add(getAsProperty(ingredient));
+        ingredientArray.add(getAsProperty(Bodaciousberries.id("chorus_berry_juice")));
         json.add("ingredients", ingredientArray);
 
         //add result
         //adds: "result": {"item": "output", "count": 1}
-        JsonObject result = new Id(output, false).getAsProperty();
+        JsonObject result = getAsProperty(output);
         result.addProperty("count", 1);
         json.add("result", result);
 
         return json;
     }
 
-    public record Id(Identifier id, boolean tag) {
-        public Id(Identifier id, boolean tag) {
-            this.tag = tag;
-
-            if (tag) {
-                String string = id.toString();
-                if (string.endsWith("y")) {
-                    string = string.substring(0, string.length() - 1) + "ies";
-                }
-
-                string = "c:" + string.split(":")[1];
-                this.id = new Identifier(string);
-            } else {
-                this.id = id;
+    private static JsonObject getAsProperty(Identifier id) {
+        JsonObject property = new JsonObject();
+        //if the namespace is c: we can assume it's a tag
+        if (id.getNamespace().equals("c")) {
+            //attempt to pluralize the name as it is a tag
+            String string = id.toString();
+            if (string.endsWith("y")) {
+                string = string.substring(0, string.length() - 1) + "ies";
             }
+
+            property.addProperty("tag", string);
+        } else {
+            property.addProperty("item", id.toString());
         }
 
-        public JsonObject getAsProperty() {
-            JsonObject property = new JsonObject();
-            //pluralizes the string if it is a tag
-            property.addProperty(tag() ? "tag" : "item", id().toString());
-            return property;
-        }
+        return property;
     }
 }
