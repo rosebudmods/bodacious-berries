@@ -10,7 +10,8 @@
     "thonkman"
   ],
   "contact": {
-    "sources": "https://github.com/ix0rai/bodaciousberries"
+    "sources": "https://github.com/ix0rai/bodaciousberries",
+    "issues": "https://github.com/ix0rai/bodaciousberries/issues"
   },
 
   "license": "MIT",
@@ -26,6 +27,9 @@
     ],
     "rei": [
       "io.ix0rai.bodaciousberries.compat.JuicerReiPlugin"
+    ],
+    "modmenu": [
+      "io.ix0rai.bodaciousberries.config.BodaciousModMenuIntegration"
     ]
   },
   "mixins": [
@@ -37,5 +41,15 @@
     "fabric": "*",
     "minecraft": "1.18.x",
     "java": ">=17"
+  },
+
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/TN9gaXJ6E8",
+        "modmenu.issues": "https://github.com/ix0rai/bodaciousberries/issues",
+        "modmenu.website": "https://github.com/ix0rai/bodaciousberries"
+      }
+    }
   }
 }
