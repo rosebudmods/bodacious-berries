@@ -70,7 +70,7 @@
   "subtitles.bodaciousberries.block.berry_bush.pick_2": "Berry harvested",
   "subtitles.bodaciousberries.block.berry_bush.pick_3": "Berry harvested",
   "rei.bodaciousberries.juicer": "Juicer",
-  "text.autoconfig.bodaciousberries.title": "Bodacious Berries Rarity Configuration (Higher is rarer)",
+  "text.autoconfig.bodaciousberries.title": "Bodacious Berries Rarity Configuration (Higher is rarer; requires restart)",
   "text.autoconfig.bodaciousberries.option.ultraRareBushRarity": "Ultra Rare Bush Rarity:",
   "text.autoconfig.bodaciousberries.option.rareBushRarity": "Rare Bush Rarity:",
   "text.autoconfig.bodaciousberries.option.mediumBushRarity": "Medium Bush Rarity",
