@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "ecotones:blueberries",
+      "required": false
+    },
+    {
+      "id": "alaskanativecraft:blueberries",
+      "required": false
+    },
+    {
+      "id": "croptopia:blueberry",
+      "required": false
+    },
+    {
+      "id": "promenade:blueberries",
+      "required": false
+    },
+    {
+      "id": "moreberries:blue_berries",
+      "required": false
+    }
+  ]
+}

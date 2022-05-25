@@ -106,7 +106,7 @@ public class Juices {
 
     private static void register(String name, Juice juice) {
         Identifier id = Bodaciousberries.id(name);
-        JuicerRecipes.addJuiceRecipe(Registry.ITEM.getId(juice.getBerry()), id);
+        JuicerRecipes.addJuiceRecipe(new Identifier("c", Registry.ITEM.getId(juice.getBerry()).getPath()), id);
         register(id, juice);
     }
 

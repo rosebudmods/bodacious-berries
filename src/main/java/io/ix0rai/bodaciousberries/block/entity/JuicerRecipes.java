@@ -56,14 +56,14 @@ public class JuicerRecipes {
         json.addProperty("type", JuicerRecipe.Serializer.ID.toString());
 
         //add ingredients
-        //adds: "ingredient(i)": {"item": "ingredients[i]"}
+        //adds: "ingredient(i)": {"item || tag": "ingredients[i]"}
         for (int i = 0; i < ingredients.length; i++) {
-            json.add("ingredient" + i, getItemProperty(ingredients[i].toString()));
+            json.add("ingredient" + i, getAsProperty(ingredients[i]));
         }
 
         //add receptacle
         //adds: "receptacle": {"item": "receptacle_id"}
-        json.add("receptacle", getItemProperty(receptacle.toString()));
+        json.add("receptacle", getAsProperty(receptacle));
 
         //add result
         //adds: "result": "output_id"
@@ -81,22 +81,34 @@ public class JuicerRecipes {
         //add ingredients
         //adds "ingredients": {"item": "ingredient", "item", "bodaciousberries:chorus_berry_juice}
         JsonArray ingredientArray = new JsonArray();
-        ingredientArray.add(getItemProperty(ingredient.toString()));
-        ingredientArray.add(getItemProperty(Bodaciousberries.idString("chorus_berry_juice")));
+        ingredientArray.add(getAsProperty(ingredient));
+        ingredientArray.add(getAsProperty(Bodaciousberries.id("chorus_berry_juice")));
         json.add("ingredients", ingredientArray);
 
         //add result
         //adds: "result": {"item": "output", "count": 1}
-        JsonObject result = getItemProperty(output.toString());
+        JsonObject result = getAsProperty(output);
         result.addProperty("count", 1);
         json.add("result", result);
 
         return json;
     }
 
-    private static JsonObject getItemProperty(String string) {
+    private static JsonObject getAsProperty(Identifier id) {
         JsonObject property = new JsonObject();
-        property.addProperty("item", string);
+        //if the namespace is c: we can assume it's a tag
+        if (id.getNamespace().equals("c")) {
+            //attempt to pluralize the name as it is a tag
+            String string = id.toString();
+            if (string.endsWith("y")) {
+                string = string.substring(0, string.length() - 1) + "ies";
+            }
+
+            property.addProperty("tag", string);
+        } else {
+            property.addProperty("item", id.toString());
+        }
+
         return property;
     }
 }
