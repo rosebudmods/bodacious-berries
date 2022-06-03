@@ -16,9 +16,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
@@ -26,7 +24,7 @@ import java.util.List;
 
 @SuppressWarnings("UnstableApiUsage")
 public class JuicerDisplayCategory implements DisplayCategory<JuicerDisplay> {
-    public static final MutableText TITLE = new TranslatableText("rei.bodaciousberries.juicer");
+    public static final Text TITLE = Text.of("rei.bodaciousberries.juicer");
     public static final EntryStack<ItemStack> ICON = EntryStacks.of(BodaciousBlocks.JUICER_BLOCK);
     private static final Identifier TEXTURE = Bodaciousberries.id("textures/gui/juicer_rei.png");
 

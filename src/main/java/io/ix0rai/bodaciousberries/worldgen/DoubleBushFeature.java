@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
@@ -21,7 +22,7 @@ public class DoubleBushFeature extends Feature<DoubleBushFeatureConfig> {
         DoubleBushFeatureConfig config = context.getConfig();
         StructureWorldAccess access = context.getWorld();
         BlockPos pos = context.getOrigin();
-        Random random = context.getRandom();
+        RandomGenerator random = context.getRandom();
         BlockState tallState = config.tallForm().getBlockState(random, pos);
         BlockState babyState = config.babyForm().getBlockState(random, pos);
 

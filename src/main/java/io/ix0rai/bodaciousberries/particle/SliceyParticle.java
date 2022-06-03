@@ -10,6 +10,7 @@ import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.random.RandomGenerator;
 
 import java.util.Random;
 
@@ -42,7 +43,7 @@ public class SliceyParticle extends AnimatedParticle {
             return new SliceyParticle(clientWorld, posX, posY, posZ, this.spriteProvider);
         }
 
-        private static double randomise(Random random, double number) {
+        private static double randomise(RandomGenerator random, double number) {
             return random.nextBoolean() ? number + MathHelper.nextBetween(random, 0.1f, 0.3f) : number - MathHelper.nextBetween(random, 0.1f, 0.3f);
         }
     }

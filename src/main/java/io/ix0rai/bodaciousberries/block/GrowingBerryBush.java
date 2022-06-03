@@ -13,6 +13,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 
@@ -41,7 +42,7 @@ public class GrowingBerryBush extends BasicBerryBush {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
         int age = state.get(getAge());
         if (random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             grow(world, pos, state, age + 1);
