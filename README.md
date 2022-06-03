@@ -1,5 +1,6 @@
-# bodaciousberries
-BodaciousBerries is a mod adding some decidedly quite fine berries. Whether you want to pick them, destroy them, farm them or simply admire their beauty, you're getting the berry best experience you could possibly have. Sweet Berries don't hold a candle to the greatness of **bodacious** berries.
+![2022-06-02_19 59 34](https://user-images.githubusercontent.com/66223394/171769253-9bc3ef22-77f3-4bac-966a-9876e3342adf.png)
+
+## [discord](https://discord.gg/TN9gaXJ6E8) | [github](https://github.com/ix0rai/bodaciousberries) | [modrinth](https://modrinth.com/mod/berries) | [curseforge](https://www.curseforge.com/minecraft/mc-mods/bodacious-berries)
 
 # features
 ### berries!
@@ -23,6 +24,3 @@ The berry harvester is a custom block centered around harvesting berries. It wil
 
 ### dependencies
 ![fabric api](https://i.imgur.com/HabVZJRm.png "kneecaps required")
-
-### join my discord please!
-https://discord.gg/TN9gaXJ6E8
