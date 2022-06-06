@@ -73,7 +73,7 @@ public class ChorusBerryJuice extends Juice {
                 user.getBlockPos(),
                 6400,
                 8,
-                0
+                10
         );
 
         if (pair != null) {
