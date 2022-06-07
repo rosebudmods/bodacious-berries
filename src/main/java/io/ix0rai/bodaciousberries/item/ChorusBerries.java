@@ -13,8 +13,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class ChorusBerries extends AliasedBlockItem {
     public ChorusBerries(Block block, Settings settings) {
         super(block, settings);

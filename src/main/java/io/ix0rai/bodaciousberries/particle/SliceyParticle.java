@@ -12,8 +12,6 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.random.RandomGenerator;
 
-import java.util.Random;
-
 @Environment(EnvType.CLIENT)
 public class SliceyParticle extends AnimatedParticle {
     SliceyParticle(ClientWorld world, double x, double y, double z, SpriteProvider spriteProvider) {

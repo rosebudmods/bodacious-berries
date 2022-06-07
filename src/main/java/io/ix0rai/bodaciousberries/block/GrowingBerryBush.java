@@ -17,8 +17,6 @@ import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 

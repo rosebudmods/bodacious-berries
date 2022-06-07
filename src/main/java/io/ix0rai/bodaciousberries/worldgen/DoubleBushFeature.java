@@ -10,8 +10,6 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
-import java.util.Random;
-
 public class DoubleBushFeature extends Feature<DoubleBushFeatureConfig> {
     public DoubleBushFeature(Codec<DoubleBushFeatureConfig> codec) {
         super(codec);

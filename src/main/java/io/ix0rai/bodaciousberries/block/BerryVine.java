@@ -20,8 +20,6 @@ import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 @SuppressWarnings("deprecation")
 public class BerryVine extends VineBlock implements BerryBush {
     protected static final int MAX_AGE = 3;

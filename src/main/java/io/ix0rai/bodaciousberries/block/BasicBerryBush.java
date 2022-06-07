@@ -31,7 +31,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BasicBerryBush extends PlantBlock implements BerryBush {
