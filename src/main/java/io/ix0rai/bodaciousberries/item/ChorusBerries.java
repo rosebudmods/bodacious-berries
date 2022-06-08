@@ -10,9 +10,8 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class ChorusBerries extends AliasedBlockItem {
     public ChorusBerries(Block block, Settings settings) {
@@ -23,7 +22,7 @@ public class ChorusBerries extends AliasedBlockItem {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         //modified code from ChorusFruitItem
         if (!world.isClient) {
-            Random random = user.getRandom();
+            RandomGenerator random = user.getRandom();
 
             double originalX = user.getX();
             double originalY = user.getY();

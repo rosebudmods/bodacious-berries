@@ -16,10 +16,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BerryVine extends VineBlock implements BerryBush {
@@ -56,7 +55,7 @@ public class BerryVine extends VineBlock implements BerryBush {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
         super.randomTick(state, world, pos, random);
 
         int age = state.get(AGE);
@@ -72,12 +71,12 @@ public class BerryVine extends VineBlock implements BerryBush {
     }
 
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+    public boolean canGrow(World world, RandomGenerator random, BlockPos pos, BlockState state) {
         return hasRandomTicks(state);
     }
 
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+    public void grow(ServerWorld world, RandomGenerator random, BlockPos pos, BlockState state) {
         int newBerryAge = Math.min(MAX_AGE, state.get(AGE) + 1);
         grow(world, pos, state, newBerryAge);
     }

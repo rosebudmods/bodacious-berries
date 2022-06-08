@@ -25,12 +25,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BasicBerryBush extends PlantBlock implements BerryBush {
@@ -114,7 +114,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * grows the bush if it can, a random throw is met, and light level is high enough
      */
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
         int age = state.get(getAge());
         //if the age isn't maximum and the light level is high enough grow the bush
         if (age <= maxAge && random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
@@ -198,13 +198,13 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+    public boolean canGrow(World world, RandomGenerator random, BlockPos pos, BlockState state) {
         //hasRandomTicks checks the same thing as this method
         return hasRandomTicks(state);
     }
 
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+    public void grow(ServerWorld world, RandomGenerator random, BlockPos pos, BlockState state) {
         int newAge = Math.min(maxAge, state.get(getAge()) + 1);
         grow(world, pos, state, newAge);
     }

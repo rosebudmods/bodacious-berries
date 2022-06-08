@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.dimension.DimensionTypes;
 
 public class ChorusBerryJuice extends Juice {
     private final Identifier biome;
@@ -34,7 +34,7 @@ public class ChorusBerryJuice extends Juice {
         if (biome != null && world.getServer() != null) {
             MinecraftServer server = world.getServer();
             //ensure we are in the overworld
-            if (world.getDimension().equals(server.getRegistryManager().get(Registry.DIMENSION_TYPE_KEY).get(DimensionType.OVERWORLD_ID))) {
+            if (world.getDimension().equals(server.getRegistryManager().get(Registry.DIMENSION_TYPE_KEY).get(DimensionTypes.OVERWORLD_ID))) {
                 //locate the biome to teleport to
                 Pair<BlockPos, Boolean> pair = locateBiome(server, user.getBlockPos(), user);
                 BlockPos pos = pair.getFirst();
@@ -67,11 +67,12 @@ public class ChorusBerryJuice extends Juice {
     }
 
     private Pair<BlockPos, Boolean> locateBiome(MinecraftServer server, BlockPos pos, LivingEntity user) {
-        Pair<BlockPos, Holder<Biome>> pair = server.getOverworld().locateBiome(
+        Pair<BlockPos, Holder<Biome>> pair = server.getOverworld().method_42108(
                 entry -> (entry.value().equals(Holder.createDirect(server.getRegistryManager().get(Registry.BIOME_KEY).get(biome)).value())),
                 user.getBlockPos(),
                 6400,
-                8
+                8,
+                10
         );
 
         if (pair != null) {

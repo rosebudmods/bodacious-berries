@@ -9,15 +9,12 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.tag.BiomeTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.treedecorator.LeavesVineTreeDecorator;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.function.BiConsumer;
 
 @Mixin(LeavesVineTreeDecorator.class)
 public class VineDecoratorRedirect {
@@ -26,18 +23,18 @@ public class VineDecoratorRedirect {
      * @author ix0rai
      */
     @Inject(method = "placeVines", at = @At("HEAD"), cancellable = true)
-    private static void placeVines(TestableWorld world, BlockPos pos, BooleanProperty facing, BiConsumer<BlockPos, BlockState> replacer, CallbackInfo ci) {
+    private static void placeVines(BlockPos pos, BooleanProperty facing, TreeDecorator.class_7402 arg, CallbackInfo ci) {
         //convert world to structure world access so that we can test for vines and air blocks
-        final StructureWorldAccess access = (StructureWorldAccess) world;
+        final StructureWorldAccess access = (StructureWorldAccess) arg.method_43316();
 
         //only redirect the method if we're in a jungle biome
         if (access.getBiome(pos).hasTag(BiomeTags.IS_JUNGLE)) {
-            placeVine(access, replacer, pos, facing);
+            placeVine(access, arg, pos, facing);
 
             //place vines that are hanging down from other vines
-            int i = access.getRandom().nextInt(3, 6);
-            for(pos = pos.down(); Feature.isAir(world, pos) && i > 0; --i) {
-                placeVine(access, replacer, pos, facing);
+            int i = access.getRandom().range(3, 6);
+            for(pos = pos.down(); access.isAir(pos) && i > 0; --i) {
+                placeVine(access, arg, pos, facing);
                 pos = pos.down();
             }
 
@@ -45,7 +42,7 @@ public class VineDecoratorRedirect {
         }
     }
 
-    private static void placeVine(StructureWorldAccess access, BiConsumer<BlockPos, BlockState> replacer, BlockPos pos, BooleanProperty facing) {
+    private static void placeVine(StructureWorldAccess access, TreeDecorator.class_7402 arg, BlockPos pos, BooleanProperty facing) {
         BlockState block = matchBlockAbove(access, pos, facing);
 
         if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDumbCheck(access, pos)) {
@@ -58,7 +55,7 @@ public class VineDecoratorRedirect {
         }
 
         if (block != null) {
-            replacer.accept(pos, block);
+            arg.method_43318(pos, block);
         }
     }
 

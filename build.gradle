@@ -1,7 +1,8 @@
 plugins {
     id 'io.github.p03w.machete' version '1.+'
     id 'fabric-loom' version '0.11-SNAPSHOT'
-    id 'org.quiltmc.quilt-mappings-on-loom' version '4.2.0'
+    id 'org.quiltmc.quilt-mappings-on-loom' version '4.2.+'
+    id 'io.github.juuxel.loom-quiltflower' version '1.7.+'
     id 'maven-publish'
 }
 
@@ -11,7 +12,6 @@ sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
 repositories {
-    maven { url = "https://maven.gegy.dev/releases" }
     maven { url = "https://maven.shedaniel.me/" }
     maven { url = "https://maven.terraformersmc.com/releases/" }
 }
@@ -27,7 +27,6 @@ dependencies {
     })
     modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 
-    modLocalRuntime("supercoder79:databreaker:${project.databreaker_version}")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}")
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}")
 
