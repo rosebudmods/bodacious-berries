@@ -15,7 +15,7 @@ public class GojiBerries extends AliasedBlockItem {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        //clear the user of poison only
+        // clear the user of poison only
         for (StatusEffectInstance effect : user.getStatusEffects()) {
             if (effect.getEffectType().equals(StatusEffects.POISON)) {
                 user.removeStatusEffect(StatusEffects.POISON);

@@ -26,10 +26,10 @@ public class Rainberry extends AliasedBlockItem {
             stack.decrement(1);
         }
 
-        //give the player random dye
+        // give the player random dye
         user.getInventory().insertStack(new ItemStack(DyeItem.byColor(DyeColor.byId(world.random.range(0, 16))), 1));
 
-        //magicky sounding sound
+        // magicky sounding sound
         user.playSound(SoundEvents.BLOCK_AMETHYST_CLUSTER_HIT, SoundCategory.PLAYERS, 0.75F, 0.4F / (user.getRandom().nextFloat() * 0.4F + 0.8F));
 
         return TypedActionResult.success(stack);

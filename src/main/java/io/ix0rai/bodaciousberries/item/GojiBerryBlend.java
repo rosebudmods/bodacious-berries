@@ -15,7 +15,7 @@ public class GojiBerryBlend extends Blend {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        //note: a mod conflict causes a cme here, so we use an iterator over an enhanced for
+        // note: a mod conflict somehow causes a cme here, so we use an iterator over an enhanced for
         Iterator<StatusEffectInstance> iterator = user.getStatusEffects().iterator();
         do {
             StatusEffectInstance instance = iterator.next();

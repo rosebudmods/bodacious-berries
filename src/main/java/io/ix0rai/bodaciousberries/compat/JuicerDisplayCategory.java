@@ -50,26 +50,26 @@ public class JuicerDisplayCategory implements DisplayCategory<JuicerDisplay> {
         widgets.add(Widgets.createRecipeBase(bounds));
 
         widgets.add(Widgets.createDrawableWidget((helper, matrices, mouseX, mouseY, delta) -> {
-            //add juicer background
+            // add juicer background
             RenderSystem.setShaderTexture(0, TEXTURE);
             helper.drawTexture(matrices, startPoint.x + 20, startPoint.y, 55, 17, 64, 59);
 
-            //add progress bar
+            // add progress bar
             final double time = System.currentTimeMillis() / 250d;
 
             int progress = MathHelper.floor(time % 16);
             helper.drawTexture(matrices, startPoint.x + 38, startPoint.y + 24, 187, 0, 28, progress);
 
-            //add animated bubbles
+            // add animated bubbles
             int height = MathHelper.floor(time % 9);
             helper.drawTexture(matrices, startPoint.x + 24, startPoint.y + 24 + height, 176, height, 11, 9 - height);
             helper.drawTexture(matrices, startPoint.x + 70, startPoint.y + 24 + height, 176, height, 11, 9 - height);
         }));
 
-        //show receptacle
+        // show receptacle
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 107, startPoint.y + 21)).entries(display.getReceptacleEntry()).markInput());
 
-        //we don't talk about the slots
+        // we don't talk about the slots
         widgets.add(createSlot(new Point(startPoint.x + 24, startPoint.y + 1), display.getInputEntries().get(0), true));
         widgets.add(createSlot(new Point(startPoint.x + 44, startPoint.y + 8), display.getInputEntries().get(1), true));
         widgets.add(createSlot(new Point(startPoint.x + 64, startPoint.y + 1), display.getInputEntries().get(2), true));

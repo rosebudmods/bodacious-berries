@@ -22,12 +22,12 @@ public class GrapevineFeature extends VinesFeature implements FeatureConfig {
         StructureWorldAccess structureWorldAccess = context.getWorld();
         BlockPos blockPos = context.getOrigin();
 
-        //ensure that block we're generating to is air
+        // ensure that block we're generating to is air
         if (structureWorldAccess.isAir(blockPos)) {
-            //check all directions
+            // check all directions
             Direction direction = checkDirections(structureWorldAccess, blockPos);
             if (direction != null) {
-                //if we found a direction, generate vines
+                // if we found a direction, generate vines
                 structureWorldAccess.setBlockState(blockPos, Bushes.GRAPEVINE.getDefaultState().with(VineBlock.getFacingProperty(direction), true).with(Bushes.GRAPEVINE.getAge(), Bushes.GRAPEVINE.getMaxAge()), Block.NOTIFY_LISTENERS);
                 return true;
             }

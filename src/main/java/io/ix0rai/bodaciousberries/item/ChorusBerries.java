@@ -20,7 +20,7 @@ public class ChorusBerries extends AliasedBlockItem {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        //modified code from ChorusFruitItem
+        // modified code from ChorusFruitItem
         if (!world.isClient) {
             RandomGenerator random = user.getRandom();
 

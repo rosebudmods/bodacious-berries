@@ -40,7 +40,7 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-        //draw background
+        // draw background
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
         this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
@@ -53,13 +53,13 @@ public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
         final boolean blend = this.handler.brewingBlend();
 
         if (brewTime > 0) {
-            //draw progress bar
+            // draw progress bar
             int progress = Math.round(28.0F * (1.0F - brewTime / (float) JuicerBlockEntity.TOTAL_BREW_TIME));
             if (progress > 0) {
                 this.drawTexture(matrices, x + 73, y + 35, dubious ? DUBIOUS_PROGRESS_BAR_UV_X : PROGRESS_BAR_UV_X, blend ? BLEND_PROGRESS_BAR_UV_Y : PROGRESS_BAR_UV_Y, 28, progress);
             }
 
-            //draw bubbles
+            // draw bubbles
             progress = BUBBLE_PROGRESS[brewTime / 2 % 7];
             if (progress > 0) {
                 for (int i = 0; i < 2; i++) {

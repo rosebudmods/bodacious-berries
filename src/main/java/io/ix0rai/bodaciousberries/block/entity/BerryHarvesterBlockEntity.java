@@ -62,17 +62,17 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     public static void tick(World world, BlockPos pos, BlockState state, BerryHarvesterBlockEntity harvester) {
         if (harvester.tickCounter++ >= ATTEMPT_HARVEST_ON && !world.isReceivingRedstonePower(pos)) {
             if (!harvester.isInventoryFull()) {
-                //block the harvester is facing must be a berry bush
+                // block the harvester is facing must be a berry bush
                 BlockPos bushPos = pos.offset(state.get(BerryHarvesterBlock.FACING));
                 BlockState bush = world.getBlockState(bushPos);
                 Block block = bush.getBlock();
 
-                //also ensure bush is ready to harvest
+                // also ensure bush is ready to harvest
                 if (block instanceof BerryBush berryBush && berryBush.isFullyGrown(bush)) {
-                    //insert items
+                    // insert items
                     harvester.insert(new ItemStack(berryBush.getBerryType(), berryBush.getMaxBerryAmount()));
 
-                    //play pick sound and reset bush growth
+                    // play pick sound and reset bush growth
                     addPickEffects(world, bushPos);
                     berryBush.resetAge(world, bushPos, bush);
                 } else if (block instanceof SweetBerryBushBlock) {
@@ -85,12 +85,12 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     }
 
     private static void handleSweetBerry(World world, BlockPos bushPos, BlockState bushState, BerryHarvesterBlockEntity harvester) {
-        //is fully grown
+        // is fully grown
         if (bushState.get(SweetBerryBushBlock.AGE) >= 3) {
             harvester.insert(new ItemStack(Items.SWEET_BERRIES, 3));
             addPickEffects(world, bushPos);
 
-            //reset bush
+            // reset bush
             world.setBlockState(bushPos, bushState.with(SweetBerryBushBlock.AGE, 1));
         }
     }
@@ -118,21 +118,21 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
      * @param stack the items to insert
      */
     public void insert(ItemStack stack) {
-        //find an open slot and insert items
+        // find an open slot and insert items
         for (int i = 0; i < this.getItems().size(); i++) {
-            //get items currently in slot
+            // get items currently in slot
             ItemStack slot = this.getItems().get(i);
             int maxAmount = slot.getMaxCount();
 
             if ((slot.isEmpty() || slot.getItem().equals(stack.getItem())) && slot.getCount() <= maxAmount) {
                 stack.setCount(slot.getCount() + stack.getCount());
-                //if stack overflows available space
+                // if stack overflows available space
                 if (stack.getCount() > maxAmount) {
-                    //split the stack, inserting one stack of 64 and running the remainder back through the loop
+                    // split the stack, inserting one stack of 64 and running the remainder back through the loop
                     this.setStack(i, new ItemStack(stack.getItem(), maxAmount));
                     stack.decrement(maxAmount);
                 } else {
-                    //if stack fits, insert it
+                    // if stack fits, insert it
                     this.setStack(i, stack);
                     break;
                 }

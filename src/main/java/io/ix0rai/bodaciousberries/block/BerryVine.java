@@ -59,7 +59,7 @@ public class BerryVine extends VineBlock implements BerryBush {
         super.randomTick(state, world, pos, random);
 
         int age = state.get(AGE);
-        //if the age isn't maximum and the light level is high enough grow the bush
+        // if the age isn't maximum and the light level is high enough grow the bush
         if (age < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             world.setBlockState(pos, state.with(AGE, age + 1), Block.NOTIFY_LISTENERS);
         }
@@ -101,11 +101,6 @@ public class BerryVine extends VineBlock implements BerryBush {
     @Override
     public int getMaxAge() {
         return MAX_AGE;
-    }
-
-    @Override
-    public BlockState getBaseState() {
-        return super.getDefaultState().with(AGE, 0);
     }
 
     @Override

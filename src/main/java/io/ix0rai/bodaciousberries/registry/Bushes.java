@@ -34,7 +34,7 @@ public class Bushes {
 
     public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
 
-    //bushes
+    // bushes
     public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berries.CHORUS_BERRIES,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
     public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(

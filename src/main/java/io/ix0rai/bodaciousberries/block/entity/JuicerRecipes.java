@@ -51,22 +51,22 @@ public class JuicerRecipes {
 
     public static JsonObject createRecipeJson(Identifier[] ingredients, Identifier receptacle, Identifier output) {
         JsonObject json = new JsonObject();
-        //add type
-        //adds: "type": "bodaciousberries:juicer_recipe"
+        // add type
+        // adds: "type": "bodaciousberries:juicer_recipe"
         json.addProperty("type", JuicerRecipe.Serializer.ID.toString());
 
-        //add ingredients
-        //adds: "ingredient(i)": {"item || tag": "ingredients[i]"}
+        // add ingredients
+        // adds: "ingredient(i)": {"item || tag": "ingredients[i]"}
         for (int i = 0; i < ingredients.length; i++) {
             json.add("ingredient" + i, getAsProperty(ingredients[i]));
         }
 
-        //add receptacle
-        //adds: "receptacle": {"item": "receptacle_id"}
+        // add receptacle
+        // adds: "receptacle": {"item": "receptacle_id"}
         json.add("receptacle", getAsProperty(receptacle));
 
-        //add result
-        //adds: "result": "output_id"
+        // add result
+        // adds: "result": "output_id"
         json.addProperty("result", output.toString());
 
         return json;
@@ -74,19 +74,19 @@ public class JuicerRecipes {
 
     public static JsonObject createShapelessJson(Identifier ingredient, Identifier output) {
         JsonObject json = new JsonObject();
-        //add type
-        //adds: "type": "minecraft:crafting_shapeless"
+        // add type
+        // adds: "type": "minecraft:crafting_shapeless"
         json.addProperty("type", "minecraft:crafting_shapeless");
 
-        //add ingredients
-        //adds "ingredients": {"item": "ingredient", "item", "bodaciousberries:chorus_berry_juice}
+        // add ingredients
+        // adds "ingredients": {"item": "ingredient", "item", "bodaciousberries:chorus_berry_juice}
         JsonArray ingredientArray = new JsonArray();
         ingredientArray.add(getAsProperty(ingredient));
         ingredientArray.add(getAsProperty(Bodaciousberries.id("chorus_berry_juice")));
         json.add("ingredients", ingredientArray);
 
-        //add result
-        //adds: "result": {"item": "output", "count": 1}
+        // add result
+        // adds: "result": {"item": "output", "count": 1}
         JsonObject result = getAsProperty(output);
         result.addProperty("count", 1);
         json.add("result", result);
@@ -96,9 +96,9 @@ public class JuicerRecipes {
 
     private static JsonObject getAsProperty(Identifier id) {
         JsonObject property = new JsonObject();
-        //if the namespace is c: we can assume it's a tag
+        // if the namespace is c: we can assume it's a tag
         if (id.getNamespace().equals("c")) {
-            //attempt to pluralize the name as it is a tag
+            // attempt to pluralize the name as it is a tag
             String string = id.toString();
             if (string.endsWith("y")) {
                 string = string.substring(0, string.length() - 1) + "ies";

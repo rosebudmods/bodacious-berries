@@ -26,7 +26,6 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
 public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
-    //berry age is hard capped at 3 for double bushes
     public static final int MAX_AGE = 3;
     public static final IntProperty AGE = Properties.AGE_3;
 
@@ -59,8 +58,8 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        //I spent about an hour and a half debugging a crash before realising it originated from this property not existing
-        //yay me
+        // I spent about an hour and a half debugging a crash before realising it originated from this property not existing
+        // yay me
         builder.add(getAge()).add(HALF);
     }
 
@@ -72,7 +71,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
         int age = state.get(getAge());
-        //if the age isn't maximum and the light level is high enough grow the bush
+        // if the age isn't maximum and the light level is high enough grow the bush
         if (age < MAX_AGE && random.nextInt(5) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             world.setBlockState(pos, state.with(getAge(), age + 1), Block.NOTIFY_LISTENERS);
         }
@@ -114,11 +113,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public int getMaxAge() {
         return MAX_AGE;
-    }
-
-    @Override
-    public BlockState getBaseState() {
-        return super.getDefaultState().with(getAge(), 0);
     }
 
     @Override

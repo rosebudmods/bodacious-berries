@@ -44,7 +44,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected final VoxelShape largeShape;
     protected final int sizeChangeAge;
 
-    //animals that can move through bushes without being slowed
+    // animals that can move through bushes without being slowed
     public static final List<EntityType<?>> SMALL_ENTITIES = List.of(
             EntityType.FOX,
             EntityType.BEE,
@@ -116,7 +116,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
         int age = state.get(getAge());
-        //if the age isn't maximum and the light level is high enough grow the bush
+        // if the age isn't maximum and the light level is high enough grow the bush
         if (age <= maxAge && random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             grow(world, pos, state, age + 1);
         }
@@ -155,14 +155,14 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         BerryTypeConfigurationException.check(berryType);
 
         final int currentAge = state.get(getAge());
-        //if bone meal is allowed to be used, pass action
+        // if bone meal is allowed to be used, pass action
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (currentAge == maxAge) {
-            //otherwise, give berries/unripe berries
+            // otherwise, give berries/unripe berries
             return pickBerries(pos, world, state);
         } else {
-            //otherwise, do default use action from superclass
+            // otherwise, do default use action from superclass
             return super.onUse(state, world, pos, player, hand, hit);
         }
     }
@@ -172,16 +172,16 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * <br> this method is static so that it can be used in {@link DoubleBerryBush}
      */
     public static ActionResult pickBerries(BlockPos pos, World world, BlockState state) {
-        //we can assume the state to be a berry bush
+        // we can assume the state to be a berry bush
         BerryBush bush = (BerryBush) state.getBlock();
 
         int berryAmount = world.random.nextInt(bush.getMaxBerryAmount() + 1) + 1;
         dropStack(world, pos, new ItemStack(bush.getBerryType(), berryAmount));
 
-        //play randomly picked sound
+        // play randomly picked sound
         world.playSound(null, pos, selectPickSound(world), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 
-        //reset berry growth; they were just picked
+        // reset berry growth; they were just picked
         bush.resetAge(world, pos, state);
         return ActionResult.success(world.isClient);
     }
@@ -193,13 +193,13 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     @Override
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        //hasRandomTicks checks the same thing as this method
+        // hasRandomTicks checks the same thing as this method
         return hasRandomTicks(state);
     }
 
     @Override
     public boolean canGrow(World world, RandomGenerator random, BlockPos pos, BlockState state) {
-        //hasRandomTicks checks the same thing as this method
+        // hasRandomTicks checks the same thing as this method
         return hasRandomTicks(state);
     }
 
@@ -216,11 +216,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public int getMaxAge() {
         return maxAge;
-    }
-
-    @Override
-    public BlockState getBaseState() {
-        return super.getDefaultState().with(getAge(), 0);
     }
 
     @Override

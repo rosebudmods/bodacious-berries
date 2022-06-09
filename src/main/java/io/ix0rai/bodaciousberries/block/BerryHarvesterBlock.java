@@ -40,7 +40,7 @@ public class BerryHarvesterBlock extends BlockWithEntity {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        //ensure when placed the block faces the player
+        // ensure when placed the block faces the player
         Direction facing = ctx.getPlayerFacing();
         if (facing == Direction.UP || facing == Direction.DOWN) {
             facing = Direction.NORTH;
@@ -63,7 +63,7 @@ public class BerryHarvesterBlock extends BlockWithEntity {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            //create screen
+            // create screen
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
             if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);
@@ -75,13 +75,13 @@ public class BerryHarvesterBlock extends BlockWithEntity {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        //return the ticker for BerryHarvesterBlockEntity
+        // return the ticker for BerryHarvesterBlockEntity
         return checkType(type, BodaciousBlocks.BERRY_HARVESTER_ENTITY, BerryHarvesterBlockEntity::tick);
     }
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        //drop all items to the ground when block is broken
+        // drop all items to the ground when block is broken
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof BerryHarvesterBlockEntity harvesterEntity) {

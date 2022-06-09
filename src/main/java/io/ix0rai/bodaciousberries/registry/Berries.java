@@ -27,7 +27,7 @@ public class Berries {
 
     private static final Item.Settings berrySettings = new Item.Settings().group(ItemGroup.FOOD);
 
-    //berry items
+    // berry items
     public static AliasedBlockItem SASKATOON_BERRIES;
     public static AliasedBlockItem STRAWBERRY;
     public static AliasedBlockItem RASPBERRIES;
@@ -41,7 +41,7 @@ public class Berries {
     public static AliasedBlockItem CLOUDBERRIES;
 
     public static void registerBerries() {
-        //create items for each berry
+        // create items for each berry
         SASKATOON_BERRIES = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 2f));
         STRAWBERRY = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
         RASPBERRIES = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(2, 3f));
@@ -56,7 +56,7 @@ public class Berries {
 
         initialiseBerries();
 
-        //register
+        // register
         register(SASKATOON_BERRIES, "saskatoon_berries");
         register(STRAWBERRY, "strawberry");
         register(RASPBERRIES, "raspberries");
@@ -136,11 +136,11 @@ public class Berries {
 
         for (var entry : BERRY_BUSHES.entrySet()) {
             BerryBush bush = entry.getKey();
-            //set berry types
+            // set berry types
             Item berryType = entry.getValue();
             bush.setBerryType(berryType);
 
-            //register as compostable
+            // register as compostable
             registerCompostableBerry(berryType);
         }
     }

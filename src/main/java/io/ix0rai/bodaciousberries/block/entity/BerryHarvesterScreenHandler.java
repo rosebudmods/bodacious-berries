@@ -19,7 +19,7 @@ public class BerryHarvesterScreenHandler extends DefaultScreenHandler {
         checkSize(inventory, 9);
         inventory.onOpen(playerInventory.player);
 
-        //harvester inventory
+        // harvester inventory
         int m;
         int l;
         for (m = 0; m < 3; ++m) {

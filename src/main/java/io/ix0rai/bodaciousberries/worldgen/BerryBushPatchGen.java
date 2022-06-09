@@ -125,7 +125,7 @@ public class BerryBushPatchGen {
         generateBerryPatches("add_grapevine_patches", BiomeTags.IS_JUNGLE, PATCH_GRAPEVINE_PLACED);
         generateBerryPatches("add_goji_berry_patches", BiomeTags.IS_MOUNTAIN, PATCH_GOJI_BERRY_PLACED);
         generateBerryPatches("add_gooseberry_patches", gooseberryCategories, PATCH_GOOSEBERRY_PLACED);
-        //cloudberries generated below the minimum height will just die :(
+        // cloudberries generated below the minimum height will just die :(
         generateBerryPatches("add_cloudberry_patches", BiomeTags.IS_MOUNTAIN, PATCH_CLOUDBERRY_PLACED);
     }
 
@@ -139,7 +139,7 @@ public class BerryBushPatchGen {
     public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> berryPatchConfiguredFeature(String name, BerryBush bush, Block placedOn) {
         return ConfiguredFeatureUtil.register(Bodaciousberries.idString(name), Feature.RANDOM_PATCH,
                 ConfiguredFeatureUtil.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockFeatureConfig(BlockStateProvider.of(bush.getBaseState().with(bush.getAge(), bush.getMaxAge()))),
+                        new SimpleBlockFeatureConfig(BlockStateProvider.of(((Block) bush).getDefaultState().with(bush.getAge(), bush.getMaxAge()))),
                         List.of(placedOn)
                 )
         );
@@ -157,7 +157,7 @@ public class BerryBushPatchGen {
     public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> berryPatchConfiguredFeature(String name, GrowingBerryBush smallBush, DoubleBerryBush tallBush, Block placedOn) {
         return ConfiguredFeatureUtil.register(Bodaciousberries.idString(name), Feature.RANDOM_PATCH,
                 ConfiguredFeatureUtil.createRandomPatchFeatureConfig(DOUBLE_BUSH_FEATURE,
-                        new DoubleBushFeatureConfig(BlockStateProvider.of(smallBush.getBaseState().with(smallBush.getAge(), smallBush.getMaxAge())),
+                        new DoubleBushFeatureConfig(BlockStateProvider.of(smallBush.getDefaultState().with(smallBush.getAge(), smallBush.getMaxAge())),
                                 BlockStateProvider.of(tallBush.getDefaultState().with(DoubleBerryBush.AGE, tallBush.getMaxAge()))),
                         List.of(placedOn)
                 )
@@ -200,7 +200,7 @@ public class BerryBushPatchGen {
     public static void generateBerryPatches(String name, List<TagKey<Biome>> tags, Holder<PlacedFeature> placedFeature) {
         generateBerryPatches(
                 name,
-                //check all tags
+                // check all tags
                 context -> {
                     Holder<Biome> entry = context.getBiomeRegistryEntry();
                     for (TagKey<Biome> tag : tags) {
@@ -218,9 +218,9 @@ public class BerryBushPatchGen {
     private static void generateBerryPatches(String name, Predicate<BiomeSelectionContext> predicate, Holder<PlacedFeature> placedFeature) {
         BiomeModifications.create(Bodaciousberries.id(name)).add(
                 ModificationPhase.ADDITIONS,
-                //decide if the biome should receive our feature
+                // decide if the biome should receive our feature
                 predicate,
-                //add feature to the biome under the step vegetal decoration
+                // add feature to the biome under the step vegetal decoration
                 context -> context.getGenerationSettings().addBuiltInFeature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeature.value())
         );
     }

@@ -9,10 +9,23 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface BerryBush extends Fertilizable {
+    /**
+     * sets the type of berry that this bush gives when picked
+     * @param berryType the item that will be given
+     */
     void setBerryType(Item berryType);
+
+    /**
+     * gets the type of berry that this bush gives when picked
+     * @return the item that will be given
+     */
     Item getBerryType();
+
+    /**
+     * gets the maximum age to which this bush can grow
+     * @return the maximum age
+     */
     int getMaxAge();
-    BlockState getBaseState();
     int getSizeChangeAge();
     IntProperty getAge();
     int getMaxBerryAmount();

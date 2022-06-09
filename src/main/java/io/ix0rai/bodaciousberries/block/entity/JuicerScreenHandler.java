@@ -32,11 +32,11 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
         this.propertyDelegate = propertyDelegate;
         this.addProperties(propertyDelegate);
 
-        //output slots
+        // output slots
         this.addSlot(new JuicerOutputSlot(inventory, 0, 56, 51));
         this.addSlot(new JuicerOutputSlot(inventory, 1, 79, 58));
         this.addSlot(new JuicerOutputSlot(inventory, 2, 102, 51));
-        //ingredient slots
+        // ingredient slots
         this.addSlot(new JuicerIngredientSlot(inventory, 3, 59, 10));
         this.addSlot(new JuicerIngredientSlot(inventory, 4, 79, 18));
         this.addSlot(new JuicerIngredientSlot(inventory, 5, 99, 10));
@@ -106,12 +106,12 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
     }
 
     private boolean attemptInsertToOutputSlot(ItemStack stack) {
-        //iterate over output slots
+        // iterate over output slots
         for (int i = 0; i < 3; i++) {
-            //check if tested output slot is empty
+            // check if tested output slot is empty
             if (this.slots.get(i).getStack().isEmpty()
                     && this.insertItem(new ItemStack(stack.getItem()), i, i + 1, false)) {
-                //if so, insert a single item and decrement the stack sending the item by 1
+                // if so, insert a single item and decrement the stack sending the item by 1
                 stack.decrement(1);
                 return true;
             }

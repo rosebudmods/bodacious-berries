@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 public class SpikedBerryBush extends BasicBerryBush {
     public static final DamageSource BERRY_BUSH = DamageSourceAccessor.create("berry_bush");
-    //copy of SweetBerryBushBlock's minimum distance
+    // copy of SweetBerryBushBlock's minimum distance
     private static final float MINIMUM_DAMAGE_DISTANCE = 0.003f;
     private final float damage;
 
@@ -45,8 +45,8 @@ public class SpikedBerryBush extends BasicBerryBush {
     }
 
     private boolean movedMinDistance(Entity entity) {
-        //the entity must move a minimum distance to be damaged
-        //this is implemented so if you accidentally touch the keyboard for a millisecond, you won't be damaged
+        // the entity must move a minimum distance to be damaged
+        // this is implemented so if you accidentally touch the keyboard for a millisecond, you won't be damaged
         return !(entity.lastRenderX == entity.getX() && entity.lastRenderZ == entity.getZ())
                 && (Math.abs(entity.getX() - entity.lastRenderX) >= MINIMUM_DAMAGE_DISTANCE
                 || Math.abs(entity.getZ() - entity.lastRenderZ) >= MINIMUM_DAMAGE_DISTANCE);

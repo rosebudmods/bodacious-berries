@@ -51,10 +51,10 @@ public class GrowingBerryBush extends BasicBerryBush {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         BerryTypeConfigurationException.check(berryType);
 
-        //a GrowingBerryBush cannot produce berries until it grows to its double bush state
+        // a GrowingBerryBush cannot produce berries until it grows to its double bush state
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             final int newAge = Math.min(maxAge, state.get(getAge()) + 1);
-            //grow to a double bush if new age exceeds maximum
+            // grow to a double bush if new age exceeds maximum
             if (newAge > maxAge) {
                 TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, Block.NOTIFY_LISTENERS);
             }

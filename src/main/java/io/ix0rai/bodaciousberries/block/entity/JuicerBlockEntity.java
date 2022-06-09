@@ -83,14 +83,14 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     private static void craft(World world, BlockPos pos, ItemStack result, Ingredient receptacle, DefaultedList<ItemStack> slots) {
         ItemStack[] ingredients = new ItemStack[]{slots.get(3), slots.get(4), slots.get(5)};
 
-        //craft items for all three slots - as long as there's a bottle to contain the juice
+        // craft items for all three slots - as long as there's a bottle to contain the juice
         for(int i = 0; i < 3; i ++) {
             if (receptacle.test(slots.get(i))) {
                 slots.set(i, new ItemStack(result.getItem()));
             }
         }
 
-        //decrement stack and give recipe remainder
+        // decrement stack and give recipe remainder
         for (ItemStack ingredient : ingredients) {
             ingredient.decrement(1);
             if (ingredient.getItem().hasRecipeRemainder()) {
@@ -121,7 +121,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         if (isBrewing) {
             juicer.brewTime --;
 
-            //if brewing is finished, craft the juices
+            // if brewing is finished, craft the juices
             if (juicer.hasValidReceptacle() && juicer.brewTime == 0) {
                 if (recipe.isPresent()) {
                     craft(world, pos, recipe.get(), juicer.inventory);
@@ -131,7 +131,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
 
                 stopJuicer(world, pos, state, juicer);
             } else if (recipe.isEmpty() && !(juicer.makingDubiousJuice && juicer.hasAllIngredients()) || !juicer.hasValidReceptacle()) {
-                //if we cannot craft, the ingredient has been removed/changed, and we should stop brewing without giving a result
+                // if we cannot craft, the ingredient has been removed/changed, and we should stop brewing without giving a result
                 stopJuicer(world, pos, state, juicer);
             }
         } else if (juicer.hasValidReceptacle()) {
@@ -140,12 +140,12 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
             if (recipe.isPresent()) {
                 juicer.makingBerryBlend = !recipe.get().ingredientsMatch(inventory.get(3));
 
-                //if we're not currently brewing, start brewing with the ingredient
+                // if we're not currently brewing, start brewing with the ingredient
                 startJuicer(world, pos, state, juicer);
             } else if (inventory.get(3).isIn(Berries.BERRY_TAG) && inventory.get(4).isIn(Berries.BERRY_TAG) && inventory.get(5).isIn(Berries.BERRY_TAG)
                                 && (inventory.get(0).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(1).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(2).getItem().equals(Juices.JUICE_RECEPTACLE))) {
-                //everything in the juicer is a berry, so logically we can make something
-                //of course, that doesn't mean it'll be good!
+                // everything in the juicer is a berry, so logically we can make something
+                // of course, that doesn't mean it'll be good!
                 startJuicer(world, pos, state, juicer);
                 juicer.makingDubiousJuice = true;
             }

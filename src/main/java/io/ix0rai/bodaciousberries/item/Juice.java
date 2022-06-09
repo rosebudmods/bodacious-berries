@@ -41,7 +41,7 @@ public class Juice extends HoneyBottleItem {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        //we handle changing the stack
+        // we handle changing the stack
         ItemStack stack1 = stack.copy();
         super.finishUsing(stack, world, user);
         stack = stack1;
@@ -50,8 +50,8 @@ public class Juice extends HoneyBottleItem {
             Criteria.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
         }
 
-        //return empty bottle, or throw it away if it does not fit
-        //also decrement the stack size if it will not be entirely consumed
+        // return empty bottle, or throw it away if it does not fit
+        // also decrement the stack size if it will not be entirely consumed
         if (stack.isEmpty()) {
             return new ItemStack(Juices.JUICE_RECEPTACLE);
         } else {

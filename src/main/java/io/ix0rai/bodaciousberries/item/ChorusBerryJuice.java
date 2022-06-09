@@ -27,15 +27,15 @@ public class ChorusBerryJuice extends Juice {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        //teleport user to biome specified in constructor
-        //the biome can be null, in which case the user will not be teleported
+        // teleport user to biome specified in constructor
+        // the biome can be null, in which case the user will not be teleported
         boolean success = false;
 
         if (biome != null && world.getServer() != null) {
             MinecraftServer server = world.getServer();
-            //ensure we are in the overworld
+            // ensure we are in the overworld
             if (world.getDimension().equals(server.getRegistryManager().get(Registry.DIMENSION_TYPE_KEY).get(DimensionTypes.OVERWORLD_ID))) {
-                //locate the biome to teleport to
+                // locate the biome to teleport to
                 Pair<BlockPos, Boolean> pair = locateBiome(server, user.getBlockPos(), user);
                 BlockPos pos = pair.getFirst();
                 success = pair.getSecond();
@@ -46,10 +46,10 @@ public class ChorusBerryJuice extends Juice {
             }
         }
 
-        //sending entity status 43 causes the player to emit some particles similar to the ones an explosion would emit, while 46 sends ender pearl particles
+        // sending entity status 43 causes the player to emit some particles similar to the ones an explosion would emit, while 46 sends ender pearl particles
         world.sendEntityStatus(user, success ? (byte) 46 : (byte) 43);
 
-        //consume item
+        // consume item
         return super.finishUsing(stack, world, user);
     }
 

@@ -24,14 +24,14 @@ public class VineDecoratorRedirect {
      */
     @Inject(method = "placeVines", at = @At("HEAD"), cancellable = true)
     private static void placeVines(BlockPos pos, BooleanProperty facing, TreeDecorator.class_7402 arg, CallbackInfo ci) {
-        //convert world to structure world access so that we can test for vines and air blocks
+        // convert world to structure world access so that we can test for vines and air blocks
         final StructureWorldAccess access = (StructureWorldAccess) arg.method_43316();
 
-        //only redirect the method if we're in a jungle biome
+        // only redirect the method if we're in a jungle biome
         if (access.getBiome(pos).hasTag(BiomeTags.IS_JUNGLE)) {
             placeVine(access, arg, pos, facing);
 
-            //place vines that are hanging down from other vines
+            // place vines that are hanging down from other vines
             int i = access.getRandom().range(3, 6);
             for(pos = pos.down(); access.isAir(pos) && i > 0; --i) {
                 placeVine(access, arg, pos, facing);
@@ -46,7 +46,7 @@ public class VineDecoratorRedirect {
         BlockState block = matchBlockAbove(access, pos, facing);
 
         if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDumbCheck(access, pos)) {
-            //otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
+            // otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
             if (access.getBiome(pos).hasTag(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
                 block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
             } else if (access.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
@@ -75,8 +75,8 @@ public class VineDecoratorRedirect {
         final Block north = access.getBlockState(pos.north()).getBlock();
         final Block south = access.getBlockState(pos.south()).getBlock();
 
-        //block must not be surrounded by air or a non-solid blocks
-        //we only return true if it has a supporting solid block
+        // block must not be surrounded by air or a non-solid blocks
+        // we only return true if it has a supporting solid block
         return east != Blocks.AIR || west != Blocks.AIR || north != Blocks.AIR || south != Blocks.AIR
                 && (east.canMobSpawnInside() || west.canMobSpawnInside() || north.canMobSpawnInside() || south.canMobSpawnInside());
     }
