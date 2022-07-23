@@ -4,9 +4,7 @@ import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
-import io.ix0rai.bodaciousberries.config.BodaciousConfig;
 import io.ix0rai.bodaciousberries.registry.Bushes;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
@@ -37,6 +35,8 @@ import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 
 import java.util.List;
 import java.util.function.Predicate;
+
+import static io.ix0rai.bodaciousberries.BodaciousBerries.CONFIG;
 
 public class BerryBushPatchGen {
     public static Feature<DefaultFeatureConfig> grapevineFeature;
@@ -92,21 +92,19 @@ public class BerryBushPatchGen {
     }
 
     private static void registerPlacedFeatures() {
-        BodaciousConfig config = AutoConfig.getConfigHolder(BodaciousConfig.class).getConfig();
-
-        patchSaskatoonBerryPlaced = berryPatchPlacedFeature("patch_saskatoon_berry_placed", config.commonBushRarity, patchSaskatoonBerry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchStrawberryPlaced = berryPatchPlacedFeature("patch_strawberry_placed", config.commonBushRarity, patchStrawberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchBlackberryPlaced = berryPatchPlacedFeature("patch_blackberry_placed", config.mediumBushRarity, patchBlackberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchRaspberryPlaced = berryPatchPlacedFeature("patch_raspberry_placed", config.mediumBushRarity, patchRaspberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchChorusBerryPlaced = berryPatchPlacedFeature("patch_chorus_berry_placed", config.rareBushRarity, patchChorusBerry, PlacedFeatureUtil.MOTION_BLOCKING_HEIGHTMAP);
-        patchRainberryPlaced = berryPatchPlacedFeature("patch_rainberry_placed", config.ultraRareBushRarity, patchRainberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchLingonberryPlaced = berryPatchPlacedFeature("patch_lingonberry_placed", config.mediumBushRarity, patchLingonberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        patchSaskatoonBerryPlaced = berryPatchPlacedFeature("patch_saskatoon_berry_placed", CONFIG.common(), patchSaskatoonBerry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        patchStrawberryPlaced = berryPatchPlacedFeature("patch_strawberry_placed", CONFIG.common(), patchStrawberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        patchBlackberryPlaced = berryPatchPlacedFeature("patch_blackberry_placed", CONFIG.medium(), patchBlackberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        patchRaspberryPlaced = berryPatchPlacedFeature("patch_raspberry_placed", CONFIG.medium(), patchRaspberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        patchChorusBerryPlaced = berryPatchPlacedFeature("patch_chorus_berry_placed", CONFIG.rare(), patchChorusBerry, PlacedFeatureUtil.MOTION_BLOCKING_HEIGHTMAP);
+        patchRainberryPlaced = berryPatchPlacedFeature("patch_rainberry_placed", CONFIG.ultraRare(), patchRainberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        patchLingonberryPlaced = berryPatchPlacedFeature("patch_lingonberry_placed", CONFIG.medium(), patchLingonberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
         patchGrapevinePlaced = PlacedFeatureUtil.register(BodaciousBerries.idString("patch_grapevine_placed"), patchGrapevine,
-                List.of(CountPlacementModifier.create(127), HeightRangePlacementModifier.createUniform(YOffset.fixed(50), YOffset.fixed(255)), BiomePlacementModifier.getInstance(), RarityFilterPlacementModifier.create(config.mediumBushRarity))
+                List.of(CountPlacementModifier.create(127), HeightRangePlacementModifier.createUniform(YOffset.fixed(50), YOffset.fixed(255)), BiomePlacementModifier.getInstance(), RarityFilterPlacementModifier.create(CONFIG.medium()))
         );
-        patchGojiBerryPlaced = berryPatchPlacedFeature("patch_goji_berry_placed", config.rareBushRarity, patchGojiBerry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchGooseberryPlaced = berryPatchPlacedFeature("patch_gooseberry_placed", config.mediumBushRarity, patchGooseberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchCloudberryPlaced = berryPatchPlacedFeature("patch_cloudberry_placed", config.rareBushRarity, patchCloudberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        patchGojiBerryPlaced = berryPatchPlacedFeature("patch_goji_berry_placed", CONFIG.rare(), patchGojiBerry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        patchGooseberryPlaced = berryPatchPlacedFeature("patch_gooseberry_placed", CONFIG.medium(), patchGooseberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        patchCloudberryPlaced = berryPatchPlacedFeature("patch_cloudberry_placed", CONFIG.rare(), patchCloudberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
     }
 
     private static void placePatches() {

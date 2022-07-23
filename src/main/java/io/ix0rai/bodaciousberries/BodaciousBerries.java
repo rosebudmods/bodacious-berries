@@ -2,20 +2,15 @@ package io.ix0rai.bodaciousberries;
 
 import io.ix0rai.bodaciousberries.compat.Compat;
 import io.ix0rai.bodaciousberries.config.BodaciousConfig;
-import io.ix0rai.bodaciousberries.registry.Berries;
-import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
-import io.ix0rai.bodaciousberries.registry.Bushes;
-import io.ix0rai.bodaciousberries.registry.Juices;
-import io.ix0rai.bodaciousberries.registry.Sounds;
+import io.ix0rai.bodaciousberries.registry.*;
 import io.ix0rai.bodaciousberries.worldgen.BerryBushPatchGen;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class BodaciousBerries implements ModInitializer {
     public static final String MOD_ID = "bodaciousberries";
+    public static final BodaciousConfig CONFIG = new BodaciousConfig();
 
     public static Identifier id(String path) {
         if (!path.startsWith(MOD_ID + ":")) {
@@ -35,8 +30,6 @@ public class BodaciousBerries implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        AutoConfig.register(BodaciousConfig.class, Toml4jConfigSerializer::new);
-
         Bushes.registerBushes();
         Berries.registerBerries();
         BodaciousBlocks.registerBlocks();

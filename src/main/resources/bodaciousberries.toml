@@ -1,0 +1,7 @@
+# rarities for berry bushes
+# higher is more rare, lower is more common
+
+common_rarity = 100
+medium_rarity = 130
+rare_rarity = 170
+ultra_rare_rarity = 200
