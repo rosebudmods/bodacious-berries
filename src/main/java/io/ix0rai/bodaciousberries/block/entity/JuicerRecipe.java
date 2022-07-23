@@ -51,6 +51,11 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
     }
 
     @Override
+    public boolean isIgnoredInRecipeBook() {
+        return true;
+    }
+
+    @Override
     public boolean matches(ImplementedInventory inv, World world) {
         if (inv.size() < 5) return false;
         return ingredient0.test(inv.getStack(3)) && ingredient1.test(inv.getStack(4)) && ingredient2.test(inv.getStack(5))
