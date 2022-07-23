@@ -3,7 +3,7 @@ package io.ix0rai.bodaciousberries.block.entity;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.BodaciousBerries;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -97,7 +97,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
         public static final Serializer INSTANCE = new Serializer();
 
-        public static final Identifier ID = Bodaciousberries.id(Type.ID);
+        public static final Identifier ID = BodaciousBerries.id(Type.ID);
 
         @Override
         public JuicerRecipe read(Identifier id, JsonObject json) {
@@ -119,7 +119,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         }
 
         public JuicerRecipe read(JsonObject json) {
-            return read(Bodaciousberries.id(json.get("result").getAsString().split(":")[1]), json);
+            return read(BodaciousBerries.id(json.get("result").getAsString().split(":")[1]), json);
         }
 
         @Override

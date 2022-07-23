@@ -2,7 +2,7 @@ package io.ix0rai.bodaciousberries.block.entity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.registry.Juices;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -82,7 +82,7 @@ public class JuicerRecipes {
         // adds "ingredients": {"item": "ingredient", "item", "bodaciousberries:chorus_berry_juice}
         JsonArray ingredientArray = new JsonArray();
         ingredientArray.add(getAsProperty(ingredient));
-        ingredientArray.add(getAsProperty(Bodaciousberries.id("chorus_berry_juice")));
+        ingredientArray.add(getAsProperty(BodaciousBerries.id("chorus_berry_juice")));
         json.add("ingredients", ingredientArray);
 
         // add result

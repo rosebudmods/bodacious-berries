@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.registry;
 
-import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryVine;
 import io.ix0rai.bodaciousberries.block.ChorusBerryBush;
@@ -35,31 +35,31 @@ public class Bushes {
     public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
 
     // bushes
-    public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berries.CHORUS_BERRIES,
+    public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berries.chorusBerries,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
     public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(
-            Berries.SASKATOON_BERRIES);
+            Berries.saskatoonBerries);
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, LARGE_SWEET_BERRY,
             DOUBLE_SASKATOON_BERRY_BUSH);
-    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush.ThreeStageBush(Berries.STRAWBERRY,
+    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush.ThreeStageBush(Berries.strawberry,
             SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
-    public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.RASPBERRIES,
+    public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.raspberries,
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
-    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.BLACKBERRIES,
+    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.blackberries,
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
-    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berries.RAINBERRY,
+    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berries.rainberry,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
-    public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(Berries.LINGONBERRIES,
+    public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(Berries.lingonberries,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
     public static final BerryVine GRAPEVINE = new BerryVine(
-            Berries.GRAPES);
+            Berries.grapes);
     public static final DoubleBerryBush DOUBLE_GOJI_BERRY_BUSH = new DoubleBerryBush(
-            Berries.GOJI_BERRIES);
+            Berries.gojiBerries);
     public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, VoxelShapes.fullCube(),
             DOUBLE_GOJI_BERRY_BUSH);
-    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyThreeStageBush(Berries.GOOSEBERRIES,
+    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyThreeStageBush(Berries.gooseberries,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
-    public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(Berries.CLOUDBERRIES,
+    public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(Berries.cloudberries,
             SMALL_SWEET_BERRY, LARGE_CLOUDBERRY, 1);
 
     public static void registerBushes() {
@@ -79,6 +79,6 @@ public class Bushes {
     }
 
     private static void register(String name, Block block) {
-        Registry.register(Registry.BLOCK, Bodaciousberries.id(name), block);
+        Registry.register(Registry.BLOCK, BodaciousBerries.id(name), block);
     }
 }

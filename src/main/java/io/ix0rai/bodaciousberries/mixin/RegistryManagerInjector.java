@@ -2,7 +2,7 @@ package io.ix0rai.bodaciousberries.mixin;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipes;
 import io.ix0rai.bodaciousberries.registry.Juices;
 import net.minecraft.recipe.RecipeManager;
@@ -21,11 +21,11 @@ public class RegistryManagerInjector {
     @Inject(method = "apply*", at = @At("HEAD"))
     public void interceptApply(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo info) {
         for (JsonObject jsonObject : JuicerRecipes.JUICER_RECIPES) {
-            map.put(Bodaciousberries.id(jsonObject.get("result").getAsString().split(":")[1]), jsonObject);
+            map.put(BodaciousBerries.id(jsonObject.get("result").getAsString().split(":")[1]), jsonObject);
         }
 
         for (JsonObject jsonObject : Juices.RECIPES) {
-            map.put(Bodaciousberries.id(jsonObject.get("result").getAsJsonObject().get("item").getAsString().split(":")[1]), jsonObject);
+            map.put(BodaciousBerries.id(jsonObject.get("result").getAsJsonObject().get("item").getAsString().split(":")[1]), jsonObject);
         }
     }
 }

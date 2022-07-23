@@ -14,7 +14,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 
 @Environment(EnvType.CLIENT)
-public class BodaciousberriesClient implements ClientModInitializer {
+public class BodaciousBerriesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         HandledScreens.register(BodaciousBlocks.BERRY_HARVESTER_SCREEN_HANDLER, BerryHarvesterScreen::new);

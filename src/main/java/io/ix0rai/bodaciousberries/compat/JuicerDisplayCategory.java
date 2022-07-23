@@ -2,7 +2,7 @@ package io.ix0rai.bodaciousberries.compat;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -26,7 +26,7 @@ import java.util.List;
 public class JuicerDisplayCategory implements DisplayCategory<JuicerDisplay> {
     public static final Text TITLE = Text.of("rei.bodaciousberries.juicer");
     public static final EntryStack<ItemStack> ICON = EntryStacks.of(BodaciousBlocks.JUICER_BLOCK);
-    private static final Identifier TEXTURE = Bodaciousberries.id("textures/gui/juicer_rei.png");
+    private static final Identifier TEXTURE = BodaciousBerries.id("textures/gui/juicer_rei.png");
 
     @Override
     public Renderer getIcon() {

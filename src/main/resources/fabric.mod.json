@@ -20,10 +20,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.ix0rai.bodaciousberries.Bodaciousberries"
+      "io.ix0rai.bodaciousberries.BodaciousBerries"
     ],
     "client": [
-      "io.ix0rai.bodaciousberries.client.BodaciousberriesClient"
+      "io.ix0rai.bodaciousberries.client.BodaciousBerriesClient"
     ],
     "rei_client": [
       "io.ix0rai.bodaciousberries.compat.JuicerReiPlugin"

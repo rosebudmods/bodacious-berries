@@ -1,7 +1,7 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.BodaciousBerries;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -10,7 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
-    private static final Identifier TEXTURE = Bodaciousberries.id("textures/gui/juicer.png");
+    private static final Identifier TEXTURE = BodaciousBerries.id("textures/gui/juicer.png");
     private static final int[] BUBBLE_PROGRESS = new int[]{29, 29, 25, 17, 11, 6, 0};
     private static final int DUBIOUS_BUBBLE_UV_X = 188;
     private static final int DUBIOUS_PROGRESS_BAR_UV_X = 227;

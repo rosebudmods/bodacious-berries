@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.particle;
 
-import io.ix0rai.bodaciousberries.Bodaciousberries;
+import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.mixin.accessors.DefaultParticleTypeAccessor;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.impl.client.particle.ParticleFactoryRegistryImpl;
@@ -17,7 +17,7 @@ public class Particles {
     }
 
     private static void registerParticle(String name, DefaultParticleType particle, ParticleFactoryRegistry.PendingParticleFactory<DefaultParticleType> constructor) {
-        Registry.register(Registry.PARTICLE_TYPE, Bodaciousberries.id(name), particle);
+        Registry.register(Registry.PARTICLE_TYPE, BodaciousBerries.id(name), particle);
         ParticleFactoryRegistryImpl.INSTANCE.register(particle, constructor);
     }
 }
