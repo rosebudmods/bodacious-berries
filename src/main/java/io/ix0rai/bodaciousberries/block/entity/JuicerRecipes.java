@@ -41,7 +41,7 @@ public class JuicerRecipes {
 
     private static boolean check(Function<JuicerRecipe, Boolean> function) {
         for (JsonObject recipe : JUICER_RECIPES) {
-            if (function.apply(JuicerRecipe.Serializer.INSTANCE.read(recipe))) {
+            if (function.apply(JuicerRecipe.SERIALIZER.read(recipe))) {
                 return true;
             }
         }
@@ -53,7 +53,7 @@ public class JuicerRecipes {
         JsonObject json = new JsonObject();
         // add type
         // adds: "type": "bodaciousberries:juicer_recipe"
-        json.addProperty("type", JuicerRecipe.Serializer.ID.toString());
+        json.addProperty("type", JuicerRecipe.RECIPE_ID);
 
         // add ingredients
         // adds: "ingredient(i)": {"item || tag": "ingredients[i]"}

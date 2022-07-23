@@ -12,10 +12,15 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack output) implements Recipe<ImplementedInventory> {
+    public static final String RECIPE_ID = BodaciousBerries.idString("juicing");
+    public static final Serializer SERIALIZER = RecipeSerializer.register(RECIPE_ID, new Serializer());
+    public static final RecipeType<JuicerRecipe> TYPE = RecipeType.register(RECIPE_ID);
+
     public boolean isIngredient(ItemStack stack) {
         return ingredient0.test(stack) || ingredient1.test(stack) || ingredient2.test(stack);
     }
@@ -33,6 +38,16 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
     public boolean isReceptacle(ItemStack stack) {
         return receptacle.test(stack);
+    }
+
+    @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        DefaultedList<Ingredient> ingredients = DefaultedList.ofSize(3);
+        ingredients.add(ingredient0);
+        ingredients.add(ingredient1);
+        ingredients.add(ingredient2);
+
+        return ingredients;
     }
 
     @Override
@@ -64,21 +79,12 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return Serializer.INSTANCE;
+        return SERIALIZER;
     }
 
     @Override
     public RecipeType<?> getType() {
-        return Type.INSTANCE;
-    }
-
-    public static class Type implements RecipeType<JuicerRecipe> {
-        private Type() {
-
-        }
-
-        public static final Type INSTANCE = new Type();
-        public static final String ID = "juicer_recipe";
+        return TYPE;
     }
 
     @SuppressWarnings("unused")
@@ -91,14 +97,6 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
     }
 
     public static class Serializer implements RecipeSerializer<JuicerRecipe> {
-        private Serializer() {
-
-        }
-
-        public static final Serializer INSTANCE = new Serializer();
-
-        public static final Identifier ID = BodaciousBerries.id(Type.ID);
-
         @Override
         public JuicerRecipe read(Identifier id, JsonObject json) {
             JuicerRecipeJsonFormat recipeJson = new Gson().fromJson(json, JuicerRecipeJsonFormat.class);

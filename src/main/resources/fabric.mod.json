@@ -25,8 +25,8 @@
     "client": [
       "io.ix0rai.bodaciousberries.client.BodaciousBerriesClient"
     ],
-    "rei_client": [
-      "io.ix0rai.bodaciousberries.compat.JuicerReiPlugin"
+    "emi": [
+      "io.ix0rai.bodaciousberries.compat.JuicerEmiPlugin"
     ],
     "modmenu": [
       "io.ix0rai.bodaciousberries.config.BodaciousModMenuIntegration"
@@ -41,6 +41,11 @@
     "fabric": "*",
     "minecraft": "1.19",
     "java": ">=17"
+  },
+
+  "suggests": {
+    "emi": ">=0.2.0",
+    "modmenu": ">=4.0.0"
   },
 
   "custom": {
