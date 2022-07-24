@@ -97,9 +97,12 @@
   "tag.c.gooseberries": "Gooseberries",
   "tag.c.green_berries": "Green Berries",
   "tag.dehydration.hydrating_drinks": "Hydrating Drinks",
-  "text.autoconfig.bodaciousberries.title": "Bodacious Berries Rarity Configuration (Higher is rarer; requires restart)",
-  "text.autoconfig.bodaciousberries.option.ultraRareBushRarity": "Ultra Rare Bush Rarity:",
-  "text.autoconfig.bodaciousberries.option.rareBushRarity": "Rare Bush Rarity:",
-  "text.autoconfig.bodaciousberries.option.mediumBushRarity": "Medium Bush Rarity",
-  "text.autoconfig.bodaciousberries.option.commonBushRarity": "Common Bush Rarity"
+  "bodaciousberries.config.title": "Bodacious Berries Configuration",
+  "bodaciousberries.config.ultraRareRarityOption": "Ultra rare rarity",
+  "bodaciousberries.config.rareRarityOption": "Rare rarity",
+  "bodaciousberries.config.mediumRarityOption": "Medium rarity",
+  "bodaciousberries.config.commonRarityOption": "Common rarity",
+  "bodaciousberries.config.title.info": "Bodacious Berries Configuration - Extra Info",
+  "bodaciousberries.config.info.1": "All configuration values are only applied when the game is restarted.",
+  "bodaciousberries.config.info.2": "Higher values make the bushes with the corresponding rarity more uncommon, and lower values make them more common."
 }

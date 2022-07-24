@@ -29,7 +29,7 @@
       "io.ix0rai.bodaciousberries.compat.JuicerEmiPlugin"
     ],
     "modmenu": [
-      "io.ix0rai.bodaciousberries.config.BodaciousModMenuIntegration"
+      "io.ix0rai.bodaciousberries.config.BodaciousModMenu"
     ]
   },
   "mixins": [

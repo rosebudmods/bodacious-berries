@@ -6,9 +6,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
-public class BodaciousModMenuIntegration implements ModMenuApi {
+public class BodaciousModMenu implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return null; // todo
+        return BodaciousConfigScreen::new;
     }
 }

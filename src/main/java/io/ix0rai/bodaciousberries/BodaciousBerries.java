@@ -5,6 +5,7 @@ import io.ix0rai.bodaciousberries.config.BodaciousConfig;
 import io.ix0rai.bodaciousberries.registry.*;
 import io.ix0rai.bodaciousberries.worldgen.BerryBushPatchGen;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -24,8 +25,12 @@ public class BodaciousBerries implements ModInitializer {
         return MOD_ID + ":" + path;
     }
 
-    public static Text translatableText(String key) {
-        return Text.translatable("text." + MOD_ID + "." + key);
+    public static String translatableTextKey(String path) {
+        return MOD_ID + "." + path;
+    }
+
+    public static MutableText translatableText(String key) {
+        return Text.translatable(translatableTextKey(key));
     }
 
     @Override
