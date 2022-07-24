@@ -3,7 +3,6 @@ package io.ix0rai.bodaciousberries.compat;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
-import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiStack;
 import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipe;
@@ -15,7 +14,7 @@ public class JuicerEmiPlugin implements EmiPlugin {
     public static final Identifier JUICER_TEXTURE = BodaciousBerries.id("textures/gui/juicer_emi.png");
     public static final EmiStack JUICER = EmiStack.of(BodaciousBlocks.JUICER_BLOCK);
     public static final EmiRecipeCategory JUICER_RECIPE_CATEGORY
-            = new EmiRecipeCategory(BodaciousBlocks.JUICER, new EmiTexture(JUICER_TEXTURE, 0, 0, 16, 16));
+            = new EmiRecipeCategory(BodaciousBlocks.JUICER, EmiStack.of(BodaciousBlocks.JUICER_BLOCK));
 
     @Override
     public void register(EmiRegistry registry) {
@@ -25,7 +24,6 @@ public class JuicerEmiPlugin implements EmiPlugin {
 
         // add all juicer recipes to emi's recipe manager
         RecipeManager manager = registry.getRecipeManager();
-
         for (JuicerRecipe recipe : manager.listAllOfType(JuicerRecipe.TYPE)) {
             registry.addRecipe(new JuicerEmiRecipe(recipe));
         }

@@ -6,6 +6,7 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
+import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipe;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.util.Identifier;
@@ -24,6 +25,9 @@ public class JuicerEmiRecipe implements EmiRecipe {
         this.id = recipe.getId();
         List<EmiIngredient> list = new ArrayList<>();
         recipe.getIngredients().forEach(ingredient -> list.add(EmiIngredient.of(ingredient)));
+        for (int i = 0; i < 3; i++) {
+            list.add(EmiIngredient.of(recipe.receptacle()));
+        }
         this.inputs = list;
         this.output = EmiStack.of(recipe.getOutput());
         this.receptacle = EmiIngredient.of(recipe.receptacle());
@@ -46,7 +50,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
 
     @Override
     public List<EmiStack> getOutputs() {
-        return List.of(output);
+        return List.of(output, output, output);
     }
 
     @Override
@@ -70,7 +74,10 @@ public class JuicerEmiRecipe implements EmiRecipe {
         widgets.addSlot(output, 47, 36).recipeContext(this);
 
         // slot showing required receptacle
-        widgets.addSlot(receptacle, 87, 22);
+        // we add three of these so that emi recognises all required ingredients
+        for (int i = 0; i < 3; i++) {
+            widgets.addSlot(receptacle, 87, 22);
+        }
 
         // juicer background and animated textures
         widgets.addDrawable(-19, 3, 64, 59, (matrices, mouseX, mouseY, delta) -> {
@@ -89,5 +96,8 @@ public class JuicerEmiRecipe implements EmiRecipe {
             DrawableHelper.drawTexture(matrices, 24, 24 + height, 176, height, 11, 9 - height, 256, 256);
             DrawableHelper.drawTexture(matrices, 70, 24 + height, 176, height, 11, 9 - height, 256, 256);
         });
+
+        // "receptacle" text
+        widgets.addText(BodaciousBerries.translatableText("receptacle").asOrderedText(), 67, 8, 0xFFFFFF, true);
     }
 }

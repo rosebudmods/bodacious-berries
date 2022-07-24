@@ -23,6 +23,7 @@ public class BodaciousConfig {
                 .concurrent()
                 .defaultResource("/" + CONFIG_FILE_NAME)
                 .autosave()
+                .preserveInsertionOrder()
                 .build();
         this.config.load();
     }
