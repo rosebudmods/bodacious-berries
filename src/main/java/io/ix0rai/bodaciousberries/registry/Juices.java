@@ -2,7 +2,6 @@ package io.ix0rai.bodaciousberries.registry;
 
 import com.google.gson.JsonObject;
 import io.ix0rai.bodaciousberries.BodaciousBerries;
-import io.ix0rai.bodaciousberries.block.entity.JuicerRecipe;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipes;
 import io.ix0rai.bodaciousberries.item.Blend;
 import io.ix0rai.bodaciousberries.item.ChorusBerryJuice;
@@ -32,17 +31,17 @@ public class Juices {
 
     public static void registerJuice() {
         register(BodaciousBerries.id("dubious_juice"), DUBIOUS_JUICE);
-        register("saskatoon_berry_juice", new Juice(Berries.saskatoonBerries));
+        register("saskatoon_berry_juice", new Juice(Berries.saskatoonBerries, BodaciousBerries.translatableText("hint.more_purple")));
         register("strawberry_juice", new Juice(Berries.strawberry));
         register("raspberry_juice", new Juice(Berries.raspberries));
-        register("blackberry_juice", new Juice(Berries.blackberries));
+        register("blackberry_juice", new Juice(Berries.blackberries, BodaciousBerries.translatableText("hint.blackberries_and_sweetness")));
         register("rainberry_juice", new Juice(Berries.rainberry));
-        register("lingonberry_juice", new Juice(Berries.lingonberries));
+        register("lingonberry_juice", new Juice(Berries.lingonberries, BodaciousBerries.translatableText("hint.more_red")));
         register("grape_juice", new Juice(Berries.grapes));
-        register("goji_berry_juice", new Juice(Berries.gojiBerries));
-        register("gooseberry_juice", new Juice(Berries.gooseberries));
+        register("goji_berry_juice", new Juice(Berries.gojiBerries, BodaciousBerries.translatableText("hint.sweetness")));
+        register("gooseberry_juice", new Juice(Berries.gooseberries, BodaciousBerries.translatableText("hint.red_and_yellow")));
         register("glow_berry_juice", new Juice(Items.GLOW_BERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 90, 1), 1.0F)));
-        register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES, new FoodComponent.Builder()));
+        register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES, BodaciousBerries.translatableText("hint.vanilla")));
         register("chorus_berry_juice", new ChorusBerryJuice(Berries.chorusBerries, null));
         register("cloudberry_juice", new Juice(Berries.cloudberries, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 1200, 1), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 600, 1), 1.0f)));
 
