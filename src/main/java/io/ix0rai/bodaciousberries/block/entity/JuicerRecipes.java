@@ -56,14 +56,16 @@ public class JuicerRecipes {
         json.addProperty("type", JuicerRecipe.RECIPE_ID);
 
         // add ingredients
-        // adds: "ingredient(i)": {"item || tag": "ingredients[i]"}
-        for (int i = 0; i < ingredients.length; i++) {
-            json.add("ingredient" + i, getAsProperty(ingredients[i]));
+        // adds: "0||1||2": {"item || tag": "ingredients[i]"}
+        JsonObject jsonIngredients = new JsonObject();
+        for (int i = 0; i < ingredients.length; i ++) {
+            jsonIngredients.add(i + "", getAsProperty(ingredients[i]));
         }
+        jsonIngredients.add("receptacle", getAsProperty(receptacle));
+        json.add("ingredients", jsonIngredients);
 
         // add receptacle
-        // adds: "receptacle": {"item": "receptacle_id"}
-        json.add("receptacle", getAsProperty(receptacle));
+        // adds: "receptacle": {"item": "receptacle_id")
 
         // add result
         // adds: "result": "output_id"

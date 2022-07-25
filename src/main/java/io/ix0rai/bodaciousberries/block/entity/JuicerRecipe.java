@@ -1,6 +1,7 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import io.ix0rai.bodaciousberries.BodaciousBerries;
@@ -94,10 +95,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
     @SuppressWarnings("unused")
     private static class JuicerRecipeJsonFormat {
-        public JsonObject ingredient0;
-        public JsonObject ingredient1;
-        public JsonObject ingredient2;
-        public JsonObject receptacle;
+        public JsonObject ingredients;
         public String result;
     }
 
@@ -106,14 +104,24 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         public JuicerRecipe read(Identifier id, JsonObject json) {
             JuicerRecipeJsonFormat recipeJson = new Gson().fromJson(json, JuicerRecipeJsonFormat.class);
 
-            if (recipeJson.ingredient0 == null || recipeJson.ingredient1 == null || recipeJson.ingredient2 == null || recipeJson.result == null) {
-                throw new JsonSyntaxException("a required attribute is missing!");
+            if (recipeJson.ingredients == null || recipeJson.result == null) {
+                throw new JsonSyntaxException("a required json attribute is missing (result or ingredients) in recipe " + id + "!");
             }
 
-            Ingredient input0 = Ingredient.fromJson(recipeJson.ingredient0);
-            Ingredient input1 = Ingredient.fromJson(recipeJson.ingredient1);
-            Ingredient input2 = Ingredient.fromJson(recipeJson.ingredient2);
-            Ingredient receptacle = Ingredient.fromJson(recipeJson.receptacle);
+            Ingredient input0;
+            Ingredient input1;
+            Ingredient input2;
+            JsonElement allIngredient = recipeJson.ingredients.get("all");
+            if (allIngredient != null) {
+                input0 = Ingredient.fromJson(allIngredient);
+                input1 = Ingredient.fromJson(allIngredient);
+                input2 = Ingredient.fromJson(allIngredient);
+            } else {
+                input0 = Ingredient.fromJson(recipeJson.ingredients.get("0"));
+                input1 = Ingredient.fromJson(recipeJson.ingredients.get("1"));
+                input2 = Ingredient.fromJson(recipeJson.ingredients.get("2"));
+            }
+            Ingredient receptacle = Ingredient.fromJson(recipeJson.ingredients.get("receptacle"));
             Item outputItem = Registry.ITEM.getOrEmpty(new Identifier(recipeJson.result))
                     .orElseThrow(() -> new JsonSyntaxException("no such item: " + recipeJson.result));
             ItemStack output = new ItemStack(outputItem);
