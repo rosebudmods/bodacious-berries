@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class Compat {
-    public static void init() {
+    public static void register() {
         String id = "moreberries";
         if (FabricLoader.getInstance().isModLoaded(id)) {
             String[] berryIds = new String[]{"purple", "yellow", "green", "black", "orange", "blue"};

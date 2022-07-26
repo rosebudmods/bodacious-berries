@@ -7,13 +7,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bodaciousberries:raspberries"
+          "name": "bodacious_berries:raspberries"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "bodaciousberries:raspberry_bush",
+          "block": "bodacious_berries:raspberry_bush",
           "properties": {
             "age": "4"
           }

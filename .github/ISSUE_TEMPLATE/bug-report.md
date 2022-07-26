@@ -21,4 +21,4 @@ Steps to reproduce the behavior:
 if applicable, add screenshots/logs to help explain your problem
 
 **version**
-add the mod version you're using here, e.g. bodaciousberries-1.0.1-mc1.18.2
+add the mod version you're using here, e.g. bodacious_berries-1.0.1-mc1.18.2

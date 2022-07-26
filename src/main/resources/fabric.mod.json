@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "bodaciousberries",
+  "id": "bodacious_berries",
   "version": "${version}",
 
   "name": "Bodacious Berries",
@@ -15,15 +15,17 @@
   },
 
   "license": "MIT",
-  "icon": "assets/bodaciousberries/icon.png",
+  "icon": "assets/bodacious_berries/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.ix0rai.bodaciousberries.BodaciousBerries"
+      "io.ix0rai.bodaciousberries.BodaciousBerries",
+      "adudecalledleo.dfubuddy.impl.Initializer"
     ],
     "client": [
-      "io.ix0rai.bodaciousberries.client.BodaciousBerriesClient"
+      "io.ix0rai.bodaciousberries.client.BodaciousBerriesClient",
+      "adudecalledleo.dfubuddy.impl.client.ClientInitializer"
     ],
     "emi": [
       "io.ix0rai.bodaciousberries.compat.JuicerEmiPlugin"
@@ -33,7 +35,8 @@
     ]
   },
   "mixins": [
-    "bodaciousberries.mixins.json"
+    "bodacious_berries.mixins.json",
+    "dfubuddy.mixins.json"
   ],
 
   "depends": {

@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0,dying=false": {
+      "model": "bodacious_berries:block/cloudberry_bush_stage0"
+    },
+    "age=1,dying=false": {
+      "model": "bodacious_berries:block/cloudberry_bush_stage1"
+    },
+    "age=2,dying=false": {
+      "model": "bodacious_berries:block/cloudberry_bush_stage2"
+    },
+    "age=3,dying=false": {
+      "model": "bodacious_berries:block/cloudberry_bush_stage3"
+    },
+    "age=0,dying=true": {
+      "model": "bodacious_berries:block/cloudberry_bush_stage0_dying"
+    },
+    "age=1,dying=true": {
+      "model": "bodacious_berries:block/cloudberry_bush_stage1_dying"
+    },
+    "age=2,dying=true": {
+      "model": "bodacious_berries:block/cloudberry_bush_stage2_dying"
+    },
+    "age=3,dying=true": {
+      "model": "bodacious_berries:block/cloudberry_bush_stage3_dying"
+    }
+  }
+}

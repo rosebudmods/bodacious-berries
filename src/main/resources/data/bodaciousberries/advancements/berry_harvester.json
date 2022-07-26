@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "bodaciousberries:berry_harvester"
+      "bodacious_berries:berry_harvester"
     ]
   },
   "criteria": {

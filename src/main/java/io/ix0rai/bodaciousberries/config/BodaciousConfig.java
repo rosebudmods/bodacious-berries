@@ -9,7 +9,7 @@ import java.nio.file.Paths;
  * originally based on the configuration for lambdabettergrass by lambdaurora
  */
 public class BodaciousConfig {
-    private static final String CONFIG_FILE_NAME = "bodaciousberries.toml";
+    private static final String CONFIG_FILE_NAME = "bodacious_berries.toml";
     public static final Path CONFIG_FILE_PATH = Paths.get("config/" + CONFIG_FILE_NAME);
     private static final String COMMON_KEY = "common_rarity";
     private static final String MEDIUM_KEY = "medium_rarity";

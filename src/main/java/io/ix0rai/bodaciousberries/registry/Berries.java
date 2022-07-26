@@ -40,7 +40,7 @@ public class Berries {
     public static AliasedBlockItem gooseberries;
     public static AliasedBlockItem cloudberries;
 
-    public static void registerBerries() {
+    public static void register() {
         // create items for each berry
         saskatoonBerries = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 2f));
         strawberry = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));

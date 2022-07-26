@@ -29,7 +29,7 @@ public class Juices {
     public static final List<JsonObject> RECIPES = new ArrayList<>();
     public static final Juice DUBIOUS_JUICE = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturationModifier(3F).build()));
 
-    public static void registerJuice() {
+    public static void register() {
         register(BodaciousBerries.id("dubious_juice"), DUBIOUS_JUICE);
         register("saskatoon_berry_juice", new Juice(Berries.saskatoonBerries, BodaciousBerries.translatableText("hint.more_purple")));
         register("strawberry_juice", new Juice(Berries.strawberry));

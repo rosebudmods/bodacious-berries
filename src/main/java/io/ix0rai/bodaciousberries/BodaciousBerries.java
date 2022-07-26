@@ -10,7 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class BodaciousBerries implements ModInitializer {
-    public static final String MOD_ID = "bodaciousberries";
+    public static final String MOD_ID = "bodacious_berries";
     public static final BodaciousConfig CONFIG = new BodaciousConfig();
 
     public static Identifier id(String path) {
@@ -35,12 +35,13 @@ public class BodaciousBerries implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Bushes.registerBushes();
-        Berries.registerBerries();
-        BodaciousBlocks.registerBlocks();
-        Juices.registerJuice();
-        Sounds.registerSounds();
+        Bushes.register();
+        Berries.register();
+        BodaciousBlocks.register();
+        Juices.register();
+        Sounds.register();
         BerryBushPatchGen.register();
-        Compat.init();
+        Compat.register();
+        BodaciousDataFixers.register();
     }
 }

@@ -7,20 +7,20 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bodaciousberries:saskatoon_berries"
+          "name": "bodacious_berries:saskatoon_berries"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "bodaciousberries:saskatoon_berry_bush",
+          "block": "bodacious_berries:saskatoon_berry_bush",
           "properties": {
             "age": "2"
           }
         },
         {
           "condition": "minecraft:block_state_property",
-          "block": "bodaciousberries:double_saskatoon_berry_bush",
+          "block": "bodacious_berries:double_saskatoon_berry_bush",
           "properties": {
             "age": "3"
           }

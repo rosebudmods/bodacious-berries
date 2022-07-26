@@ -7,13 +7,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bodaciousberries:grapes"
+          "name": "bodacious_berries:grapes"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "bodaciousberries:grapevine",
+          "block": "bodacious_berries:grapevine",
           "properties": {
             "age": "3"
           }

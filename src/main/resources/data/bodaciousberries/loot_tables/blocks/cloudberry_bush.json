@@ -7,13 +7,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bodaciousberries:cloudberries"
+          "name": "bodacious_berries:cloudberries"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "bodaciousberries:cloudberry_bush",
+          "block": "bodacious_berries:cloudberry_bush",
           "properties": {
             "age": "3"
           }

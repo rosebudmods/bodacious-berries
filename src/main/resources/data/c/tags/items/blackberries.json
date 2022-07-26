@@ -1,7 +1,7 @@
 {
   "replace": "false",
   "values": [
-    "bodaciousberries:blackberries",
+    "bodacious_berries:blackberries",
     {
       "id": "moreberries:black_berries",
       "required": false

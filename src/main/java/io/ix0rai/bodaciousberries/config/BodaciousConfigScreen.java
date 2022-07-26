@@ -21,7 +21,6 @@ import net.minecraft.util.Formatting;
 import javax.annotation.Nullable;
 
 import static io.ix0rai.bodaciousberries.BodaciousBerries.CONFIG;
-import static io.ix0rai.bodaciousberries.BodaciousBerries.translatableTextKey;
 
 /**
  * based on the configuration screen for lambdabettergrass by lambdaurora
@@ -40,28 +39,28 @@ public class BodaciousConfigScreen extends SpruceScreen {
         super(BodaciousBerries.translatableText("config.title"));
         this.parent = parent;
 
-        this.commonRarityOption = new SpruceIntegerInputOption(translatableTextKey("config.commonRarityOption"),
+        this.commonRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.commonRarityOption"),
                 CONFIG::common,
                 CONFIG::setCommon,
-                Text.translatable("config.tooltip.common")
+                null
         );
 
-        this.mediumRarityOption = new SpruceIntegerInputOption(translatableTextKey("config.mediumRarityOption"),
+        this.mediumRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.mediumRarityOption"),
                 CONFIG::medium,
                 CONFIG::setMedium,
-                Text.translatable("config.tooltip.medium")
+                null
         );
 
-        this.rareRarityOption = new SpruceIntegerInputOption(translatableTextKey("config.rareRarityOption"),
+        this.rareRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.rareRarityOption"),
                 CONFIG::rare,
                 CONFIG::setRare,
-                Text.translatable("config.tooltip.rare")
+                null
         );
 
-        this.ultraRareRarityOption = new SpruceIntegerInputOption(translatableTextKey("config.ultraRareRarityOption"),
+        this.ultraRareRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.ultraRareRarityOption"),
                 CONFIG::ultraRare,
                 CONFIG::setUltraRare,
-                Text.translatable("config.tooltip.ultraRare")
+                null
         );
 
         this.resetOption = SpruceSimpleActionOption.reset(btn -> {

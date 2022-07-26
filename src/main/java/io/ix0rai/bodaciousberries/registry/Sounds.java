@@ -21,7 +21,7 @@ public class Sounds {
         return event;
     }
 
-    public static void registerSounds() {
+    public static void register() {
         for (Map.Entry<Identifier, SoundEvent> entry : SOUND_EVENTS.entrySet()) {
             Registry.register(Registry.SOUND_EVENT, entry.getKey(), entry.getValue());
         }

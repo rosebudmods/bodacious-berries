@@ -7,13 +7,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bodaciousberries:chorus_berries"
+          "name": "bodacious_berries:chorus_berries"
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "bodaciousberries:chorus_berry_bush",
+          "block": "bodacious_berries:chorus_berry_bush",
           "properties": {
             "age": "4"
           }

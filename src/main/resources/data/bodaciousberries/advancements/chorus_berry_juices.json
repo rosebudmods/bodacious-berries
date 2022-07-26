@@ -2,24 +2,24 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "bodaciousberries:chorus_berry_juice_badlands",
-      "bodaciousberries:chorus_berry_juice_birch_forest",
-      "bodaciousberries:chorus_berry_juice_dark_forest",
-      "bodaciousberries:chorus_berry_juice_desert",
-      "bodaciousberries:chorus_berry_juice_dripstone_caves",
-      "bodaciousberries:chorus_berry_juice_flower_forest",
-      "bodaciousberries:chorus_berry_juice_forest",
-      "bodaciousberries:chorus_berry_juice_jungle",
-      "bodaciousberries:chorus_berry_juice_lush_caves",
-      "bodaciousberries:chorus_berry_juice_meadow",
-      "bodaciousberries:chorus_berry_juice_mushroom_fields",
-      "bodaciousberries:chorus_berry_juice_ocean",
-      "bodaciousberries:chorus_berry_juice_plains",
-      "bodaciousberries:chorus_berry_juice_savanna",
-      "bodaciousberries:chorus_berry_juice_snowy_slopes",
-      "bodaciousberries:chorus_berry_juice_sunflower_plains",
-      "bodaciousberries:chorus_berry_juice_swamp",
-      "bodaciousberries:chorus_berry_juice_taiga"
+      "bodacious_berries:chorus_berry_juice_badlands",
+      "bodacious_berries:chorus_berry_juice_birch_forest",
+      "bodacious_berries:chorus_berry_juice_dark_forest",
+      "bodacious_berries:chorus_berry_juice_desert",
+      "bodacious_berries:chorus_berry_juice_dripstone_caves",
+      "bodacious_berries:chorus_berry_juice_flower_forest",
+      "bodacious_berries:chorus_berry_juice_forest",
+      "bodacious_berries:chorus_berry_juice_jungle",
+      "bodacious_berries:chorus_berry_juice_lush_caves",
+      "bodacious_berries:chorus_berry_juice_meadow",
+      "bodacious_berries:chorus_berry_juice_mushroom_fields",
+      "bodacious_berries:chorus_berry_juice_ocean",
+      "bodacious_berries:chorus_berry_juice_plains",
+      "bodacious_berries:chorus_berry_juice_savanna",
+      "bodacious_berries:chorus_berry_juice_snowy_slopes",
+      "bodacious_berries:chorus_berry_juice_sunflower_plains",
+      "bodacious_berries:chorus_berry_juice_swamp",
+      "bodacious_berries:chorus_berry_juice_taiga"
     ]
   },
   "criteria": {
@@ -29,7 +29,7 @@
         "items": [
           {
             "items": [
-              "bodaciousberries:chorus_berry_juice"
+              "bodacious_berries:chorus_berry_juice"
             ]
           }
         ]
@@ -38,7 +38,7 @@
     "has_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "bodaciousberries:chorus_berry_juice"
+        "recipe": "bodacious_berries:chorus_berry_juice"
       }
     }
   },

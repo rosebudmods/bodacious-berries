@@ -2,17 +2,17 @@
   "replace": "false",
   "values": [
     "minecraft:sweet_berry_bush",
-    "bodaciousberries:strawberry_bush",
-    "bodaciousberries:double_saskatoon_berry_bush",
-    "bodaciousberries:saskatoon_berry_bush",
-    "bodaciousberries:raspberry_bush",
-    "bodaciousberries:blackberry_bush",
-    "bodaciousberries:chorus_berry_bush",
-    "bodaciousberries:rainberry_bush",
-    "bodaciousberries:lingonberry_bush",
-    "bodaciousberries:grapevine",
-    "bodaciousberries:goji_berry_bush",
-    "bodaciousberries:double_goji_berry_bush",
-    "bodaciousberries:cloudberry_bush"
+    "bodacious_berries:strawberry_bush",
+    "bodacious_berries:double_saskatoon_berry_bush",
+    "bodacious_berries:saskatoon_berry_bush",
+    "bodacious_berries:raspberry_bush",
+    "bodacious_berries:blackberry_bush",
+    "bodacious_berries:chorus_berry_bush",
+    "bodacious_berries:rainberry_bush",
+    "bodacious_berries:lingonberry_bush",
+    "bodacious_berries:grapevine",
+    "bodacious_berries:goji_berry_bush",
+    "bodacious_berries:double_goji_berry_bush",
+    "bodacious_berries:cloudberry_bush"
   ]
 }

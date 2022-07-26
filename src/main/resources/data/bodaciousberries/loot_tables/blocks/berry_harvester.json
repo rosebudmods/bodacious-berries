@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bodaciousberries:berry_harvester"
+          "name": "bodacious_berries:berry_harvester"
         }
       ],
       "conditions": [

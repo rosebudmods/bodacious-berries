@@ -62,7 +62,7 @@ public class Bushes {
     public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(Berries.cloudberries,
             SMALL_SWEET_BERRY, LARGE_CLOUDBERRY, 1);
 
-    public static void registerBushes() {
+    public static void register() {
         register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
         register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
         register("strawberry_bush", STRAWBERRY_BUSH);

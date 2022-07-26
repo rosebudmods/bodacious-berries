@@ -30,7 +30,7 @@ public class BodaciousBlocks {
     public static final BlockEntityType<JuicerBlockEntity> JUICER_ENTITY = FabricBlockEntityTypeBuilder.create(JuicerBlockEntity::new, JUICER_BLOCK).build(null);
     public static final ScreenHandlerType<JuicerScreenHandler> JUICER_SCREEN_HANDLER = new ScreenHandlerType<>(JuicerScreenHandler::new);
 
-    public static void registerBlocks() {
+    public static void register() {
         registerBlockEntity(BERRY_HARVESTER, BERRY_HARVESTER_BLOCK, BERRY_HARVESTER_ENTITY, BERRY_HARVESTER_SCREEN_HANDLER);
         registerBlockItem(BERRY_HARVESTER, BERRY_HARVESTER_BLOCK, ItemGroup.REDSTONE);
 
