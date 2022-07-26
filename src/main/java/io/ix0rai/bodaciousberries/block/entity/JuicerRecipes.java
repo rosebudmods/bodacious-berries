@@ -52,7 +52,7 @@ public class JuicerRecipes {
     public static JsonObject createRecipeJson(Identifier[] ingredients, Identifier receptacle, Identifier output) {
         JsonObject json = new JsonObject();
         // add type
-        // adds: "type": "bodaciousberries:juicer_recipe"
+        // adds: "type": "bodacious_berries:juicing"
         json.addProperty("type", JuicerRecipe.RECIPE_ID);
 
         // add ingredients
