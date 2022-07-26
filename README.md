@@ -1,6 +1,6 @@
 ![2022-06-02_19 59 34](https://user-images.githubusercontent.com/66223394/171769253-9bc3ef22-77f3-4bac-966a-9876e3342adf.png)
 
-## [discord](https://discord.gg/TN9gaXJ6E8) | [github](https://github.com/ix0rai/bodacious_berries) | [modrinth](https://modrinth.com/mod/berries) | [curseforge](https://www.curseforge.com/minecraft/mc-mods/bodacious-berries)
+## [discord](https://discord.gg/TN9gaXJ6E8) | [github](https://github.com/ix0rai/bodaciousberries) | [modrinth](https://modrinth.com/mod/berries) | [curseforge](https://www.curseforge.com/minecraft/mc-mods/bodacious-berries)
 
 # features
 ### berries!
