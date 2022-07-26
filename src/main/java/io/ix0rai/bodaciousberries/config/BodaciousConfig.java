@@ -16,9 +16,28 @@ public class BodaciousConfig {
     private static final String RARE_KEY = "rare_rarity";
     private static final String ULTRA_RARE_KEY = "ultra_rare_rarity";
 
+    private static final int DEFAULT_COMMON_RARITY = 150;
+    private static final int DEFAULT_MEDIUM_RARITY = 250;
+    private static final int DEFAULT_RARE_RARITY = 325;
+    private static final int DEFAULT_ULTRA_RARE_RARITY = 400;
+
     protected final CommentedFileConfig config;
 
     public BodaciousConfig() {
+        CommentedFileConfig defaultConfig = CommentedFileConfig.builder(CONFIG_FILE_NAME)
+                .concurrent()
+                .preserveInsertionOrder()
+                .build();
+
+        defaultConfig.setComment(MEDIUM_KEY, "berry bush rarities - higher is more rare; lower is more common");
+        defaultConfig.set(COMMON_KEY, DEFAULT_COMMON_RARITY);
+        defaultConfig.set(MEDIUM_KEY, DEFAULT_MEDIUM_RARITY);
+        defaultConfig.set(RARE_KEY, DEFAULT_RARE_RARITY);
+        defaultConfig.set(ULTRA_RARE_KEY, DEFAULT_ULTRA_RARE_RARITY);
+
+        defaultConfig.save();
+        defaultConfig.close();
+
         this.config = CommentedFileConfig.builder(CONFIG_FILE_PATH)
                 .concurrent()
                 .defaultResource("/" + CONFIG_FILE_NAME)
@@ -29,10 +48,10 @@ public class BodaciousConfig {
     }
 
     public void reset() {
-        this.config.set(COMMON_KEY, 100);
-        this.config.set(MEDIUM_KEY, 130);
-        this.config.set(RARE_KEY, 170);
-        this.config.set(ULTRA_RARE_KEY, 200);
+        this.config.set(COMMON_KEY, DEFAULT_COMMON_RARITY);
+        this.config.set(MEDIUM_KEY, DEFAULT_MEDIUM_RARITY);
+        this.config.set(RARE_KEY, DEFAULT_RARE_RARITY);
+        this.config.set(ULTRA_RARE_KEY, DEFAULT_ULTRA_RARE_RARITY);
     }
 
     public int common() {
