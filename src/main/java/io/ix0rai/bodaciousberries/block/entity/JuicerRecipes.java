@@ -61,11 +61,10 @@ public class JuicerRecipes {
         for (int i = 0; i < ingredients.length; i ++) {
             jsonIngredients.add(i + "", getAsProperty(ingredients[i]));
         }
-        jsonIngredients.add("receptacle", getAsProperty(receptacle));
-        json.add("ingredients", jsonIngredients);
-
         // add receptacle
         // adds: "receptacle": {"item": "receptacle_id")
+        jsonIngredients.add("receptacle", getAsProperty(receptacle));
+        json.add("ingredients", jsonIngredients);
 
         // add result
         // adds: "result": "output_id"
@@ -81,7 +80,7 @@ public class JuicerRecipes {
         json.addProperty("type", "minecraft:crafting_shapeless");
 
         // add ingredients
-        // adds "ingredients": {"item": "ingredient", "item", "bodaciousberries:chorus_berry_juice}
+        // adds "ingredients": {"item": "ingredient", "item", "bodacious_berries:chorus_berry_juice}
         JsonArray ingredientArray = new JsonArray();
         ingredientArray.add(getAsProperty(ingredient));
         ingredientArray.add(getAsProperty(BodaciousBerries.id("chorus_berry_juice")));
