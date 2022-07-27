@@ -1,6 +1,6 @@
-package adudecalledleo.dfubuddy.mixin;
+package io.ix0rai.dfubestie.impl.mixin;
 
-import adudecalledleo.dfubuddy.impl.ModDataFixesInternals;
+import io.ix0rai.dfubestie.impl.DataFixesInternals;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.ChunkPos;
@@ -16,6 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 public class ChunkSerializerMixin {
     @Inject(method = "serialize", at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/NbtCompound;putInt(Ljava/lang/String;I)V", ordinal = 0), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private static void addModDataVersions(ServerWorld world, Chunk chunk, CallbackInfoReturnable<NbtCompound> cir, ChunkPos chunkPos, NbtCompound compoundTag) {
-        ModDataFixesInternals.addModDataVersions(compoundTag);
+        DataFixesInternals.addModDataVersions(compoundTag);
     }
 }

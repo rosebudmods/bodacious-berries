@@ -1,6 +1,6 @@
-package adudecalledleo.dfubuddy.mixin.client;
+package io.ix0rai.dfubestie.impl.mixin.client;
 
-import adudecalledleo.dfubuddy.impl.ModDataFixesInternals;
+import io.ix0rai.dfubestie.impl.DataFixesInternals;
 import net.minecraft.client.option.HotbarStorage;
 import net.minecraft.nbt.NbtCompound;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,6 +15,6 @@ public class HotbarStorageMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/NbtIo;write(Lnet/minecraft/nbt/NbtCompound;Ljava/io/File;)V"),
             locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     public void addModDataVersions(CallbackInfo ci, NbtCompound tag) {
-        ModDataFixesInternals.addModDataVersions(tag);
+        DataFixesInternals.addModDataVersions(tag);
     }
 }

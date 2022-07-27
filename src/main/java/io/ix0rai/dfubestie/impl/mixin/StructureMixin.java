@@ -1,6 +1,6 @@
-package adudecalledleo.dfubuddy.mixin;
+package io.ix0rai.dfubestie.impl.mixin;
 
-import adudecalledleo.dfubuddy.impl.ModDataFixesInternals;
+import io.ix0rai.dfubestie.impl.DataFixesInternals;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.structure.piece.StructurePieceSerializationContext;
@@ -15,7 +15,7 @@ public class StructureMixin {
     @Inject(method = "toNbt", at = @At("TAIL"), cancellable = true)
     private void addModDataVersions(StructurePieceSerializationContext context, ChunkPos chunkPos, CallbackInfoReturnable<NbtCompound> cir) {
         NbtCompound out = cir.getReturnValue();
-        ModDataFixesInternals.addModDataVersions(out);
+        DataFixesInternals.addModDataVersions(out);
         cir.setReturnValue(out);
     }
 }

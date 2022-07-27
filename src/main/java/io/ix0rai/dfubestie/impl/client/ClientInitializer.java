@@ -1,11 +1,10 @@
-package adudecalledleo.dfubuddy.impl.client;
+package io.ix0rai.dfubestie.impl.client;
 
-import adudecalledleo.dfubuddy.impl.ModDataFixesInternals;
+import io.ix0rai.dfubestie.impl.DataFixesInternals;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.MinecraftClient;
 import org.jetbrains.annotations.ApiStatus;
 
 @Environment(EnvType.CLIENT)
@@ -13,10 +12,6 @@ import org.jetbrains.annotations.ApiStatus;
 public final class ClientInitializer implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        ClientTickEvents.END_CLIENT_TICK.register(this::onEndClientTick);
-    }
-
-    private void onEndClientTick(MinecraftClient client) {
-        ModDataFixesInternals.lock();
+        ClientTickEvents.END_CLIENT_TICK.register((client -> DataFixesInternals.lock()));
     }
 }

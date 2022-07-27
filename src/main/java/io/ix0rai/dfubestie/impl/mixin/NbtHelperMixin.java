@@ -1,6 +1,6 @@
-package adudecalledleo.dfubuddy.mixin;
+package io.ix0rai.dfubestie.impl.mixin;
 
-import adudecalledleo.dfubuddy.impl.ModDataFixesInternals;
+import io.ix0rai.dfubestie.impl.DataFixesInternals;
 import com.mojang.datafixers.DataFixer;
 import net.minecraft.datafixer.DataFixTypes;
 import net.minecraft.nbt.NbtCompound;
@@ -16,7 +16,7 @@ public class NbtHelperMixin {
             at = @At("RETURN"), cancellable = true)
     private static void updateDataWithFixers(DataFixer fixer, DataFixTypes fixTypes, NbtCompound compound, int oldVersion, CallbackInfoReturnable<NbtCompound> cir) {
         NbtCompound original = cir.getReturnValue(); // we do our fixes after vanilla
-        NbtCompound finalTag = ModDataFixesInternals.updateWithAllFixers(fixTypes, original);
+        NbtCompound finalTag = DataFixesInternals.updateWithAllFixers(fixTypes, original);
         cir.setReturnValue(finalTag);
     }
 }

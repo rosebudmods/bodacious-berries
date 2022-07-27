@@ -1,10 +1,10 @@
 package io.ix0rai.bodaciousberries.registry;
 
-import adudecalledleo.dfubuddy.api.ModDataFixes;
-import com.mojang.datafixers.DataFixer;
+import io.ix0rai.dfubestie.api.DataFixes;
 import com.mojang.datafixers.DataFixerBuilder;
 import com.mojang.datafixers.schemas.Schema;
 import io.ix0rai.bodaciousberries.BodaciousBerries;
+import io.ix0rai.dfubestie.api.ModdedDataFixerBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ReferenceMap;
 import it.unimi.dsi.fastutil.objects.Object2ReferenceOpenHashMap;
 import net.minecraft.datafixer.fix.BlockNameFix;
@@ -24,12 +24,9 @@ public final class BodaciousDataFixers {
     private static final String V0_MOD_ID = "bodaciousberries";
 
     public static void register() {
-        DataFixerBuilder builder = new DataFixerBuilder(DATA_VERSION);
-        builder.addSchema(0, ModDataFixes.MOD_SCHEMA);
-        Schema schemaV1 = builder.addSchema(1, Schema::new);
-        SchemaV1Data.initialize(builder, schemaV1);
-        DataFixer fixer = builder.buildOptimized(Util.getBootstrapExecutor());
-        ModDataFixes.registerFixer(BodaciousBerries.MOD_ID, DATA_VERSION, fixer);
+        ModdedDataFixerBuilder builder = new ModdedDataFixerBuilder(DATA_VERSION, 0);
+        builder.initialiseWithNewSchema(DATA_VERSION, SchemaV1Data::initialize);
+        DataFixes.registerFixer(BodaciousBerries.MOD_ID, DATA_VERSION, builder);
     }
 
     private static final class SchemaV1Data {

@@ -1,5 +1,6 @@
-package adudecalledleo.dfubuddy.impl;
+package io.ix0rai.dfubestie.impl;
 
+import com.google.common.base.Preconditions;
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.DataFixer;
 import com.mojang.datafixers.schemas.Schema;
@@ -20,8 +21,8 @@ import java.util.Map;
 import java.util.function.BiFunction;
 
 @ApiStatus.Internal
-public final class ModDataFixesInternals {
-    public static final Logger LOGGER = LogManager.getLogger("ModDataFixesInternals");
+public final class DataFixesInternals {
+    public static final Logger LOGGER = LogManager.getLogger("DataFixesInternals");
 
     private static Map<String, DataFixerEntry> modDataFixers = new Object2ReferenceOpenHashMap<>();
     private static Schema modSchema;
@@ -64,13 +65,17 @@ public final class ModDataFixesInternals {
     public static void lock() {
         if (!locked) {
             modDataFixers = Collections.unmodifiableMap(modDataFixers);
-            LOGGER.info("DataFixer registration locked!");
+            LOGGER.info("datafixer registration locked!");
         }
         locked = true;
     }
 
     public static boolean isLocked() {
         return locked;
+    }
+
+    public static void checkNotNull(Object reference, String name) {
+        Preconditions.checkNotNull(reference, name + " cannot be null");
     }
 
     public record DataFixerEntry(@NotNull DataFixer dataFixer, int currentVersion) {
