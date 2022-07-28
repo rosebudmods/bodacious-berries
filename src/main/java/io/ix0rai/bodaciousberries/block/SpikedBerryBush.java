@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.mixin.accessors.DamageSourceAccessor;
+import io.ix0rai.bodaciousberries.mixin.DamageSourceInvoker;
 import io.ix0rai.bodaciousberries.registry.Bushes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -14,7 +14,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 
 public class SpikedBerryBush extends BasicBerryBush {
-    public static final DamageSource BERRY_BUSH = DamageSourceAccessor.create("berry_bush");
+    public static final DamageSource BERRY_BUSH = DamageSourceInvoker.create("berry_bush");
     // copy of SweetBerryBushBlock's minimum distance
     private static final float MINIMUM_DAMAGE_DISTANCE = 0.003f;
     private final float damage;

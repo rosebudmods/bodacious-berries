@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.mixin.accessors;
+package io.ix0rai.bodaciousberries.mixin.client;
 
 import net.minecraft.client.particle.SpriteProvider;
 import net.minecraft.client.particle.WaterSuspendParticle;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(WaterSuspendParticle.class)
 @SuppressWarnings("unused")
-public interface WaterSuspendParticleAccessor {
+public interface WaterSuspendParticleInvoker {
     @Invoker("<init>")
     static WaterSuspendParticle create(ClientWorld world, SpriteProvider spriteProvider, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         throw new AssertionError();

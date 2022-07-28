@@ -16,6 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
 
+/**
+ * reason: add juicer recipes to the recipe manager
+ * @author ix0rai
+ */
 @Mixin(RecipeManager.class)
 public class RegistryManagerInjector {
     @Inject(method = "apply*", at = @At("HEAD"))

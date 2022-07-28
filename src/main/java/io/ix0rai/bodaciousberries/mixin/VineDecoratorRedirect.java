@@ -45,7 +45,7 @@ public class VineDecoratorRedirect {
     private static void placeVine(StructureWorldAccess access, TreeDecorator.class_7402 arg, BlockPos pos, BooleanProperty facing) {
         BlockState block = matchBlockAbove(access, pos, facing);
 
-        if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDumbCheck(access, pos)) {
+        if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDisgustingRevoltingHorrificDumbCheck(access, pos)) {
             // otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
             if (access.getBiome(pos).hasTag(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
                 block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
@@ -69,7 +69,7 @@ public class VineDecoratorRedirect {
         return null;
     }
 
-    private static boolean reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDumbCheck(StructureWorldAccess access, BlockPos pos) {
+    private static boolean reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDisgustingRevoltingHorrificDumbCheck(StructureWorldAccess access, BlockPos pos) {
         final Block east = access.getBlockState(pos.east()).getBlock();
         final Block west = access.getBlockState(pos.west()).getBlock();
         final Block north = access.getBlockState(pos.north()).getBlock();

@@ -10,6 +10,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * reason: make mobs avoid spiky bushes
+ * @author ix0rai
+ */
 @Mixin(LandPathNodeMaker.class)
 public class PathNodeMakerInjector {
     @Inject(method="getCommonNodeType", at = @At("HEAD"), cancellable = true)

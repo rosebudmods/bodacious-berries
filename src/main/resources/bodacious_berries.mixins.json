@@ -8,11 +8,10 @@
     "PathNodeMakerInjector",
     "RegistryManagerInjector",
     "VineDecoratorRedirect",
-    "accessors.DamageSourceAccessor"
+    "DamageSourceInvoker"
   ],
   "client": [
-    "accessors.DefaultParticleTypeAccessor",
-    "accessors.WaterSuspendParticleAccessor"
+    "client.WaterSuspendParticleInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

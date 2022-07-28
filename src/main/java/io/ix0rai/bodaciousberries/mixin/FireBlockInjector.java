@@ -8,6 +8,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * reason: allow fire to spread to berry bushes
+ * @author ix0rai
+ */
 @Mixin(FireBlock.class)
 public class FireBlockInjector {
     @Inject(method = "getSpreadChance", at = @At("HEAD"), cancellable = true)

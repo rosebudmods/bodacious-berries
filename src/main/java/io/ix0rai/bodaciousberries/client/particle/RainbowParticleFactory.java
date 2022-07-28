@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.client.particle;
 
-import io.ix0rai.bodaciousberries.mixin.accessors.WaterSuspendParticleAccessor;
+import io.ix0rai.bodaciousberries.mixin.client.WaterSuspendParticleInvoker;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.Particle;
@@ -33,7 +33,7 @@ public record RainbowParticleFactory(SpriteProvider spriteProvider) implements P
     };
 
     public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-        WaterSuspendParticle waterSuspendParticle = WaterSuspendParticleAccessor.create(clientWorld, this.spriteProvider, d, e, f, 0.0D, -0.8D, 0.0D);
+        WaterSuspendParticle waterSuspendParticle = WaterSuspendParticleInvoker.create(clientWorld, this.spriteProvider, d, e, f, 0.0D, -0.8D, 0.0D);
         // particles last a couple seconds at most
         waterSuspendParticle.setMaxAge(MathHelper.nextBetween(clientWorld.random, 10, 30));
         // pick random colour
