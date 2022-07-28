@@ -3,7 +3,7 @@ package io.ix0rai.bodaciousberries.block.entity;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.BerryHarvesterBlock;
-import io.ix0rai.bodaciousberries.particle.Particles;
+import io.ix0rai.bodaciousberries.client.particle.Particles;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

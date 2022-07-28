@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.particle;
+package io.ix0rai.bodaciousberries.client.particle;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

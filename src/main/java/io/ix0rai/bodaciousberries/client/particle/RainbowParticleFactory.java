@@ -1,4 +1,4 @@
-package io.ix0rai.bodaciousberries.particle;
+package io.ix0rai.bodaciousberries.client.particle;
 
 import io.ix0rai.bodaciousberries.mixin.accessors.WaterSuspendParticleAccessor;
 import net.fabricmc.api.EnvType;

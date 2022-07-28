@@ -2,7 +2,7 @@ package io.ix0rai.bodaciousberries.client;
 
 import io.ix0rai.bodaciousberries.block.entity.BerryHarvesterScreen;
 import io.ix0rai.bodaciousberries.block.entity.JuicerScreen;
-import io.ix0rai.bodaciousberries.particle.Particles;
+import io.ix0rai.bodaciousberries.client.particle.Particles;
 import io.ix0rai.bodaciousberries.registry.Berries;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
 import net.fabricmc.api.ClientModInitializer;
