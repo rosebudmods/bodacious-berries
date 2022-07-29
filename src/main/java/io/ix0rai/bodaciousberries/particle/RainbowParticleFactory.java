@@ -37,7 +37,7 @@ public record RainbowParticleFactory(SpriteProvider spriteProvider) implements P
         // particles last a couple seconds at most
         waterSuspendParticle.setMaxAge(MathHelper.nextBetween(clientWorld.random, 10, 30));
         // pick random colour
-        float[] colour = colours[clientWorld.random.nextBetween(0, 7)];
+        float[] colour = colours[clientWorld.random.range(0, 7)];
         waterSuspendParticle.setColor(colour[0], colour[1], colour[2]);
         return waterSuspendParticle;
     }
