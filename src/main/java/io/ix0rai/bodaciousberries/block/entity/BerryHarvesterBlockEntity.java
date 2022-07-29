@@ -51,12 +51,12 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
 
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.of(this);
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
     @Override
     public NbtCompound toInitialChunkDataNbt() {
-        return toNbt();
+        return createNbt();
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, BerryHarvesterBlockEntity harvester) {

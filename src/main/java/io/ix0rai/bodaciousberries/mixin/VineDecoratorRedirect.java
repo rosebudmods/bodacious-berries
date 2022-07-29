@@ -23,18 +23,18 @@ public class VineDecoratorRedirect {
      * @author ix0rai
      */
     @Inject(method = "placeVines", at = @At("HEAD"), cancellable = true)
-    private static void placeVines(BlockPos pos, BooleanProperty facing, TreeDecorator.C_jvnizkzw arg, CallbackInfo ci) {
+    private static void placeVines(BlockPos pos, BooleanProperty faceProperty, TreeDecorator.Generator generator, CallbackInfo ci) {
         // convert world to structure world access so that we can test for vines and air blocks
-        final StructureWorldAccess access = (StructureWorldAccess) arg.method_43316();
+        final StructureWorldAccess access = (StructureWorldAccess) generator.getWorld();
 
         // only redirect the method if we're in a jungle biome
-        if (access.getBiome(pos).hasTag(BiomeTags.IS_JUNGLE)) {
-            placeVine(access, arg, pos, facing);
+        if (access.getBiome(pos).isIn(BiomeTags.IS_JUNGLE)) {
+            placeVine(access, generator, pos, faceProperty);
 
             // place vines that are hanging down from other vines
-            int i = access.getRandom().range(3, 6);
+            int i = access.getRandom().nextBetween(3, 6);
             for(pos = pos.down(); access.isAir(pos) && i > 0; --i) {
-                placeVine(access, arg, pos, facing);
+                placeVine(access, generator, pos, faceProperty);
                 pos = pos.down();
             }
 
@@ -42,12 +42,12 @@ public class VineDecoratorRedirect {
         }
     }
 
-    private static void placeVine(StructureWorldAccess access, TreeDecorator.C_jvnizkzw arg, BlockPos pos, BooleanProperty facing) {
+    private static void placeVine(StructureWorldAccess access, TreeDecorator.Generator arg, BlockPos pos, BooleanProperty facing) {
         BlockState block = matchBlockAbove(access, pos, facing);
 
         if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDumbCheck(access, pos)) {
             // otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
-            if (access.getBiome(pos).hasTag(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
+            if (access.getBiome(pos).isIn(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
                 block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
             } else if (access.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
                 block = Blocks.VINE.getDefaultState().with(facing, true);
@@ -55,7 +55,7 @@ public class VineDecoratorRedirect {
         }
 
         if (block != null) {
-            arg.m_lgousnhs(pos, block);
+            arg.replace(pos, block);
         }
     }
 
