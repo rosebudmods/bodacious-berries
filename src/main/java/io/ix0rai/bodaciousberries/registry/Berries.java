@@ -7,6 +7,7 @@ import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.item.ChorusBerries;
 import io.ix0rai.bodaciousberries.item.GojiBerries;
 import io.ix0rai.bodaciousberries.item.Rainberry;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.AliasedBlockItem;
@@ -19,8 +20,6 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.fabricmc.fabric.impl.content.registry.CompostingChanceRegistryImpl.INSTANCE;
 
 public class Berries {
     public static final TagKey<Item> BERRY_TAG = TagKey.of(Registry.ITEM_KEY, new Identifier("c", "berries"));
@@ -87,7 +86,7 @@ public class Berries {
      * @param berry the berry to make compostable
      */
     private static void registerCompostableBerry(Item berry) {
-        INSTANCE.add(berry, BERRY_COMPOST_LEVEL_INCREASE_CHANCE);
+        CompostingChanceRegistry.INSTANCE.add(berry, BERRY_COMPOST_LEVEL_INCREASE_CHANCE);
     }
 
     /**
