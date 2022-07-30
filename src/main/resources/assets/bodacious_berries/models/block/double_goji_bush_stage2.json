@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/tinted_cross",
   "textures": {
     "cross": "bodacious_berries:block/goj_bewwy_vine_stage2"
   }

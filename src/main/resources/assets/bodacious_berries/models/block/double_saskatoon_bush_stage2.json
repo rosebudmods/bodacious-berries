@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/tinted_cross",
   "textures": {
     "cross": "bodacious_berries:block/double_saskatoon_bush_stage2"
   }
