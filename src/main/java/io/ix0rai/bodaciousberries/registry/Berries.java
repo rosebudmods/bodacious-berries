@@ -18,7 +18,9 @@ import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Berries {
@@ -75,6 +77,8 @@ public class Berries {
      */
     public static final Map<BerryBush, Item> BERRY_BUSHES = new HashMap<>();
 
+    public static final List<BerryBush> COLOUR_PROVIDER_EXCLUDED = new ArrayList<>();
+
     /**
      * the chance that a berry will raise the level of compost in a composter
      * <br> out of one: 0.4 = 40%, etc
@@ -109,6 +113,10 @@ public class Berries {
         BERRY_BUSHES.put(bigBush, berries);
     }
 
+    public static void excludeFromColourProvider(BerryBush bush) {
+        COLOUR_PROVIDER_EXCLUDED.add(bush);
+    }
+
     private static void register(Item berry, String name) {
         Registry.register(Registry.ITEM, BodaciousBerries.id(name), berry);
     }
@@ -132,6 +140,11 @@ public class Berries {
         initialise(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, gojiBerries);
         initialise(Bushes.GOOSEBERRY_BUSH, gooseberries);
         initialise(Bushes.CLOUDBERRY_BUSH, cloudberries);
+
+        excludeFromColourProvider(Bushes.CLOUDBERRY_BUSH);
+        excludeFromColourProvider(Bushes.CHORUS_BERRY_BUSH);
+        excludeFromColourProvider(Bushes.LINGONBERRY_BUSH);
+        excludeFromColourProvider(Bushes.RAINBERRY_BUSH);
 
         for (var entry : BERRY_BUSHES.entrySet()) {
             BerryBush bush = entry.getKey();

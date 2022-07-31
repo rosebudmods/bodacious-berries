@@ -31,13 +31,17 @@ public class BodaciousBerriesClient implements ClientModInitializer {
             // ensure bush is rendered with a cutout
             Block block = (Block) entry.getKey();
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
-            ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
-                if (view != null) {
-                    return BiomeColors.getFoliageColor(view, pos);
-                } else {
-                    return FoliageColors.getDefaultColor();
-                }
-            }, block);
+
+            if (!Berries.COLOUR_PROVIDER_EXCLUDED.contains(entry.getKey())) {
+                // register colour provider for the bush
+                ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
+                    if (view != null) {
+                        return BiomeColors.getFoliageColor(view, pos);
+                    } else {
+                        return FoliageColors.getDefaultColor();
+                    }
+                }, block);
+            }
         }
 
         Particles.registerParticles();

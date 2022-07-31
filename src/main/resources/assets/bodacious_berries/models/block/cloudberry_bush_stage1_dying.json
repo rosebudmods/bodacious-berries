@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/tinted_cross",
+  "parent": "minecraft:block/cross",
   "textures": {
     "cross": "bodacious_berries:block/cloudberry_bush_stage1_dying"
   }
