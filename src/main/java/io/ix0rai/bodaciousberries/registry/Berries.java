@@ -30,7 +30,7 @@ public class Berries {
 
     // berry items
     public static AliasedBlockItem saskatoonBerries;
-    public static AliasedBlockItem strawberry;
+    public static AliasedBlockItem strawberries;
     public static AliasedBlockItem raspberries;
     public static AliasedBlockItem blackberries;
     public static AliasedBlockItem chorusBerries;
@@ -44,7 +44,7 @@ public class Berries {
     public static void register() {
         // create items for each berry
         saskatoonBerries = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 2f));
-        strawberry = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
+        strawberries = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
         raspberries = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(2, 3f));
         blackberries = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(2, 3.5f));
         chorusBerries = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(2, 2.5f));
@@ -59,7 +59,7 @@ public class Berries {
 
         // register
         register(saskatoonBerries, "saskatoon_berries");
-        register(strawberry, "strawberry");
+        register(strawberries, "strawberries");
         register(raspberries, "raspberries");
         register(blackberries, "blackberries");
         register(chorusBerries, "chorus_berries");
@@ -130,7 +130,7 @@ public class Berries {
      */
     public static void initialiseBerries() {
         initialise(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, saskatoonBerries);
-        initialise(Bushes.STRAWBERRY_BUSH, strawberry);
+        initialise(Bushes.STRAWBERRY_BUSH, strawberries);
         initialise(Bushes.RASPBERRY_BUSH, raspberries);
         initialise(Bushes.BLACKBERRY_BUSH, blackberries);
         initialise(Bushes.CHORUS_BERRY_BUSH, chorusBerries);
