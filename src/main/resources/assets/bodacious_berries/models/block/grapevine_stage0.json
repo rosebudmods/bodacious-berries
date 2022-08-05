@@ -1,11 +1,12 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "bodacious_berries:block/grapevine_stage0",
-    "vine": "bodacious_berries:block/grapevine_stage0"
+    "particle": "bodacious_berries:block/grape/stage0",
+    "vine": "bodacious_berries:block/grape/stage0"
   },
   "elements": [
-    {   "from": [ 0, 0, 0.8 ],
+    {
+      "from": [ 0, 0, 0.8 ],
       "to": [ 16, 16, 0.8 ],
       "shade": false,
       "faces": {

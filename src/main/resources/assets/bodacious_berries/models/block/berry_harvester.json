@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "top": "bodacious_berries:block/berry_harvester_top",
-    "front": "bodacious_berries:block/berry_harvester_front",
-    "side": "bodacious_berries:block/berry_harvester_side"
+    "top": "bodacious_berries:block/berry_harvester/top",
+    "front": "bodacious_berries:block/berry_harvester/front",
+    "side": "bodacious_berries:block/berry_harvester/side"
   }
 }

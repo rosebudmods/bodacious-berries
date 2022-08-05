@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/tinted_cross",
+  "parent": "bodacious_berries:block/template/bodacious_berry_bush",
   "textures": {
-    "cross": "bodacious_berries:block/double_saskatoon_bush_stage1"
+    "leaves": "bodacious_berries:block/saskatoon/double_leaves_stage1",
+    "berries": "bodacious_berries:block/saskatoon/double_berries_stage1",
+    "twigs": "bodacious_berries:block/saskatoon/double_twigs_stage1"
   }
 }

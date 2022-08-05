@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/tinted_cross",
+  "parent": "bodacious_berries:block/template/bodacious_berry_bush",
   "textures": {
-    "cross": "bodacious_berries:block/goj_bewwy_vine_stage3"
+    "leaves": "bodacious_berries:block/goji_berry/double_leaves_stage3",
+    "berries": "bodacious_berries:block/goji_berry/double_berries_stage3",
+    "twigs": "bodacious_berries:block/goji_berry/double_twigs_stage3"
   }
 }
