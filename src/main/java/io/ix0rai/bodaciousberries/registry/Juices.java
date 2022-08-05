@@ -35,7 +35,7 @@ public class Juices {
         register("strawberry_juice", new Juice(Berries.strawberries));
         register("raspberry_juice", new Juice(Berries.raspberries));
         register("blackberry_juice", new Juice(Berries.blackberries, BodaciousBerries.translatableText("hint.blackberries_and_sweetness")));
-        register("rainberry_juice", new Juice(Berries.rainberry));
+        register("rainberry_juice", new Juice(Berries.rainberries));
         register("lingonberry_juice", new Juice(Berries.lingonberries, BodaciousBerries.translatableText("hint.more_red")));
         register("grape_juice", new Juice(Berries.grapes));
         register("goji_berry_juice", new Juice(Berries.gojiBerries, BodaciousBerries.translatableText("hint.sweetness")));
@@ -84,13 +84,13 @@ public class Juices {
         registerBlend("goji_berry_blend", gojiBerryBlend);
         Blend oppositeJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(5.0F).build()), Berries.raspberries, Berries.blackberries, Items.SUGAR_CANE);
         registerBlend("opposite_juice", oppositeJuice);
-        Blend rainberryBlend = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(8).saturationModifier(10.0F).build()), Berries.rainberry, Berries.gojiBerries, Items.GOLDEN_APPLE);
+        Blend rainberryBlend = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(8).saturationModifier(10.0F).build()), Berries.rainberries, Berries.gojiBerries, Items.GOLDEN_APPLE);
         registerBlend("rainberry_blend", rainberryBlend);
         Blend gooseberryRum = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(4.0f).build()), Berries.gooseberries, Berries.gooseberries, Items.WHEAT);
         registerBlend("gooseberry_rum", gooseberryRum);
         Blend redJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(6.0F).build()), Berries.strawberries, Items.SWEET_BERRIES, Berries.lingonberries);
         registerBlend("red_juice", redJuice);
-        Blend endBlend = new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(8.0F).build()), Berries.chorusBerries, Berries.rainberry, Items.CHORUS_FRUIT);
+        Blend endBlend = new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(8.0F).build()), Berries.chorusBerries, Berries.rainberries, Items.CHORUS_FRUIT);
         registerBlend("end_blend", endBlend);
         Blend purpleDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(6.0F).build()), Berries.chorusBerries, Berries.grapes, Berries.saskatoonBerries);
         registerBlend("purple_delight", purpleDelight);

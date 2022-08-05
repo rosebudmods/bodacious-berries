@@ -47,7 +47,7 @@ public class Bushes {
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
     public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.blackberries,
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
-    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berries.rainberry,
+    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berries.rainberries,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
     public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(Berries.lingonberries,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);

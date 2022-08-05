@@ -6,7 +6,7 @@ import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
 import io.ix0rai.bodaciousberries.item.ChorusBerries;
 import io.ix0rai.bodaciousberries.item.GojiBerries;
-import io.ix0rai.bodaciousberries.item.Rainberry;
+import io.ix0rai.bodaciousberries.item.Rainberries;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -34,7 +34,7 @@ public class Berries {
     public static AliasedBlockItem raspberries;
     public static AliasedBlockItem blackberries;
     public static AliasedBlockItem chorusBerries;
-    public static AliasedBlockItem rainberry;
+    public static AliasedBlockItem rainberries;
     public static AliasedBlockItem lingonberries;
     public static AliasedBlockItem grapes;
     public static AliasedBlockItem gojiBerries;
@@ -48,7 +48,7 @@ public class Berries {
         raspberries = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(2, 3f));
         blackberries = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(2, 3.5f));
         chorusBerries = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(2, 2.5f));
-        rainberry = new Rainberry(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
+        rainberries = new Rainberries(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
         lingonberries = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
         grapes = new AliasedBlockItem(Bushes.GRAPEVINE, settings(2, 2f));
         gojiBerries = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(2, 2.5f));
@@ -63,7 +63,7 @@ public class Berries {
         register(raspberries, "raspberries");
         register(blackberries, "blackberries");
         register(chorusBerries, "chorus_berries");
-        register(rainberry, "rainberry");
+        register(rainberries, "rainberries");
         register(lingonberries, "lingonberries");
         register(grapes, "grapes");
         register(gojiBerries, "goji_berries");
@@ -134,7 +134,7 @@ public class Berries {
         initialise(Bushes.RASPBERRY_BUSH, raspberries);
         initialise(Bushes.BLACKBERRY_BUSH, blackberries);
         initialise(Bushes.CHORUS_BERRY_BUSH, chorusBerries);
-        initialise(Bushes.RAINBERRY_BUSH, rainberry);
+        initialise(Bushes.RAINBERRY_BUSH, rainberries);
         initialise(Bushes.LINGONBERRY_BUSH, lingonberries);
         initialise(Bushes.GRAPEVINE, grapes);
         initialise(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, gojiBerries);
