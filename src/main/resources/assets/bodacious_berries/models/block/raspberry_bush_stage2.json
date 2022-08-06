@@ -3,6 +3,6 @@
   "textures": {
     "leaves": "bodacious_berries:block/raspberry/leaves_stage2",
     "berries": "bodacious_berries:block/raspberry/berries_stage2",
-    "twigs": "bodacious_berries:block/raspberry/twigs_stage2"
+    "twigs": "bodacious_berries:block/blackberry/twigs_big"
   }
 }
