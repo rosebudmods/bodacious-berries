@@ -7,7 +7,7 @@
       "model": "bodacious_berries:block/goji_berry_bush_stage1"
     },
     "age=2": {
-      "model": "bodacious_berries:block/goji_berry_bush_stage2"
+      "model": "bodacious_berries:block/double_goji_bush_stage0"
     }
   }
 }

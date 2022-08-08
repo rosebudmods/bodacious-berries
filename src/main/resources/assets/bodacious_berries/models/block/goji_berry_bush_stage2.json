@@ -1,8 +1,0 @@
-{
-  "parent": "bodacious_berries:block/template/bodacious_berry_bush",
-  "textures": {
-    "leaves": "bodacious_berries:block/goji_berry/leaves_stage2",
-    "berries": "bodacious_berries:block/goji_berry/berries_stage2",
-    "twigs": "bodacious_berries:block/goji_berry/twigs_stage2"
-  }
-}
