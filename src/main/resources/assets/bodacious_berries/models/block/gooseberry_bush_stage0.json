@@ -2,7 +2,7 @@
   "parent": "bodacious_berries:block/template/bodacious_berry_bush",
   "textures": {
     "leaves": "bodacious_berries:block/gooseberry/leaves_small",
-    "berries": "bodacious_berries:block/gooseberry/misc/empty",
-    "twigs": "bodacious_berries:block/gooseberry/misc/empty"
+    "berries": "bodacious_berries:block/misc/empty",
+    "twigs": "bodacious_berries:block/misc/empty"
   }
 }
