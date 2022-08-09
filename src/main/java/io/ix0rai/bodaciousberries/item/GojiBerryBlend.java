@@ -17,13 +17,15 @@ public class GojiBerryBlend extends Blend {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         // note: a mod conflict somehow causes a cme here, so we use an iterator over an enhanced for
-        Iterator<StatusEffectInstance> iterator = user.getStatusEffects().iterator();
-        do {
-            StatusEffectInstance instance = iterator.next();
-            if (instance.getEffectType().getType().equals(StatusEffectType.HARMFUL)) {
-                user.removeStatusEffect(instance.getEffectType());
-            }
-        } while (iterator.hasNext());
+        if (!user.getStatusEffects().isEmpty()) {
+            Iterator<StatusEffectInstance> iterator = user.getStatusEffects().iterator();
+            do {
+                StatusEffectInstance instance = iterator.next();
+                if (instance.getEffectType().getType().equals(StatusEffectType.HARMFUL)) {
+                    user.removeStatusEffect(instance.getEffectType());
+                }
+            } while (iterator.hasNext());
+        }
 
         return super.finishUsing(stack, world, user);
     }
