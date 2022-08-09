@@ -2,6 +2,7 @@ package io.ix0rai.bodaciousberries.item;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -19,7 +20,9 @@ public class GojiBerryBlend extends Blend {
         Iterator<StatusEffectInstance> iterator = user.getStatusEffects().iterator();
         do {
             StatusEffectInstance instance = iterator.next();
-            user.removeStatusEffect(instance.getEffectType());
+            if (instance.getEffectType().getType().equals(StatusEffectType.HARMFUL)) {
+                user.removeStatusEffect(instance.getEffectType());
+            }
         } while (iterator.hasNext());
 
         return super.finishUsing(stack, world, user);
