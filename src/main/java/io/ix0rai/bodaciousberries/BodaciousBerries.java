@@ -49,7 +49,7 @@ public class BodaciousBerries implements ModInitializer {
         BodaciousDataFixers.register();
 
         FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer ->
-            ResourceManagerHelper.registerBuiltinResourcePack(id("bodacious_classic"), modContainer, ResourcePackActivationType.NORMAL)
+            ResourceManagerHelper.registerBuiltinResourcePack(id("classic"), modContainer, ResourcePackActivationType.NORMAL)
         );
     }
 }
