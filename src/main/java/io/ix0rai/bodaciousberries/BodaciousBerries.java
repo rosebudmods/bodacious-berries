@@ -5,6 +5,9 @@ import io.ix0rai.bodaciousberries.config.BodaciousConfig;
 import io.ix0rai.bodaciousberries.registry.*;
 import io.ix0rai.bodaciousberries.worldgen.BerryBushPatchGen;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -44,5 +47,9 @@ public class BodaciousBerries implements ModInitializer {
         BerryBushPatchGen.register();
         Compat.register();
         BodaciousDataFixers.register();
+
+        FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer ->
+            ResourceManagerHelper.registerBuiltinResourcePack(id("bodacious_classic"), modContainer, ResourcePackActivationType.NORMAL)
+        );
     }
 }
