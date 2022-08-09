@@ -43,17 +43,17 @@ public class Berries {
 
     public static void register() {
         // create items for each berry
-        saskatoonBerries = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 2f));
-        strawberries = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1.5f));
-        raspberries = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(2, 3f));
-        blackberries = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(2, 3.5f));
+        saskatoonBerries = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 0.5f));
+        strawberries = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1f));
+        raspberries = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(3, 0.5f));
+        blackberries = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(1, 1.5f));
         chorusBerries = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(2, 2.5f));
         rainberries = new Rainberries(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
-        lingonberries = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 1.5f));
-        grapes = new AliasedBlockItem(Bushes.GRAPEVINE, settings(2, 2f));
-        gojiBerries = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(2, 2.5f));
-        gooseberries = new AliasedBlockItem(Bushes.GOOSEBERRY_BUSH, settings(2, 1f));
-        cloudberries = new AliasedBlockItem(Bushes.CLOUDBERRY_BUSH, berrySettings.food(new FoodComponent.Builder().hunger(2).saturationModifier(1.5f).statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600, 1), 1).snack().build()));
+        lingonberries = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 0.5f));
+        grapes = new AliasedBlockItem(Bushes.GRAPEVINE, settings(2, 1f));
+        gojiBerries = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(1, 2.5f));
+        gooseberries = new AliasedBlockItem(Bushes.GOOSEBERRY_BUSH, settings(2, 0.5f));
+        cloudberries = new AliasedBlockItem(Bushes.CLOUDBERRY_BUSH, berrySettings.food(new FoodComponent.Builder().hunger(2).saturationModifier(1f).statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600, 1), 1).snack().build()));
 
         initialiseBerries();
 

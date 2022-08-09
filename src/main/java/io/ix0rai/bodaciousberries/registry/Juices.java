@@ -80,23 +80,23 @@ public class Juices {
     }
 
     private static void registerBlends() {
-        Blend gojiBerryBlend = new GojiBerryBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(6.0F).statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F).build()), Berries.gojiBerries, Berries.gojiBerries, Items.SUGAR_CANE);
+        Blend gojiBerryBlend = new GojiBerryBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(6.0F).statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F).build()), Berries.gojiBerries, Berries.gojiBerries, Items.SUGAR_CANE);
         registerBlend("goji_berry_blend", gojiBerryBlend);
-        Blend oppositeJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(5.0F).build()), Berries.raspberries, Berries.blackberries, Items.SUGAR_CANE);
+        Blend oppositeJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturationModifier(5.0F).build()), Berries.raspberries, Berries.blackberries, Items.SUGAR_CANE);
         registerBlend("opposite_juice", oppositeJuice);
-        Blend rainberryBlend = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(8).saturationModifier(10.0F).build()), Berries.rainberries, Berries.gojiBerries, Items.GOLDEN_APPLE);
+        Blend rainberryBlend = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(10.0F).build()), Berries.rainberries, Berries.gojiBerries, Items.GOLDEN_APPLE);
         registerBlend("rainberry_blend", rainberryBlend);
         Blend gooseberryRum = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(4.0f).build()), Berries.gooseberries, Berries.gooseberries, Items.WHEAT);
         registerBlend("gooseberry_rum", gooseberryRum);
-        Blend redJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(6.0F).build()), Berries.strawberries, Items.SWEET_BERRIES, Berries.lingonberries);
+        Blend redJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(6.0F).build()), Berries.strawberries, Items.SWEET_BERRIES, Berries.lingonberries);
         registerBlend("red_juice", redJuice);
-        Blend endBlend = new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(8.0F).build()), Berries.chorusBerries, Berries.rainberries, Items.CHORUS_FRUIT);
+        Blend endBlend = new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(6.0F).build()), Berries.chorusBerries, Berries.rainberries, Items.CHORUS_FRUIT);
         registerBlend("end_blend", endBlend);
-        Blend purpleDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(6.0F).build()), Berries.chorusBerries, Berries.grapes, Berries.saskatoonBerries);
+        Blend purpleDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(5.0F).build()), Berries.chorusBerries, Berries.grapes, Berries.saskatoonBerries);
         registerBlend("purple_delight", purpleDelight);
-        Blend trafficLightJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(8.0F).build()), Berries.gooseberries, Items.GLOW_BERRIES, Berries.raspberries);
+        Blend trafficLightJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(6.0F).build()), Berries.gooseberries, Items.GLOW_BERRIES, Berries.raspberries);
         registerBlend("traffic_light_juice", trafficLightJuice);
-        Blend vanillaDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(5.0F).build()), Items.GLOW_BERRIES, Items.SWEET_BERRIES, Items.APPLE);
+        Blend vanillaDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturationModifier(4.0F).build()), Items.GLOW_BERRIES, Items.SWEET_BERRIES, Items.APPLE);
         registerBlend("vanilla_delight", vanillaDelight);
     }
 
