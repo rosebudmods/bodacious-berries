@@ -4,7 +4,7 @@ import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
-import io.ix0rai.bodaciousberries.registry.Bushes;
+import io.ix0rai.bodaciousberries.registry.BodaciousBushes;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
@@ -78,17 +78,17 @@ public class BerryBushPatchGen {
     }
 
     private static void registerConfiguredFeatures() {
-        patchSaskatoonBerry = berryPatchConfiguredFeature("patch_saskatoon_berry", Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchStrawberry = berryPatchConfiguredFeature("patch_strawberry", Bushes.STRAWBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchBlackberry = berryPatchConfiguredFeature("patch_blackberry", Bushes.BLACKBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchRaspberry = berryPatchConfiguredFeature("patch_raspberry", Bushes.RASPBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchChorusBerry = berryPatchConfiguredFeature("patch_chorus_berry", Bushes.CHORUS_BERRY_BUSH, Blocks.END_STONE);
-        patchRainberry = berryPatchConfiguredFeature("patch_rainberry", Bushes.RAINBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchLingonberry = berryPatchConfiguredFeature("patch_lingonberry", Bushes.LINGONBERRY_BUSH, Blocks.GRASS_BLOCK);
+        patchSaskatoonBerry = berryPatchConfiguredFeature("patch_saskatoon_berry", BodaciousBushes.SASKATOON_BERRY_BUSH, BodaciousBushes.DOUBLE_SASKATOON_BERRY_BUSH, Blocks.GRASS_BLOCK);
+        patchStrawberry = berryPatchConfiguredFeature("patch_strawberry", BodaciousBushes.STRAWBERRY_BUSH, Blocks.GRASS_BLOCK);
+        patchBlackberry = berryPatchConfiguredFeature("patch_blackberry", BodaciousBushes.BLACKBERRY_BUSH, Blocks.GRASS_BLOCK);
+        patchRaspberry = berryPatchConfiguredFeature("patch_raspberry", BodaciousBushes.RASPBERRY_BUSH, Blocks.GRASS_BLOCK);
+        patchChorusBerry = berryPatchConfiguredFeature("patch_chorus_berry", BodaciousBushes.CHORUS_BERRY_BUSH, Blocks.END_STONE);
+        patchRainberry = berryPatchConfiguredFeature("patch_rainberry", BodaciousBushes.RAINBERRY_BUSH, Blocks.GRASS_BLOCK);
+        patchLingonberry = berryPatchConfiguredFeature("patch_lingonberry", BodaciousBushes.LINGONBERRY_BUSH, Blocks.GRASS_BLOCK);
         patchGrapevine = ConfiguredFeatureUtil.register(BodaciousBerries.idString("patch_grapevine"), grapevineFeature, DefaultFeatureConfig.INSTANCE);
-        patchGojiBerry = berryPatchConfiguredFeature("patch_goji_berry", Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchGooseberry = berryPatchConfiguredFeature("patch_gooseberry", Bushes.GOOSEBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchCloudberry = berryPatchConfiguredFeature("patch_cloudberry", Bushes.CLOUDBERRY_BUSH, Blocks.GRASS_BLOCK);
+        patchGojiBerry = berryPatchConfiguredFeature("patch_goji_berry", BodaciousBushes.GOJI_BERRY_BUSH, BodaciousBushes.DOUBLE_GOJI_BERRY_BUSH, Blocks.GRASS_BLOCK);
+        patchGooseberry = berryPatchConfiguredFeature("patch_gooseberry", BodaciousBushes.GOOSEBERRY_BUSH, Blocks.GRASS_BLOCK);
+        patchCloudberry = berryPatchConfiguredFeature("patch_cloudberry", BodaciousBushes.CLOUDBERRY_BUSH, Blocks.GRASS_BLOCK);
     }
 
     private static void registerPlacedFeatures() {

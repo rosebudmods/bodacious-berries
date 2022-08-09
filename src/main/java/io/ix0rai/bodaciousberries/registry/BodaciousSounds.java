@@ -8,7 +8,7 @@ import net.minecraft.util.registry.Registry;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Sounds {
+public class BodaciousSounds {
     private static final HashMap<Identifier, SoundEvent> SOUND_EVENTS = new HashMap<>();
 
     public static final SoundEvent BERRY_PICK_1 = create(BodaciousBerries.id("block.berry_bush.pick_1"));

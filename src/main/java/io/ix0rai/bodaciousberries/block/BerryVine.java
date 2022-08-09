@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.registry.Bushes;
+import io.ix0rai.bodaciousberries.registry.BodaciousBushes;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -30,7 +30,7 @@ public class BerryVine extends VineBlock implements BerryBush {
     protected Item berryType;
 
     public BerryVine(Item berry) {
-        super(Bushes.BERRY_BUSH_SETTINGS);
+        super(BodaciousBushes.BERRY_BUSH_SETTINGS);
         this.berryType = berry;
     }
 

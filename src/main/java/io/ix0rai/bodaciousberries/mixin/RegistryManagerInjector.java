@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.block.entity.JuicerRecipes;
-import io.ix0rai.bodaciousberries.registry.Juices;
+import io.ix0rai.bodaciousberries.registry.BodaciousJuices;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -28,7 +28,7 @@ public class RegistryManagerInjector {
             map.put(BodaciousBerries.id(jsonObject.get("result").getAsString().split(":")[1]), jsonObject);
         }
 
-        for (JsonObject jsonObject : Juices.RECIPES) {
+        for (JsonObject jsonObject : BodaciousJuices.RECIPES) {
             map.put(BodaciousBerries.id(jsonObject.get("result").getAsJsonObject().get("item").getAsString().split(":")[1]), jsonObject);
         }
     }

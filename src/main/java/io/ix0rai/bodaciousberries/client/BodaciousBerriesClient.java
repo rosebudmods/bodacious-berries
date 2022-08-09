@@ -4,7 +4,7 @@ import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.entity.BerryHarvesterScreen;
 import io.ix0rai.bodaciousberries.block.entity.JuicerScreen;
 import io.ix0rai.bodaciousberries.client.particle.Particles;
-import io.ix0rai.bodaciousberries.registry.Berries;
+import io.ix0rai.bodaciousberries.registry.BodaciousItems;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -27,12 +27,12 @@ public class BodaciousBerriesClient implements ClientModInitializer {
         HandledScreens.register(BodaciousBlocks.BERRY_HARVESTER_SCREEN_HANDLER, BerryHarvesterScreen::new);
         HandledScreens.register(BodaciousBlocks.JUICER_SCREEN_HANDLER, JuicerScreen::new);
 
-        for (Map.Entry<BerryBush, Item> entry : Berries.BERRY_BUSHES.entrySet()) {
+        for (Map.Entry<BerryBush, Item> entry : BodaciousItems.BERRY_BUSHES.entrySet()) {
             // ensure bush is rendered with a cutout
             Block block = (Block) entry.getKey();
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
 
-            if (!Berries.COLOUR_PROVIDER_EXCLUDED.contains(entry.getKey())) {
+            if (!BodaciousItems.COLOUR_PROVIDER_EXCLUDED.contains(entry.getKey())) {
                 // register colour provider for the bush
                 ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
                     if (view != null) {

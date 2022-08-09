@@ -1,7 +1,7 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.registry.Bushes;
-import io.ix0rai.bodaciousberries.registry.Sounds;
+import io.ix0rai.bodaciousberries.registry.BodaciousBushes;
+import io.ix0rai.bodaciousberries.registry.BodaciousSounds;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -66,7 +66,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
     public BasicBerryBush(Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        super(Bushes.BERRY_BUSH_SETTINGS);
+        super(BodaciousBushes.BERRY_BUSH_SETTINGS);
         this.berryType = berryType;
         this.maxAge = maxAge;
         this.smallShape = smallShape;
@@ -138,9 +138,9 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     public static SoundEvent selectPickSound(World world) {
         return switch (world.random.nextInt(3)) {
-            case 1 -> Sounds.BERRY_PICK_2;
-            case 2 -> Sounds.BERRY_PICK_3;
-            default -> Sounds.BERRY_PICK_1;
+            case 1 -> BodaciousSounds.BERRY_PICK_2;
+            case 2 -> BodaciousSounds.BERRY_PICK_3;
+            default -> BodaciousSounds.BERRY_PICK_1;
         };
     }
 
@@ -245,7 +245,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
         @Override
         public IntProperty getAge() {
-            return Bushes.AGE_4;
+            return BodaciousBushes.AGE_4;
         }
     }
 

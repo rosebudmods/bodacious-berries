@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.mixin;
 
-import io.ix0rai.bodaciousberries.registry.Bushes;
+import io.ix0rai.bodaciousberries.registry.BodaciousBushes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FireBlock;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,14 +16,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FireBlockInjector {
     @Inject(method = "getSpreadChance", at = @At("HEAD"), cancellable = true)
     private void getSpreadChance(BlockState state, CallbackInfoReturnable<Integer> ci) {
-        if (state.isIn(Bushes.BERRY_BUSHES)) {
+        if (state.isIn(BodaciousBushes.BERRY_BUSHES)) {
             ci.setReturnValue(100);
         }
     }
 
     @Inject(method = "getBurnChance(Lnet/minecraft/block/BlockState;)I", at = @At("HEAD"), cancellable = true)
     private void getBurnChance(BlockState state, CallbackInfoReturnable<Integer> ci) {
-        if (state.isIn(Bushes.BERRY_BUSHES)) {
+        if (state.isIn(BodaciousBushes.BERRY_BUSHES)) {
             ci.setReturnValue(60);
         }
     }

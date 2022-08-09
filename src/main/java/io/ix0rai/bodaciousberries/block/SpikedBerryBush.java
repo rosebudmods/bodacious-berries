@@ -1,7 +1,7 @@
 package io.ix0rai.bodaciousberries.block;
 
 import io.ix0rai.bodaciousberries.mixin.DamageSourceInvoker;
-import io.ix0rai.bodaciousberries.registry.Bushes;
+import io.ix0rai.bodaciousberries.registry.BodaciousBushes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -59,7 +59,7 @@ public class SpikedBerryBush extends BasicBerryBush {
 
         @Override
         public IntProperty getAge() {
-            return Bushes.AGE_4;
+            return BodaciousBushes.AGE_4;
         }
     }
 

@@ -3,7 +3,7 @@ package io.ix0rai.bodaciousberries.block.entity;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import io.ix0rai.bodaciousberries.BodaciousBerries;
-import io.ix0rai.bodaciousberries.registry.Juices;
+import io.ix0rai.bodaciousberries.registry.BodaciousJuices;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -20,7 +20,7 @@ public class JuicerRecipes {
     }
 
     public static void addJuiceRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier output) {
-        addRecipe(new Identifier[]{input0, input1, input2}, Registry.ITEM.getId(Juices.JUICE_RECEPTACLE), output);
+        addRecipe(new Identifier[]{input0, input1, input2}, Registry.ITEM.getId(BodaciousJuices.JUICE_RECEPTACLE), output);
     }
 
     public static void addJuiceRecipe(Identifier input, Identifier output) {

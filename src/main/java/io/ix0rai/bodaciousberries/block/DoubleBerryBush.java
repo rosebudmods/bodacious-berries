@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.block;
 
-import io.ix0rai.bodaciousberries.registry.Bushes;
+import io.ix0rai.bodaciousberries.registry.BodaciousBushes;
 import io.ix0rai.bodaciousberries.util.BerryTypeConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -35,7 +35,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected Item berryType;
 
     public DoubleBerryBush(Item berryType) {
-        super(Bushes.BERRY_BUSH_SETTINGS);
+        super(BodaciousBushes.BERRY_BUSH_SETTINGS);
         this.berryType = berryType;
     }
 

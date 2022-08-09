@@ -1,6 +1,6 @@
 package io.ix0rai.bodaciousberries.item;
 
-import io.ix0rai.bodaciousberries.registry.Juices;
+import io.ix0rai.bodaciousberries.registry.BodaciousJuices;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -49,7 +49,7 @@ public class Juice extends HoneyBottleItem {
     public static Settings settings(Item berry, FoodComponent.Builder builder) {
         FoodComponent foodComponent = berry.getFoodComponent();
         if (foodComponent != null) {
-            return Juices.JUICE_SETTINGS.food(builder.hunger(foodComponent.getHunger() * 2).saturationModifier(foodComponent.getSaturationModifier() * 2.5f).build());
+            return BodaciousJuices.JUICE_SETTINGS.food(builder.hunger(foodComponent.getHunger() * 2).saturationModifier(foodComponent.getSaturationModifier() * 2.5f).build());
         }
 
         throw new InvalidParameterException("item: " + berry + " does not have a food component");
@@ -69,10 +69,10 @@ public class Juice extends HoneyBottleItem {
         // return empty bottle, or throw it away if it does not fit
         // also decrement the stack size if it will not be entirely consumed
         if (stack.isEmpty()) {
-            return new ItemStack(Juices.JUICE_RECEPTACLE);
+            return new ItemStack(BodaciousJuices.JUICE_RECEPTACLE);
         } else {
             if (user instanceof PlayerEntity playerEntity && !playerEntity.getAbilities().creativeMode) {
-                ItemStack glassBottle = new ItemStack(Juices.JUICE_RECEPTACLE);
+                ItemStack glassBottle = new ItemStack(BodaciousJuices.JUICE_RECEPTACLE);
                 if (!playerEntity.getInventory().insertStack(glassBottle)) {
                     playerEntity.dropItem(glassBottle, false);
                 }

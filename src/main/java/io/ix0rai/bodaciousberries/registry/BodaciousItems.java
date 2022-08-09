@@ -1,6 +1,5 @@
 package io.ix0rai.bodaciousberries.registry;
 
-import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.DoubleBerryBush;
 import io.ix0rai.bodaciousberries.block.GrowingBerryBush;
@@ -23,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Berries {
+public class BodaciousItems {
     public static final TagKey<Item> BERRY_TAG = TagKey.of(Registry.ITEM_KEY, new Identifier("c", "berries"));
 
     private static final Item.Settings berrySettings = new Item.Settings().group(ItemGroup.FOOD);
@@ -43,17 +42,17 @@ public class Berries {
 
     public static void register() {
         // create items for each berry
-        saskatoonBerries = new AliasedBlockItem(Bushes.SASKATOON_BERRY_BUSH, settings(3, 0.5f));
-        strawberries = new AliasedBlockItem(Bushes.STRAWBERRY_BUSH, settings(3, 1f));
-        raspberries = new AliasedBlockItem(Bushes.RASPBERRY_BUSH, settings(3, 0.5f));
-        blackberries = new AliasedBlockItem(Bushes.BLACKBERRY_BUSH, settings(1, 1.5f));
-        chorusBerries = new ChorusBerries(Bushes.CHORUS_BERRY_BUSH, settings(2, 2.5f));
-        rainberries = new Rainberries(Bushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
-        lingonberries = new AliasedBlockItem(Bushes.LINGONBERRY_BUSH, settings(2, 0.5f));
-        grapes = new AliasedBlockItem(Bushes.GRAPEVINE, settings(2, 1f));
-        gojiBerries = new GojiBerries(Bushes.GOJI_BERRY_BUSH, settings(1, 2.5f));
-        gooseberries = new AliasedBlockItem(Bushes.GOOSEBERRY_BUSH, settings(2, 0.5f));
-        cloudberries = new AliasedBlockItem(Bushes.CLOUDBERRY_BUSH, berrySettings.food(new FoodComponent.Builder().hunger(2).saturationModifier(1f).statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600, 1), 1).snack().build()));
+        saskatoonBerries = new AliasedBlockItem(BodaciousBushes.SASKATOON_BERRY_BUSH, settings(3, 0.5f));
+        strawberries = new AliasedBlockItem(BodaciousBushes.STRAWBERRY_BUSH, settings(3, 1f));
+        raspberries = new AliasedBlockItem(BodaciousBushes.RASPBERRY_BUSH, settings(3, 0.5f));
+        blackberries = new AliasedBlockItem(BodaciousBushes.BLACKBERRY_BUSH, settings(1, 1.5f));
+        chorusBerries = new ChorusBerries(BodaciousBushes.CHORUS_BERRY_BUSH, settings(2, 2.5f));
+        rainberries = new Rainberries(BodaciousBushes.RAINBERRY_BUSH, new Item.Settings().group(ItemGroup.MATERIALS));
+        lingonberries = new AliasedBlockItem(BodaciousBushes.LINGONBERRY_BUSH, settings(2, 0.5f));
+        grapes = new AliasedBlockItem(BodaciousBushes.GRAPEVINE, settings(2, 1f));
+        gojiBerries = new GojiBerries(BodaciousBushes.GOJI_BERRY_BUSH, settings(1, 2.5f));
+        gooseberries = new AliasedBlockItem(BodaciousBushes.GOOSEBERRY_BUSH, settings(2, 0.5f));
+        cloudberries = new AliasedBlockItem(BodaciousBushes.CLOUDBERRY_BUSH, berrySettings.food(new FoodComponent.Builder().hunger(2).saturationModifier(1f).statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600, 1), 1).snack().build()));
 
         initialiseBerries();
 
@@ -118,7 +117,7 @@ public class Berries {
     }
 
     private static void register(Item berry, String name) {
-        Registry.register(Registry.ITEM, BodaciousBerries.id(name), berry);
+        Registry.register(Registry.ITEM, io.ix0rai.bodaciousberries.BodaciousBerries.id(name), berry);
     }
 
     private static Item.Settings settings(int hunger, float saturation) {
@@ -129,22 +128,22 @@ public class Berries {
      * sets the berry type of each bush in the list and registers all berries as compostable
      */
     public static void initialiseBerries() {
-        initialise(Bushes.SASKATOON_BERRY_BUSH, Bushes.DOUBLE_SASKATOON_BERRY_BUSH, saskatoonBerries);
-        initialise(Bushes.STRAWBERRY_BUSH, strawberries);
-        initialise(Bushes.RASPBERRY_BUSH, raspberries);
-        initialise(Bushes.BLACKBERRY_BUSH, blackberries);
-        initialise(Bushes.CHORUS_BERRY_BUSH, chorusBerries);
-        initialise(Bushes.RAINBERRY_BUSH, rainberries);
-        initialise(Bushes.LINGONBERRY_BUSH, lingonberries);
-        initialise(Bushes.GRAPEVINE, grapes);
-        initialise(Bushes.GOJI_BERRY_BUSH, Bushes.DOUBLE_GOJI_BERRY_BUSH, gojiBerries);
-        initialise(Bushes.GOOSEBERRY_BUSH, gooseberries);
-        initialise(Bushes.CLOUDBERRY_BUSH, cloudberries);
+        initialise(BodaciousBushes.SASKATOON_BERRY_BUSH, BodaciousBushes.DOUBLE_SASKATOON_BERRY_BUSH, saskatoonBerries);
+        initialise(BodaciousBushes.STRAWBERRY_BUSH, strawberries);
+        initialise(BodaciousBushes.RASPBERRY_BUSH, raspberries);
+        initialise(BodaciousBushes.BLACKBERRY_BUSH, blackberries);
+        initialise(BodaciousBushes.CHORUS_BERRY_BUSH, chorusBerries);
+        initialise(BodaciousBushes.RAINBERRY_BUSH, rainberries);
+        initialise(BodaciousBushes.LINGONBERRY_BUSH, lingonberries);
+        initialise(BodaciousBushes.GRAPEVINE, grapes);
+        initialise(BodaciousBushes.GOJI_BERRY_BUSH, BodaciousBushes.DOUBLE_GOJI_BERRY_BUSH, gojiBerries);
+        initialise(BodaciousBushes.GOOSEBERRY_BUSH, gooseberries);
+        initialise(BodaciousBushes.CLOUDBERRY_BUSH, cloudberries);
 
-        excludeFromColourProvider(Bushes.CLOUDBERRY_BUSH);
-        excludeFromColourProvider(Bushes.CHORUS_BERRY_BUSH);
-        excludeFromColourProvider(Bushes.LINGONBERRY_BUSH);
-        excludeFromColourProvider(Bushes.RAINBERRY_BUSH);
+        excludeFromColourProvider(BodaciousBushes.CLOUDBERRY_BUSH);
+        excludeFromColourProvider(BodaciousBushes.CHORUS_BERRY_BUSH);
+        excludeFromColourProvider(BodaciousBushes.LINGONBERRY_BUSH);
+        excludeFromColourProvider(BodaciousBushes.RAINBERRY_BUSH);
 
         for (var entry : BERRY_BUSHES.entrySet()) {
             BerryBush bush = entry.getKey();

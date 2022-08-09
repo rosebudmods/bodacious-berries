@@ -1,7 +1,7 @@
 package io.ix0rai.bodaciousberries.mixin;
 
 import io.ix0rai.bodaciousberries.block.BerryVine;
-import io.ix0rai.bodaciousberries.registry.Bushes;
+import io.ix0rai.bodaciousberries.registry.BodaciousBushes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -48,7 +48,7 @@ public class VineDecoratorRedirect {
         if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDisgustingRevoltingHorrificDumbCheck(access, pos)) {
             // otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
             if (access.getBiome(pos).hasTag(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
-                block = Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
+                block = BodaciousBushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
             } else if (access.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
                 block = Blocks.VINE.getDefaultState().with(facing, true);
             }
@@ -62,8 +62,8 @@ public class VineDecoratorRedirect {
     private static BlockState matchBlockAbove(StructureWorldAccess access, BlockPos pos, BooleanProperty facing) {
         if (access.getBlockState(pos.up()).getBlock() == Blocks.VINE) {
             return Blocks.VINE.getDefaultState().with(facing, true);
-        } else if (access.getBlockState(pos.up()).getBlock() == Bushes.GRAPEVINE) {
-            return Bushes.GRAPEVINE.getDefaultState().with(facing, true).with(Bushes.GRAPEVINE.getAge(), Bushes.GRAPEVINE.getMaxAge());
+        } else if (access.getBlockState(pos.up()).getBlock() == BodaciousBushes.GRAPEVINE) {
+            return BodaciousBushes.GRAPEVINE.getDefaultState().with(facing, true).with(BodaciousBushes.GRAPEVINE.getAge(), BodaciousBushes.GRAPEVINE.getMaxAge());
         }
 
         return null;

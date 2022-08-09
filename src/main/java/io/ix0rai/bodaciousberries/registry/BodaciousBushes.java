@@ -1,6 +1,5 @@
 package io.ix0rai.bodaciousberries.registry;
 
-import io.ix0rai.bodaciousberries.BodaciousBerries;
 import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryVine;
 import io.ix0rai.bodaciousberries.block.ChorusBerryBush;
@@ -20,7 +19,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
-public class Bushes {
+public class BodaciousBushes {
     public static final TagKey<Block> BERRY_BUSHES = TagKey.of(Registry.BLOCK_KEY, new Identifier("c:berry_bushes"));
     public static final IntProperty AGE_4 = IntProperty.of("age", 0, 4);
 
@@ -35,31 +34,31 @@ public class Bushes {
     public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
 
     // bushes
-    public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berries.chorusBerries,
+    public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(BodaciousItems.chorusBerries,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
     public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(
-            Berries.saskatoonBerries);
+            BodaciousItems.saskatoonBerries);
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, LARGE_SWEET_BERRY,
             DOUBLE_SASKATOON_BERRY_BUSH);
-    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush.ThreeStageBush(Berries.strawberries,
+    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush.ThreeStageBush(BodaciousItems.strawberries,
             SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
-    public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.raspberries,
+    public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(BodaciousItems.raspberries,
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
-    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berries.blackberries,
+    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(BodaciousItems.blackberries,
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
-    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berries.rainberries,
+    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(BodaciousItems.rainberries,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
-    public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(Berries.lingonberries,
+    public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(BodaciousItems.lingonberries,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
     public static final BerryVine GRAPEVINE = new BerryVine(
-            Berries.grapes);
+            BodaciousItems.grapes);
     public static final DoubleBerryBush DOUBLE_GOJI_BERRY_BUSH = new DoubleBerryBush(
-            Berries.gojiBerries);
+            BodaciousItems.gojiBerries);
     public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, VoxelShapes.fullCube(),
             DOUBLE_GOJI_BERRY_BUSH);
-    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyThreeStageBush(Berries.gooseberries,
+    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyThreeStageBush(BodaciousItems.gooseberries,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
-    public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(Berries.cloudberries,
+    public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(BodaciousItems.cloudberries,
             SMALL_SWEET_BERRY, LARGE_CLOUDBERRY, 1);
 
     public static void register() {
@@ -79,6 +78,6 @@ public class Bushes {
     }
 
     private static void register(String name, Block block) {
-        Registry.register(Registry.BLOCK, BodaciousBerries.id(name), block);
+        Registry.register(Registry.BLOCK, io.ix0rai.bodaciousberries.BodaciousBerries.id(name), block);
     }
 }

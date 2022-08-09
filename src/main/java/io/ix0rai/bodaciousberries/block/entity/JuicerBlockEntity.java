@@ -1,9 +1,9 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
 import io.ix0rai.bodaciousberries.block.JuicerBlock;
-import io.ix0rai.bodaciousberries.registry.Berries;
+import io.ix0rai.bodaciousberries.registry.BodaciousItems;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
-import io.ix0rai.bodaciousberries.registry.Juices;
+import io.ix0rai.bodaciousberries.registry.BodaciousJuices;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -126,7 +126,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 if (recipe.isPresent()) {
                     craft(world, pos, recipe.get(), juicer.inventory);
                 } else if (juicer.makingDubiousJuice) {
-                    craft(world, pos, new ItemStack(Juices.DUBIOUS_JUICE), Ingredient.ofItems(Juices.JUICE_RECEPTACLE), juicer.inventory);
+                    craft(world, pos, new ItemStack(BodaciousJuices.DUBIOUS_JUICE), Ingredient.ofItems(BodaciousJuices.JUICE_RECEPTACLE), juicer.inventory);
                 }
 
                 stopJuicer(world, pos, state, juicer);
@@ -142,8 +142,8 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
 
                 // if we're not currently brewing, start brewing with the ingredient
                 startJuicer(world, pos, state, juicer);
-            } else if (inventory.get(3).isIn(Berries.BERRY_TAG) && inventory.get(4).isIn(Berries.BERRY_TAG) && inventory.get(5).isIn(Berries.BERRY_TAG)
-                                && (inventory.get(0).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(1).getItem().equals(Juices.JUICE_RECEPTACLE) || inventory.get(2).getItem().equals(Juices.JUICE_RECEPTACLE))) {
+            } else if (inventory.get(3).isIn(BodaciousItems.BERRY_TAG) && inventory.get(4).isIn(BodaciousItems.BERRY_TAG) && inventory.get(5).isIn(BodaciousItems.BERRY_TAG)
+                                && (inventory.get(0).getItem().equals(BodaciousJuices.JUICE_RECEPTACLE) || inventory.get(1).getItem().equals(BodaciousJuices.JUICE_RECEPTACLE) || inventory.get(2).getItem().equals(BodaciousJuices.JUICE_RECEPTACLE))) {
                 // everything in the juicer is a berry, so logically we can make something
                 // of course, that doesn't mean it'll be good!
                 startJuicer(world, pos, state, juicer);
