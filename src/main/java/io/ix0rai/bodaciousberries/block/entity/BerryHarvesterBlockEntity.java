@@ -1,10 +1,10 @@
 package io.ix0rai.bodaciousberries.block.entity;
 
-import io.ix0rai.bodaciousberries.block.BasicBerryBush;
 import io.ix0rai.bodaciousberries.block.BerryBush;
 import io.ix0rai.bodaciousberries.block.BerryHarvesterBlock;
 import io.ix0rai.bodaciousberries.client.particle.Particles;
 import io.ix0rai.bodaciousberries.registry.BodaciousBlocks;
+import io.ix0rai.bodaciousberries.registry.BodaciousSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
@@ -96,7 +96,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     }
 
     private static void addPickEffects(World world, BlockPos pos) {
-        world.playSound(null, pos, BasicBerryBush.selectPickSound(world), SoundCategory.BLOCKS, 0.3F, 1.5F);
+        world.playSound(null, pos, BodaciousSounds.BERRY_PICK, SoundCategory.BLOCKS, 0.3F, 1.5F);
         for (int i = 0; i < 6; i++) {
             world.addParticle(Particles.SLICEY_PARTICLE, pos.getX() + 0.5D, pos.getY() + 0.3D, pos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
         }

@@ -16,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
@@ -134,17 +133,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     /**
-     * get a random berry pick sound
-     */
-    public static SoundEvent selectPickSound(World world) {
-        return switch (world.random.nextInt(3)) {
-            case 1 -> BodaciousSounds.BERRY_PICK_2;
-            case 2 -> BodaciousSounds.BERRY_PICK_3;
-            default -> BodaciousSounds.BERRY_PICK_1;
-        };
-    }
-
-    /**
      * handles when our berry bush is right-clicked
      * <br> if the player clicking has bone meal, grow the plant if possible or pick berries if fully grown
      * <br> otherwise, pick berries if possible
@@ -179,7 +167,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
         dropStack(world, pos, new ItemStack(bush.getBerryType(), berryAmount));
 
         // play randomly picked sound
-        world.playSound(null, pos, selectPickSound(world), SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+        world.playSound(null, pos, BodaciousSounds.BERRY_PICK, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 
         // reset berry growth; they were just picked
         bush.resetAge(world, pos, state);
