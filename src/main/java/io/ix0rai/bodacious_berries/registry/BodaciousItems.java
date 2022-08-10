@@ -54,6 +54,23 @@ public class BodaciousItems {
         gooseberries = new AliasedBlockItem(BodaciousBushes.GOOSEBERRY_BUSH, settings(2, 0.5f));
         cloudberries = new AliasedBlockItem(BodaciousBushes.CLOUDBERRY_BUSH, berrySettings.food(new FoodComponent.Builder().hunger(2).saturationModifier(1f).statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600, 1), 1).snack().build()));
 
+        associate(BodaciousBushes.SASKATOON_BERRY_BUSH, BodaciousBushes.DOUBLE_SASKATOON_BERRY_BUSH, saskatoonBerries);
+        associate(BodaciousBushes.STRAWBERRY_BUSH, strawberries);
+        associate(BodaciousBushes.RASPBERRY_BUSH, raspberries);
+        associate(BodaciousBushes.BLACKBERRY_BUSH, blackberries);
+        associate(BodaciousBushes.CHORUS_BERRY_BUSH, chorusBerries);
+        associate(BodaciousBushes.RAINBERRY_BUSH, rainberries);
+        associate(BodaciousBushes.LINGONBERRY_BUSH, lingonberries);
+        associate(BodaciousBushes.GRAPEVINE, grapes);
+        associate(BodaciousBushes.GOJI_BERRY_BUSH, BodaciousBushes.DOUBLE_GOJI_BERRY_BUSH, gojiBerries);
+        associate(BodaciousBushes.GOOSEBERRY_BUSH, gooseberries);
+        associate(BodaciousBushes.CLOUDBERRY_BUSH, cloudberries);
+
+        excludeFromColourProvider(BodaciousBushes.CLOUDBERRY_BUSH);
+        excludeFromColourProvider(BodaciousBushes.CHORUS_BERRY_BUSH);
+        excludeFromColourProvider(BodaciousBushes.LINGONBERRY_BUSH);
+        excludeFromColourProvider(BodaciousBushes.RAINBERRY_BUSH);
+
         initialiseBerries();
 
         // register
@@ -72,7 +89,7 @@ public class BodaciousItems {
 
     /**
      * map containing a berry bush, its associated berry, and unripe form if applicable
-     * <br> should not be directly added to, use {@link #initialise(BerryBush, Item)}
+     * <br> should not be directly added to, use {@link #associate(BerryBush, Item)}
      */
     public static final Map<BerryBush, Item> BERRY_BUSHES = new HashMap<>();
 
@@ -97,17 +114,17 @@ public class BodaciousItems {
      * @param bush the berry bush you wish to associate your berries with
      * @param berries the base form of the berries to associate
      */
-    public static void initialise(BerryBush bush, Item berries) {
+    public static void associate(BerryBush bush, Item berries) {
         BERRY_BUSHES.put(bush, berries);
     }
 
     /**
-     * uses {@link #initialise(BerryBush, Item)} to add both forms of a double berry bush to the automatic registration list
+     * uses {@link #associate(BerryBush, Item)} to add both forms of a double berry bush to the automatic registration list
      * @param smallBush the small form of the berry bush
      * @param bigBush the double form of the berry bush
      * @param berries the base form of the berries to associate
      */
-    public static void initialise(GrowingBerryBush smallBush, DoubleBerryBush bigBush, Item berries) {
+    public static void associate(GrowingBerryBush smallBush, DoubleBerryBush bigBush, Item berries) {
         BERRY_BUSHES.put(smallBush, berries);
         BERRY_BUSHES.put(bigBush, berries);
     }
@@ -128,24 +145,6 @@ public class BodaciousItems {
      * sets the berry type of each bush in the list and registers all berries as compostable
      */
     public static void initialiseBerries() {
-        initialise(BodaciousBushes.SASKATOON_BERRY_BUSH, BodaciousBushes.DOUBLE_SASKATOON_BERRY_BUSH, saskatoonBerries);
-        initialise(BodaciousBushes.STRAWBERRY_BUSH, strawberries);
-        initialise(BodaciousBushes.RASPBERRY_BUSH, raspberries);
-        initialise(BodaciousBushes.BLACKBERRY_BUSH, blackberries);
-        initialise(BodaciousBushes.CHORUS_BERRY_BUSH, chorusBerries);
-        initialise(BodaciousBushes.RAINBERRY_BUSH, rainberries);
-        initialise(BodaciousBushes.LINGONBERRY_BUSH, lingonberries);
-        initialise(BodaciousBushes.GRAPEVINE, grapes);
-        initialise(BodaciousBushes.GOJI_BERRY_BUSH, BodaciousBushes.DOUBLE_GOJI_BERRY_BUSH, gojiBerries);
-        initialise(BodaciousBushes.GOOSEBERRY_BUSH, gooseberries);
-        initialise(BodaciousBushes.CLOUDBERRY_BUSH, cloudberries);
-
-        excludeFromColourProvider(BodaciousBushes.CLOUDBERRY_BUSH);
-        excludeFromColourProvider(BodaciousBushes.CHORUS_BERRY_BUSH);
-        excludeFromColourProvider(BodaciousBushes.LINGONBERRY_BUSH);
-        excludeFromColourProvider(BodaciousBushes.RAINBERRY_BUSH);
-        excludeFromColourProvider(BodaciousBushes.GRAPEVINE);
-
         for (var entry : BERRY_BUSHES.entrySet()) {
             BerryBush bush = entry.getKey();
             // set berry types
