@@ -19,6 +19,6 @@ public final class DataFixes {
         Preconditions.checkArgument(currentVersion >= 0, "currentVersion must be positive");
         if (DataFixesInternals.isLocked())
             throw new IllegalStateException("Can't register data fixer after registration is locked!");
-        DataFixesInternals.registerFixer(modId, currentVersion, dataFixer.buildOptimized(Util.getMainWorkerExecutor()));
+        DataFixesInternals.registerFixer(modId, currentVersion, dataFixer.build(Util.getMainWorkerExecutor()));
     }
 }
