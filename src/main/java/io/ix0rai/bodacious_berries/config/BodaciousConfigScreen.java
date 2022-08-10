@@ -16,6 +16,9 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
+import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -89,11 +92,11 @@ public class BodaciousConfigScreen extends SpruceScreen {
     }
 
     @Override
-    public void closeScreen() {
+    public void onClose() {
         if (this.client != null) {
             this.client.setScreen(this.parent);
         } else {
-            super.closeScreen();
+            super.onClose();
         }
     }
 
@@ -119,7 +122,7 @@ public class BodaciousConfigScreen extends SpruceScreen {
         this.addDrawableChild(this.resetOption.createWidget(Position.of(this, this.width / 2 - 155, this.height - 29), 150));
         this.addDrawableChild(new SpruceButtonWidget(Position.of(this, this.width / 2 - 155 + 160, this.height - 29), 150,
                 buttonHeight, SpruceTexts.GUI_DONE,
-                buttonWidget -> this.closeScreen()));
+                buttonWidget -> this.onClose()));
     }
 
     @Override
