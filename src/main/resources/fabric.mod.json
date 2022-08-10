@@ -20,23 +20,23 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.ix0rai.bodaciousberries.BodaciousBerries",
-      "io.ix0rai.dfubestie.impl.Initializer"
+      "io.ix0rai.bodacious_berries.BodaciousBerries",
+      "io.ix0rai.dfu_bestie.impl.Initializer"
     ],
     "client": [
-      "io.ix0rai.bodaciousberries.client.BodaciousBerriesClient",
-      "io.ix0rai.dfubestie.impl.client.ClientInitializer"
+      "io.ix0rai.bodacious_berries.client.BodaciousBerriesClient",
+      "io.ix0rai.dfu_bestie.impl.client.ClientInitializer"
     ],
     "emi": [
-      "io.ix0rai.bodaciousberries.compat.JuicerEmiPlugin"
+      "io.ix0rai.bodacious_berries.compat.JuicerEmiPlugin"
     ],
     "modmenu": [
-      "io.ix0rai.bodaciousberries.config.BodaciousModMenu"
+      "io.ix0rai.bodacious_berries.config.BodaciousModMenu"
     ]
   },
   "mixins": [
     "bodacious_berries.mixins.json",
-    "dfubestie.mixins.json"
+    "dfu_bestie.mixins.json"
   ],
 
   "depends": {
