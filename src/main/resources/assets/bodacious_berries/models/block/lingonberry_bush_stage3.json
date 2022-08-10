@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/coral_fan",
+  "parent": "bodacious_berries:block/template/berry_fan",
   "textures": {
-    "fan": "bodacious_berries:block/lingonberry/stage3"
+    "leaves": "bodacious_berries:block/lingonberry/leaves_big",
+    "berries": "bodacious_berries:block/lingonberry/berries_stage3",
+    "twigs": "bodacious_berries:block/lingonberry/twigs_big"
   }
 }

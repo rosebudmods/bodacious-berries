@@ -68,7 +68,6 @@ public class BodaciousItems {
 
         excludeFromColourProvider(BodaciousBushes.CLOUDBERRY_BUSH);
         excludeFromColourProvider(BodaciousBushes.CHORUS_BERRY_BUSH);
-        excludeFromColourProvider(BodaciousBushes.LINGONBERRY_BUSH);
         excludeFromColourProvider(BodaciousBushes.RAINBERRY_BUSH);
 
         initialiseBerries();
