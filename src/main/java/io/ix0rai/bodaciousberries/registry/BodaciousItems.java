@@ -144,6 +144,7 @@ public class BodaciousItems {
         excludeFromColourProvider(BodaciousBushes.CHORUS_BERRY_BUSH);
         excludeFromColourProvider(BodaciousBushes.LINGONBERRY_BUSH);
         excludeFromColourProvider(BodaciousBushes.RAINBERRY_BUSH);
+        excludeFromColourProvider(BodaciousBushes.GRAPEVINE);
 
         for (var entry : BERRY_BUSHES.entrySet()) {
             BerryBush bush = entry.getKey();
