@@ -11,6 +11,9 @@
     },
     "age=3": {
       "model": "bodacious_berries:block/gooseberry_bush_stage3"
+    },
+    "age=4": {
+      "model": "bodacious_berries:block/gooseberry_bush_stage4"
     }
   }
 }

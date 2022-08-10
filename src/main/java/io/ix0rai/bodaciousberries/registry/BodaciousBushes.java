@@ -56,7 +56,7 @@ public class BodaciousBushes {
             BodaciousItems.gojiBerries);
     public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, VoxelShapes.fullCube(),
             DOUBLE_GOJI_BERRY_BUSH);
-    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyThreeStageBush(BodaciousItems.gooseberries,
+    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(BodaciousItems.gooseberries,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
     public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(BodaciousItems.cloudberries,
             SMALL_SWEET_BERRY, LARGE_CLOUDBERRY, 1);

@@ -8,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
@@ -60,17 +59,6 @@ public class SpikedBerryBush extends BasicBerryBush {
         @Override
         public IntProperty getAge() {
             return BodaciousBushes.AGE_4;
-        }
-    }
-
-    public static class SpikyThreeStageBush extends SpikedBerryBush {
-        public SpikyThreeStageBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
-            super(berryType, 3, smallShape, largeShape, sizeChangeAge, damage);
-        }
-
-        @Override
-        public IntProperty getAge() {
-            return Properties.AGE_3;
         }
     }
 }
