@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class BodaciousBerries implements ModInitializer {
@@ -33,7 +33,7 @@ public class BodaciousBerries implements ModInitializer {
     }
 
     public static MutableText translatableText(String key) {
-        return Text.translatable(translatableTextKey(key));
+        return new TranslatableText(translatableTextKey(key));
     }
 
     @Override
