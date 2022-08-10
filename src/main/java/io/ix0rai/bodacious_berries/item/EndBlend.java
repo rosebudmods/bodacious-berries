@@ -8,8 +8,9 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class EndBlend extends Blend {
     public EndBlend(Settings settings, Item ingredient0, Item ingredient1, Item ingredient2) {
@@ -19,7 +20,7 @@ public class EndBlend extends Blend {
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (!world.isClient) {
-            RandomGenerator random = user.getRandom();
+            Random random = user.getRandom();
 
             double originalX = user.getX();
             double originalY = user.getY();
