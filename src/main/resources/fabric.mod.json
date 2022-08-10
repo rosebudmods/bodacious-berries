@@ -10,8 +10,8 @@
     "thonkman"
   ],
   "contact": {
-    "sources": "https://github.com/ix0rai/bodaciousberries",
-    "issues": "https://github.com/ix0rai/bodaciousberries/issues"
+    "sources": "https://github.com/ix0rai/bodacious_berries",
+    "issues": "https://github.com/ix0rai/bodacious_berries/issues"
   },
 
   "license": "MIT",
@@ -55,8 +55,8 @@
     "modmenu": {
       "links": {
         "modmenu.discord": "https://discord.gg/TN9gaXJ6E8",
-        "modmenu.issues": "https://github.com/ix0rai/bodaciousberries/issues",
-        "modmenu.website": "https://github.com/ix0rai/bodaciousberries"
+        "modmenu.issues": "https://github.com/ix0rai/bodacious_berries/issues",
+        "modmenu.website": "https://github.com/ix0rai/bodacious_berries"
       }
     }
   }
