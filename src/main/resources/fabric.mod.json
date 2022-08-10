@@ -40,15 +40,15 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.9",
+    "fabricloader": ">=0.11.0",
     "fabric": ">=0.50.0",
-    "minecraft": ">=1.19.1",
+    "minecraft": ">=1.18.2",
     "java": ">=17"
   },
 
   "suggests": {
     "emi": ">=0.3.0",
-    "modmenu": ">=4.0.0"
+    "modmenu": ">=3.0.0"
   },
 
   "custom": {
