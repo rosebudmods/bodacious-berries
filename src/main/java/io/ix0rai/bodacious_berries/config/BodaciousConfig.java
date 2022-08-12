@@ -2,6 +2,8 @@ package io.ix0rai.bodacious_berries.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -24,23 +26,27 @@ public class BodaciousConfig {
     protected final CommentedFileConfig config;
 
     public BodaciousConfig() {
-        CommentedFileConfig defaultConfig = CommentedFileConfig.builder(CONFIG_FILE_NAME)
-                .concurrent()
-                .preserveInsertionOrder()
-                .build();
-
-        defaultConfig.setComment(MEDIUM_KEY, "berry bush rarities - higher is more rare; lower is more common");
-        defaultConfig.set(COMMON_KEY, DEFAULT_COMMON_RARITY);
-        defaultConfig.set(MEDIUM_KEY, DEFAULT_MEDIUM_RARITY);
-        defaultConfig.set(RARE_KEY, DEFAULT_RARE_RARITY);
-        defaultConfig.set(ULTRA_RARE_KEY, DEFAULT_ULTRA_RARE_RARITY);
-
-        defaultConfig.save();
-        defaultConfig.close();
+        try {
+            File file = new File(CONFIG_FILE_PATH.toUri());
+            // noinspection ResultOfMethodCallIgnored
+            file.getParentFile().mkdirs();
+            try (FileWriter writer = new FileWriter(file)) {
+            writer.write("""
+                    # bodacious berries configuration file - higher is more rare, lower is more common
+                    # values only apply on game restart
+                                        
+                    common_rarity =""" + " " + DEFAULT_COMMON_RARITY
+                    + "\nmedium_rarity = " + DEFAULT_MEDIUM_RARITY
+                    + "\nrare_rarity = " + DEFAULT_RARE_RARITY
+                    + "\nultra_rare_rarity = " + DEFAULT_ULTRA_RARE_RARITY
+                    );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         this.config = CommentedFileConfig.builder(CONFIG_FILE_PATH)
                 .concurrent()
-                .defaultResource("/" + CONFIG_FILE_NAME)
                 .autosave()
                 .preserveInsertionOrder()
                 .build();
