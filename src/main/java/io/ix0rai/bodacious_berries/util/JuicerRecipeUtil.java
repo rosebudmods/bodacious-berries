@@ -14,26 +14,60 @@ import java.util.function.Function;
 public class JuicerRecipeUtil {
     public static final List<JsonObject> JUICER_RECIPES = new ArrayList<>();
 
-    public static void addRecipe(Identifier[] ids, Identifier receptacle, Identifier output) {
-        JUICER_RECIPES.add(createRecipeJson(ids, receptacle, output));
+    /**
+     * registers a juicer recipe with all
+     * @param ingredients the ingredients of the recipe, must have exactly three elements
+     * @param receptacle the receptacle of the recipe
+     * @param output the resulting juice item
+     */
+    public static void registerJuicerRecipe(Identifier[] ingredients, Identifier receptacle, Identifier output) {
+        confirmSize(ingredients);
+        JUICER_RECIPES.add(createRecipeJson(ingredients, receptacle, output));
     }
 
-    public static void addJuiceRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier output) {
-        addRecipe(new Identifier[]{input0, input1, input2}, Registry.ITEM.getId(BodaciousJuices.JUICE_RECEPTACLE), output);
+    /**
+     * registers a juicer recipe with the given three ingredients, the given output as the output, and a glass bottle as the receptacle
+     * @param input0 the first input berry
+     * @param input1 the second input berry
+     * @param input2 the third input berry
+     * @param output the resulting juice
+     */
+    public static void registerJuiceRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier output) {
+        registerJuicerRecipe(new Identifier[]{input0, input1, input2}, Registry.ITEM.getId(BodaciousJuices.JUICE_RECEPTACLE), output);
     }
 
-    public static void addJuiceRecipe(Identifier input, Identifier output) {
-        addJuiceRecipe(input, input, input, output);
+    /**
+     * registers a juicer recipe with the given input as all ingredients, the given output as the output, and a glass bottle as the receptacle
+     * @param input the input berry of the recipe
+     * @param output the resulting juice
+     */
+    public static void registerJuiceRecipe(Identifier input, Identifier output) {
+        registerJuiceRecipe(input, input, input, output);
     }
 
+    /**
+     * checks whether the given stack is an ingredient in any registered juicer recipe
+     * @param stack the stack to check
+     * @return true if the stack is a valid ingredient
+     */
     public static boolean isIngredient(ItemStack stack) {
         return check(juicerRecipe -> juicerRecipe.isIngredient(stack));
     }
 
+    /**
+     * checks whether the given stack is the result of any registered juicer recipe
+     * @param stack the stack to check
+     * @return true if the stack is a valid result
+     */
     public static boolean isResult(ItemStack stack) {
         return check(juicerRecipe -> juicerRecipe.isResult(stack));
     }
 
+    /**
+     * checks whether the given stack is the receptacle of any registered juicer recipe
+     * @param stack the stack to check
+     * @return true if the stack is a valid receptacle
+     */
     public static boolean isReceptacle(ItemStack stack) {
         return check(juicerRecipe -> juicerRecipe.isReceptacle(stack));
     }
@@ -57,9 +91,7 @@ public class JuicerRecipeUtil {
      * @return a json object representing the recipe
      */
     public static JsonObject createRecipeJson(Identifier[] ingredients, Identifier receptacle, Identifier output) {
-        if (ingredients.length != 3) {
-            throw new IllegalArgumentException("ingredients must be an array of length 3");
-        }
+        confirmSize(ingredients);
 
         JsonObject json = new JsonObject();
         json.addProperty("type", JuicerRecipe.RECIPE_ID);
@@ -84,6 +116,12 @@ public class JuicerRecipeUtil {
         }
 
         return property;
+    }
+
+    private static void confirmSize(Identifier[] ingredients) {
+        if (ingredients.length != 3) {
+            throw new IllegalArgumentException("ingredients must be an array of length 3");
+        }
     }
 }
 

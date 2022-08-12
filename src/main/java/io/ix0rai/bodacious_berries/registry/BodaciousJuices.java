@@ -121,14 +121,14 @@ public class BodaciousJuices {
 
     private static void register(String name, Juice juice) {
         Identifier id = BodaciousBerries.id(name);
-        JuicerRecipeUtil.addJuiceRecipe(new Identifier("c", Registry.ITEM.getId(juice.getBerry()).getPath()), id);
+        JuicerRecipeUtil.registerJuiceRecipe(new Identifier("c", Registry.ITEM.getId(juice.getBerry()).getPath()), id);
         register(id, juice);
     }
 
     private static void registerBlend(String name, Blend blend) {
         Identifier id = BodaciousBerries.id(name);
         register(id, blend);
-        JuicerRecipeUtil.addJuiceRecipe(Registry.ITEM.getId(blend.getIngredient0()), Registry.ITEM.getId(blend.getIngredient1()), Registry.ITEM.getId(blend.getIngredient2()), id);
+        JuicerRecipeUtil.registerJuiceRecipe(Registry.ITEM.getId(blend.getIngredient0()), Registry.ITEM.getId(blend.getIngredient1()), Registry.ITEM.getId(blend.getIngredient2()), id);
     }
 
     private static void register(Identifier id, Juice juice) {
