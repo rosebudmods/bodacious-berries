@@ -28,18 +28,18 @@ public class BodaciousConfig {
     public BodaciousConfig() {
         try {
             File file = new File(CONFIG_FILE_PATH.toUri());
-            // noinspection ResultOfMethodCallIgnored
-            file.getParentFile().mkdirs();
-            try (FileWriter writer = new FileWriter(file)) {
-            writer.write("""
-                    # bodacious berries configuration file - higher is more rare, lower is more common
-                    # values only apply on game restart
-                                        
-                    common_rarity =""" + " " + DEFAULT_COMMON_RARITY
-                    + "\nmedium_rarity = " + DEFAULT_MEDIUM_RARITY
-                    + "\nrare_rarity = " + DEFAULT_RARE_RARITY
-                    + "\nultra_rare_rarity = " + DEFAULT_ULTRA_RARE_RARITY
+            if (file.getParentFile().mkdirs() || file.createNewFile()) {
+                try (FileWriter writer = new FileWriter(file)) {
+                    writer.write("""
+                            # bodacious berries configuration file - higher is more rare, lower is more common
+                            # values only apply on game restart
+                                                
+                            common_rarity =""" + " " + DEFAULT_COMMON_RARITY
+                            + "\nmedium_rarity = " + DEFAULT_MEDIUM_RARITY
+                            + "\nrare_rarity = " + DEFAULT_RARE_RARITY
+                            + "\nultra_rare_rarity = " + DEFAULT_ULTRA_RARE_RARITY
                     );
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
