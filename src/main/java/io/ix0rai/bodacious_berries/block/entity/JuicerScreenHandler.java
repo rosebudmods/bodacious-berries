@@ -1,6 +1,7 @@
 package io.ix0rai.bodacious_berries.block.entity;
 
 import io.ix0rai.bodacious_berries.registry.BodaciousBlocks;
+import io.ix0rai.bodacious_berries.util.JuicerRecipeUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -101,7 +102,7 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
     }
 
     private boolean attemptInsertToJuicer(ItemStack stack) {
-        return JuicerRecipes.isIngredient(stack) && !this.insertItem(stack, 3, 6, false)
+        return JuicerRecipeUtil.isIngredient(stack) && !this.insertItem(stack, 3, 6, false)
                 || JuicerOutputSlot.matches(stack) && attemptInsertToOutputSlot(stack);
     }
 
@@ -127,7 +128,7 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
 
         @Override
         public boolean canInsert(ItemStack stack) {
-            return JuicerRecipes.isIngredient(stack);
+            return JuicerRecipeUtil.isIngredient(stack);
         }
     }
 
@@ -147,7 +148,7 @@ public class JuicerScreenHandler extends DefaultScreenHandler {
         }
 
         public static boolean matches(ItemStack stack) {
-            return JuicerRecipes.isReceptacle(stack) || JuicerRecipes.isResult(stack);
+            return JuicerRecipeUtil.isReceptacle(stack) || JuicerRecipeUtil.isResult(stack);
         }
     }
 }

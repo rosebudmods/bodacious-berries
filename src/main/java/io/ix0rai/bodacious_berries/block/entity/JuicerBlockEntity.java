@@ -4,6 +4,7 @@ import io.ix0rai.bodacious_berries.block.JuicerBlock;
 import io.ix0rai.bodacious_berries.registry.BodaciousItems;
 import io.ix0rai.bodacious_berries.registry.BodaciousBlocks;
 import io.ix0rai.bodacious_berries.registry.BodaciousJuices;
+import io.ix0rai.bodacious_berries.util.JuicerRecipeUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -171,7 +172,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     public boolean hasValidReceptacle() {
-        return JuicerRecipes.isReceptacle(inventory.get(0)) || JuicerRecipes.isReceptacle(inventory.get(1)) || JuicerRecipes.isReceptacle(inventory.get(2));
+        return JuicerRecipeUtil.isReceptacle(inventory.get(0)) || JuicerRecipeUtil.isReceptacle(inventory.get(1)) || JuicerRecipeUtil.isReceptacle(inventory.get(2));
     }
 
     @Override
@@ -204,7 +205,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         if (slot < 3) {
             return this.inventory.get(slot).isEmpty() && JuicerScreenHandler.JuicerOutputSlot.matches(stack);
         } else if (slot <= 5) {
-            return JuicerRecipes.isIngredient(stack);
+            return JuicerRecipeUtil.isIngredient(stack);
         } else {
             return false;
         }
@@ -212,6 +213,6 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return slot < 3 && !JuicerRecipes.isReceptacle(stack);
+        return slot < 3 && !JuicerRecipeUtil.isReceptacle(stack);
     }
 }

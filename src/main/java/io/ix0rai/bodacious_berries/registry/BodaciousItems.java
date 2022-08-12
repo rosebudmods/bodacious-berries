@@ -1,5 +1,6 @@
 package io.ix0rai.bodacious_berries.registry;
 
+import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.block.BerryBush;
 import io.ix0rai.bodacious_berries.block.DoubleBerryBush;
 import io.ix0rai.bodacious_berries.block.GrowingBerryBush;
@@ -133,7 +134,7 @@ public class BodaciousItems {
     }
 
     private static void register(Item berry, String name) {
-        Registry.register(Registry.ITEM, io.ix0rai.bodacious_berries.BodaciousBerries.id(name), berry);
+        Registry.register(Registry.ITEM, BodaciousBerries.id(name), berry);
     }
 
     private static Item.Settings settings(int hunger, float saturation) {

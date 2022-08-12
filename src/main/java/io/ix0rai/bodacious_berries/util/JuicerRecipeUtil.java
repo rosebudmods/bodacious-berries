@@ -1,8 +1,7 @@
-package io.ix0rai.bodacious_berries.block.entity;
+package io.ix0rai.bodacious_berries.util;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import io.ix0rai.bodacious_berries.BodaciousBerries;
+import io.ix0rai.bodacious_berries.block.entity.JuicerRecipe;
 import io.ix0rai.bodacious_berries.registry.BodaciousJuices;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class JuicerRecipes {
+public class JuicerRecipeUtil {
     public static final List<JsonObject> JUICER_RECIPES = new ArrayList<>();
 
     public static void addRecipe(Identifier[] ids, Identifier receptacle, Identifier output) {
@@ -49,48 +48,28 @@ public class JuicerRecipes {
         return false;
     }
 
+    /**
+     * creates a recipe json object using the default three-ingredient format
+     * <br>documentation on what the json will look like can be found <a href="https://github.com/ix0rai/bodacious_berries/wiki/Custom-Juicing-Recipes">here</a>
+     * @param ingredients an array of three ingredients to use in the recipe
+     * @param receptacle the receptacle for the juice
+     * @param output the output item of the recipe
+     * @return a json object representing the recipe
+     */
     public static JsonObject createRecipeJson(Identifier[] ingredients, Identifier receptacle, Identifier output) {
-        JsonObject json = new JsonObject();
-        // add type
-        // adds: "type": "bodacious_berries:juicing"
-        json.addProperty("type", JuicerRecipe.RECIPE_ID);
+        if (ingredients.length != 3) {
+            throw new IllegalArgumentException("ingredients must be an array of length 3");
+        }
 
-        // add ingredients
-        // adds: "0||1||2": {"item || tag": "ingredients[i]"}
+        JsonObject json = new JsonObject();
+        json.addProperty("type", JuicerRecipe.RECIPE_ID);
         JsonObject jsonIngredients = new JsonObject();
         for (int i = 0; i < ingredients.length; i ++) {
             jsonIngredients.add(i + "", getAsProperty(ingredients[i]));
         }
-        // add receptacle
-        // adds: "receptacle": {"item": "receptacle_id")
         jsonIngredients.add("receptacle", getAsProperty(receptacle));
         json.add("ingredients", jsonIngredients);
-
-        // add result
-        // adds: "result": "output_id"
         json.addProperty("result", output.toString());
-
-        return json;
-    }
-
-    public static JsonObject createShapelessJson(Identifier ingredient, Identifier output) {
-        JsonObject json = new JsonObject();
-        // add type
-        // adds: "type": "minecraft:crafting_shapeless"
-        json.addProperty("type", "minecraft:crafting_shapeless");
-
-        // add ingredients
-        // adds "ingredients": {"item": "ingredient", "item", "bodacious_berries:chorus_berry_juice}
-        JsonArray ingredientArray = new JsonArray();
-        ingredientArray.add(getAsProperty(ingredient));
-        ingredientArray.add(getAsProperty(BodaciousBerries.id("chorus_berry_juice")));
-        json.add("ingredients", ingredientArray);
-
-        // add result
-        // adds: "result": {"item": "output", "count": 1}
-        JsonObject result = getAsProperty(output);
-        result.addProperty("count", 1);
-        json.add("result", result);
 
         return json;
     }
@@ -99,13 +78,7 @@ public class JuicerRecipes {
         JsonObject property = new JsonObject();
         // if the namespace is c: we can assume it's a tag
         if (id.getNamespace().equals("c")) {
-            // attempt to pluralize the name as it is a tag
-            String string = id.toString();
-            if (string.endsWith("y")) {
-                string = string.substring(0, string.length() - 1) + "ies";
-            }
-
-            property.addProperty("tag", string);
+            property.addProperty("tag", id.toString());
         } else {
             property.addProperty("item", id.toString());
         }
@@ -113,3 +86,4 @@ public class JuicerRecipes {
         return property;
     }
 }
+

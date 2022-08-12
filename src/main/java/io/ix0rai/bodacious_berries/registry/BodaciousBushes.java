@@ -1,5 +1,6 @@
 package io.ix0rai.bodacious_berries.registry;
 
+import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.block.BasicBerryBush;
 import io.ix0rai.bodacious_berries.block.BerryVine;
 import io.ix0rai.bodacious_berries.block.ChorusBerryBush;
@@ -78,6 +79,6 @@ public class BodaciousBushes {
     }
 
     private static void register(String name, Block block) {
-        Registry.register(Registry.BLOCK, io.ix0rai.bodacious_berries.BodaciousBerries.id(name), block);
+        Registry.register(Registry.BLOCK, BodaciousBerries.id(name), block);
     }
 }
