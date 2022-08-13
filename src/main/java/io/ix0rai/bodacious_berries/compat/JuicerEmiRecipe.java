@@ -30,7 +30,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
         }
         this.inputs = list;
         this.output = EmiStack.of(recipe.getOutput(), 3);
-        this.receptacle = EmiIngredient.of(recipe.receptacle());
+        this.receptacle = EmiIngredient.of(recipe.receptacle(), 3);
     }
 
     @Override
@@ -65,21 +65,6 @@ public class JuicerEmiRecipe implements EmiRecipe {
 
     @Override
     public void addWidgets(WidgetHolder widgets) {
-        // input and output slots
-        widgets.addSlot(inputs.get(0), 4, 3);
-        widgets.addSlot(inputs.get(1), 24, 10);
-        widgets.addSlot(inputs.get(2), 44, 3);
-        EmiStack outputWithSingleItem = EmiStack.of(output.getItemStack(), 1);
-        widgets.addSlot(outputWithSingleItem, 1, 36).recipeContext(this);
-        widgets.addSlot(outputWithSingleItem, 24, 43).recipeContext(this);
-        widgets.addSlot(outputWithSingleItem, 47, 36).recipeContext(this);
-
-        // slot showing required receptacle
-        // we add three of these so that emi recognises all required ingredients
-        for (int i = 0; i < 3; i++) {
-            widgets.addSlot(receptacle, 87, 22);
-        }
-
         // juicer background and animated textures
         widgets.addDrawable(-19, 3, 64, 59, (matrices, mouseX, mouseY, delta) -> {
             // add juicer background
@@ -97,6 +82,18 @@ public class JuicerEmiRecipe implements EmiRecipe {
             DrawableHelper.drawTexture(matrices, 24, 24 + height, 176, height, 11, 9 - height, 256, 256);
             DrawableHelper.drawTexture(matrices, 70, 24 + height, 176, height, 11, 9 - height, 256, 256);
         });
+
+        // input and output slots
+        widgets.addSlot(inputs.get(0), 4, 3);
+        widgets.addSlot(inputs.get(1), 24, 10);
+        widgets.addSlot(inputs.get(2), 44, 3);
+        EmiStack outputWithSingleItem = EmiStack.of(output.getItemStack(), 1);
+        widgets.addSlot(outputWithSingleItem, 1, 36).recipeContext(this);
+        widgets.addSlot(outputWithSingleItem, 24, 43).recipeContext(this);
+        widgets.addSlot(outputWithSingleItem, 47, 36).recipeContext(this);
+
+        // slot showing required receptacle
+        widgets.addSlot(receptacle, 87, 22);
 
         // "receptacle" text
         widgets.addText(BodaciousBerries.translatableText("receptacle").asOrderedText(), 67, 8, 0xFFFFFF, true);
