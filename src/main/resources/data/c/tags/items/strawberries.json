@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "bodaciousberries:strawberry",
+    "bodacious_berries:strawberries",
     {
       "id": "croptopia:strawberry",
       "required": false

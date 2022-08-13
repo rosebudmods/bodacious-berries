@@ -1,0 +1,8 @@
+{
+  "parent": "bodacious_berries:block/template/bodacious_berry_bush",
+  "textures": {
+    "leaves": "bodacious_berries:block/blackberry/leaves_big",
+    "berries": "bodacious_berries:block/blackberry/berries_stage4",
+    "twigs": "bodacious_berries:block/blackberry/twigs_big"
+  }
+}

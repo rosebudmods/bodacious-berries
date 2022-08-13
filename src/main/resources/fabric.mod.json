@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "bodaciousberries",
+  "id": "bodacious_berries",
   "version": "${version}",
 
   "name": "Bodacious Berries",
@@ -10,45 +10,53 @@
     "thonkman"
   ],
   "contact": {
-    "sources": "https://github.com/ix0rai/bodaciousberries",
-    "issues": "https://github.com/ix0rai/bodaciousberries/issues"
+    "sources": "https://github.com/ix0rai/bodacious_berries",
+    "issues": "https://github.com/ix0rai/bodacious_berries/issues"
   },
 
   "license": "MIT",
-  "icon": "assets/bodaciousberries/icon.png",
+  "icon": "assets/bodacious_berries/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.ix0rai.bodaciousberries.Bodaciousberries"
+      "io.ix0rai.bodacious_berries.BodaciousBerries",
+      "io.ix0rai.dfu_bestie.impl.Initializer"
     ],
     "client": [
-      "io.ix0rai.bodaciousberries.client.BodaciousberriesClient"
+      "io.ix0rai.bodacious_berries.client.BodaciousBerriesClient",
+      "io.ix0rai.dfu_bestie.impl.client.ClientInitializer"
     ],
-    "rei_client": [
-      "io.ix0rai.bodaciousberries.compat.JuicerReiPlugin"
+    "emi": [
+      "io.ix0rai.bodacious_berries.compat.JuicerEmiPlugin"
     ],
     "modmenu": [
-      "io.ix0rai.bodaciousberries.config.BodaciousModMenuIntegration"
+      "io.ix0rai.bodacious_berries.config.BodaciousModMenu"
     ]
   },
   "mixins": [
-    "bodaciousberries.mixins.json"
+    "bodacious_berries.mixins.json",
+    "dfu_bestie.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.0",
-    "fabric": "*",
-    "minecraft": "1.19.1",
+    "fabricloader": ">=0.14.8",
+    "fabric": ">=0.50.0",
+    "minecraft": ">=1.19.1",
     "java": ">=17"
+  },
+
+  "suggests": {
+    "emi": ">=0.3.0",
+    "modmenu": ">=4.0.0"
   },
 
   "custom": {
     "modmenu": {
       "links": {
         "modmenu.discord": "https://discord.gg/TN9gaXJ6E8",
-        "modmenu.issues": "https://github.com/ix0rai/bodaciousberries/issues",
-        "modmenu.website": "https://github.com/ix0rai/bodaciousberries"
+        "modmenu.issues": "https://github.com/ix0rai/bodacious_berries/issues",
+        "modmenu.website": "https://github.com/ix0rai/bodacious_berries"
       }
     }
   }

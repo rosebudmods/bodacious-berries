@@ -1,0 +1,6 @@
+{
+  "parent": "bodacious_berries:block/template/berry_vine",
+  "textures": {
+    "berries": "bodacious_berries:block/grape/berries_stage1"
+  }
+}

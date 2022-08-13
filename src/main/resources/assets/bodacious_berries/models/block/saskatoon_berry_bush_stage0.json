@@ -1,0 +1,8 @@
+{
+  "parent": "bodacious_berries:block/template/bodacious_berry_bush",
+  "textures": {
+    "leaves": "bodacious_berries:block/saskatoon/leaves_stage0",
+    "berries": "bodacious_berries:block/misc/empty",
+    "twigs": "bodacious_berries:block/saskatoon/twigs_stage0"
+  }
+}

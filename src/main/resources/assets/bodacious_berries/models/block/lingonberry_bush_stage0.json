@@ -1,0 +1,8 @@
+{
+  "parent": "bodacious_berries:block/template/berry_fan",
+  "textures": {
+    "leaves": "bodacious_berries:block/lingonberry/leaves_small",
+    "berries": "bodacious_berries:block/misc/empty",
+    "twigs": "bodacious_berries:block/lingonberry/twigs_small"
+  }
+}

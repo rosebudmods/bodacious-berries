@@ -1,0 +1,51 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bodacious_berries:chorus_berry_juice_badlands",
+      "bodacious_berries:chorus_berry_juice_birch_forest",
+      "bodacious_berries:chorus_berry_juice_dark_forest",
+      "bodacious_berries:chorus_berry_juice_desert",
+      "bodacious_berries:chorus_berry_juice_dripstone_caves",
+      "bodacious_berries:chorus_berry_juice_flower_forest",
+      "bodacious_berries:chorus_berry_juice_forest",
+      "bodacious_berries:chorus_berry_juice_jungle",
+      "bodacious_berries:chorus_berry_juice_lush_caves",
+      "bodacious_berries:chorus_berry_juice_meadow",
+      "bodacious_berries:chorus_berry_juice_mushroom_fields",
+      "bodacious_berries:chorus_berry_juice_ocean",
+      "bodacious_berries:chorus_berry_juice_plains",
+      "bodacious_berries:chorus_berry_juice_savanna",
+      "bodacious_berries:chorus_berry_juice_snowy_slopes",
+      "bodacious_berries:chorus_berry_juice_sunflower_plains",
+      "bodacious_berries:chorus_berry_juice_swamp",
+      "bodacious_berries:chorus_berry_juice_taiga"
+    ]
+  },
+  "criteria": {
+    "has_juice": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bodacious_berries:chorus_berry_juice"
+            ]
+          }
+        ]
+      }
+    },
+    "has_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bodacious_berries:chorus_berry_juice"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_juice",
+      "has_recipe"
+    ]
+  ]
+}
