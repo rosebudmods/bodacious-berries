@@ -29,7 +29,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
             list.add(EmiIngredient.of(recipe.receptacle()));
         }
         this.inputs = list;
-        this.output = EmiStack.of(recipe.getOutput());
+        this.output = EmiStack.of(recipe.getOutput(), 3);
         this.receptacle = EmiIngredient.of(recipe.receptacle());
     }
 
@@ -50,7 +50,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
 
     @Override
     public List<EmiStack> getOutputs() {
-        return List.of(output, output, output);
+        return List.of(output);
     }
 
     @Override
@@ -69,9 +69,10 @@ public class JuicerEmiRecipe implements EmiRecipe {
         widgets.addSlot(inputs.get(0), 4, 3);
         widgets.addSlot(inputs.get(1), 24, 10);
         widgets.addSlot(inputs.get(2), 44, 3);
-        widgets.addSlot(output, 1, 36).recipeContext(this);
-        widgets.addSlot(output, 24, 43).recipeContext(this);
-        widgets.addSlot(output, 47, 36).recipeContext(this);
+        EmiStack outputWithSingleItem = EmiStack.of(output.getItemStack(), 1);
+        widgets.addSlot(outputWithSingleItem, 1, 36).recipeContext(this);
+        widgets.addSlot(outputWithSingleItem, 24, 43).recipeContext(this);
+        widgets.addSlot(outputWithSingleItem, 47, 36).recipeContext(this);
 
         // slot showing required receptacle
         // we add three of these so that emi recognises all required ingredients
