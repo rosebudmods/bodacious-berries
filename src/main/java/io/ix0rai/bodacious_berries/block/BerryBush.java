@@ -16,22 +16,44 @@ public interface BerryBush extends Fertilizable {
     void setBerryType(Item berryType);
 
     /**
-     * gets the type of berry that this bush gives when picked
-     * @return the item that will be given
+     * @return the type of berry that this bush gives when picked
      */
     Item getBerryType();
 
     /**
-     * gets the maximum age to which this bush can grow
-     * @return the maximum age
+     * @return the maximum age to which the bush can grow
      */
     int getMaxAge();
+
+    /**
+     * @return the age at which the bush grows into its largest form
+     */
     int getSizeChangeAge();
+
+    /**
+     * @return the bush's age property
+     */
     IntProperty getAge();
+
+    /**
+     * @return the maximum amount of berries that can be picked from the bush in one action
+     */
     int getMaxBerryAmount();
+
+    /**
+     * @param state the block state to check
+     * @return whether the specified block state is at its maximum age
+     */
     default boolean isFullyGrown(BlockState state) {
         return state.get(getAge()) == getMaxAge();
     }
+
+    /**
+     * sets the age of the bush its minimum possible age while preserving its size
+     * @param world the world in which the bush is growing
+     * @param pos the position of the bush
+     * @param state the block state to reset
+     */
     default void resetAge(World world, BlockPos pos, BlockState state) {
         IntProperty age = getAge();
         int currentAge = state.get(age);
