@@ -1,9 +1,11 @@
 plugins {
-    id 'io.github.p03w.machete' version '1.1.4'
-    id 'fabric-loom' version '0.12-SNAPSHOT'
-    id 'org.quiltmc.quilt-mappings-on-loom' version '4.2.0'
-    id 'io.github.juuxel.loom-quiltflower' version '1.7.3'
-    id 'maven-publish'
+    id "io.github.p03w.machete" version "1.1.4"
+    id "fabric-loom" version "0.12-SNAPSHOT"
+    id "org.quiltmc.quilt-mappings-on-loom" version "4.2.0"
+    id "io.github.juuxel.loom-quiltflower" version "1.7.3"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "java-library"
+    id "maven-publish"
 }
 
 int javaVersion = Integer.parseInt(project.java_version)
@@ -46,6 +48,23 @@ dependencies {
     // fabric api
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 }
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = 'UTF-8'
+    it.options.deprecation(true)
+    it.options.incremental(true)
+    it.options.release.set(javaVersion)
+}
+
+shadowJar {
+    dependsOn jar
+    configurations = [project.configurations.shadow]
+    destinationDirectory.set(file("${project.buildDir}/devlibs"))
+    archiveClassifier.set('dev')
+
+    relocate 'com.electronwill.nightconfig', 'dev.lambdaurora.lambdabettergrass.shadow.nightconfig'
+}
+prepareRemapJar.dependsOn(shadowJar)
 
 processResources {
     inputs.property "version", project.version
