@@ -49,6 +49,13 @@ public interface BerryBush extends Fertilizable, BlockPathingBehavior {
         return PathNodeType.DAMAGE_OTHER;
     }
 
+    /**
+     * compatibility with lithium's BlockPathingBehavior
+     */
+    default PathNodeType getPathNodeTypeAsNeighbor(BlockState state) {
+        return PathNodeType.WALKABLE;
+    }
+
 
     /**
      * @param state the block state to check
