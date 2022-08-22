@@ -7,10 +7,10 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 
-public abstract class DefaultScreenHandler extends ScreenHandler {
+public abstract class BodaciousScreenHandler extends ScreenHandler {
     protected final Inventory inventory;
 
-    protected DefaultScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory) {
+    protected BodaciousScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory) {
         super(type, syncId);
         this.inventory = playerInventory;
     }

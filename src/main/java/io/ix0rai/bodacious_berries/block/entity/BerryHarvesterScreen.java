@@ -1,14 +1,13 @@
 package io.ix0rai.bodacious_berries.block.entity;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class BerryHarvesterScreen extends HandledScreen<BerryHarvesterScreenHandler> {
+public class BerryHarvesterScreen extends BodaciousScreen<BerryHarvesterScreenHandler> {
     private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
 
     public BerryHarvesterScreen(BerryHarvesterScreenHandler handler, PlayerInventory inventory, Text title) {

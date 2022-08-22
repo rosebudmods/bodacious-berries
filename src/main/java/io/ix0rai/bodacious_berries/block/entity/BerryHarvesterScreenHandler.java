@@ -8,8 +8,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 
-public class BerryHarvesterScreenHandler extends DefaultScreenHandler {
-
+public class BerryHarvesterScreenHandler extends BodaciousScreenHandler {
     public BerryHarvesterScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(9));
     }

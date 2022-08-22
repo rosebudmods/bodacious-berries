@@ -11,7 +11,7 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.slot.Slot;
 
-public class JuicerScreenHandler extends DefaultScreenHandler {
+public class JuicerScreenHandler extends BodaciousScreenHandler {
     private final PropertyDelegate propertyDelegate;
 
     public JuicerScreenHandler(int syncId, PlayerInventory playerInventory) {
