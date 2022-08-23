@@ -49,7 +49,7 @@ public class Juice extends HoneyBottleItem {
     public static Settings settings(Item berry, FoodComponent.Builder builder) {
         FoodComponent foodComponent = berry.getFoodComponent();
         if (foodComponent != null) {
-            return BodaciousJuices.JUICE_SETTINGS.food(builder.hunger(foodComponent.getHunger() * 2).saturationModifier(foodComponent.getSaturationModifier() * 2f).build());
+            return BodaciousJuices.JUICE_SETTINGS.food(builder.hunger(foodComponent.getHunger() * 2).saturationModifier(foodComponent.getSaturationModifier() * 1.5f).build());
         }
 
         throw new InvalidParameterException("item: " + berry + " does not have a food component");

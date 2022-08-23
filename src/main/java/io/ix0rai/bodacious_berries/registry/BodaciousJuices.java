@@ -28,7 +28,7 @@ public class BodaciousJuices {
     public static final Item JUICE_RECEPTACLE = Items.GLASS_BOTTLE;
     public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(JUICE_RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
     public static final List<JsonObject> RECIPES = new ArrayList<>();
-    public static final Juice DUBIOUS_JUICE = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturationModifier(3F).build()));
+    public static final Juice DUBIOUS_JUICE = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturationModifier(2F).build()));
 
     public static void register() {
         register(BodaciousBerries.id("dubious_juice"), DUBIOUS_JUICE);
@@ -99,23 +99,23 @@ public class BodaciousJuices {
     }
 
     private static void registerBlends() {
-        Blend gojiBerryBlend = new GojiBerryBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(3.0F).statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F).build()), BodaciousItems.GOJI_BERRIES, BodaciousItems.GOJI_BERRIES, Items.SUGAR_CANE);
+        Blend gojiBerryBlend = new GojiBerryBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(1.8F).statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F).build()), BodaciousItems.GOJI_BERRIES, BodaciousItems.GOJI_BERRIES, Items.SUGAR_CANE);
         registerBlend("goji_berry_blend", gojiBerryBlend);
-        Blend oppositeJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturationModifier(2.5F).build()), BodaciousItems.RASPBERRIES, BodaciousItems.BLACKBERRIES, Items.SUGAR_CANE);
+        Blend oppositeJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturationModifier(1.2F).build()), BodaciousItems.RASPBERRIES, BodaciousItems.BLACKBERRIES, Items.SUGAR_CANE);
         registerBlend("opposite_juice", oppositeJuice);
-        Blend rainberryBlend = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(5.0F).build()), BodaciousItems.RAINBERRIES, BodaciousItems.GOJI_BERRIES, Items.GOLDEN_APPLE);
+        Blend rainberryBlend = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(1.6F).build()), BodaciousItems.RAINBERRIES, BodaciousItems.GOJI_BERRIES, Items.GOLDEN_APPLE);
         registerBlend("rainberry_blend", rainberryBlend);
-        Blend gooseberryRum = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(2.0f).build()), BodaciousItems.GOOSEBERRIES, BodaciousItems.GOOSEBERRIES, Items.WHEAT);
+        Blend gooseberryRum = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(1.0f).build()), BodaciousItems.GOOSEBERRIES, BodaciousItems.GOOSEBERRIES, Items.WHEAT);
         registerBlend("gooseberry_rum", gooseberryRum);
-        Blend redJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(3.0F).build()), BodaciousItems.STRAWBERRIES, Items.SWEET_BERRIES, BodaciousItems.LINGONBERRIES);
+        Blend redJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(1.3F).build()), BodaciousItems.STRAWBERRIES, Items.SWEET_BERRIES, BodaciousItems.LINGONBERRIES);
         registerBlend("red_juice", redJuice);
-        Blend endBlend = new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(3.5F).build()), BodaciousItems.CHORUS_BERRIES, BodaciousItems.RAINBERRIES, Items.CHORUS_FRUIT);
+        Blend endBlend = new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(3.3F).build()), BodaciousItems.CHORUS_BERRIES, BodaciousItems.RAINBERRIES, Items.CHORUS_FRUIT);
         registerBlend("end_blend", endBlend);
-        Blend purpleDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(3.0F).build()), BodaciousItems.CHORUS_BERRIES, BodaciousItems.GRAPES, BodaciousItems.SASKATOON_BERRIES);
+        Blend purpleDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(1.6F).build()), BodaciousItems.CHORUS_BERRIES, BodaciousItems.GRAPES, BodaciousItems.SASKATOON_BERRIES);
         registerBlend("purple_delight", purpleDelight);
-        Blend trafficLightJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(4.0F).build()), BodaciousItems.GOOSEBERRIES, Items.GLOW_BERRIES, BodaciousItems.RASPBERRIES);
+        Blend trafficLightJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(1.4F).build()), BodaciousItems.GOOSEBERRIES, Items.GLOW_BERRIES, BodaciousItems.RASPBERRIES);
         registerBlend("traffic_light_juice", trafficLightJuice);
-        Blend vanillaDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturationModifier(2.5F).build()), Items.GLOW_BERRIES, Items.SWEET_BERRIES, Items.APPLE);
+        Blend vanillaDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturationModifier(2.0F).build()), Items.GLOW_BERRIES, Items.SWEET_BERRIES, Items.APPLE);
         registerBlend("vanilla_delight", vanillaDelight);
     }
 

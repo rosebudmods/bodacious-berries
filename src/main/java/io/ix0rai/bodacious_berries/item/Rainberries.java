@@ -14,7 +14,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class Rainberries extends AliasedBlockItem {
-    private final FoodComponent foodComponent = new FoodComponent.Builder().hunger(3).saturationModifier(3.5F).build();
+    private final FoodComponent foodComponent = new FoodComponent.Builder().hunger(3).saturationModifier(1.0F).build();
     public Rainberries(Block block, Settings settings) {
         super(block, settings);
     }
