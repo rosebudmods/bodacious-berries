@@ -10,12 +10,10 @@ out/
 build/
 run/
 remappedSrc/
-!gradle-wrapper.jar
 
 # filetypes we don't want
 *.class
 *.log
-*.jar
 *.war
 *.nar
 *.zip

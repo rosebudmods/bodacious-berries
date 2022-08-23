@@ -50,7 +50,6 @@ public interface BerryBush extends Fertilizable, BlockPathingBehavior {
         return PathNodeType.WALKABLE;
     }
 
-
     /**
      * @param state the block state to check
      * @return whether the specified block state is at its maximum age

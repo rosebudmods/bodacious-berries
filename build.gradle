@@ -1,6 +1,6 @@
 plugins {
     id "io.github.p03w.machete" version "1.1.4"
-    id "fabric-loom" version "0.12-SNAPSHOT"
+    id "fabric-loom" version "0.13-SNAPSHOT"
     id "org.quiltmc.quilt-mappings-on-loom" version "4.2.0"
     id "io.github.juuxel.loom-quiltflower" version "1.7.3"
     id "com.github.johnrengelman.shadow" version "7.1.2"
@@ -16,12 +16,6 @@ targetCompatibility = javaVersion
 repositories {
     maven { url = "https://maven.gegy.dev/" }
     maven { url = "https://maven.terraformersmc.com/releases/" }
-    maven {
-        url = "https://api.modrinth.com/maven"
-        content {
-            includeGroup "maven.modrinth"
-        }
-    }
     mavenCentral()
 }
 
@@ -46,7 +40,7 @@ dependencies {
     modImplementation("dev.emi:emi:${emi_version}") { transitive = false }
 
     // lithium - block pathing compat
-    modImplementation("maven.modrinth:lithium:${lithium_version}")
+    shadow(files("libs/lithium-fabric-mc1.19.1-0.9.0-SNAPSHOT-api-dev.jar"))
 
     // dependencies for config
     shadow("com.electronwill.night-config:core:${project.night_config_version}")
@@ -70,8 +64,6 @@ shadowJar {
     configurations = [project.configurations.shadow]
     destinationDirectory.set(file("${project.buildDir}/devlibs"))
     archiveClassifier.set('dev')
-
-    relocate 'com.electronwill.nightconfig', 'dev.lambdaurora.lambdabettergrass.shadow.nightconfig'
 }
 prepareRemapJar.dependsOn(shadowJar)
 
