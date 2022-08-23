@@ -2,7 +2,6 @@ package io.ix0rai.bodacious_berries.block;
 
 import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
 import io.ix0rai.bodacious_berries.registry.BodaciousSounds;
-import io.ix0rai.bodacious_berries.util.BerryTypeConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PlantBlock;
@@ -21,10 +20,12 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -37,7 +38,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected static final int GROW_CHANCE = 5;
     protected static final int MAX_BERRY_AMOUNT = 3;
 
-    protected Item berryType;
+    protected final Identifier berryType;
     protected final int maxAge;
     protected final VoxelShape smallShape;
     protected final VoxelShape largeShape;
@@ -64,7 +65,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param largeShape large voxel shape for the bush
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
-    public BasicBerryBush(Item berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+    public BasicBerryBush(Identifier berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);
         this.berryType = berryType;
         this.maxAge = maxAge;
@@ -74,21 +75,12 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     /**
-     * sets the berry type
-     * @param berryType the item to use
-     */
-    @Override
-    public void setBerryType(Item berryType) {
-        this.berryType = berryType;
-    }
-
-    /**
      * used for the pick block key
      * @return what kind of berries this block grows
      */
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(berryType);
+        return Registry.ITEM.get(berryType).getDefaultStack();
     }
 
     /**
@@ -140,15 +132,13 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        BerryTypeConfigurationException.check(berryType);
-
         final int currentAge = state.get(getAge());
         // if bone meal is allowed to be used, pass action
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (currentAge == maxAge) {
             // otherwise, give berries/unripe berries
-            return pickBerries(pos, world, state);
+            return pickBerries(pos, world, state, Registry.ITEM.get(berryType));
         } else {
             // otherwise, do default use action from superclass
             return super.onUse(state, world, pos, player, hand, hit);
@@ -159,12 +149,12 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * handles berries being picked
      * <br> this method is static so that it can be used in {@link DoubleBerryBush}
      */
-    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state) {
+    public static ActionResult pickBerries(BlockPos pos, World world, BlockState state, Item berryType) {
         // we can assume the state to be a berry bush
         BerryBush bush = (BerryBush) state.getBlock();
 
         int berryAmount = world.random.nextInt(bush.getMaxBerryAmount() + 1) + 1;
-        dropStack(world, pos, new ItemStack(bush.getBerryType(), berryAmount));
+        dropStack(world, pos, new ItemStack(berryType, berryAmount));
 
         // play randomly picked sound
         world.playSound(null, pos, BodaciousSounds.BERRY_PICK, SoundCategory.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
@@ -217,7 +207,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     @Override
-    public Item getBerryType() {
+    public Identifier getBerryType() {
         return berryType;
     }
 
@@ -227,7 +217,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     public static class FourStageBush extends BasicBerryBush {
-        public FourStageBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        public FourStageBush(Identifier berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
             super(berryType, 4, smallShape, largeShape, sizeChangeAge);
         }
 
@@ -238,7 +228,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     public static class ThreeStageBush extends BasicBerryBush {
-        public ThreeStageBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        public ThreeStageBush(Identifier berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
             super(berryType, 3, smallShape, largeShape, sizeChangeAge);
         }
 

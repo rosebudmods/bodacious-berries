@@ -2,13 +2,13 @@ package io.ix0rai.bodacious_berries.block;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 public class ChorusBerryBush extends BasicBerryBush.FourStageBush {
-    public ChorusBerryBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+    public ChorusBerryBush(Identifier berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         super(berryType, smallShape, largeShape, sizeChangeAge);
     }
 

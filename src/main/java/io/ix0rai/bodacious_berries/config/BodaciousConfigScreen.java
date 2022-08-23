@@ -17,8 +17,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import static io.ix0rai.bodacious_berries.BodaciousBerries.CONFIG;
 

@@ -39,8 +39,8 @@ public class BodaciousBerries implements ModInitializer {
     @Override
     public void onInitialize() {
         BodaciousBushes.register();
-        BodaciousItems.register();
         BodaciousBlocks.register();
+        BodaciousItems.register();
         BodaciousStatusEffects.register();
         BodaciousJuices.register();
         BodaciousSounds.register();

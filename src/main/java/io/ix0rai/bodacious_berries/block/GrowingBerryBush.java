@@ -1,6 +1,5 @@
 package io.ix0rai.bodacious_berries.block;
 
-import io.ix0rai.bodacious_berries.util.BerryTypeConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
@@ -49,8 +48,6 @@ public class GrowingBerryBush extends BasicBerryBush {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        BerryTypeConfigurationException.check(berryType);
-
         // a GrowingBerryBush cannot produce berries until it grows to its double bush state
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             final int newAge = Math.min(maxAge, state.get(getAge()) + 1);

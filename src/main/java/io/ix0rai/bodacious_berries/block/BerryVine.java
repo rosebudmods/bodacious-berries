@@ -1,12 +1,10 @@
 package io.ix0rai.bodacious_berries.block;
 
 import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
-import io.ix0rai.bodacious_berries.util.BerryTypeConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.VineBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
@@ -14,9 +12,11 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -27,21 +27,16 @@ public class BerryVine extends VineBlock implements BerryBush {
 
     public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
 
-    protected Item berryType;
+    protected Identifier berryType;
 
-    public BerryVine(Item berry) {
+    public BerryVine(Identifier berryType) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);
-        this.berryType = berry;
-    }
-
-    @Override
-    public void setBerryType(Item berryType) {
         this.berryType = berryType;
     }
 
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(berryType);
+        return new ItemStack(Registry.ITEM.get(berryType));
     }
 
     @Override
@@ -87,12 +82,10 @@ public class BerryVine extends VineBlock implements BerryBush {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        BerryTypeConfigurationException.check(berryType);
-
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (state.get(AGE) == MAX_AGE) {
-            return BasicBerryBush.pickBerries(pos, world, state);
+            return BasicBerryBush.pickBerries(pos, world, state, Registry.ITEM.get(berryType));
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
@@ -114,7 +107,7 @@ public class BerryVine extends VineBlock implements BerryBush {
     }
 
     @Override
-    public Item getBerryType() {
+    public Identifier getBerryType() {
         return berryType;
     }
 

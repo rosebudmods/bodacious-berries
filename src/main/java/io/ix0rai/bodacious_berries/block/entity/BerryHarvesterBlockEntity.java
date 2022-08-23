@@ -26,6 +26,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -70,7 +71,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
                 // also ensure bush is ready to harvest
                 if (block instanceof BerryBush berryBush && berryBush.isFullyGrown(bush)) {
                     // insert items
-                    harvester.insert(new ItemStack(berryBush.getBerryType(), berryBush.getMaxBerryAmount()));
+                    harvester.insert(new ItemStack(Registry.ITEM.get(berryBush.getBerryType()), berryBush.getMaxBerryAmount()));
 
                     // play pick sound and reset bush growth
                     addPickEffects(world, bushPos);

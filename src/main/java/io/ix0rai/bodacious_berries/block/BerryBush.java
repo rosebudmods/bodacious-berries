@@ -5,22 +5,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.item.Item;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface BerryBush extends Fertilizable, BlockPathingBehavior {
     /**
-     * sets the type of berry that this bush gives when picked
-     * @param berryType the item that will be given
-     */
-    void setBerryType(Item berryType);
-
-    /**
      * @return the type of berry that this bush gives when picked
      */
-    Item getBerryType();
+    Identifier getBerryType();
 
     /**
      * @return the maximum age to which the bush can grow

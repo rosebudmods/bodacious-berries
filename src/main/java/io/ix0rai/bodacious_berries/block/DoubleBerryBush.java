@@ -1,14 +1,12 @@
 package io.ix0rai.bodacious_berries.block;
 
 import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
-import io.ix0rai.bodacious_berries.util.BerryTypeConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
@@ -17,10 +15,12 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -32,21 +32,16 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
     protected static final int MAX_BERRY_AMOUNT = 5;
 
-    protected Item berryType;
+    protected Identifier berryType;
 
-    public DoubleBerryBush(Item berryType) {
+    public DoubleBerryBush(Identifier berryType) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);
         this.berryType = berryType;
     }
 
     @Override
-    public void setBerryType(Item berryType) {
-        this.berryType = berryType;
-    }
-
-    @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(berryType);
+        return Registry.ITEM.get(berryType).getDefaultStack();
     }
 
     @Override
@@ -99,12 +94,10 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        BerryTypeConfigurationException.check(berryType);
-
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (state.get(getAge()) == MAX_AGE) {
-            return BasicBerryBush.pickBerries(pos, world, state);
+            return BasicBerryBush.pickBerries(pos, world, state, Registry.ITEM.get(berryType));
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
@@ -126,7 +119,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     }
 
     @Override
-    public Item getBerryType() {
+    public Identifier getBerryType() {
         return berryType;
     }
 

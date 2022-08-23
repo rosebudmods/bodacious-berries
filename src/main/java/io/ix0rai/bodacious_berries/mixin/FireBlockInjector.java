@@ -16,14 +16,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FireBlockInjector {
     @Inject(method = "getSpreadChance", at = @At("HEAD"), cancellable = true)
     private void getSpreadChance(BlockState state, CallbackInfoReturnable<Integer> ci) {
-        if (state.isIn(BodaciousBushes.BERRY_BUSHES)) {
+        if (state.isIn(BodaciousBushes.BERRY_BUSHES_TAG)) {
             ci.setReturnValue(100);
         }
     }
 
     @Inject(method = "getBurnChance(Lnet/minecraft/block/BlockState;)I", at = @At("HEAD"), cancellable = true)
     private void getBurnChance(BlockState state, CallbackInfoReturnable<Integer> ci) {
-        if (state.isIn(BodaciousBushes.BERRY_BUSHES)) {
+        if (state.isIn(BodaciousBushes.BERRY_BUSHES_TAG)) {
             ci.setReturnValue(60);
         }
     }

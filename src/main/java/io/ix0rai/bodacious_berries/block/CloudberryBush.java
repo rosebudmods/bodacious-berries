@@ -1,16 +1,15 @@
 package io.ix0rai.bodacious_berries.block;
 
-import io.ix0rai.bodacious_berries.util.BerryTypeConfigurationException;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
@@ -20,7 +19,7 @@ import net.minecraft.world.World;
 public class CloudberryBush extends BasicBerryBush.ThreeStageBush {
     private static final BooleanProperty DYING = BooleanProperty.of("dying");
 
-    public CloudberryBush(Item berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+    public CloudberryBush(Identifier berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         super(berryType, smallShape, largeShape, sizeChangeAge);
         this.setDefaultState(this.stateManager.getDefaultState().with(DYING, false));
     }
@@ -54,7 +53,6 @@ public class CloudberryBush extends BasicBerryBush.ThreeStageBush {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        BerryTypeConfigurationException.check(this.berryType);
         if (Boolean.FALSE.equals(state.get(DYING))) {
             super.onUse(state, world, pos, player, hand, hit);
         }
