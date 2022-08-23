@@ -31,20 +31,14 @@ public class BodaciousBlocks {
     public static final ScreenHandlerType<JuicerScreenHandler> JUICER_SCREEN_HANDLER = new ScreenHandlerType<>(JuicerScreenHandler::new);
 
     public static void register() {
-        registerBlockEntity(BERRY_HARVESTER, BERRY_HARVESTER_BLOCK, BERRY_HARVESTER_ENTITY, BERRY_HARVESTER_SCREEN_HANDLER);
-        registerBlockItem(BERRY_HARVESTER, BERRY_HARVESTER_BLOCK, ItemGroup.REDSTONE);
-
-        registerBlockEntity(JUICER, JUICER_BLOCK, JUICER_ENTITY, JUICER_SCREEN_HANDLER);
-        registerBlockItem(JUICER, JUICER_BLOCK, ItemGroup.BREWING);
+        register(BERRY_HARVESTER, BERRY_HARVESTER_BLOCK, BERRY_HARVESTER_ENTITY, BERRY_HARVESTER_SCREEN_HANDLER, ItemGroup.REDSTONE);
+        register(JUICER, JUICER_BLOCK, JUICER_ENTITY, JUICER_SCREEN_HANDLER, ItemGroup.BREWING);
     }
 
-    private static void registerBlockEntity(Identifier id, Block block, BlockEntityType<?> entity, ScreenHandlerType<?> handler) {
+    private static void register(Identifier id, Block block, BlockEntityType<?> entity, ScreenHandlerType<?> handler, ItemGroup group) {
         Registry.register(Registry.BLOCK, id, block);
         Registry.register(Registry.SCREEN_HANDLER, id, handler);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, BodaciousBerries.id(id.getPath() + "_entity"), entity);
-    }
-
-    private static void registerBlockItem(Identifier id, Block block, ItemGroup group) {
         Registry.register(Registry.ITEM, id, new BlockItem(block, new Settings().group(group)));
     }
 }
