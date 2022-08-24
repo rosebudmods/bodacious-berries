@@ -34,7 +34,7 @@ import java.util.Optional;
 
 public class JuicerBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory {
     public static final int TOTAL_BREW_TIME = 300;
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
+    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
     private int brewTime = 0;
     private boolean makingDubiousJuice = false;
     private boolean makingBerryBlend = false;
@@ -136,7 +136,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 stopJuicer(world, pos, state, juicer);
             }
         } else if (juicer.hasValidReceptacle()) {
-            DefaultedList<ItemStack> inventory = juicer.getItems();
+            DefaultedList<ItemStack> inventory = juicer.getInventoryLithium();
 
             if (recipe.isPresent()) {
                 juicer.makingBerryBlend = !recipe.get().ingredientsMatch(inventory.get(3));
@@ -144,7 +144,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 // if we're not currently brewing, start brewing with the ingredient
                 startJuicer(world, pos, state, juicer);
             } else if (inventory.get(3).isIn(BodaciousItems.BERRY_TAG) && inventory.get(4).isIn(BodaciousItems.BERRY_TAG) && inventory.get(5).isIn(BodaciousItems.BERRY_TAG)
-                                && (inventory.get(0).getItem().equals(BodaciousJuices.JUICE_RECEPTACLE) || inventory.get(1).getItem().equals(BodaciousJuices.JUICE_RECEPTACLE) || inventory.get(2).getItem().equals(BodaciousJuices.JUICE_RECEPTACLE))) {
+                    && (inventory.get(0).getItem().equals(BodaciousJuices.JUICE_RECEPTACLE) || inventory.get(1).getItem().equals(BodaciousJuices.JUICE_RECEPTACLE) || inventory.get(2).getItem().equals(BodaciousJuices.JUICE_RECEPTACLE))) {
                 // everything in the juicer is a berry, so logically we can make something
                 // of course, that doesn't mean it'll be good!
                 startJuicer(world, pos, state, juicer);
@@ -176,8 +176,13 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     @Override
-    public DefaultedList<ItemStack> getItems() {
+    public DefaultedList<ItemStack> getInventoryLithium() {
         return inventory;
+    }
+
+    @Override
+    public void setInventoryLithium(DefaultedList<ItemStack> inventory) {
+        this.inventory = inventory;
     }
 
     @Override
