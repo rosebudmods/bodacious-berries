@@ -40,7 +40,7 @@ dependencies {
     modImplementation("dev.emi:emi:${emi_version}") { transitive = false }
 
     // lithium - block pathing compat
-    shadow(files("libs/lithium-fabric-mc1.19.1-0.9.0-SNAPSHOT-api-dev.jar"))
+    shadow(files("libs/lithium-fabric-${project.lithium_api_version}-api-dev.jar"))
 
     // dependencies for config
     shadow("com.electronwill.night-config:core:${project.night_config_version}")
