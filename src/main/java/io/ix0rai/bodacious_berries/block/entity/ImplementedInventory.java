@@ -1,5 +1,6 @@
 package io.ix0rai.bodacious_berries.block.entity;
 
+import me.jellysquid.mods.lithium.api.inventory.LithiumInventory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
@@ -7,23 +8,29 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 
 /**
- * a simple implementation of {@link Inventory} with a few default methods
+ * a simple implementation of {@link LithiumInventory} with a few default methods
+ * uses names like {@link #getInventoryLithium()} for conciseness as they accomplish the same goals as the non-lithium methods
  * @author juuz, ix0rai
  */
-public interface ImplementedInventory extends Inventory {
+public interface ImplementedInventory extends LithiumInventory {
 
     /**
      * Retrieves the item list of this inventory.
      * Must return the same instance every time it's called.
      */
-    DefaultedList<ItemStack> getInventory();
+    DefaultedList<ItemStack> getInventoryLithium();
+
+    /**
+     * sets the contents of the inventory to the given list
+     */
+    void setInventoryLithium(DefaultedList<ItemStack> inventory);
 
     /**
      * Returns the inventory size.
      */
     @Override
     default int size() {
-        return getInventory().size();
+        return getInventoryLithium().size();
     }
 
     /**
@@ -46,7 +53,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default ItemStack getStack(int slot) {
-        return getInventory().get(slot);
+        return getInventoryLithium().get(slot);
     }
 
     /**
@@ -57,7 +64,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default ItemStack removeStack(int slot, int count) {
-        ItemStack result = Inventories.splitStack(getInventory(), slot, count);
+        ItemStack result = Inventories.splitStack(getInventoryLithium(), slot, count);
         if (!result.isEmpty()) {
             markDirty();
         }
@@ -70,7 +77,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default ItemStack removeStack(int slot) {
-        return Inventories.removeStack(getInventory(), slot);
+        return Inventories.removeStack(getInventoryLithium(), slot);
     }
 
     /**
@@ -82,7 +89,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default void setStack(int slot, ItemStack stack) {
-        getInventory().set(slot, stack);
+        getInventoryLithium().set(slot, stack);
         if (stack.getCount() > getMaxCountPerStack()) {
             stack.setCount(getMaxCountPerStack());
         }
@@ -93,7 +100,7 @@ public interface ImplementedInventory extends Inventory {
      */
     @Override
     default void clear() {
-        getInventory().clear();
+        getInventoryLithium().clear();
     }
 
     /**
