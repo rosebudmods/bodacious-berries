@@ -15,13 +15,10 @@ public class RainberryBush extends BasicBerryBush.FourStageBush {
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, RandomGenerator random) {
         if (state.get(getAge()) == maxAge) {
-            int i = pos.getX();
-            int j = pos.getY();
-            int k = pos.getZ();
-            double d = i + random.nextDouble();
-            double e = j + 0.7D;
-            double f = k + random.nextDouble();
-            world.addParticle(Particles.RAINBOW_PARTICLE, d, e, f, 0.0D, 0.0D, 0.0D);
+            double x = pos.getX() + random.nextDouble();
+            double y = pos.getY() + 0.7D;
+            double z = pos.getZ() + random.nextDouble();
+            world.addParticle(Particles.RAINBOW_PARTICLE, x, y, z, 0.0D, 0.0D, 0.0D);
         }
     }
 }
