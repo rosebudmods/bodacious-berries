@@ -5,10 +5,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class ChorusBerryBush extends BasicBerryBush.FourStageBush {
     public ChorusBerryBush(Identifier berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
@@ -21,7 +22,7 @@ public class ChorusBerryBush extends BasicBerryBush.FourStageBush {
     }
 
     @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, RandomGenerator random) {
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (state.get(getAge()) == maxAge) {
             double x = pos.getX() + random.nextDouble();
             double y = pos.getY() + 0.3D;
