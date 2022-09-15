@@ -139,19 +139,27 @@ public class BodaciousConfig {
     }
 
     public void setCommon(int value) {
-        this.config.set(COMMON_KEY, value);
+        setRarity(COMMON_KEY, value);
     }
 
     public void setMedium(int value) {
-        this.config.set(MEDIUM_KEY, value);
+        setRarity(MEDIUM_KEY, value);
     }
 
     public void setRare(int value) {
-        this.config.set(RARE_KEY, value);
+        setRarity(RARE_KEY, value);
     }
 
     public void setUltraRare(int value) {
-        this.config.set(ULTRA_RARE_KEY, value);
+        setRarity(ULTRA_RARE_KEY, value);
+    }
+
+    private void setRarity(String key, int value) {
+        if (value > 0) {
+            this.config.set(key, value);
+        } else {
+            this.config.set(key, 1);
+        }
     }
 
 
