@@ -34,6 +34,7 @@ import net.minecraft.world.gen.feature.util.PlacedFeatureUtil;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 
 import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
 
 import static io.ix0rai.bodacious_berries.BodaciousBerries.CONFIG;
@@ -113,18 +114,27 @@ public class BerryBushPatchGen {
         final List<TagKey<Biome>> lingonberryCategories = List.of(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA);
         final List<TagKey<Biome>> gooseberryCategories = List.of(BiomeTags.IS_FOREST, BiomeTags.IS_MOUNTAIN);
 
-        generateBerryPatches("add_saskatoon_berry_patches", saskatoonBerryCategories, patchSaskatoonBerryPlaced);
-        generateBerryPatches("add_strawberry_patches", strawberryCategories, patchStrawberryPlaced);
-        generateBerryPatches("add_raspberry_patches", saskatoonBerryCategories, patchRaspberryPlaced);
-        generateBerryPatches("add_blackberry_patches", saskatoonBerryCategories, patchBlackberryPlaced);
-        generateBerryPatches("add_chorus_berry_patches", BiomeTags.END_CITY_HAS_STRUCTURE, patchChorusBerryPlaced);
-        generateBerryPatches("add_rainberry_patches", strawberryCategories, patchRainberryPlaced);
-        generateBerryPatches("add_lingonberry_patches", lingonberryCategories, patchLingonberryPlaced);
-        generateBerryPatches("add_grapevine_patches", BiomeTags.IS_JUNGLE, patchGrapevinePlaced);
-        generateBerryPatches("add_goji_berry_patches", BiomeTags.IS_MOUNTAIN, patchGojiBerryPlaced);
-        generateBerryPatches("add_gooseberry_patches", gooseberryCategories, patchGooseberryPlaced);
-        // cloudberries generated below the minimum height will just die :(
-        generateBerryPatches("add_cloudberry_patches", BiomeTags.IS_MOUNTAIN, patchCloudberryPlaced);
+        generate(CONFIG::generateSaskatoons, "add_saskatoon_berry_patches", saskatoonBerryCategories, patchSaskatoonBerryPlaced);
+        generate(CONFIG::generateStrawberries, "add_strawberry_patches", strawberryCategories, patchStrawberryPlaced);
+        generate(CONFIG::generateBlackberries, "add_blackberry_patches", saskatoonBerryCategories, patchBlackberryPlaced);
+        generate(CONFIG::generateRaspberries, "add_raspberry_patches", saskatoonBerryCategories, patchRaspberryPlaced);
+        generate(CONFIG::generateChorusBerries, "add_chorus_berry_patches", BiomeTags.END_CITY_HAS_STRUCTURE, patchChorusBerryPlaced);
+        generate(CONFIG::generateRainberries, "add_rainberry_patches", strawberryCategories, patchRainberryPlaced);
+        generate(CONFIG::generateLingonberries, "add_lingonberry_patches", lingonberryCategories, patchLingonberryPlaced);
+        generate(CONFIG::generateGrapes, "add_grapevine_patches", BiomeTags.IS_JUNGLE, patchGrapevinePlaced);
+        generate(CONFIG::generateGojiBerries, "add_goji_berry_patches", BiomeTags.IS_MOUNTAIN, patchGojiBerryPlaced);
+        generate(CONFIG::generateGooseberries, "add_gooseberry_patches", gooseberryCategories, patchGooseberryPlaced);
+        generate(CONFIG::generateCloudberries, "add_cloudberry_patches", BiomeTags.IS_MOUNTAIN, patchCloudberryPlaced);
+    }
+
+    private static void generate(BooleanSupplier checks, String name, TagKey<Biome> tag, Holder<PlacedFeature> placedFeature) {
+        generate(checks, name, List.of(tag), placedFeature);
+    }
+
+    private static void generate(BooleanSupplier checks, String name, List<TagKey<Biome>> tags, Holder<PlacedFeature> placedFeature) {
+        if (placedFeature != null && checks.getAsBoolean()) {
+            generateBerryPatches(name, tags, placedFeature);
+        }
     }
 
     /**
@@ -170,23 +180,13 @@ public class BerryBushPatchGen {
      * @return a placed berry patch feature
      */
     public static Holder<PlacedFeature> berryPatchPlacedFeature(String name, int rarity, Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> feature, PlacementModifier heightMap) {
-        return PlacedFeatureUtil.register(BodaciousBerries.idString(name), feature,
+        return rarity == 0 ? null : PlacedFeatureUtil.register(BodaciousBerries.idString(name), feature,
                 List.of(
                         RarityFilterPlacementModifier.create(rarity),
                         InSquarePlacementModifier.getInstance(),
                         heightMap
                 )
         );
-    }
-
-    /**
-     * generates the placed berry patch feature in the specified biomes
-     * @param name the name of the feature
-     * @param tag the biome tag to generate the feature in
-     * @param placedFeature the feature to place
-     */
-    public static void generateBerryPatches(String name, TagKey<Biome> tag, Holder<PlacedFeature> placedFeature) {
-        generateBerryPatches(name, context -> context.getBiomeRegistryEntry().hasTag(tag), placedFeature);
     }
 
     /**

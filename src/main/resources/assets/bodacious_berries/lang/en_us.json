@@ -107,7 +107,15 @@
   "bodacious_berries.config.rareRarityOption": "Rare rarity",
   "bodacious_berries.config.mediumRarityOption": "Medium rarity",
   "bodacious_berries.config.commonRarityOption": "Common rarity",
-  "bodacious_berries.config.title.info": "Bodacious Berries Configuration - Extra Info",
-  "bodacious_berries.config.info.1": "All configuration values are only applied when the game is restarted.",
-  "bodacious_berries.config.info.2": "Higher values make the bushes with the corresponding rarity more uncommon, and lower values make them more common."
+  "bodacious_berries.config.generateSaskatoons": "Generate Saskatoons",
+  "bodacious_berries.config.generateRaspberries": "Generate Raspberries",
+  "bodacious_berries.config.generateBlackberries": "Generate Blackberries",
+  "bodacious_berries.config.generateStrawberries": "Generate Strawberries",
+  "bodacious_berries.config.generateChorusBerries": "Generate Chorus Berries",
+  "bodacious_berries.config.generateRainberries": "Generate Rainberries",
+  "bodacious_berries.config.generateLingonberries": "Generate Lingonberries",
+  "bodacious_berries.config.generateGrapes": "Generate Grapes",
+  "bodacious_berries.config.generateGojiBerries": "Generate Goji Berries",
+  "bodacious_berries.config.generateCloudberries": "Generate Cloudberries",
+  "bodacious_berries.config.generateGooseberries": "Generate Gooseberries"
 }
