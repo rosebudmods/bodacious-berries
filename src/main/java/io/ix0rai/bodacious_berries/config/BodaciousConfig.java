@@ -1,6 +1,7 @@
 package io.ix0rai.bodacious_berries.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +14,7 @@ import java.nio.file.Paths;
  */
 public class BodaciousConfig {
     private static final String CONFIG_FILE_NAME = "bodacious_berries.toml";
-    public static final Path CONFIG_FILE_PATH = Paths.get("config/" + CONFIG_FILE_NAME);
+    private static final Path CONFIG_FILE_PATH = Paths.get(FabricLoader.getInstance().getConfigDir().resolve(CONFIG_FILE_NAME).toUri());
     private static final String COMMON_KEY = "common_rarity";
     private static final String MEDIUM_KEY = "medium_rarity";
     private static final String RARE_KEY = "rare_rarity";
