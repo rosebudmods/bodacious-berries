@@ -2,25 +2,33 @@
 
 ## [discord](https://discord.gg/TN9gaXJ6E8) | [github](https://github.com/ix0rai/bodaciousberries) | [modrinth](https://modrinth.com/mod/berries) | [curseforge](https://www.curseforge.com/minecraft/mc-mods/bodacious-berries)
 
-# features
-### berries!
-This mod adds a huge variety of berries, all with uniques appearances and properties. There are over 10 different varieties to discover!
-![2022-03-27_18 55 33](https://user-images.githubusercontent.com/66223394/160307795-a1ab3d00-cb77-4697-bcf2-278c6e1dcaea.png)  
-*just a few of the diverse berries in bodacious_berries*
+## overview
+Bodacious Berries is a small content mod about berries. Its berries range from mundane and unobtrusive to pretty and sweet to whimsical and unique.
 
-### the juicer
-The juicer is a unique machine that will create juice out of your berries when given bottles and berries to work with. It can create a unique juice out of each vanilla and bodacious_berries berry, and also creates blends when given different combinations of berries!  
-![2022-03-27_18 56 23](https://user-images.githubusercontent.com/66223394/160307943-94df46b8-e6e7-45b7-ab7f-8cbcd9563fc1.png)  
-*the juicer at work*  
-![2022-03-27_19 36 11](https://user-images.githubusercontent.com/66223394/160308450-aa3a9e0d-1e11-40e7-a3e0-49f3ff6b3060.png)  
-*the juicer's crafting recipe*
+## features
+- 11 different varieties of berries, many with unique properties or uses!
+- Berry juice, crafted in a custom machine, the juicer!
+- Different berry blends to discover when throwing different combinations of berries into the juicer
+- An expansive configuration file, allowing you to decide for yourself how rare berries are, and letting you disable each bush's generation on a case-by-case basis
+- A machine, the berry harvester, to facilitate automatically harvesting your berries
+- Integration with many mods, such as displaying recipes with EMI and letting you craft Croptopia's juice in the bodacious berries juicer
+- Pretty berry bush models with unique shapes, that sync to a biome's foliage colour, so they look at home anywhere
 
-### the berry harvester
-The berry harvester is a custom block centered around harvesting berries. It will automatically pick berries from any bodacious_berries bush and more! The berry harvester will stop running if powered by redstone.  
-![output](https://user-images.githubusercontent.com/66223394/160307760-c71bd218-7655-4f07-96a9-c41cf4c28577.gif)  
-*the berry harvester at work*  
-![2022-03-27_19 33 04](https://user-images.githubusercontent.com/66223394/160308361-4b4689cb-3531-4201-8e09-26748738a999.png)  
-*the berry harvester's crafting recipe*  
+## dependencies
+- fabric api
 
-### dependencies
-![fabric api](https://i.imgur.com/HabVZJRm.png "kneecaps required")
+## mod integrations
+- mod menu (config screen)
+- emi (recipe viewing)
+- more berries (juice craftable with the bodacious berries juicer)
+- croptopia (juice craftable with the bodacious berries juicer)
+- improved berries (juice craftable with the bodacious berries juicer)
+- lithium (block entity and pathing optimisations)
+
+## credits
+thank you to:
+- thonkman (development help, textures)
+- mxlvilleyy (help with 2.0 texture format migration)
+- n0valey, lucille (suggestions)
+- wpgradford, nephatrine, cr4ftjunkie, milkev, sunconure11, thebutterbrotman and garogan (bug reports)
+- the quilt community discord (answering my many questions)
