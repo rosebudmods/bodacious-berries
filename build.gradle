@@ -17,6 +17,14 @@ repositories {
     maven { url = "https://maven.gegy.dev/" }
     maven { url = "https://maven.terraformersmc.com/releases/" }
     mavenCentral()
+
+    flatDir {
+        dirs "./libs"
+    }
+
+    flatDir {
+        dirs "./.gradle/loom-cache/remapped_mods"
+    }
 }
 
 archivesBaseName = project.archives_base_name
@@ -40,7 +48,7 @@ dependencies {
     modImplementation("dev.emi:emi:${emi_version}") { transitive = false }
 
     // lithium - block pathing compat
-    shadow(files("libs/lithium-fabric-${project.lithium_api_version}-api-dev.jar"))
+    include(modApiMapped(files("libs/lithium-fabric-${project.lithium_api_version}-api-dev.jar")))
 
     // dependencies for config
     shadow("com.electronwill.night-config:core:${project.night_config_version}")
