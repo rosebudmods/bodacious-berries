@@ -51,6 +51,7 @@
   "item.bodacious_berries.chorus_berry_juice_sunflower_plains": "Sunflower Plains Chorus Berry Juice",
   "item.bodacious_berries.chorus_berry_juice_swamp": "Swamp Chorus Berry Juice",
   "item.bodacious_berries.chorus_berry_juice_taiga": "Taiga Chorus Berry Juice",
+
   "block.bodacious_berries.berry_harvester": "Berry Harvester",
   "block.bodacious_berries.juicer": "Juicer",
   "block.bodacious_berries.double_saskatoon_berry_bush": "Double Saskatoon Berry Bush",
@@ -66,16 +67,23 @@
   "block.bodacious_berries.goji_berry_bush": "Goji Berry Bush",
   "block.bodacious_berries.double_goji_berry_bush": "Double Goji Berry Bush",
   "block.bodacious_berries.cloudberry_bush": "Cloudberry Bush",
+  "block.bodacious_berries.gooseberry_bush": "Gooseberry Bush",
+
   "subtitles.bodacious_berries.block.berry_bush.pick": "Berry is harvested",
+
   "effect.bodacious_berries.refreshed": "Refreshed",
+
   "bodacious_berries.receptacle": "Receptacle:",
+
   "bodacious_berries.hint.sweetness": "This drink feels like it needs just a hint of a raw kind of sweetness...",
   "bodacious_berries.hint.more_purple": "What if we combined all the different kinds of purple into one bottle of juice?",
   "bodacious_berries.hint.more_red": "You can never blend together too many red things...",
   "bodacious_berries.hint.vanilla": "This drink just doesn't feel quite vanilla enough...",
   "bodacious_berries.hint.red_and_yellow": "We already have green in here, so why not red and yellow?",
   "bodacious_berries.hint.blackberries_and_sweetness": "What if we added some sweetness and those lovely dark berries?",
+
   "emi.category.bodacious_berries.juicer": "Juicer",
+
   "tag.c.juices": "Juices",
   "tag.c.berries": "Berries",
   "tag.c.fruits": "Fruits",
@@ -102,6 +110,7 @@
   "tag.c.gooseberries": "Gooseberries",
   "tag.c.green_berries": "Green Berries",
   "tag.dehydration.hydrating_drinks": "Hydrating Drinks",
+
   "bodacious_berries.config.title": "Bodacious Berries Configuration",
   "bodacious_berries.config.ultraRareRarityOption": "Ultra rare rarity",
   "bodacious_berries.config.rareRarityOption": "Rare rarity",
