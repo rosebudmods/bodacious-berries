@@ -17,14 +17,6 @@ repositories {
     maven { url = "https://maven.gegy.dev/" }
     maven { url = "https://maven.terraformersmc.com/releases/" }
     mavenCentral()
-
-    flatDir {
-        dirs "./libs"
-    }
-
-    flatDir {
-        dirs "./.gradle/loom-cache/remapped_mods"
-    }
 }
 
 archivesBaseName = project.archives_base_name
