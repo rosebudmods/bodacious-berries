@@ -30,44 +30,28 @@ public class BodaciousBushes {
 
     public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
 
-    // ids are contained in this class to avoid loading BodaciousItems until bushes are all created
-    public static final Identifier SASKATOON_ID = BodaciousBerries.id("saskatoon_berries");
-    public static final Identifier STRAWBERRY_ID = BodaciousBerries.id("strawberries");
-    public static final Identifier RASPBERRY_ID = BodaciousBerries.id("raspberries");
-    public static final Identifier BLACKBERRY_ID = BodaciousBerries.id("blackberries");
-    public static final Identifier CHORUS_BERRY_ID = BodaciousBerries.id("chorus_berries");
-    public static final Identifier RAINBERRY_ID = BodaciousBerries.id("rainberries");
-    public static final Identifier LINGONBERRY_ID = BodaciousBerries.id("lingonberries");
-    public static final Identifier GRAPE_ID = BodaciousBerries.id("grapes");
-    public static final Identifier GOJI_BERRY_ID = BodaciousBerries.id("goji_berries");
-    public static final Identifier GOOSEBERRY_ID = BodaciousBerries.id("gooseberries");
-    public static final Identifier CLOUDBERRY_ID = BodaciousBerries.id("cloudberries");
-
-    public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(CHORUS_BERRY_ID,
+    public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berry.CHORUS_BERRIES.get(),
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
-    public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(
-            SASKATOON_ID);
+    public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(Berry.SASKATOON_BERRIES.get());
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, LARGE_SWEET_BERRY,
             DOUBLE_SASKATOON_BERRY_BUSH);
-    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush.ThreeStageBush(STRAWBERRY_ID,
+    public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush.ThreeStageBush(Berry.STRAWBERRIES,
             SMALL_SWEET_BERRY, LARGE_STRAWBERRY, 1);
-    public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(RASPBERRY_ID,
+    public static final BasicBerryBush RASPBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berry.RASPBERRIES,
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
-    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(BLACKBERRY_ID,
+    public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berry.BLACKBERRIES,
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
-    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(RAINBERRY_ID,
+    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berry.RAINBERRIES.get(),
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
-    public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(LINGONBERRY_ID,
+    public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(Berry.LINGONBERRIES,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
-    public static final BerryVine GRAPEVINE = new BerryVine(
-            GRAPE_ID);
-    public static final DoubleBerryBush DOUBLE_GOJI_BERRY_BUSH = new DoubleBerryBush(
-            GOJI_BERRY_ID);
+    public static final BerryVine GRAPEVINE = new BerryVine(Berry.GRAPES.get());
+    public static final DoubleBerryBush DOUBLE_GOJI_BERRY_BUSH = new DoubleBerryBush(Berry.GOJI_BERRIES.get());
     public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, VoxelShapes.fullCube(),
             DOUBLE_GOJI_BERRY_BUSH);
-    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(GOOSEBERRY_ID,
+    public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berry.GOOSEBERRIES,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
-    public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(CLOUDBERRY_ID,
+    public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(Berry.CLOUDBERRIES.get(),
             SMALL_SWEET_BERRY, LARGE_CLOUDBERRY, 1);
 
     public static final List<Block> BERRY_BUSHES = new ArrayList<>();
@@ -93,7 +77,7 @@ public class BodaciousBushes {
         Registry.register(Registry.BLOCK, BodaciousBerries.id(name), block);
         BERRY_BUSHES.add(block);
     }
-    
+
     private static void registerWithoutColourProvider(String name, Block block) {
         register(name, block);
         COLOUR_PROVIDER_EXCLUDED.add(block);

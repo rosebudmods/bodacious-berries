@@ -1,13 +1,13 @@
 package io.ix0rai.bodacious_berries.block;
 
 import io.ix0rai.bodacious_berries.mixin.DamageSourceInvoker;
+import io.ix0rai.bodacious_berries.registry.Berry;
 import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
@@ -22,7 +22,7 @@ public class SpikedBerryBush extends BasicBerryBush {
      * derived from {@link BasicBerryBush}
      * @param damage the amount of damage the berry bush does on contact
      */
-    public SpikedBerryBush(Identifier berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
+    public SpikedBerryBush(Berry berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
         super(berryType, maxAge, smallShape, largeShape, sizeChangeAge);
         if (damage < 1.0f) {
             throw new IllegalArgumentException("damage must be greater than or equal to 1");
@@ -32,7 +32,7 @@ public class SpikedBerryBush extends BasicBerryBush {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity) || SMALL_ENTITIES.contains(entity.getType()) || state.get(getAge()) < sizeChangeAge) {
+        if (!(entity instanceof LivingEntity) || UNSLOWED_ENTITIES.contains(entity.getType()) || state.get(getAge()) < sizeChangeAge) {
             return;
         }
 
@@ -52,7 +52,7 @@ public class SpikedBerryBush extends BasicBerryBush {
     }
 
     public static class SpikyFourStageBush extends SpikedBerryBush {
-        public SpikyFourStageBush(Identifier berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
+        public SpikyFourStageBush(Berry berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
             super(berryType, 4, smallShape, largeShape, sizeChangeAge, damage);
         }
 

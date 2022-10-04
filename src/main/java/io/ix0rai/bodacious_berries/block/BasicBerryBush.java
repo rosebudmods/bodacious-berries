@@ -1,5 +1,6 @@
 package io.ix0rai.bodacious_berries.block;
 
+import io.ix0rai.bodacious_berries.registry.Berry;
 import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
 import io.ix0rai.bodacious_berries.registry.BodaciousSounds;
 import net.minecraft.block.Block;
@@ -44,8 +45,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected final VoxelShape largeShape;
     protected final int sizeChangeAge;
 
-    // animals that can move through bushes without being slowed
-    public static final List<EntityType<?>> SMALL_ENTITIES = List.of(
+    public static final List<EntityType<?>> UNSLOWED_ENTITIES = List.of(
             EntityType.FOX,
             EntityType.BEE,
             EntityType.RABBIT,
@@ -65,9 +65,9 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param largeShape large voxel shape for the bush
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
-    public BasicBerryBush(Identifier berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+    public BasicBerryBush(Berry berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);
-        this.berryType = berryType;
+        this.berryType = berryType.get();
         this.maxAge = maxAge;
         this.smallShape = smallShape;
         this.largeShape = largeShape;
@@ -119,7 +119,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && !SMALL_ENTITIES.contains(entity.getType())) {
+        if (entity instanceof LivingEntity && !UNSLOWED_ENTITIES.contains(entity.getType())) {
             entity.slowMovement(state, BERRY_BUSH_SLOWING_VECTOR);
         }
     }
@@ -217,7 +217,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     public static class FourStageBush extends BasicBerryBush {
-        public FourStageBush(Identifier berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        public FourStageBush(Berry berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
             super(berryType, 4, smallShape, largeShape, sizeChangeAge);
         }
 
@@ -228,7 +228,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     public static class ThreeStageBush extends BasicBerryBush {
-        public ThreeStageBush(Identifier berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        public ThreeStageBush(Berry berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
             super(berryType, 3, smallShape, largeShape, sizeChangeAge);
         }
 

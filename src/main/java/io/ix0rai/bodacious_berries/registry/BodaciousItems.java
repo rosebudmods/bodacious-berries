@@ -33,17 +33,17 @@ public class BodaciousItems {
     public static final AliasedBlockItem CLOUDBERRIES = new AliasedBlockItem(BodaciousBushes.CLOUDBERRY_BUSH, berrySettings.food(new FoodComponent.Builder().hunger(2).saturationModifier(1f).statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600, 1), 1).snack().build()));
 
     public static void register() {
-        register(SASKATOON_BERRIES, BodaciousBushes.SASKATOON_ID);
-        register(STRAWBERRIES, BodaciousBushes.STRAWBERRY_ID);
-        register(RASPBERRIES, BodaciousBushes.RASPBERRY_ID);
-        register(BLACKBERRIES, BodaciousBushes.BLACKBERRY_ID);
-        register(CHORUS_BERRIES, BodaciousBushes.CHORUS_BERRY_ID);
-        register(RAINBERRIES, BodaciousBushes.RAINBERRY_ID);
-        register(LINGONBERRIES, BodaciousBushes.LINGONBERRY_ID);
-        register(GRAPES, BodaciousBushes.GRAPE_ID);
-        register(GOJI_BERRIES, BodaciousBushes.GOJI_BERRY_ID);
-        register(GOOSEBERRIES, BodaciousBushes.GOOSEBERRY_ID);
-        register(CLOUDBERRIES, BodaciousBushes.CLOUDBERRY_ID);
+        register(SASKATOON_BERRIES, Berry.SASKATOON_BERRIES);
+        register(STRAWBERRIES, Berry.STRAWBERRIES);
+        register(RASPBERRIES, Berry.RASPBERRIES);
+        register(BLACKBERRIES, Berry.BLACKBERRIES);
+        register(CHORUS_BERRIES, Berry.CHORUS_BERRIES);
+        register(RAINBERRIES, Berry.RAINBERRIES);
+        register(LINGONBERRIES, Berry.LINGONBERRIES);
+        register(GRAPES, Berry.GRAPES);
+        register(GOJI_BERRIES, Berry.GOJI_BERRIES);
+        register(GOOSEBERRIES, Berry.GOOSEBERRIES);
+        register(CLOUDBERRIES, Berry.CLOUDBERRIES);
     }
 
     /**
@@ -52,9 +52,9 @@ public class BodaciousItems {
      */
     private static final float BERRY_COMPOST_LEVEL_INCREASE_CHANCE = 0.4f;
 
-    private static void register(Item berry, Identifier id) {
-        Registry.register(Registry.ITEM, id, berry);
-        CompostingChanceRegistry.INSTANCE.add(berry, BERRY_COMPOST_LEVEL_INCREASE_CHANCE);
+    private static void register(Item item, Berry id) {
+        Registry.register(Registry.ITEM, id.get(), item);
+        CompostingChanceRegistry.INSTANCE.add(item, BERRY_COMPOST_LEVEL_INCREASE_CHANCE);
     }
 
     private static Item.Settings settings(int hunger, float saturation) {

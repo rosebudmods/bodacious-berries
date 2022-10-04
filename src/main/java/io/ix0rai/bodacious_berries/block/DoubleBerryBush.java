@@ -46,7 +46,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && !BasicBerryBush.SMALL_ENTITIES.contains(entity.getType())) {
+        if (entity instanceof LivingEntity && !BasicBerryBush.UNSLOWED_ENTITIES.contains(entity.getType())) {
             entity.slowMovement(state, DOUBLE_BUSH_SLOWING_VECTOR);
         }
     }
