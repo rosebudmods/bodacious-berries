@@ -1,5 +1,6 @@
 package io.ix0rai.bodacious_berries.block;
 
+import io.ix0rai.bodacious_berries.registry.Berry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -9,7 +10,6 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class CloudberryBush extends BasicBerryBush.ThreeStageBush {
     private static final BooleanProperty DYING = BooleanProperty.of("dying");
 
-    public CloudberryBush(Identifier berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+    public CloudberryBush(Berry berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         super(berryType, smallShape, largeShape, sizeChangeAge);
         this.setDefaultState(this.stateManager.getDefaultState().with(DYING, false));
     }

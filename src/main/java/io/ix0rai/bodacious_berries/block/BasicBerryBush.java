@@ -65,13 +65,25 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param largeShape large voxel shape for the bush
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
-    public BasicBerryBush(Berry berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+    public BasicBerryBush(Identifier berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);
-        this.berryType = berryType.get();
+        this.berryType = berryType;
         this.maxAge = maxAge;
         this.smallShape = smallShape;
         this.largeShape = largeShape;
         this.sizeChangeAge = sizeChangeAge;
+    }
+
+    /**
+     * berry bush constructor
+     * @param berryType which berries will be given when this bush is picked from
+     * @param maxAge maximum age bush can grow to
+     * @param smallShape small voxel shape for the bush
+     * @param largeShape large voxel shape for the bush
+     * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
+     */
+    public BasicBerryBush(Berry berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        this(berryType.get(), maxAge, smallShape, largeShape, sizeChangeAge);
     }
 
     /**

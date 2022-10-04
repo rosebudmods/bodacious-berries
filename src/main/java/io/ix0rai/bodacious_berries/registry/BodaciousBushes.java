@@ -1,7 +1,14 @@
 package io.ix0rai.bodacious_berries.registry;
 
 import io.ix0rai.bodacious_berries.BodaciousBerries;
-import io.ix0rai.bodacious_berries.block.*;
+import io.ix0rai.bodacious_berries.block.BasicBerryBush;
+import io.ix0rai.bodacious_berries.block.BerryVine;
+import io.ix0rai.bodacious_berries.block.ChorusBerryBush;
+import io.ix0rai.bodacious_berries.block.CloudberryBush;
+import io.ix0rai.bodacious_berries.block.DoubleBerryBush;
+import io.ix0rai.bodacious_berries.block.GrowingBerryBush;
+import io.ix0rai.bodacious_berries.block.RainberryBush;
+import io.ix0rai.bodacious_berries.block.SpikedBerryBush;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -30,9 +37,9 @@ public class BodaciousBushes {
 
     public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
 
-    public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berry.CHORUS_BERRIES.get(),
+    public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berry.CHORUS_BERRIES,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
-    public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(Berry.SASKATOON_BERRIES.get());
+    public static final DoubleBerryBush DOUBLE_SASKATOON_BERRY_BUSH = new DoubleBerryBush(Berry.SASKATOON_BERRIES);
     public static final GrowingBerryBush SASKATOON_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, LARGE_SWEET_BERRY,
             DOUBLE_SASKATOON_BERRY_BUSH);
     public static final BasicBerryBush STRAWBERRY_BUSH = new BasicBerryBush.ThreeStageBush(Berry.STRAWBERRIES,
@@ -41,17 +48,17 @@ public class BodaciousBushes {
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
     public static final BasicBerryBush BLACKBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berry.BLACKBERRIES,
             SMALL_SWEET_BERRY, LARGE_RASPBERRY, 1, 1.0f);
-    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berry.RAINBERRIES.get(),
+    public static final RainberryBush RAINBERRY_BUSH = new RainberryBush(Berry.RAINBERRIES,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 2);
     public static final BasicBerryBush LINGONBERRY_BUSH = new BasicBerryBush.FourStageBush(Berry.LINGONBERRIES,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 1);
     public static final BerryVine GRAPEVINE = new BerryVine(Berry.GRAPES.get());
-    public static final DoubleBerryBush DOUBLE_GOJI_BERRY_BUSH = new DoubleBerryBush(Berry.GOJI_BERRIES.get());
+    public static final DoubleBerryBush DOUBLE_GOJI_BERRY_BUSH = new DoubleBerryBush(Berry.GOJI_BERRIES);
     public static final GrowingBerryBush GOJI_BERRY_BUSH = new GrowingBerryBush(SMALL_SWEET_BERRY, VoxelShapes.fullCube(),
             DOUBLE_GOJI_BERRY_BUSH);
     public static final BasicBerryBush GOOSEBERRY_BUSH = new SpikedBerryBush.SpikyFourStageBush(Berry.GOOSEBERRIES,
             SMALL_SWEET_BERRY, LARGE_SWEET_BERRY, 1, 2.0f);
-    public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(Berry.CLOUDBERRIES.get(),
+    public static final CloudberryBush CLOUDBERRY_BUSH = new CloudberryBush(Berry.CLOUDBERRIES,
             SMALL_SWEET_BERRY, LARGE_CLOUDBERRY, 1);
 
     public static final List<Block> BERRY_BUSHES = new ArrayList<>();
