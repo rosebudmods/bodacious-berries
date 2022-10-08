@@ -4,13 +4,12 @@ import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.block.BerryBush;
 import io.ix0rai.bodacious_berries.block.DoubleBerryBush;
 import io.ix0rai.bodacious_berries.block.GrowingBerryBush;
+import io.ix0rai.bodacious_berries.registry.Berry;
 import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.tag.BiomeTags;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Holder;
 import net.minecraft.util.registry.Registry;
@@ -39,32 +38,14 @@ import java.util.function.Predicate;
 
 import static io.ix0rai.bodacious_berries.BodaciousBerries.CONFIG;
 
+// note: all casting done in this class is safe, but it has to be performed due to array creation limitations
+@SuppressWarnings("unchecked")
 public class BerryBushPatchGen {
     public static Feature<DefaultFeatureConfig> grapevineFeature;
     public static Feature<DoubleBushFeatureConfig> doubleBushFeature;
 
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchSaskatoonBerry;
-    public static Holder<PlacedFeature> patchSaskatoonBerryPlaced;
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchStrawberry;
-    public static Holder<PlacedFeature> patchStrawberryPlaced;
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchRaspberry;
-    public static Holder<PlacedFeature> patchRaspberryPlaced;
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchBlackberry;
-    public static Holder<PlacedFeature> patchBlackberryPlaced;
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchChorusBerry;
-    public static Holder<PlacedFeature> patchChorusBerryPlaced;
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchRainberry;
-    public static Holder<PlacedFeature> patchRainberryPlaced;
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchLingonberry;
-    public static Holder<PlacedFeature> patchLingonberryPlaced;
-    public static Holder<ConfiguredFeature<DefaultFeatureConfig, ?>> patchGrapevine;
-    public static Holder<PlacedFeature> patchGrapevinePlaced;
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchGojiBerry;
-    public static Holder<PlacedFeature> patchGojiBerryPlaced;
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchGooseberry;
-    public static Holder<PlacedFeature> patchGooseberryPlaced;
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> patchCloudberry;
-    public static Holder<PlacedFeature> patchCloudberryPlaced;
+    public static Holder<?>[] berryPatches = new Holder[Berry.values().length];
+    public static Holder<?>[] placedBerryPatches = new Holder[Berry.values().length];
 
     public static void register() {
         registerFeatures();
@@ -79,56 +60,54 @@ public class BerryBushPatchGen {
     }
 
     private static void registerConfiguredFeatures() {
-        patchSaskatoonBerry = berryPatchConfiguredFeature("patch_saskatoon_berry", BodaciousBushes.SASKATOON_BERRY_BUSH, BodaciousBushes.DOUBLE_SASKATOON_BERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchStrawberry = berryPatchConfiguredFeature("patch_strawberry", BodaciousBushes.STRAWBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchBlackberry = berryPatchConfiguredFeature("patch_blackberry", BodaciousBushes.BLACKBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchRaspberry = berryPatchConfiguredFeature("patch_raspberry", BodaciousBushes.RASPBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchChorusBerry = berryPatchConfiguredFeature("patch_chorus_berry", BodaciousBushes.CHORUS_BERRY_BUSH, Blocks.END_STONE);
-        patchRainberry = berryPatchConfiguredFeature("patch_rainberry", BodaciousBushes.RAINBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchLingonberry = berryPatchConfiguredFeature("patch_lingonberry", BodaciousBushes.LINGONBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchGrapevine = ConfiguredFeatureUtil.register(BodaciousBerries.idString("patch_grapevine"), grapevineFeature, DefaultFeatureConfig.INSTANCE);
-        patchGojiBerry = berryPatchConfiguredFeature("patch_goji_berry", BodaciousBushes.GOJI_BERRY_BUSH, BodaciousBushes.DOUBLE_GOJI_BERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchGooseberry = berryPatchConfiguredFeature("patch_gooseberry", BodaciousBushes.GOOSEBERRY_BUSH, Blocks.GRASS_BLOCK);
-        patchCloudberry = berryPatchConfiguredFeature("patch_cloudberry", BodaciousBushes.CLOUDBERRY_BUSH, Blocks.GRASS_BLOCK);
+        for (Berry berry : Berry.values()) {
+            String featureName = "patch_" + berry.toString();
+            // grapevine needs special treatment as it's not random patch
+            var configuredFeature = berry == Berry.GRAPES ?
+                    ConfiguredFeatureUtil.register(BodaciousBerries.idString(featureName), grapevineFeature, DefaultFeatureConfig.INSTANCE) :
+                    berryPatchConfiguredFeature(
+                            featureName,
+                            BodaciousBushes.getBushFor(berry),
+                            BodaciousBushes.getDoubleBushFor(berry),
+                            berry.getPlacedOn()
+                    );
+            berryPatches[berry.ordinal()] = configuredFeature;
+        }
     }
 
     private static void registerPlacedFeatures() {
-        patchSaskatoonBerryPlaced = berryPatchPlacedFeature("patch_saskatoon_berry_placed", CONFIG.common(), patchSaskatoonBerry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchStrawberryPlaced = berryPatchPlacedFeature("patch_strawberry_placed", CONFIG.common(), patchStrawberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchBlackberryPlaced = berryPatchPlacedFeature("patch_blackberry_placed", CONFIG.medium(), patchBlackberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchRaspberryPlaced = berryPatchPlacedFeature("patch_raspberry_placed", CONFIG.medium(), patchRaspberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchChorusBerryPlaced = berryPatchPlacedFeature("patch_chorus_berry_placed", CONFIG.rare(), patchChorusBerry, PlacedFeatureUtil.MOTION_BLOCKING_HEIGHTMAP);
-        patchRainberryPlaced = berryPatchPlacedFeature("patch_rainberry_placed", CONFIG.ultraRare(), patchRainberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchLingonberryPlaced = berryPatchPlacedFeature("patch_lingonberry_placed", CONFIG.medium(), patchLingonberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchGrapevinePlaced = PlacedFeatureUtil.register(BodaciousBerries.idString("patch_grapevine_placed"), patchGrapevine,
-                List.of(CountPlacementModifier.create(127), HeightRangePlacementModifier.createUniform(YOffset.fixed(50), YOffset.fixed(255)), BiomePlacementModifier.getInstance(), RarityFilterPlacementModifier.create(CONFIG.medium()))
-        );
-        patchGojiBerryPlaced = berryPatchPlacedFeature("patch_goji_berry_placed", CONFIG.rare(), patchGojiBerry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchGooseberryPlaced = berryPatchPlacedFeature("patch_gooseberry_placed", CONFIG.medium(), patchGooseberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
-        patchCloudberryPlaced = berryPatchPlacedFeature("patch_cloudberry_placed", CONFIG.rare(), patchCloudberry, PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP);
+        for (Berry berry : Berry.values()) {
+            String featureName = "patch_" + berry.toString() + "_placed";
+            Holder<ConfiguredFeature<?, ?>> feature = (Holder<ConfiguredFeature<?, ?>>) berryPatches[berry.ordinal()];
+
+            // again, grapevine needs special treatment as it's not random patch
+            var placedFeature = berry == Berry.GRAPES ?
+                    PlacedFeatureUtil.register(BodaciousBerries.idString("patch_grapevine_placed"), feature,
+                            List.of(CountPlacementModifier.create(127), HeightRangePlacementModifier.createUniform(YOffset.fixed(50), YOffset.fixed(255)), BiomePlacementModifier.getInstance(), RarityFilterPlacementModifier.create(CONFIG.medium()))
+                    ) :
+                    berryPatchPlacedFeature(
+                            featureName,
+                            berry.getRarity(),
+                            feature,
+                            berry.getHeightmap()
+                    );
+            placedBerryPatches[berry.ordinal()] = placedFeature;
+        }
     }
 
     private static void placePatches() {
-        final List<TagKey<Biome>> saskatoonBerryCategories = List.of(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA, BiomeTags.IS_MOUNTAIN);
-        final List<TagKey<Biome>> strawberryCategories = List.of(BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE, BiomeTags.IS_FOREST, BiomeTags.SWAMP_HUT_HAS_STRUCTURE);
-        final List<TagKey<Biome>> lingonberryCategories = List.of(BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA);
-        final List<TagKey<Biome>> gooseberryCategories = List.of(BiomeTags.IS_FOREST, BiomeTags.IS_MOUNTAIN);
+        for (Berry berry : Berry.values()) {
+            String featureName = "place_" + berry.toString() + "_patches";
+            Holder<PlacedFeature> placedFeature = (Holder<PlacedFeature>) placedBerryPatches[berry.ordinal()];
 
-        generate(CONFIG::generateSaskatoons, "add_saskatoon_berry_patches", saskatoonBerryCategories, patchSaskatoonBerryPlaced);
-        generate(CONFIG::generateStrawberries, "add_strawberry_patches", strawberryCategories, patchStrawberryPlaced);
-        generate(CONFIG::generateBlackberries, "add_blackberry_patches", saskatoonBerryCategories, patchBlackberryPlaced);
-        generate(CONFIG::generateRaspberries, "add_raspberry_patches", saskatoonBerryCategories, patchRaspberryPlaced);
-        generate(CONFIG::generateChorusBerries, "add_chorus_berry_patches", BiomeTags.END_CITY_HAS_STRUCTURE, patchChorusBerryPlaced);
-        generate(CONFIG::generateRainberries, "add_rainberry_patches", strawberryCategories, patchRainberryPlaced);
-        generate(CONFIG::generateLingonberries, "add_lingonberry_patches", lingonberryCategories, patchLingonberryPlaced);
-        generate(CONFIG::generateGrapes, "add_grapevine_patches", BiomeTags.IS_JUNGLE, patchGrapevinePlaced);
-        generate(CONFIG::generateGojiBerries, "add_goji_berry_patches", BiomeTags.IS_MOUNTAIN, patchGojiBerryPlaced);
-        generate(CONFIG::generateGooseberries, "add_gooseberry_patches", gooseberryCategories, patchGooseberryPlaced);
-        generate(CONFIG::generateCloudberries, "add_cloudberry_patches", BiomeTags.IS_MOUNTAIN, patchCloudberryPlaced);
-    }
-
-    private static void generate(BooleanSupplier checks, String name, TagKey<Biome> tag, Holder<PlacedFeature> placedFeature) {
-        generate(checks, name, List.of(tag), placedFeature);
+            // no specialness for grapevines this time >:)
+            generate(
+                    () -> CONFIG.isGenerating(berry),
+                    featureName,
+                    berry.getGenerationCategories(),
+                    placedFeature
+            );
+        }
     }
 
     private static void generate(BooleanSupplier checks, String name, List<TagKey<Biome>> tags, Holder<PlacedFeature> placedFeature) {
@@ -139,37 +118,26 @@ public class BerryBushPatchGen {
 
     /**
      * creates and registers a berry patch feature, with the default age of the berry bush being the maximum age of said berry bush
-     * @param name the name of the feature
-     * @param bush the bush to generate
-     * @param placedOn which block the bush should be placed on
-     * @return a berry patch configured feature
-     */
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> berryPatchConfiguredFeature(String name, BerryBush bush, Block placedOn) {
-        return ConfiguredFeatureUtil.register(BodaciousBerries.idString(name), Feature.RANDOM_PATCH,
-                ConfiguredFeatureUtil.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockFeatureConfig(BlockStateProvider.of(((Block) bush).getDefaultState().with(bush.getAge(), bush.getMaxAge()))),
-                        List.of(placedOn)
-                )
-        );
-    }
-
-    /**
-     * creates and registers a berry patch feature, with the default age of the berry bush being the maximum age of said berry bush
-     * <br>also generates the double version of said berry bush alongside it
+     * <br>also generates the double version of said berry bush alongside it if the berry bush has a double version
      * @param name the name of the feature
      * @param smallBush the bush to generate
      * @param tallBush the tall version of the bush
      * @param placedOn which block the bush should be placed on
      * @return a berry patch configured feature
      */
-    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> berryPatchConfiguredFeature(String name, GrowingBerryBush smallBush, DoubleBerryBush tallBush, Block placedOn) {
-        return ConfiguredFeatureUtil.register(BodaciousBerries.idString(name), Feature.RANDOM_PATCH,
+    public static Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> berryPatchConfiguredFeature(String name, BerryBush smallBush, BerryBush tallBush, Block placedOn) {
+        RandomPatchFeatureConfig feature = tallBush instanceof DoubleBerryBush && smallBush instanceof GrowingBerryBush ?
                 ConfiguredFeatureUtil.createRandomPatchFeatureConfig(doubleBushFeature,
-                        new DoubleBushFeatureConfig(BlockStateProvider.of(smallBush.getDefaultState().with(smallBush.getAge(), smallBush.getMaxAge())),
-                                BlockStateProvider.of(tallBush.getDefaultState().with(DoubleBerryBush.AGE, tallBush.getMaxAge()))),
+                        new DoubleBushFeatureConfig(BlockStateProvider.of(((Block) smallBush).getDefaultState().with(smallBush.getAge(), smallBush.getMaxAge())),
+                                BlockStateProvider.of(((Block) tallBush).getDefaultState().with(DoubleBerryBush.AGE, tallBush.getMaxAge()))),
                         List.of(placedOn)
-                )
-        );
+                ) :
+                ConfiguredFeatureUtil.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
+                        new SimpleBlockFeatureConfig(BlockStateProvider.of(((Block) smallBush).getDefaultState().with(smallBush.getAge(), smallBush.getMaxAge()))),
+                        List.of(placedOn)
+                );
+
+        return ConfiguredFeatureUtil.register(BodaciousBerries.idString(name), Feature.RANDOM_PATCH, feature);
     }
 
     /**
@@ -179,7 +147,7 @@ public class BerryBushPatchGen {
      * @param feature the feature to place
      * @return a placed berry patch feature
      */
-    public static Holder<PlacedFeature> berryPatchPlacedFeature(String name, int rarity, Holder<ConfiguredFeature<RandomPatchFeatureConfig, ?>> feature, PlacementModifier heightMap) {
+    public static Holder<PlacedFeature> berryPatchPlacedFeature(String name, int rarity, Holder<ConfiguredFeature<?, ?>> feature, PlacementModifier heightMap) {
         return rarity == 0 ? null : PlacedFeatureUtil.register(BodaciousBerries.idString(name), feature,
                 List.of(
                         RarityFilterPlacementModifier.create(rarity),

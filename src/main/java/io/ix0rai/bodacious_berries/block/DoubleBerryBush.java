@@ -16,12 +16,10 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -33,16 +31,16 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
     protected static final int MAX_BERRY_AMOUNT = 5;
 
-    protected Identifier berryType;
+    protected Berry berry;
 
-    public DoubleBerryBush(Berry berryType) {
+    public DoubleBerryBush(Berry berry) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);
-        this.berryType = berryType.get();
+        this.berry = berry;
     }
 
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return Registry.ITEM.get(berryType).getDefaultStack();
+        return this.getBerryItem().getDefaultStack();
     }
 
     @Override
@@ -98,7 +96,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (state.get(getAge()) == MAX_AGE) {
-            return BasicBerryBush.pickBerries(pos, world, state, Registry.ITEM.get(berryType));
+            return BasicBerryBush.pickBerries(pos, world, state, this.getBerryItem());
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
@@ -120,8 +118,8 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     }
 
     @Override
-    public Identifier getBerryType() {
-        return berryType;
+    public Berry getBerry() {
+        return berry;
     }
 
     @Override

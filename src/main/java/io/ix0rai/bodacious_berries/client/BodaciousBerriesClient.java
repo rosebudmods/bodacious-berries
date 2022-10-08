@@ -1,10 +1,11 @@
 package io.ix0rai.bodacious_berries.client;
 
+import io.ix0rai.bodacious_berries.block.BerryBush;
 import io.ix0rai.bodacious_berries.block.entity.BerryHarvesterScreen;
 import io.ix0rai.bodacious_berries.block.entity.JuicerScreen;
 import io.ix0rai.bodacious_berries.client.particle.Particles;
-import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
 import io.ix0rai.bodacious_berries.registry.BodaciousBlocks;
+import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -23,7 +24,9 @@ public class BodaciousBerriesClient implements ClientModInitializer {
         HandledScreens.register(BodaciousBlocks.BERRY_HARVESTER_SCREEN_HANDLER, BerryHarvesterScreen::new);
         HandledScreens.register(BodaciousBlocks.JUICER_SCREEN_HANDLER, JuicerScreen::new);
 
-        for (Block block : BodaciousBushes.BERRY_BUSHES) {
+        for (BerryBush bush : BodaciousBushes.getBushes()) {
+            Block block = (Block) bush;
+
             // ensure bush is rendered with a cutout
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
 

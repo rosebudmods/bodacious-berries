@@ -8,8 +8,8 @@ import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 public class RainberryBush extends BasicBerryBush.FourStageBush {
-    public RainberryBush(Berry berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        super(berryType, smallShape, largeShape, sizeChangeAge);
+    public RainberryBush(Berry berry, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        super(berry, smallShape, largeShape, sizeChangeAge);
     }
 
     @Override

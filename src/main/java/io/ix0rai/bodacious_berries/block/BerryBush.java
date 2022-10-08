@@ -1,20 +1,22 @@
 package io.ix0rai.bodacious_berries.block;
 
+import io.ix0rai.bodacious_berries.registry.Berry;
 import me.jellysquid.mods.lithium.api.pathing.BlockPathingBehavior;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.item.Item;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public interface BerryBush extends Fertilizable, BlockPathingBehavior {
     /**
      * @return the type of berry that this bush gives when picked
      */
-    Identifier getBerryType();
+    Berry getBerry();
 
     /**
      * @return the maximum age to which the bush can grow
@@ -73,5 +75,12 @@ public interface BerryBush extends Fertilizable, BlockPathingBehavior {
         } else {
             world.setBlockState(pos, state.with(age, 0), Block.NOTIFY_LISTENERS);
         }
+    }
+
+    /**
+     * gets the registered item associated with the bush's berry
+     */
+    default Item getBerryItem() {
+        return Registry.ITEM.get(getBerry().get());
     }
 }

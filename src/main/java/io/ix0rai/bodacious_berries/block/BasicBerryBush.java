@@ -21,12 +21,10 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -39,7 +37,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected static final int GROW_CHANCE = 5;
     protected static final int MAX_BERRY_AMOUNT = 3;
 
-    protected final Identifier berryType;
+    protected final Berry berry;
     protected final int maxAge;
     protected final VoxelShape smallShape;
     protected final VoxelShape largeShape;
@@ -59,31 +57,19 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     /**
      * berry bush constructor
-     * @param berryType which berries will be given when this bush is picked from
+     * @param berry which berries will be given when this bush is picked from
      * @param maxAge maximum age bush can grow to
      * @param smallShape small voxel shape for the bush
      * @param largeShape large voxel shape for the bush
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
-    public BasicBerryBush(Identifier berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+    public BasicBerryBush(Berry berry, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);
-        this.berryType = berryType;
+        this.berry = berry;
         this.maxAge = maxAge;
         this.smallShape = smallShape;
         this.largeShape = largeShape;
         this.sizeChangeAge = sizeChangeAge;
-    }
-
-    /**
-     * berry bush constructor
-     * @param berryType which berries will be given when this bush is picked from
-     * @param maxAge maximum age bush can grow to
-     * @param smallShape small voxel shape for the bush
-     * @param largeShape large voxel shape for the bush
-     * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
-     */
-    public BasicBerryBush(Berry berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        this(berryType.get(), maxAge, smallShape, largeShape, sizeChangeAge);
     }
 
     /**
@@ -92,7 +78,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return Registry.ITEM.get(berryType).getDefaultStack();
+        return this.getBerryItem().getDefaultStack();
     }
 
     /**
@@ -150,7 +136,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
             return ActionResult.PASS;
         } else if (currentAge == maxAge) {
             // otherwise, give berries/unripe berries
-            return pickBerries(pos, world, state, Registry.ITEM.get(berryType));
+            return pickBerries(pos, world, state, this.getBerryItem());
         } else {
             // otherwise, do default use action from superclass
             return super.onUse(state, world, pos, player, hand, hit);
@@ -219,8 +205,8 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     @Override
-    public Identifier getBerryType() {
-        return berryType;
+    public Berry getBerry() {
+        return berry;
     }
 
     @Override

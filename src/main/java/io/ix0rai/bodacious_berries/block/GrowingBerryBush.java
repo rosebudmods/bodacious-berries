@@ -20,7 +20,7 @@ public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 
     public GrowingBerryBush(VoxelShape smallShape, VoxelShape largeShape, DoubleBerryBush bush) {
-        super(bush.getBerryType(), 2, smallShape, largeShape, 2);
+        super(bush.getBerry(), 2, smallShape, largeShape, 2);
         this.futureBush = bush;
     }
 

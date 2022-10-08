@@ -1,5 +1,6 @@
 package io.ix0rai.bodacious_berries.block;
 
+import io.ix0rai.bodacious_berries.registry.Berry;
 import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,11 +13,9 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -27,16 +26,16 @@ public class BerryVine extends VineBlock implements BerryBush {
 
     public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
 
-    protected Identifier berryType;
+    protected Berry berry;
 
-    public BerryVine(Identifier berryType) {
+    public BerryVine(Berry berry) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);
-        this.berryType = berryType;
+        this.berry = berry;
     }
 
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(Registry.ITEM.get(berryType));
+        return this.getBerryItem().getDefaultStack();
     }
 
     @Override
@@ -85,7 +84,7 @@ public class BerryVine extends VineBlock implements BerryBush {
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         } else if (state.get(AGE) == MAX_AGE) {
-            return BasicBerryBush.pickBerries(pos, world, state, Registry.ITEM.get(berryType));
+            return BasicBerryBush.pickBerries(pos, world, state, this.getBerryItem());
         } else {
             return super.onUse(state, world, pos, player, hand, hit);
         }
@@ -107,8 +106,8 @@ public class BerryVine extends VineBlock implements BerryBush {
     }
 
     @Override
-    public Identifier getBerryType() {
-        return berryType;
+    public Berry getBerry() {
+        return berry;
     }
 
     @Override

@@ -27,7 +27,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -83,7 +82,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
                     }
 
                     // insert items, doubling if we have a double bush
-                    harvester.insert(new ItemStack(Registry.ITEM.get(berryBush.getBerryType()), berryBush.getMaxBerryAmount() * (secondaryBushState == null ? 1 : 2) - 1));
+                    harvester.insert(new ItemStack(berryBush.getBerryItem(), berryBush.getMaxBerryAmount() * (secondaryBushState == null ? 1 : 2) - 1));
 
                     // play pick sound and reset bush growth
                     world.playSound(null, pos, BodaciousSounds.BERRY_PICK, SoundCategory.BLOCKS, 0.3F, 1.5F);
