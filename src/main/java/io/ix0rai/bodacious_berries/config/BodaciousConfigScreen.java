@@ -42,32 +42,32 @@ public class BodaciousConfigScreen extends SpruceScreen {
         super(BodaciousBerries.translatableText("config.title"));
         this.parent = parent;
 
-        this.commonRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.commonRarityOption"),
+        this.commonRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.common_rarity_option"),
                 CONFIG::common,
                 CONFIG::setCommon,
                 null
         );
 
-        this.mediumRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.mediumRarityOption"),
+        this.mediumRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.medium_rarity_option"),
                 CONFIG::medium,
                 CONFIG::setMedium,
                 null
         );
 
-        this.rareRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.rareRarityOption"),
+        this.rareRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.rare_rarity_option"),
                 CONFIG::rare,
                 CONFIG::setRare,
                 null
         );
 
-        this.ultraRareRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.ultraRareRarityOption"),
+        this.ultraRareRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.ultra_rare_rarity_option"),
                 CONFIG::ultraRare,
                 CONFIG::setUltraRare,
                 null
         );
 
         for (Berry berry : Berry.values()) {
-            generationOptions[berry.ordinal()] = createGenOption(berry.langKey(),
+            generationOptions[berry.ordinal()] = createGenOption(berry.toString(),
                     () -> CONFIG.isGenerating(berry),
                     value -> CONFIG.setGenerating(berry, value)
             );
@@ -81,7 +81,7 @@ public class BodaciousConfigScreen extends SpruceScreen {
     }
 
     private SpruceBooleanOption createGenOption(String key, Supplier<Boolean> getter, Consumer<Boolean> setter) {
-        return new SpruceBooleanOption(BodaciousBerries.translatableTextKey("config." + key),
+        return new SpruceBooleanOption(BodaciousBerries.translatableTextKey("config." + "generate_" + key),
                 getter,
                 setter,
                 null
