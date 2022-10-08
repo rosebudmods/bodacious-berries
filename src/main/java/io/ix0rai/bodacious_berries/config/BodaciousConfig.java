@@ -4,8 +4,6 @@ import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import io.ix0rai.bodacious_berries.registry.Berry;
 import net.fabricmc.loader.api.FabricLoader;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -28,27 +26,6 @@ public class BodaciousConfig {
     protected final CommentedFileConfig config;
 
     public BodaciousConfig() {
-        try {
-            File file = new File(CONFIG_FILE_PATH.toUri());
-            if (file.getParentFile().mkdirs() || file.createNewFile()) {
-                try (FileWriter writer = new FileWriter(file)) {
-                    String content = """
-                            # bodacious berries configuration file - higher is more rare, lower is more common
-                            # values only apply on game restart
-                            # order may be mangled, this is not fixable until 3.0's quilt move
-                                                
-                            common_rarity =""" + " " + DEFAULT_COMMON_RARITY
-                            + "\nmedium_rarity = " + DEFAULT_MEDIUM_RARITY
-                            + "\nrare_rarity = " + DEFAULT_RARE_RARITY
-                            + "\nultra_rare_rarity = " + DEFAULT_ULTRA_RARE_RARITY;
-
-                    writer.write(content);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         this.config = CommentedFileConfig.builder(CONFIG_FILE_PATH)
                 .concurrent()
                 .autosave()
@@ -68,19 +45,19 @@ public class BodaciousConfig {
     }
 
     public int common() {
-        return config.get(COMMON_KEY);
+        return config.getOrElse(COMMON_KEY, DEFAULT_COMMON_RARITY);
     }
 
     public int medium() {
-        return config.get(MEDIUM_KEY);
+        return config.getOrElse(MEDIUM_KEY, DEFAULT_MEDIUM_RARITY);
     }
 
     public int rare() {
-        return config.get(RARE_KEY);
+        return config.getOrElse(RARE_KEY, DEFAULT_RARE_RARITY);
     }
 
     public int ultraRare() {
-        return config.get(ULTRA_RARE_KEY);
+        return config.getOrElse(ULTRA_RARE_KEY, DEFAULT_ULTRA_RARE_RARITY);
     }
 
     public void setCommon(int value) {
