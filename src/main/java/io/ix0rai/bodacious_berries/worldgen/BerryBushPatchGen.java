@@ -63,14 +63,16 @@ public class BerryBushPatchGen {
         for (Berry berry : Berry.values()) {
             String featureName = "patch_" + berry.toString();
             // grapevine needs special treatment as it's not random patch
-            var configuredFeature = berry == Berry.GRAPES ?
-                    ConfiguredFeatureUtil.register(BodaciousBerries.idString(featureName), grapevineFeature, DefaultFeatureConfig.INSTANCE) :
-                    berryPatchConfiguredFeature(
-                            featureName,
-                            BodaciousBushes.getBushFor(berry),
-                            BodaciousBushes.getDoubleBushFor(berry),
-                            berry.getPlacedOn()
-                    );
+            var configuredFeature = switch (berry) {
+                case GRAPES -> ConfiguredFeatureUtil.register(BodaciousBerries.idString(featureName), grapevineFeature, DefaultFeatureConfig.INSTANCE);
+                default -> berryPatchConfiguredFeature(
+                        featureName,
+                        BodaciousBushes.getBushFor(berry),
+                        BodaciousBushes.getDoubleBushFor(berry),
+                        berry.getPlacedOn()
+                );
+            };
+
             berryPatches[berry.ordinal()] = configuredFeature;
         }
     }
@@ -81,16 +83,18 @@ public class BerryBushPatchGen {
             Holder<ConfiguredFeature<?, ?>> feature = (Holder<ConfiguredFeature<?, ?>>) berryPatches[berry.ordinal()];
 
             // again, grapevine needs special treatment as it's not random patch
-            var placedFeature = berry == Berry.GRAPES ?
-                    PlacedFeatureUtil.register(BodaciousBerries.idString("patch_grapevine_placed"), feature,
-                            List.of(CountPlacementModifier.create(127), HeightRangePlacementModifier.createUniform(YOffset.fixed(50), YOffset.fixed(255)), BiomePlacementModifier.getInstance(), RarityFilterPlacementModifier.create(CONFIG.medium()))
-                    ) :
-                    berryPatchPlacedFeature(
-                            featureName,
-                            berry.getRarity(),
-                            feature,
-                            berry.getHeightmap()
-                    );
+            var placedFeature = switch (berry) {
+                case GRAPES -> PlacedFeatureUtil.register(BodaciousBerries.idString(featureName), feature,
+                        List.of(CountPlacementModifier.create(127), HeightRangePlacementModifier.createUniform(YOffset.fixed(50), YOffset.fixed(255)), BiomePlacementModifier.getInstance(), RarityFilterPlacementModifier.create(CONFIG.medium()))
+                );
+                default -> berryPatchPlacedFeature(
+                        featureName,
+                        berry.getRarity(),
+                        feature,
+                        berry.getHeightmap()
+                );
+            };
+
             placedBerryPatches[berry.ordinal()] = placedFeature;
         }
     }
