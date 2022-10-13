@@ -31,7 +31,7 @@ configurations {
 dependencies {
     // minecraft, mappings, loader
     minecraft("com.mojang:minecraft:${project.minecraft_version}")
-    mappings("org.quiltmc:quilt-mappings:${project.minecraft_version}+build.${project.quilt_mappings}:v2")
+    mappings("org.quiltmc:quilt-mappings:${project.minecraft_version}+build.${project.quilt_mappings}:intermediary-v2")
     modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 
     // emi - recipe viewer
