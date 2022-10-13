@@ -58,7 +58,7 @@ public class JuicerScreenHandler extends BodaciousScreenHandler {
     }
 
     @Override
-    public ItemStack transferSlot(PlayerEntity player, int index) {
+    public ItemStack quickTransfer(PlayerEntity player, int index) {
         Slot slot = this.slots.get(index);
         ItemStack slotItems = ItemStack.EMPTY;
 

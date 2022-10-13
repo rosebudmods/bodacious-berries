@@ -174,7 +174,7 @@ public class BerryBushPatchGen {
                 context -> {
                     Holder<Biome> entry = context.getBiomeRegistryEntry();
                     for (TagKey<Biome> tag : tags) {
-                        if (entry.hasTag(tag)) {
+                        if (entry.isIn(tag)) {
                             return true;
                         }
                     }
