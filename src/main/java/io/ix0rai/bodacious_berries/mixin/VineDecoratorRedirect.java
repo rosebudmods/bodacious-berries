@@ -23,9 +23,9 @@ public class VineDecoratorRedirect {
      * @author ix0rai
      */
     @Inject(method = "placeVines", at = @At("HEAD"), cancellable = true)
-    private static void placeVines(BlockPos pos, BooleanProperty facing, TreeDecorator.C_jvnizkzw arg, CallbackInfo ci) {
+    private static void placeVines(BlockPos pos, BooleanProperty facing, TreeDecorator.Placer arg, CallbackInfo ci) {
         // convert world to structure world access so that we can test for vines and air blocks
-        final StructureWorldAccess access = (StructureWorldAccess) arg.m_mdtsjsnm();
+        final StructureWorldAccess access = (StructureWorldAccess) arg.getWorld();
 
         // only redirect the method if we're in a jungle biome
         if (access.getBiome(pos).isIn(BiomeTags.IS_JUNGLE)) {
@@ -42,7 +42,7 @@ public class VineDecoratorRedirect {
         }
     }
 
-    private static void placeVine(StructureWorldAccess access, TreeDecorator.C_jvnizkzw arg, BlockPos pos, BooleanProperty facing) {
+    private static void placeVine(StructureWorldAccess access, TreeDecorator.Placer arg, BlockPos pos, BooleanProperty facing) {
         BlockState block = matchBlockAbove(access, pos, facing);
 
         if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDisgustingRevoltingHorrificDumbCheck(access, pos)) {
@@ -55,7 +55,7 @@ public class VineDecoratorRedirect {
         }
 
         if (block != null) {
-            arg.m_lgousnhs(pos, block);
+            arg.replace(pos, block);
         }
     }
 
