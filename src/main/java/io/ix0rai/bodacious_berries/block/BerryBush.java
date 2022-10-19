@@ -4,9 +4,10 @@ import io.ix0rai.bodacious_berries.registry.Berry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
-import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.item.Item;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public interface BerryBush extends Fertilizable {
