@@ -1,8 +1,8 @@
 package io.ix0rai.bodacious_berries.block.entity;
 
 import io.ix0rai.bodacious_berries.block.JuicerBlock;
-import io.ix0rai.bodacious_berries.registry.BodaciousItems;
 import io.ix0rai.bodacious_berries.registry.BodaciousBlocks;
+import io.ix0rai.bodacious_berries.registry.BodaciousItems;
 import io.ix0rai.bodacious_berries.registry.BodaciousJuices;
 import io.ix0rai.bodacious_berries.util.JuicerRecipeUtil;
 import net.minecraft.block.Block;
@@ -34,7 +34,7 @@ import java.util.Optional;
 
 public class JuicerBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory {
     public static final int TOTAL_BREW_TIME = 300;
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(6, ItemStack.EMPTY);
     private int brewTime = 0;
     private boolean makingDubiousJuice = false;
     private boolean makingBerryBlend = false;
@@ -136,7 +136,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
                 stopJuicer(world, pos, state, juicer);
             }
         } else if (juicer.hasValidReceptacle()) {
-            DefaultedList<ItemStack> inventory = juicer.getInventoryLithium();
+            DefaultedList<ItemStack> inventory = juicer.getInventory();
 
             if (recipe.isPresent()) {
                 juicer.makingBerryBlend = !recipe.get().ingredientsMatch(inventory.get(3));
@@ -176,13 +176,8 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     @Override
-    public DefaultedList<ItemStack> getInventoryLithium() {
+    public DefaultedList<ItemStack> getInventory() {
         return inventory;
-    }
-
-    @Override
-    public void setInventoryLithium(DefaultedList<ItemStack> inventory) {
-        this.inventory = inventory;
     }
 
     @Override
