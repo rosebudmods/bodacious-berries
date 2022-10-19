@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class BerryHarvesterBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory, NamedScreenHandlerFactory {
-    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
     private int tickCounter;
     private static final int ATTEMPT_HARVEST_ON = 100;
 
@@ -136,9 +136,9 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
      */
     public void insert(ItemStack stack) {
         // find an open slot and insert items
-        for (int i = 0; i < this.getInventoryLithium().size(); i++) {
+        for (int i = 0; i < this.getInventory().size(); i++) {
             // get items currently in slot
-            ItemStack slot = this.getInventoryLithium().get(i);
+            ItemStack slot = this.getInventory().get(i);
             int maxAmount = slot.getMaxCount();
 
             if ((slot.isEmpty() || slot.getItem().equals(stack.getItem())) && slot.getCount() <= maxAmount) {
@@ -158,18 +158,13 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     }
 
     @Override
-    public DefaultedList<ItemStack> getInventoryLithium() {
+    public DefaultedList<ItemStack> getInventory() {
         return inventory;
     }
 
     @Override
-    public void setInventoryLithium(DefaultedList<ItemStack> inventory) {
-        this.inventory = inventory;
-    }
-
-    @Override
     public int[] getAvailableSlots(Direction side) {
-        int[] slots = new int[getInventoryLithium().size()];
+        int[] slots = new int[getInventory().size()];
         for (int i = 0; i < slots.length; i++) {
             slots[i] = i;
         }

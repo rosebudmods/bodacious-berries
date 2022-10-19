@@ -39,9 +39,6 @@ dependencies {
     // emi - recipe viewer
     modImplementation("dev.emi:emi:${emi_version}") { transitive = false }
 
-    // lithium - block pathing compat
-    include(modApiMapped(files("libs/lithium-fabric-${project.lithium_api_version}-api-dev.jar")))
-
     // dependencies for config
     shadow("com.electronwill.night-config:core:${project.night_config_version}")
     shadow("com.electronwill.night-config:toml:${project.night_config_version}")

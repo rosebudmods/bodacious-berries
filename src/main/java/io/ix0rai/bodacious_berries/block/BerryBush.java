@@ -1,16 +1,14 @@
 package io.ix0rai.bodacious_berries.block;
 
-import me.jellysquid.mods.lithium.api.pathing.BlockPathingBehavior;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
-import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public interface BerryBush extends Fertilizable, BlockPathingBehavior {
+public interface BerryBush extends Fertilizable {
     /**
      * @return the type of berry that this bush gives when picked
      */
@@ -35,20 +33,6 @@ public interface BerryBush extends Fertilizable, BlockPathingBehavior {
      * @return the maximum amount of berries that can be picked from the bush in one action
      */
     int getMaxBerryAmount();
-
-    /**
-     * compatibility with lithium's BlockPathingBehavior
-     */
-    default PathNodeType getPathNodeType(BlockState state) {
-        return PathNodeType.DAMAGE_OTHER;
-    }
-
-    /**
-     * compatibility with lithium's BlockPathingBehavior
-     */
-    default PathNodeType getPathNodeTypeAsNeighbor(BlockState state) {
-        return PathNodeType.WALKABLE;
-    }
 
     /**
      * @param state the block state to check

@@ -3,9 +3,11 @@ package io.ix0rai.bodacious_berries.block;
 import io.ix0rai.bodacious_berries.mixin.DamageSourceInvoker;
 import io.ix0rai.bodacious_berries.registry.Berry;
 import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
+import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
@@ -24,6 +26,7 @@ public class SpikedBerryBush extends BasicBerryBush {
      */
     public SpikedBerryBush(Berry berryType, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
         super(berryType, maxAge, smallShape, largeShape, sizeChangeAge);
+        LandPathNodeTypesRegistry.register(this, PathNodeType.DAMAGE_OTHER, null);
         if (damage < 1.0f) {
             throw new IllegalArgumentException("damage must be greater than or equal to 1");
         }
