@@ -47,6 +47,7 @@ public class BerryHarvesterBlock extends BlockWithEntity {
         } else {
             facing = facing.getOpposite();
         }
+
         return this.getDefaultState().with(Properties.FACING, facing);
     }
 
@@ -75,7 +76,6 @@ public class BerryHarvesterBlock extends BlockWithEntity {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        // return the ticker for BerryHarvesterBlockEntity
         return checkType(type, BodaciousBlocks.BERRY_HARVESTER_ENTITY, BerryHarvesterBlockEntity::tick);
     }
 

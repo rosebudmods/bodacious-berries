@@ -23,10 +23,9 @@ import net.minecraft.world.World;
 public class BerryVine extends VineBlock implements BerryBush {
     protected static final int MAX_AGE = 3;
     protected static final int MAX_BERRY_AMOUNT = 3;
-
     public static final IntProperty AGE = IntProperty.of("age", 0, MAX_AGE);
 
-    protected Berry berry;
+    protected final Berry berry;
 
     public BerryVine(Berry berry) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);

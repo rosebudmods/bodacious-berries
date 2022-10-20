@@ -6,7 +6,6 @@ import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
 import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.state.property.IntProperty;
@@ -35,13 +34,9 @@ public class SpikedBerryBush extends BasicBerryBush {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity) || UNSLOWED_ENTITIES.contains(entity.getType()) || state.get(getAge()) < sizeChangeAge) {
-            return;
-        }
+        super.onEntityCollision(state, world, pos, entity);
 
-        entity.slowMovement(state, BERRY_BUSH_SLOWING_VECTOR);
-
-        if (!(world.isClient) && movedMinDistance(entity)) {
+        if (!(world.isClient) && movedMinDistance(entity) && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) < sizeChangeAge) {
             entity.damage(BERRY_BUSH, damage);
         }
     }

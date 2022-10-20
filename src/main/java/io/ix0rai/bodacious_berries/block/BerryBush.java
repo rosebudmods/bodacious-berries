@@ -4,13 +4,28 @@ import io.ix0rai.bodacious_berries.registry.Berry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public interface BerryBush extends Fertilizable {
+    List<EntityType<?>> UNSLOWED_ENTITIES = List.of(
+            EntityType.FOX,
+            EntityType.BEE,
+            EntityType.RABBIT,
+            EntityType.CAT,
+            EntityType.ENDERMITE,
+            EntityType.BAT,
+            EntityType.SILVERFISH,
+            EntityType.OCELOT,
+            EntityType.PARROT
+    );
+
     /**
      * @return the type of berry that this bush gives when picked
      */

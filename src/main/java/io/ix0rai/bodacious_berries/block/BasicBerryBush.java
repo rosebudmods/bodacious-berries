@@ -8,7 +8,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.PlantBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -29,8 +28,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import java.util.List;
-
 @SuppressWarnings("deprecation")
 public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected static final Vec3d BERRY_BUSH_SLOWING_VECTOR = new Vec3d(0.5D, 0.25D, 0.5D);
@@ -42,18 +39,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     protected final VoxelShape smallShape;
     protected final VoxelShape largeShape;
     protected final int sizeChangeAge;
-
-    public static final List<EntityType<?>> UNSLOWED_ENTITIES = List.of(
-            EntityType.FOX,
-            EntityType.BEE,
-            EntityType.RABBIT,
-            EntityType.CAT,
-            EntityType.ENDERMITE,
-            EntityType.BAT,
-            EntityType.SILVERFISH,
-            EntityType.OCELOT,
-            EntityType.PARROT
-    );
 
     /**
      * berry bush constructor
@@ -117,7 +102,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && !UNSLOWED_ENTITIES.contains(entity.getType())) {
+        if (entity instanceof LivingEntity && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) < sizeChangeAge) {
             entity.slowMovement(state, BERRY_BUSH_SLOWING_VECTOR);
         }
     }
