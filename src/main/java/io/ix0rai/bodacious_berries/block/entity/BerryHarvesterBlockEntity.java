@@ -135,9 +135,9 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
      */
     public void insert(ItemStack stack) {
         // find an open slot and insert items
-        for (int i = 0; i < this.getInventory().size(); i++) {
+        for (int i = 0; i < this.getInventoryLithium().size(); i++) {
             // get items currently in slot
-            ItemStack slot = this.getInventory().get(i);
+            ItemStack slot = this.getInventoryLithium().get(i);
             int maxAmount = slot.getMaxCount();
 
             if ((slot.isEmpty() || slot.getItem().equals(stack.getItem())) && slot.getCount() <= maxAmount) {
@@ -157,13 +157,8 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     }
 
     @Override
-    public DefaultedList<ItemStack> getInventory() {
-        return inventory;
-    }
-
-    @Override
     public int[] getAvailableSlots(Direction side) {
-        int[] slots = new int[getInventory().size()];
+        int[] slots = new int[getInventoryLithium().size()];
         for (int i = 0; i < slots.length; i++) {
             slots[i] = i;
         }
@@ -189,5 +184,15 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     @Override
     public Text getDisplayName() {
         return Text.of(getCachedState().getBlock().getTranslationKey());
+    }
+
+    @Override
+    public DefaultedList<ItemStack> getInventoryLithium() {
+        return inventory;
+    }
+
+    @Override
+    public void setInventoryLithium(DefaultedList<ItemStack> inventory) {
+        this.inventory = inventory;
     }
 }
