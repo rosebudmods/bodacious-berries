@@ -2,8 +2,14 @@ package io.ix0rai.bodacious_berries;
 
 import io.ix0rai.bodacious_berries.compat.Compat;
 import io.ix0rai.bodacious_berries.config.BodaciousConfig;
-import io.ix0rai.bodacious_berries.registry.*;
-import io.ix0rai.bodacious_berries.worldgen.BerryBushPatchGen;
+import io.ix0rai.bodacious_berries.registry.BodaciousBlocks;
+import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
+import io.ix0rai.bodacious_berries.registry.BodaciousDataFixers;
+import io.ix0rai.bodacious_berries.registry.BodaciousItems;
+import io.ix0rai.bodacious_berries.registry.BodaciousJuices;
+import io.ix0rai.bodacious_berries.registry.BodaciousSounds;
+import io.ix0rai.bodacious_berries.registry.BodaciousStatusEffects;
+import io.ix0rai.bodacious_berries.worldgen.BerryGeneration;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
@@ -44,7 +50,7 @@ public class BodaciousBerries implements ModInitializer {
         BodaciousStatusEffects.register();
         BodaciousJuices.register();
         BodaciousSounds.register();
-        BerryBushPatchGen.register();
+        BerryGeneration.generate();
         Compat.register();
         BodaciousDataFixers.register();
 

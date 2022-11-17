@@ -62,10 +62,7 @@ public enum Berry {
             BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA
     ),
     GRAPES(
-            Blocks.GRASS_BLOCK,
-            BodaciousBerries.CONFIG::medium,
-            PlacedFeatureUtil.WORLD_SURFACE_WG_HEIGHTMAP,
-            BiomeTags.IS_JUNGLE
+            null
     ),
     GOJI_BERRIES(
             Blocks.GRASS_BLOCK,
@@ -87,55 +84,50 @@ public enum Berry {
     );
 
     private final Identifier identifier;
-    private final Block placedOn;
-    private final Supplier<Integer> rarity;
-    private final PlacementModifier heightmap;
-    private final List<TagKey<Biome>> genCategories;
+    private final GenerationSettings settings;
 
     @SafeVarargs
     Berry(Block placedOn, Supplier<Integer> rarity, PlacementModifier heightmap, TagKey<Biome>... genCategories) {
+        this(new GenerationSettings(placedOn, rarity, heightmap, List.of(genCategories)));
+    }
+
+    Berry(GenerationSettings settings) {
         this.identifier = BodaciousBerries.id(this.toString());
-        this.placedOn = placedOn;
-        this.rarity = rarity;
-        this.heightmap = heightmap;
-        this.genCategories = List.of(genCategories);
+        this.settings = settings;
     }
 
     public Identifier get() {
         return this.identifier;
     }
 
+    public boolean usesDefaultGeneration() {
+        return this.settings != null;
+    }
+
     public Block getPlacedOn() {
-        return this.placedOn;
+        return this.settings.placedOn();
     }
 
     public int getRarity() {
-        return this.rarity.get();
+        return this.settings.getRarity();
     }
 
     public PlacementModifier getHeightmap() {
-        return this.heightmap;
+        return this.settings.heightmap();
     }
 
     public List<TagKey<Biome>> getGenerationCategories() {
-        return this.genCategories;
-    }
-
-    public String langKey() {
-        StringBuilder lowercase = new StringBuilder(this.toString());
-
-        for (int i = 0; i < lowercase.length(); i++) {
-            if (lowercase.charAt(i) == '_') {
-                lowercase.setCharAt(i + 1, Character.toUpperCase(lowercase.charAt(i + 1)));
-                lowercase.deleteCharAt(i);
-            }
-        }
-
-        return lowercase.toString();
+        return this.settings.genCategories();
     }
 
     @Override
     public String toString() {
         return this.name().toLowerCase(Locale.ROOT);
+    }
+
+    private record GenerationSettings(Block placedOn, Supplier<Integer> rarity, PlacementModifier heightmap, List<TagKey<Biome>> genCategories) {
+        public int getRarity() {
+            return this.rarity.get();
+        }
     }
 }
