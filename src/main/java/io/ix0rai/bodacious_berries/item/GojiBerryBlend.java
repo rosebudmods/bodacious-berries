@@ -3,15 +3,14 @@ package io.ix0rai.bodacious_berries.item;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectType;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import java.util.Iterator;
 
-public class GojiBerryBlend extends Blend {
-    public GojiBerryBlend(Settings settings, Item ingredient0, Item ingredient1, Item ingredient2) {
-        super(settings, ingredient0, ingredient1, ingredient2);
+public class GojiBerryBlend extends Juice {
+    public GojiBerryBlend(Settings settings) {
+        super(settings);
     }
 
     @Override

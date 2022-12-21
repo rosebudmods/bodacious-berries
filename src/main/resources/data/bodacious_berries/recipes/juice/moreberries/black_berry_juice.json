@@ -1,0 +1,20 @@
+{
+  "type": "bodacious_berries:juicing",
+  "ingredients": {
+    "all": {
+      "item": "moreberries:black_berries"
+    },
+    "receptacle": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": "moreberries:black_berry_juice",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "moreberries"
+      ]
+    }
+  ]
+}

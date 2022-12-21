@@ -2,7 +2,6 @@ package io.ix0rai.bodacious_berries.item;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -11,9 +10,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
 
-public class EndBlend extends Blend {
-    public EndBlend(Settings settings, Item ingredient0, Item ingredient1, Item ingredient2) {
-        super(settings, ingredient0, ingredient1, ingredient2);
+public class EndBlend extends Juice {
+    public EndBlend(Settings settings) {
+        super(settings);
     }
 
     @Override

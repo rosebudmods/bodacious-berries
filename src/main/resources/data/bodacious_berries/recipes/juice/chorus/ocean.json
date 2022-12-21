@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:cod"
+    },
+    {
+      "item": "bodacious_berries:chorus_berry_juice"
+    }
+  ],
+  "result": {
+    "item": "bodacious_berries:chorus_berry_juice_ocean",
+    "count": 1
+  }
+}

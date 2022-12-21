@@ -1,0 +1,26 @@
+{
+  "type": "bodacious_berries:juicing",
+  "ingredients": {
+    "0": {
+      "tag": "c:elderberries"
+    },
+    "1": {
+      "tag": "c:elderberries"
+    },
+    "2": {
+      "item": "minecraft:sugar"
+    },
+    "receptacle": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": "croptopia:elderberry_jam",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "croptopia"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "bodacious_berries:juicing",
+  "ingredients": {
+    "all": {
+      "tag": "c:blackberries"
+    },
+    "receptacle": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": "bodacious_berries:blackberry_juice"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "bodacious_berries:juicing",
+  "ingredients": {
+    "0": {
+      "item": "bodacious_berries:gooseberries"
+    },
+    "1": {
+      "item": "minecraft:glow_berries"
+    },
+    "2": {
+      "item": "bodacious_berries:raspberries"
+    },
+    "receptacle": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": "bodacious_berries:gooseberry_rum"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "bodacious_berries:juicing",
+  "ingredients": {
+    "0": {
+      "item": "bodacious_berries:raspberries"
+    },
+    "1": {
+      "item": "bodacious_berries:blackberries"
+    },
+    "2": {
+      "item": "minecraft:sugar_cane"
+    },
+    "receptacle": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": "bodacious_berries:opposite_juice"
+}

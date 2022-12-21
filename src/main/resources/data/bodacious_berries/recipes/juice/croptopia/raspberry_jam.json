@@ -1,0 +1,26 @@
+{
+  "type": "bodacious_berries:juicing",
+  "ingredients": {
+    "0": {
+      "tag": "c:raspberries"
+    },
+    "1": {
+      "tag": "c:raspberries"
+    },
+    "2": {
+      "item": "minecraft:sugar"
+    },
+    "receptacle": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": "croptopia:raspberry_jam",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "croptopia"
+      ]
+    }
+  ]
+}

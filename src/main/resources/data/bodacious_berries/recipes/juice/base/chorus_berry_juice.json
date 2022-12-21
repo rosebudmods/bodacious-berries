@@ -1,0 +1,12 @@
+{
+  "type": "bodacious_berries:juicing",
+  "ingredients": {
+    "all": {
+      "tag": "c:chorus_berries"
+    },
+    "receptacle": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": "bodacious_berries:chorus_berry_juice"
+}

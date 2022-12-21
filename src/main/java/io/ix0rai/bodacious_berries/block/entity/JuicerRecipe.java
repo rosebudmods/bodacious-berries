@@ -17,8 +17,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
 public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack output) implements Recipe<ImplementedInventory> {
     public static final String RECIPE_ID = BodaciousBerries.idString("juicing");
+    public static final List<JuicerRecipe> RECIPES = new ArrayList<>();
     public static final Serializer SERIALIZER = RecipeSerializer.register(RECIPE_ID, new Serializer());
     public static final RecipeType<JuicerRecipe> TYPE = RecipeType.register(RECIPE_ID);
 
@@ -99,6 +104,45 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         public String result;
     }
 
+    public static class Util {
+        /**
+         * checks whether the given stack is an ingredient in any registered juicer recipe
+         * @param stack the stack to check
+         * @return true if the stack is a valid ingredient
+         */
+        public static boolean isIngredient(ItemStack stack) {
+            return check(juicerRecipe -> juicerRecipe.isIngredient(stack));
+        }
+
+        /**
+         * checks whether the given stack is the result of any registered juicer recipe
+         * @param stack the stack to check
+         * @return true if the stack is a valid result
+         */
+        public static boolean isResult(ItemStack stack) {
+            return check(juicerRecipe -> juicerRecipe.isResult(stack));
+        }
+
+        /**
+         * checks whether the given stack is the receptacle of any registered juicer recipe
+         * @param stack the stack to check
+         * @return true if the stack is a valid receptacle
+         */
+        public static boolean isReceptacle(ItemStack stack) {
+            return check(juicerRecipe -> juicerRecipe.isReceptacle(stack));
+        }
+
+        private static boolean check(Predicate<JuicerRecipe> function) {
+            for (JuicerRecipe recipe : RECIPES) {
+                if (function.test(recipe)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
     public static class Serializer implements RecipeSerializer<JuicerRecipe> {
         @Override
         public JuicerRecipe read(Identifier id, JsonObject json) {
@@ -127,10 +171,6 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
             ItemStack output = new ItemStack(outputItem);
 
             return new JuicerRecipe(id, input0, input1, input2, receptacle, output);
-        }
-
-        public JuicerRecipe read(JsonObject json) {
-            return read(BodaciousBerries.id(json.get("result").getAsString().split(":")[1]), json);
         }
 
         @Override

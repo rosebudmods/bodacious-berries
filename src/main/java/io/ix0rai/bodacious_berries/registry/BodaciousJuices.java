@@ -1,14 +1,10 @@
 package io.ix0rai.bodacious_berries.registry;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import io.ix0rai.bodacious_berries.BodaciousBerries;
-import io.ix0rai.bodacious_berries.item.Blend;
 import io.ix0rai.bodacious_berries.item.ChorusBerryJuice;
 import io.ix0rai.bodacious_berries.item.EndBlend;
 import io.ix0rai.bodacious_berries.item.GojiBerryBlend;
 import io.ix0rai.bodacious_berries.item.Juice;
-import io.ix0rai.bodacious_berries.util.JuicerRecipeUtil;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -21,15 +17,11 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class BodaciousJuices {
     public static final Item JUICE_RECEPTACLE = Items.GLASS_BOTTLE;
     public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(JUICE_RECEPTACLE).maxCount(16);
-    public static final List<JsonObject> RECIPES = new ArrayList<>();
     public static final Juice DUBIOUS_JUICE = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturationModifier(2F).build()));
 
     public static void register() {
@@ -62,75 +54,28 @@ public class BodaciousJuices {
                 LUSH_CAVES, DRIPSTONE_CAVES, JUNGLE
         };
 
-        Item[] biomeItems = new Item[]{
-                Items.CORNFLOWER, Items.SNOWBALL, Items.CLAY_BALL,
-                Items.SAND, Items.SWEET_BERRIES, Items.BIRCH_SAPLING,
-                Items.COD, Items.RED_MUSHROOM, Items.SUNFLOWER,
-                Items.OAK_SAPLING, Items.PEONY, Items.DARK_OAK_SAPLING,
-                Items.ACACIA_SAPLING, Items.RED_SAND, Items.POPPY,
-                Items.GLOW_BERRIES, Items.POINTED_DRIPSTONE, Items.COCOA_BEANS
-        };
-
-        for (int i = 0; i < biomes.length; i++) {
-            // create juice and get id
-            RegistryKey<?> key = biomes[i];
+        for (RegistryKey<?> key : biomes) {
             ChorusBerryJuice juice = new ChorusBerryJuice(BodaciousItems.CHORUS_BERRIES, key.getValue());
             Identifier id = BodaciousBerries.id("chorus_berry_juice_" + key.getValue().getPath());
-
-            // create recipe as json object
-            JsonObject recipeJson = new JsonObject();
-            recipeJson.addProperty("type", "minecraft:crafting_shapeless");
-            JsonArray ingredientArray = new JsonArray();
-            ingredientArray.add(getAsProperty(Registries.ITEM.getId(biomeItems[i])));
-            ingredientArray.add(getAsProperty(BodaciousBerries.id("chorus_berry_juice")));
-            recipeJson.add("ingredients", ingredientArray);
-            JsonObject result = getAsProperty(id);
-            result.addProperty("count", 1);
-            recipeJson.add("result", result);
-
-            // register recipe and item
-            RECIPES.add(recipeJson);
             Registry.register(Registries.ITEM, id, juice);
         }
     }
 
-    private static JsonObject getAsProperty(Identifier id) {
-        JsonObject property = new JsonObject();
-        property.addProperty("item", id.toString());
-        return property;
-    }
-
     private static void registerBlends() {
-        Blend gojiBerryBlend = new GojiBerryBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(1.8F).statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F).build()), BodaciousItems.GOJI_BERRIES, BodaciousItems.GOJI_BERRIES, Items.SUGAR_CANE);
-        registerBlend("goji_berry_blend", gojiBerryBlend);
-        Blend oppositeJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturationModifier(1.2F).build()), BodaciousItems.RASPBERRIES, BodaciousItems.BLACKBERRIES, Items.SUGAR_CANE);
-        registerBlend("opposite_juice", oppositeJuice);
-        Blend rainberryBlend = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(1.6F).build()), BodaciousItems.RAINBERRIES, BodaciousItems.GOJI_BERRIES, Items.GOLDEN_APPLE);
-        registerBlend("rainberry_blend", rainberryBlend);
-        Blend gooseberryRum = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(1.0f).build()), BodaciousItems.GOOSEBERRIES, BodaciousItems.GOOSEBERRIES, Items.WHEAT);
-        registerBlend("gooseberry_rum", gooseberryRum);
-        Blend redJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(1.3F).build()), BodaciousItems.STRAWBERRIES, Items.SWEET_BERRIES, BodaciousItems.LINGONBERRIES);
-        registerBlend("red_juice", redJuice);
-        Blend endBlend = new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(3.3F).build()), BodaciousItems.CHORUS_BERRIES, BodaciousItems.RAINBERRIES, Items.CHORUS_FRUIT);
-        registerBlend("end_blend", endBlend);
-        Blend purpleDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(1.6F).build()), BodaciousItems.CHORUS_BERRIES, BodaciousItems.GRAPES, BodaciousItems.SASKATOON_BERRIES);
-        registerBlend("purple_delight", purpleDelight);
-        Blend trafficLightJuice = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(1.4F).build()), BodaciousItems.GOOSEBERRIES, Items.GLOW_BERRIES, BodaciousItems.RASPBERRIES);
-        registerBlend("traffic_light_juice", trafficLightJuice);
-        Blend vanillaDelight = new Blend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturationModifier(2.0F).build()), Items.GLOW_BERRIES, Items.SWEET_BERRIES, Items.APPLE);
-        registerBlend("vanilla_delight", vanillaDelight);
+        register("goji_berry_blend", new GojiBerryBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(1.8F).statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F).build())));
+        register("opposite_juice", new Juice(new FoodComponent.Builder().hunger(4).saturationModifier(1.2F).build()));
+        register("rainberry_blend", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(1.6F).build())));
+        register("gooseberry_rum", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturationModifier(1.0f).build())));
+        register("red_juice", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(1.3F).build())));
+        register("end_blend", new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturationModifier(3.3F).build())));
+        register("purple_delight", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturationModifier(1.6F).build())));
+        register("traffic_light_juice", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturationModifier(1.4F).build())));
+        register("vanilla_delight", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturationModifier(2.0F).build())));
     }
 
     private static void register(String name, Juice juice) {
         Identifier id = BodaciousBerries.id(name);
-        JuicerRecipeUtil.registerJuiceRecipe(new Identifier("c", Registries.ITEM.getId(juice.getBerry()).getPath()), id);
         register(id, juice);
-    }
-
-    private static void registerBlend(String name, Blend blend) {
-        Identifier id = BodaciousBerries.id(name);
-        register(id, blend);
-        JuicerRecipeUtil.registerJuiceRecipe(Registries.ITEM.getId(blend.getIngredient0()), Registries.ITEM.getId(blend.getIngredient1()), Registries.ITEM.getId(blend.getIngredient2()), id);
     }
 
     private static void register(Identifier id, Juice juice) {

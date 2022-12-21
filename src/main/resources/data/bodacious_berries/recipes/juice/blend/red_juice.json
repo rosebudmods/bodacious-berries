@@ -1,0 +1,18 @@
+{
+  "type": "bodacious_berries:juicing",
+  "ingredients": {
+    "0": {
+      "item": "bodacious_berries:strawberries"
+    },
+    "1": {
+      "item": "bodacious_berries:lingonberries"
+    },
+    "2": {
+      "item": "minecraft:sweet_berries"
+    },
+    "receptacle": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": "bodacious_berries:red_juice"
+}

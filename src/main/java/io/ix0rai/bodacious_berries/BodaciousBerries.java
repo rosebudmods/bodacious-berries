@@ -1,6 +1,5 @@
 package io.ix0rai.bodacious_berries;
 
-import io.ix0rai.bodacious_berries.compat.BodaciousCompat;
 import io.ix0rai.bodacious_berries.config.BodaciousConfig;
 import io.ix0rai.bodacious_berries.registry.BodaciousBlocks;
 import io.ix0rai.bodacious_berries.registry.BodaciousItems;
@@ -44,7 +43,6 @@ public class BodaciousBerries implements ModInitializer {
         BodaciousItems.register();
         BodaciousStatusEffects.register();
         BodaciousSounds.register();
-        BodaciousCompat.register();
         // todo!
         //BodaciousWorldgen.register();
 

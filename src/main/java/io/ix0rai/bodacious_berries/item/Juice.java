@@ -15,7 +15,6 @@ import java.security.InvalidParameterException;
 import java.util.List;
 
 public class Juice extends HoneyBottleItem {
-    private final Item berry;
     private final MutableText hintTooltip;
 
     public Juice(Item berry) {
@@ -32,13 +31,16 @@ public class Juice extends HoneyBottleItem {
 
     public Juice(Item berry, FoodComponent.Builder builder, MutableText hintTooltip) {
         super(settings(berry, builder));
-        this.berry = berry;
         this.hintTooltip = hintTooltip;
     }
 
     public Juice(Item.Settings settings) {
         super(settings);
-        this.berry = null;
+        this.hintTooltip = null;
+    }
+
+    public Juice(FoodComponent component) {
+        super(new Settings().food(component));
         this.hintTooltip = null;
     }
 
@@ -49,13 +51,6 @@ public class Juice extends HoneyBottleItem {
         }
 
         throw new InvalidParameterException("item: " + berry + " does not have a food component");
-    }
-
-    public Item getBerry() {
-        if (berry == null) {
-            throw new IllegalStateException("Illegal getBerry() call on a berry blend juice item! Please report this.");
-        }
-        return berry;
     }
 
     @Override
