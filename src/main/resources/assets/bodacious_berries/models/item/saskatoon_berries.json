@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "bodacious_berries:items/saskatoon_berries"
+    "layer0": "bodacious_berries:item/saskatoon_berries"
   }
 }

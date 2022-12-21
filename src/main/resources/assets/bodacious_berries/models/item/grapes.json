@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "bodacious_berries:items/grapes"
+    "layer0": "bodacious_berries:item/grapes"
   }
 }

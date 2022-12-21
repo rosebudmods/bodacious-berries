@@ -6,7 +6,6 @@ import io.ix0rai.bodacious_berries.registry.BodaciousBlocks;
 import io.ix0rai.bodacious_berries.registry.BodaciousItems;
 import io.ix0rai.bodacious_berries.registry.BodaciousSounds;
 import io.ix0rai.bodacious_berries.registry.BodaciousStatusEffects;
-import io.ix0rai.bodacious_berries.worldgen.BodaciousWorldgen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
@@ -46,7 +45,8 @@ public class BodaciousBerries implements ModInitializer {
         BodaciousStatusEffects.register();
         BodaciousSounds.register();
         BodaciousCompat.register();
-        BodaciousWorldgen.register();
+        // todo!
+        //BodaciousWorldgen.register();
 
         FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer ->
             ResourceManagerHelper.registerBuiltinResourcePack(id("classic"), modContainer, ResourcePackActivationType.NORMAL)

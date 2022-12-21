@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "bodacious_berries:items/grape_juice"
+    "layer0": "bodacious_berries:item/grape_juice"
   }
 }
