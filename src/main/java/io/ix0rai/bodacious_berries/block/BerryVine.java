@@ -18,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 @SuppressWarnings("deprecation")
 public class BerryVine extends VineBlock implements BerryBush {
@@ -59,7 +60,7 @@ public class BerryVine extends VineBlock implements BerryBush {
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return hasRandomTicks(state);
     }
 

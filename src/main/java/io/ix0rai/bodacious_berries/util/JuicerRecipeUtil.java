@@ -4,8 +4,8 @@ import com.google.gson.JsonObject;
 import io.ix0rai.bodacious_berries.block.entity.JuicerRecipe;
 import io.ix0rai.bodacious_berries.registry.BodaciousJuices;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class JuicerRecipeUtil {
      * @param output the resulting juice
      */
     public static void registerJuiceRecipe(Identifier input0, Identifier input1, Identifier input2, Identifier output) {
-        registerJuicerRecipe(new Identifier[]{input0, input1, input2}, Registry.ITEM.getId(BodaciousJuices.JUICE_RECEPTACLE), output);
+        registerJuicerRecipe(new Identifier[]{input0, input1, input2}, Registries.ITEM.getId(BodaciousJuices.JUICE_RECEPTACLE), output);
     }
 
     /**

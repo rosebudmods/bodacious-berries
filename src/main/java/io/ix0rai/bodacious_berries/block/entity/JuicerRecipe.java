@@ -12,9 +12,9 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack output) implements Recipe<ImplementedInventory> {
@@ -122,7 +122,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
                 input2 = Ingredient.fromJson(recipeJson.ingredients.get("2"));
             }
             Ingredient receptacle = Ingredient.fromJson(recipeJson.ingredients.get("receptacle"));
-            Item outputItem = Registry.ITEM.getOrEmpty(new Identifier(recipeJson.result))
+            Item outputItem = Registries.ITEM.getOrEmpty(new Identifier(recipeJson.result))
                     .orElseThrow(() -> new JsonSyntaxException("no such item: " + recipeJson.result));
             ItemStack output = new ItemStack(outputItem);
 

@@ -9,15 +9,17 @@ import io.ix0rai.bodacious_berries.item.EndBlend;
 import io.ix0rai.bodacious_berries.item.GojiBerryBlend;
 import io.ix0rai.bodacious_berries.item.Juice;
 import io.ix0rai.bodacious_berries.util.JuicerRecipeUtil;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ import static net.minecraft.world.biome.BiomeKeys.*;
 
 public class BodaciousJuices {
     public static final Item JUICE_RECEPTACLE = Items.GLASS_BOTTLE;
-    public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(JUICE_RECEPTACLE).group(ItemGroup.FOOD).maxCount(16);
+    public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(JUICE_RECEPTACLE).maxCount(16);
     public static final List<JsonObject> RECIPES = new ArrayList<>();
     public static final Juice DUBIOUS_JUICE = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturationModifier(2F).build()));
 
@@ -79,7 +81,7 @@ public class BodaciousJuices {
             JsonObject recipeJson = new JsonObject();
             recipeJson.addProperty("type", "minecraft:crafting_shapeless");
             JsonArray ingredientArray = new JsonArray();
-            ingredientArray.add(getAsProperty(Registry.ITEM.getId(biomeItems[i])));
+            ingredientArray.add(getAsProperty(Registries.ITEM.getId(biomeItems[i])));
             ingredientArray.add(getAsProperty(BodaciousBerries.id("chorus_berry_juice")));
             recipeJson.add("ingredients", ingredientArray);
             JsonObject result = getAsProperty(id);
@@ -88,7 +90,7 @@ public class BodaciousJuices {
 
             // register recipe and item
             RECIPES.add(recipeJson);
-            Registry.register(Registry.ITEM, id, juice);
+            Registry.register(Registries.ITEM, id, juice);
         }
     }
 
@@ -121,17 +123,18 @@ public class BodaciousJuices {
 
     private static void register(String name, Juice juice) {
         Identifier id = BodaciousBerries.id(name);
-        JuicerRecipeUtil.registerJuiceRecipe(new Identifier("c", Registry.ITEM.getId(juice.getBerry()).getPath()), id);
+        JuicerRecipeUtil.registerJuiceRecipe(new Identifier("c", Registries.ITEM.getId(juice.getBerry()).getPath()), id);
         register(id, juice);
     }
 
     private static void registerBlend(String name, Blend blend) {
         Identifier id = BodaciousBerries.id(name);
         register(id, blend);
-        JuicerRecipeUtil.registerJuiceRecipe(Registry.ITEM.getId(blend.getIngredient0()), Registry.ITEM.getId(blend.getIngredient1()), Registry.ITEM.getId(blend.getIngredient2()), id);
+        JuicerRecipeUtil.registerJuiceRecipe(Registries.ITEM.getId(blend.getIngredient0()), Registries.ITEM.getId(blend.getIngredient1()), Registries.ITEM.getId(blend.getIngredient2()), id);
     }
 
     private static void register(Identifier id, Juice juice) {
-        Registry.register(Registry.ITEM, id, juice);
+        Item item = Registry.register(Registries.ITEM, id, juice);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> entries.addItem(item));
     }
 }

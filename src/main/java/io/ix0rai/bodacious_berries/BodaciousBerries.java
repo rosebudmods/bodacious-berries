@@ -1,9 +1,12 @@
 package io.ix0rai.bodacious_berries;
 
-import io.ix0rai.bodacious_berries.compat.Compat;
+import io.ix0rai.bodacious_berries.compat.BodaciousCompat;
 import io.ix0rai.bodacious_berries.config.BodaciousConfig;
-import io.ix0rai.bodacious_berries.registry.*;
-import io.ix0rai.bodacious_berries.worldgen.BerryBushPatchGen;
+import io.ix0rai.bodacious_berries.registry.BodaciousBlocks;
+import io.ix0rai.bodacious_berries.registry.BodaciousItems;
+import io.ix0rai.bodacious_berries.registry.BodaciousSounds;
+import io.ix0rai.bodacious_berries.registry.BodaciousStatusEffects;
+import io.ix0rai.bodacious_berries.worldgen.BodaciousWorldgen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
@@ -38,15 +41,12 @@ public class BodaciousBerries implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        BodaciousBushes.register();
         BodaciousBlocks.register();
         BodaciousItems.register();
         BodaciousStatusEffects.register();
-        BodaciousJuices.register();
         BodaciousSounds.register();
-        BerryBushPatchGen.register();
-        Compat.register();
-        BodaciousDataFixers.register();
+        BodaciousCompat.register();
+        BodaciousWorldgen.register();
 
         FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer ->
             ResourceManagerHelper.registerBuiltinResourcePack(id("classic"), modContainer, ResourcePackActivationType.NORMAL)

@@ -56,7 +56,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
+    public NbtCompound toSyncedNbt() {
         return toNbt();
     }
 

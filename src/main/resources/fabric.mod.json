@@ -20,12 +20,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.ix0rai.bodacious_berries.BodaciousBerries",
-      "io.ix0rai.dfu_bestie.impl.Initializer"
+      "io.ix0rai.bodacious_berries.BodaciousBerries"
     ],
     "client": [
-      "io.ix0rai.bodacious_berries.client.BodaciousBerriesClient",
-      "io.ix0rai.dfu_bestie.impl.client.ClientInitializer"
+      "io.ix0rai.bodacious_berries.client.BodaciousBerriesClient"
     ],
     "emi": [
       "io.ix0rai.bodacious_berries.compat.JuicerEmiPlugin"
@@ -35,20 +33,19 @@
     ]
   },
   "mixins": [
-    "bodacious_berries.mixins.json",
-    "dfu_bestie.mixins.json"
+    "bodacious_berries.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.14.8",
-    "fabric-api": ">=0.64.0",
-    "minecraft": ">=1.19.1",
+    "fabric-api": ">=0.69.0",
+    "minecraft": ">=1.19.3",
     "java": ">=17"
   },
 
   "suggests": {
     "emi": ">=0.3.0",
-    "modmenu": ">=4.0.0"
+    "modmenu": ">=5.0.0"
   },
 
   "custom": {

@@ -6,9 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -80,6 +80,6 @@ public interface BerryBush extends Fertilizable {
      * gets the registered item associated with the bush's berry
      */
     default Item getBerryItem() {
-        return Registry.ITEM.get(getBerry().get());
+        return Registries.ITEM.get(getBerry().get());
     }
 }

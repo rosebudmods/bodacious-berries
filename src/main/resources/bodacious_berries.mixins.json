@@ -4,7 +4,6 @@
   "package": "io.ix0rai.bodacious_berries.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "DamageSourceInvoker",
     "FireBlockInjector",
     "RegistryManagerInjector",
     "VineDecoratorRedirect"

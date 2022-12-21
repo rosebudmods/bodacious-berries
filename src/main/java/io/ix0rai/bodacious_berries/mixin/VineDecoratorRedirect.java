@@ -5,8 +5,8 @@ import io.ix0rai.bodacious_berries.registry.BodaciousBushes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.tag.BiomeTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.treedecorator.LeavesVineTreeDecorator;
@@ -28,7 +28,7 @@ public class VineDecoratorRedirect {
         final StructureWorldAccess access = (StructureWorldAccess) arg.getWorld();
 
         // only redirect the method if we're in a jungle biome
-        if (access.getBiome(pos).isIn(BiomeTags.IS_JUNGLE)) {
+        if (access.getBiome(pos).isIn(BiomeTags.JUNGLE)) {
             placeVine(access, arg, pos, facing);
 
             // place vines that are hanging down from other vines
@@ -45,9 +45,8 @@ public class VineDecoratorRedirect {
     private static void placeVine(StructureWorldAccess access, TreeDecorator.Placer arg, BlockPos pos, BooleanProperty facing) {
         BlockState block = matchBlockAbove(access, pos, facing);
 
-        if (block == null && reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDisgustingRevoltingHorrificDumbCheck(access, pos)) {
-            // otherwise, if reallyIncrediblyStupidAwfulHorrendousDumbCheck confirms that we won't be placing a floating vine, choose a vine or grapevine
-            if (access.getBiome(pos).isIn(BiomeTags.IS_JUNGLE) && access.getRandom().nextInt(6) == 0) {
+        if (block == null && hasSupportingBlock(access, pos)) {
+            if (access.getBiome(pos).isIn(BiomeTags.JUNGLE) && access.getRandom().nextInt(6) == 0) {
                 block = BodaciousBushes.GRAPEVINE.getDefaultState().with(facing, true).with(BerryVine.AGE, 3);
             } else if (access.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
                 block = Blocks.VINE.getDefaultState().with(facing, true);
@@ -69,7 +68,7 @@ public class VineDecoratorRedirect {
         return null;
     }
 
-    private static boolean reallyIncrediblyTremendouslyStupidAwfulHorrendousTerribleHorribleDisgustingRevoltingHorrificDumbCheck(StructureWorldAccess access, BlockPos pos) {
+    private static boolean hasSupportingBlock(StructureWorldAccess access, BlockPos pos) {
         final Block east = access.getBlockState(pos.east()).getBlock();
         final Block west = access.getBlockState(pos.west()).getBlock();
         final Block north = access.getBlockState(pos.north()).getBlock();

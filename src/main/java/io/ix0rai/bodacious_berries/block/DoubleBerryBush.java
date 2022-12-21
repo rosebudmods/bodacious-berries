@@ -22,6 +22,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 @SuppressWarnings("deprecation")
 public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
@@ -46,7 +47,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity && !BasicBerryBush.UNSLOWED_ENTITIES.contains(entity.getType())) {
-            entity.slowMovement(state, DOUBLE_BUSH_SLOWING_VECTOR);
+            entity.setMovementMultiplier(state, DOUBLE_BUSH_SLOWING_VECTOR);
         }
     }
 
@@ -72,7 +73,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return hasRandomTicks(state);
     }
 

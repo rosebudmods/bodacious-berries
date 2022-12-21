@@ -27,6 +27,7 @@ import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 @SuppressWarnings("deprecation")
 public class BasicBerryBush extends PlantBlock implements BerryBush {
@@ -103,7 +104,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) < sizeChangeAge) {
-            entity.slowMovement(state, BERRY_BUSH_SLOWING_VECTOR);
+            entity.setMovementMultiplier(state, BERRY_BUSH_SLOWING_VECTOR);
         }
     }
 
@@ -153,7 +154,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         // hasRandomTicks checks the same thing as this method
         return hasRandomTicks(state);
     }

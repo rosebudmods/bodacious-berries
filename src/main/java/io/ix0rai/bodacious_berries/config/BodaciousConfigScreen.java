@@ -3,7 +3,6 @@ package io.ix0rai.bodacious_berries.config;
 import dev.lambdaurora.spruceui.Position;
 import dev.lambdaurora.spruceui.SpruceTexts;
 import dev.lambdaurora.spruceui.option.SpruceBooleanOption;
-import dev.lambdaurora.spruceui.option.SpruceIntegerInputOption;
 import dev.lambdaurora.spruceui.option.SpruceOption;
 import dev.lambdaurora.spruceui.option.SpruceSimpleActionOption;
 import dev.lambdaurora.spruceui.screen.SpruceScreen;
@@ -30,41 +29,12 @@ import static io.ix0rai.bodacious_berries.BodaciousBerries.CONFIG;
 public class BodaciousConfigScreen extends SpruceScreen {
     private final Screen parent;
 
-    private final SpruceOption commonRarityOption;
-    private final SpruceOption mediumRarityOption;
-    private final SpruceOption rareRarityOption;
-    private final SpruceOption ultraRareRarityOption;
     private final SpruceOption resetOption;
-
     private final SpruceOption[] generationOptions = new SpruceOption[Berry.values().length];
 
     public BodaciousConfigScreen(@Nullable Screen parent) {
         super(BodaciousBerries.translatableText("config.title"));
         this.parent = parent;
-
-        this.commonRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.common_rarity_option"),
-                CONFIG::common,
-                CONFIG::setCommon,
-                null
-        );
-
-        this.mediumRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.medium_rarity_option"),
-                CONFIG::medium,
-                CONFIG::setMedium,
-                null
-        );
-
-        this.rareRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.rare_rarity_option"),
-                CONFIG::rare,
-                CONFIG::setRare,
-                null
-        );
-
-        this.ultraRareRarityOption = new SpruceIntegerInputOption(BodaciousBerries.translatableTextKey("config.ultra_rare_rarity_option"),
-                CONFIG::ultraRare,
-                CONFIG::setUltraRare,
-                null
-        );
 
         for (Berry berry : Berry.values()) {
             generationOptions[berry.ordinal()] = createGenOption(berry.toString(),
@@ -104,8 +74,6 @@ public class BodaciousConfigScreen extends SpruceScreen {
         int buttonHeight = 20;
 
         SpruceOptionListWidget options = new SpruceOptionListWidget(Position.of(0, 22), this.width, this.height - (35 + 22));
-        options.addOptionEntry(this.commonRarityOption, this.mediumRarityOption);
-        options.addOptionEntry(this.rareRarityOption, this.ultraRareRarityOption);
         for (int i = 0; i < Berry.values().length; i += 2) {
             SpruceOption secondToggle = null;
             if (i + 1 < Berry.values().length) {
@@ -115,8 +83,9 @@ public class BodaciousConfigScreen extends SpruceScreen {
         }
         this.addDrawableChild(options);
 
-        this.addDrawableChild(options);
+        // reset button
         this.addDrawableChild(this.resetOption.createWidget(Position.of(this, this.width / 2 - 155, this.height - 29), 150));
+        // done button
         this.addDrawableChild(new SpruceButtonWidget(Position.of(this, this.width / 2 - 155 + 160, this.height - 29), 150,
                 buttonHeight, SpruceTexts.GUI_DONE,
                 buttonWidget -> this.closeScreen()));

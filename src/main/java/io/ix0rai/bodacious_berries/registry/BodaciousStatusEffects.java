@@ -5,7 +5,8 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectType;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 public class BodaciousStatusEffects {
     public static final StatusEffect REFRESHED = new RefreshedStatusEffect(StatusEffectType.BENEFICIAL, 0xFF0066)
@@ -13,7 +14,7 @@ public class BodaciousStatusEffects {
             .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, "CE8BEBC6-9090-4864-B372-C8C36A054156", 0.5, EntityAttributeModifier.Operation.ADDITION);
 
     public static void register() {
-        Registry.register(Registry.STATUS_EFFECT, BodaciousBerries.id("refreshed"), REFRESHED);
+        Registry.register(Registries.STATUS_EFFECT, BodaciousBerries.id("refreshed"), REFRESHED);
     }
 
     private static class RefreshedStatusEffect extends StatusEffect {

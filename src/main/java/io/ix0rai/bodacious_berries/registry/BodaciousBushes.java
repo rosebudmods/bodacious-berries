@@ -13,11 +13,13 @@ import io.ix0rai.bodacious_berries.block.SpikedBerryBush;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.IntProperty;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
@@ -27,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BodaciousBushes {
-    public static final TagKey<Block> BERRY_BUSHES_TAG = TagKey.of(Registry.BLOCK_KEY, new Identifier("c:berry_bushes"));
+    public static final TagKey<Block> BERRY_BUSHES_TAG = TagKey.of(RegistryKeys.BLOCK, new Identifier("c:berry_bushes"));
     public static final IntProperty AGE_4 = IntProperty.of("age", 0, 4);
     private static final Map<Berry, BerryBush> BY_BERRY = new HashMap<>();
     private static final Map<Berry, DoubleBerryBush> DOUBLE_BUSHES = new HashMap<>();
@@ -85,7 +87,7 @@ public class BodaciousBushes {
     }
 
     private static void register(String name, Block block) {
-        Registry.register(Registry.BLOCK, BodaciousBerries.id(name), block);
+        Registry.register(Registries.BLOCK, BodaciousBerries.id(name), block);
         if (BY_BERRY.containsKey(((BerryBush) block).getBerry())) {
             DOUBLE_BUSHES.put(((BerryBush) block).getBerry(), (DoubleBerryBush) block);
         } else {
@@ -96,14 +98,6 @@ public class BodaciousBushes {
     private static void registerWithoutColourProvider(String name, Block block) {
         register(name, block);
         COLOUR_PROVIDER_EXCLUDED.add(block);
-    }
-
-    public static BerryBush getBushFor(Berry berry) {
-        return BY_BERRY.get(berry);
-    }
-
-    public static DoubleBerryBush getDoubleBushFor(Berry berry) {
-        return DOUBLE_BUSHES.get(berry);
     }
 
     public static List<BerryBush> getBushes() {

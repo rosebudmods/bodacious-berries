@@ -4,7 +4,8 @@ import io.ix0rai.bodacious_berries.BodaciousBerries;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 public class Particles {
     public static final DefaultParticleType RAINBOW_PARTICLE = FabricParticleTypes.simple();
@@ -16,7 +17,7 @@ public class Particles {
     }
 
     private static void registerParticle(String name, DefaultParticleType particle, ParticleFactoryRegistry.PendingParticleFactory<DefaultParticleType> constructor) {
-        Registry.register(Registry.PARTICLE_TYPE, BodaciousBerries.id(name), particle);
+        Registry.register(Registries.PARTICLE_TYPE, BodaciousBerries.id(name), particle);
         ParticleFactoryRegistry.getInstance().register(particle, constructor);
     }
 }
