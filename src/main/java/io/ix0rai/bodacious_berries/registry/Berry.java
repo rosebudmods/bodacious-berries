@@ -12,10 +12,6 @@ import java.util.Set;
  * exists so that {@link BodaciousItems} is not class-loaded until after {@link BodaciousBlocks}
  */
 public enum Berry {
-//    private static final int DEFAULT_COMMON_RARITY = 150;
-//    private static final int DEFAULT_MEDIUM_RARITY = 250;
-//    private static final int DEFAULT_RARE_RARITY = 325;
-//    private static final int DEFAULT_ULTRA_RARE_RARITY = 400;
     SASKATOON_BERRIES(/*grass, common*/BiomeTags.FOREST, BiomeTags.TAIGA, BiomeTags.MOUNTAIN),
     STRAWBERRIES(/*grass, common*/BiomeTags.HAS_VILLAGE_PLAINS_STRUCTURE, BiomeTags.FOREST, BiomeTags.HAS_SWAMP_HUT_STRUCTURE),
     RASPBERRIES(/*grass, medium*/BiomeTags.FOREST, BiomeTags.TAIGA, BiomeTags.MOUNTAIN),

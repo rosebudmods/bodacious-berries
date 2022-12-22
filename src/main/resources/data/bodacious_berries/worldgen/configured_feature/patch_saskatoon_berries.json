@@ -3,14 +3,23 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "minecraft:simple_block",
+        "type": "bodacious_berries:double_bush",
         "config": {
-          "to_place": {
+          "tall_form": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "bodacious_berries:strawberry_bush",
+              "Name": "bodacious_berries:double_saskatoon_berry_bush",
               "Properties": {
                 "age": "3"
+              }
+            }
+          },
+          "baby_form": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "bodacious_berries:saskatoon_berry_bush",
+              "Properties": {
+                "age": "2"
               }
             }
           }
@@ -40,8 +49,8 @@
         }
       ]
     },
-    "tries": 40,
-    "xz_spread": 4,
+    "tries": 75,
+    "xz_spread": 5,
     "y_spread": 2
   }
 }

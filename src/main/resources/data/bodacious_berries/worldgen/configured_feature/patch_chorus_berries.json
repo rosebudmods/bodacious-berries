@@ -8,9 +8,9 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "bodacious_berries:strawberry_bush",
+              "Name": "bodacious_berries:chorus_berry_bush",
               "Properties": {
-                "age": "3"
+                "age": "4"
               }
             }
           }
@@ -28,7 +28,7 @@
               },
               {
                 "type": "minecraft:matching_blocks",
-                "blocks": "minecraft:grass_block",
+                "blocks": "minecraft:end_stone",
                 "offset": [
                   0,
                   -1,

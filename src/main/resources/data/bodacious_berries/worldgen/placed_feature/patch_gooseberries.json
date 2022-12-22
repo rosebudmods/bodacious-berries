@@ -1,0 +1,19 @@
+{
+  "feature": "bodacious_berries:patch_gooseberries",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 125
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
