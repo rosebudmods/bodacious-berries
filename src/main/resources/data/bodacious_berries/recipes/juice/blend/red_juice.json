@@ -2,13 +2,13 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "item": "bodacious_berries:strawberries"
+      "tag": "c:strawberries"
     },
     "1": {
-      "item": "bodacious_berries:lingonberries"
+      "tag": "c:lingonberries"
     },
     "2": {
-      "item": "minecraft:sweet_berries"
+      "tag": "c:sweet_berries"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"

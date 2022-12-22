@@ -2,10 +2,10 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "item": "bodacious_berries:raspberries"
+      "tag": "c:raspberries"
     },
     "1": {
-      "item": "bodacious_berries:blackberries"
+      "tag": "c:blackberries"
     },
     "2": {
       "item": "minecraft:sugar_cane"

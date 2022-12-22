@@ -2,10 +2,10 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "item": "minecraft:glow_berries"
+      "tag": "c:glow_berries"
     },
     "1": {
-      "item": "minecraft:sweet_berries"
+      "tag": "c:sweet_berries"
     },
     "2": {
       "item": "minecraft:apple"

@@ -2,10 +2,10 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "item": "bodacious_berries:chorus_berries"
+      "tag": "c:chorus_berries"
     },
     "1": {
-      "item": "bodacious_berries:grapes"
+      "tag": "c:grapes"
     },
     "2": {
       "item": "minecraft:chorus_fruit"
