@@ -13,6 +13,7 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
@@ -23,9 +24,14 @@ import java.util.function.Predicate;
 
 public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack output) implements Recipe<ImplementedInventory> {
     public static final String RECIPE_ID = BodaciousBerries.idString("juicing");
-    public static final List<JuicerRecipe> RECIPES = new ArrayList<>();
-    public static final Serializer SERIALIZER = RecipeSerializer.register(RECIPE_ID, new Serializer());
-    public static final RecipeType<JuicerRecipe> TYPE = RecipeType.register(RECIPE_ID);
+    public static Serializer serializer;
+    public static RecipeType<JuicerRecipe> type;
+
+    public static void register() {
+        // if this is not run on mod init, this file is loaded after the registry has already been frozen
+        serializer = RecipeSerializer.register(RECIPE_ID, new Serializer());
+        type = RecipeType.register(RECIPE_ID);
+    }
 
     public boolean isIngredient(ItemStack stack) {
         return ingredient0.test(stack) || ingredient1.test(stack) || ingredient2.test(stack);
@@ -90,12 +96,12 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return SERIALIZER;
+        return serializer;
     }
 
     @Override
     public RecipeType<?> getType() {
-        return TYPE;
+        return type;
     }
 
     @SuppressWarnings("unused")
@@ -105,6 +111,13 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
     }
 
     public static class Util {
+        public static final List<JuicerRecipe> RECIPES = new ArrayList<>();
+
+        public static void reloadRecipes(MinecraftServer server) {
+            RECIPES.clear();
+            RECIPES.addAll(server.getRecipeManager().listAllOfType(type));
+        }
+
         /**
          * checks whether the given stack is an ingredient in any registered juicer recipe
          * @param stack the stack to check
