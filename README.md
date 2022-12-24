@@ -32,3 +32,4 @@ thank you to:
 - n0valey, lucille (suggestions)
 - wpgradford, nephatrine, cr4ftjunkie, milkev, sunconure11, thebutterbrotman and garogan (bug reports)
 - the quilt community discord (answering my many questions)
+- haoooozhang (chinese translation)
