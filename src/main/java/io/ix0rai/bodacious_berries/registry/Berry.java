@@ -12,17 +12,17 @@ import java.util.Set;
  * exists so that {@link BodaciousItems} is not class-loaded until after {@link BodaciousBlocks}
  */
 public enum Berry {
-    SASKATOON_BERRIES(/*grass, common*/BiomeTags.FOREST, BiomeTags.TAIGA, BiomeTags.MOUNTAIN),
-    STRAWBERRIES(/*grass, common*/BiomeTags.HAS_VILLAGE_PLAINS_STRUCTURE, BiomeTags.FOREST, BiomeTags.HAS_SWAMP_HUT_STRUCTURE),
-    RASPBERRIES(/*grass, medium*/BiomeTags.FOREST, BiomeTags.TAIGA, BiomeTags.MOUNTAIN),
-    BLACKBERRIES(/*grass, medium*/BiomeTags.FOREST, BiomeTags.TAIGA, BiomeTags.MOUNTAIN),
-    CHORUS_BERRIES(/*end stone, rare, motion blocking*/BiomeTags.HAS_END_CITY_STRUCTURE),
-    RAINBERRIES(/*grass, ultra*/BiomeTags.HAS_VILLAGE_PLAINS_STRUCTURE, BiomeTags.FOREST, BiomeTags.HAS_SWAMP_HUT_STRUCTURE),
-    LINGONBERRIES(/*grass, medium*/BiomeTags.FOREST, BiomeTags.TAIGA),
-    GRAPES(/*grass, medium*/BiomeTags.JUNGLE),
-    GOJI_BERRIES(/*grass, rare*/BiomeTags.MOUNTAIN),
-    GOOSEBERRIES(/*grass, m*/BiomeTags.FOREST, BiomeTags.MOUNTAIN),
-    CLOUDBERRIES(/*grass, r*/BiomeTags.MOUNTAIN);
+    SASKATOON_BERRIES(BiomeTags.FOREST, BiomeTags.TAIGA, BiomeTags.MOUNTAIN),
+    STRAWBERRIES(BiomeTags.HAS_VILLAGE_PLAINS_STRUCTURE, BiomeTags.FOREST, BiomeTags.HAS_SWAMP_HUT_STRUCTURE),
+    RASPBERRIES(BiomeTags.FOREST, BiomeTags.TAIGA, BiomeTags.MOUNTAIN),
+    BLACKBERRIES(BiomeTags.FOREST, BiomeTags.TAIGA, BiomeTags.MOUNTAIN),
+    CHORUS_BERRIES(BiomeTags.HAS_END_CITY_STRUCTURE),
+    RAINBERRIES(BiomeTags.HAS_VILLAGE_PLAINS_STRUCTURE, BiomeTags.FOREST, BiomeTags.HAS_SWAMP_HUT_STRUCTURE),
+    LINGONBERRIES(BiomeTags.FOREST, BiomeTags.TAIGA),
+    GRAPES(BiomeTags.JUNGLE),
+    GOJI_BERRIES(BiomeTags.MOUNTAIN),
+    GOOSEBERRIES(BiomeTags.FOREST, BiomeTags.MOUNTAIN),
+    CLOUDBERRIES(BiomeTags.MOUNTAIN);
 
     private final Identifier identifier;
     private final Set<TagKey<Biome>> biomes;
