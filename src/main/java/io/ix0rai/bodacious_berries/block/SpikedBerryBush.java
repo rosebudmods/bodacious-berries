@@ -7,13 +7,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 
 public class SpikedBerryBush extends BasicBerryBush {
-    public static final DamageSource BERRY_BUSH = new DamageSource("bodacious_berry_bush");
     private static final float MINIMUM_DAMAGE_DISTANCE = 0.003f;
     private final float damage;
 
@@ -35,7 +36,7 @@ public class SpikedBerryBush extends BasicBerryBush {
         super.onEntityCollision(state, world, pos, entity);
 
         if (!(world.isClient) && movedMinDistance(entity) && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) < sizeChangeAge) {
-            entity.damage(BERRY_BUSH, damage);
+            entity.damage(world.getDamageSources().sweetBerryBush(), damage);
         }
     }
 

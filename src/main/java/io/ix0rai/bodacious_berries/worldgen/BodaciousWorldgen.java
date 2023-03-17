@@ -24,8 +24,8 @@ public class BodaciousWorldgen {
     public static final Feature<DefaultFeatureConfig> GRAPEVINE_FEATURE = new GrapevineFeature(DefaultFeatureConfig.CODEC);
 
     public static void register() {
-        Registry.register(Registries.FEATURE_WORLDGEN, BodaciousBerries.id("double_bush"), DOUBLE_BUSH_FEATURE);
-        Registry.register(Registries.FEATURE_WORLDGEN, BodaciousBerries.id("grapevine"), GRAPEVINE_FEATURE);
+        Registry.register(Registries.FEATURE, BodaciousBerries.id("double_bush"), DOUBLE_BUSH_FEATURE);
+        Registry.register(Registries.FEATURE, BodaciousBerries.id("grapevine"), GRAPEVINE_FEATURE);
 
         for (Berry berry : Berry.values()) {
             if (BodaciousBerries.CONFIG.isGenerating(berry)) {

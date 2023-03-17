@@ -17,7 +17,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 
-import static net.minecraft.world.biome.BiomeKeys.*;
+import static net.minecraft.world.biome.Biomes.*;
 
 public class BodaciousJuices {
     public static final Item JUICE_RECEPTACLE = Items.GLASS_BOTTLE;
@@ -80,6 +80,6 @@ public class BodaciousJuices {
 
     private static void register(Identifier id, Juice juice) {
         Item item = Registry.register(Registries.ITEM, id, juice);
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> entries.addItem(item));
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINKS).register(entries -> entries.addItem(item));
     }
 }

@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityT
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.feature_flags.FeatureFlags;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Settings;
@@ -27,16 +28,16 @@ public class BodaciousBlocks {
     public static final Identifier BERRY_HARVESTER = BodaciousBerries.id("berry_harvester");
     public static final BerryHarvesterBlock BERRY_HARVESTER_BLOCK = new BerryHarvesterBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f));
     public static final BlockEntityType<BerryHarvesterBlockEntity> BERRY_HARVESTER_ENTITY = FabricBlockEntityTypeBuilder.create(BerryHarvesterBlockEntity::new, BERRY_HARVESTER_BLOCK).build(null);
-    public static final ScreenHandlerType<BerryHarvesterScreenHandler> BERRY_HARVESTER_SCREEN_HANDLER = new ScreenHandlerType<>(BerryHarvesterScreenHandler::new);
+    public static final ScreenHandlerType<BerryHarvesterScreenHandler> BERRY_HARVESTER_SCREEN_HANDLER = new ScreenHandlerType<>(BerryHarvesterScreenHandler::new, FeatureFlags.DEFAULT_SET);
 
     public static final Identifier JUICER = BodaciousBerries.id("juicer");
     public static final JuicerBlock JUICER_BLOCK = new JuicerBlock(FabricBlockSettings.of(Material.METAL).strength(4.0f));
     public static final BlockEntityType<JuicerBlockEntity> JUICER_ENTITY = FabricBlockEntityTypeBuilder.create(JuicerBlockEntity::new, JUICER_BLOCK).build(null);
-    public static final ScreenHandlerType<JuicerScreenHandler> JUICER_SCREEN_HANDLER = new ScreenHandlerType<>(JuicerScreenHandler::new);
+    public static final ScreenHandlerType<JuicerScreenHandler> JUICER_SCREEN_HANDLER = new ScreenHandlerType<>(JuicerScreenHandler::new, FeatureFlags.DEFAULT_SET);
 
     public static void register() {
-        register(BERRY_HARVESTER, BERRY_HARVESTER_BLOCK, BERRY_HARVESTER_ENTITY, BERRY_HARVESTER_SCREEN_HANDLER, ItemGroups.REDSTONE);
-        register(JUICER, JUICER_BLOCK, JUICER_ENTITY, JUICER_SCREEN_HANDLER, ItemGroups.FUNCTIONAL);
+        register(BERRY_HARVESTER, BERRY_HARVESTER_BLOCK, BERRY_HARVESTER_ENTITY, BERRY_HARVESTER_SCREEN_HANDLER, ItemGroups.REDSTONE_BLOCKS);
+        register(JUICER, JUICER_BLOCK, JUICER_ENTITY, JUICER_SCREEN_HANDLER, ItemGroups.FUNCTIONAL_BLOCKS);
 
         BodaciousBushes.register();
     }

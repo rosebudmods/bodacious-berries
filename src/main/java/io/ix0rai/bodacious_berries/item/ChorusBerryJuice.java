@@ -67,7 +67,7 @@ public class ChorusBerryJuice extends Juice {
     }
 
     private Pair<BlockPos, Boolean> locateBiome(MinecraftServer server, BlockPos pos, LivingEntity user) {
-        Pair<BlockPos, Holder<Biome>> pair = server.getOverworld().m_olxeedby(
+        Pair<BlockPos, Holder<Biome>> pair = server.getOverworld().method_42108(
                 entry -> (entry.value().equals(Holder.createDirect(server.getRegistryManager().get(RegistryKeys.BIOME).get(biome)).value())),
                 user.getBlockPos(),
                 6400,

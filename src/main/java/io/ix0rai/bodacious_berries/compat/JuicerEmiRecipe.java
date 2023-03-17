@@ -29,7 +29,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
             list.add(EmiIngredient.of(recipe.receptacle()));
         }
         this.inputs = list;
-        this.output = EmiStack.of(recipe.getOutput(), 3);
+        this.output = EmiStack.of(recipe.getResult(), 3);
         this.receptacle = EmiIngredient.of(recipe.receptacle(), 3);
     }
 

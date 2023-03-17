@@ -12,6 +12,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
@@ -75,8 +76,8 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
     }
 
     @Override
-    public ItemStack craft(ImplementedInventory inventory) {
-        return getOutput().copy();
+    public ItemStack craft(ImplementedInventory inventory, DynamicRegistryManager registryManager) {
+        return getResult(registryManager).copy();
     }
 
     @Override
@@ -85,7 +86,11 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
     }
 
     @Override
-    public ItemStack getOutput() {
+    public ItemStack getResult(DynamicRegistryManager registryManager) {
+        return this.output;
+    }
+
+    public ItemStack getResult() {
         return this.output;
     }
 
@@ -111,7 +116,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
     }
 
     public static class Util {
-        public static final List<JuicerRecipe> RECIPES = new ArrayList<>();
+        private static final List<JuicerRecipe> RECIPES = new ArrayList<>();
 
         public static void reloadRecipes(MinecraftServer server) {
             RECIPES.clear();
@@ -192,7 +197,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
             recipe.ingredient1().write(packetData);
             recipe.ingredient2().write(packetData);
             recipe.receptacle().write(packetData);
-            packetData.writeItemStack(recipe.getOutput());
+            packetData.writeItemStack(recipe.getResult());
         }
 
         @Override
