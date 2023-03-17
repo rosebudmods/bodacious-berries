@@ -32,7 +32,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected static final Vec3d DOUBLE_BUSH_SLOWING_VECTOR = new Vec3d(0.7D, 0.9D, 0.7D);
     protected static final int MAX_BERRY_AMOUNT = 5;
 
-    protected Berry berry;
+    protected final Berry berry;
 
     public DoubleBerryBush(Berry berry) {
         super(BodaciousBushes.BERRY_BUSH_SETTINGS);
@@ -53,8 +53,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        // I spent about an hour and a half debugging a crash before realising it originated from this property not existing
-        // yay me
         builder.add(getAge()).add(HALF);
     }
 

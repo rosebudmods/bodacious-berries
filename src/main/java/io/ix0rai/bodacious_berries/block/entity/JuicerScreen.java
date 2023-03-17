@@ -42,7 +42,7 @@ public class JuicerScreen extends BodaciousScreen<JuicerScreenHandler> {
         // draw background
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
-        this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
         this.drawProgress(matrices);
     }
 
@@ -55,14 +55,14 @@ public class JuicerScreen extends BodaciousScreen<JuicerScreenHandler> {
             // draw progress bar
             int progress = Math.round(28.0F * (1.0F - brewTime / (float) JuicerBlockEntity.TOTAL_BREW_TIME));
             if (progress > 0) {
-                this.drawTexture(matrices, x + 73, y + 35, dubious ? DUBIOUS_PROGRESS_BAR_UV_X : PROGRESS_BAR_UV_X, blend ? BLEND_PROGRESS_BAR_UV_Y : PROGRESS_BAR_UV_Y, 28, progress);
+                drawTexture(matrices, x + 73, y + 35, dubious ? DUBIOUS_PROGRESS_BAR_UV_X : PROGRESS_BAR_UV_X, blend ? BLEND_PROGRESS_BAR_UV_Y : PROGRESS_BAR_UV_Y, 28, progress);
             }
 
             // draw bubbles
             progress = BUBBLE_PROGRESS[brewTime / 2 % 7];
             if (progress > 0) {
                 for (int i = 0; i < 2; i++) {
-                    this.drawTexture(matrices,  x + (i == 0 ? LEFT_BUBBLE_X : RIGHT_BUBBLE_X), y + 63 - progress, dubious ? DUBIOUS_BUBBLE_UV_X : BUBBLE_UV_X, (blend ? BLEND_BUBBLE_UV_Y : BUBBLE_UV_Y) - progress, 12, progress);
+                    drawTexture(matrices,  x + (i == 0 ? LEFT_BUBBLE_X : RIGHT_BUBBLE_X), y + 63 - progress, dubious ? DUBIOUS_BUBBLE_UV_X : BUBBLE_UV_X, (blend ? BLEND_BUBBLE_UV_Y : BUBBLE_UV_Y) - progress, 12, progress);
                 }
             }
         }
