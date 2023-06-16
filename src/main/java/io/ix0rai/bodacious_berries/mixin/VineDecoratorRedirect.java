@@ -77,6 +77,6 @@ public class VineDecoratorRedirect {
         // block must not be surrounded by air or a non-solid blocks
         // we only return true if it has a supporting solid block
         return east != Blocks.AIR || west != Blocks.AIR || north != Blocks.AIR || south != Blocks.AIR
-                && (east.canMobSpawnInside() || west.canMobSpawnInside() || north.canMobSpawnInside() || south.canMobSpawnInside());
+                && (east.canMobSpawnInside(east.getDefaultState()) || west.canMobSpawnInside(west.getDefaultState()) || north.canMobSpawnInside(north.getDefaultState()) || south.canMobSpawnInside(south.getDefaultState()));
     }
 }

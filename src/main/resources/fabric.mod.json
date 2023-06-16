@@ -38,14 +38,13 @@
 
   "depends": {
     "fabricloader": ">=0.14.14",
-    "fabric-api": ">=0.69.0",
-    "minecraft": ">=1.19.4",
-    "java": ">=17"
+    "fabric-api": ">=0.83.0",
+    "minecraft": ">=1.20"
   },
 
   "suggests": {
-    "emi": ">=0.7.0",
-    "modmenu": ">=6.0.0"
+    "emi": ">=1.0.0",
+    "modmenu": ">=7.0.0"
   },
 
   "custom": {

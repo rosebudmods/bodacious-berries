@@ -1,6 +1,5 @@
 package io.ix0rai.bodacious_berries.compat;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -8,7 +7,6 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.block.entity.JuicerRecipe;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
@@ -66,21 +64,20 @@ public class JuicerEmiRecipe implements EmiRecipe {
     @Override
     public void addWidgets(WidgetHolder widgets) {
         // juicer background and animated textures
-        widgets.addDrawable(-19, 3, 64, 59, (matrices, mouseX, mouseY, delta) -> {
+        widgets.addDrawable(-19, 3, 64, 59, (graphics, mouseX, mouseY, delta) -> {
             // add juicer background
-            RenderSystem.setShaderTexture(0, JuicerEmiPlugin.JUICER_TEXTURE);
-            DrawableHelper.drawTexture(matrices, 20, 0, 55, 17, 64, 59, 256, 256);
+            graphics.drawTexture(JuicerEmiPlugin.JUICER_TEXTURE, 20, 0, 55, 17, 64, 59, 256, 256);
 
             // add progress bar
             final double time = System.currentTimeMillis() / 250d;
 
             int progress = MathHelper.floor(time % 16);
-            DrawableHelper.drawTexture(matrices, 38, 24, 187, 0, 28, progress, 256, 256);
+            graphics.drawTexture(JuicerEmiPlugin.JUICER_TEXTURE, 38, 24, 187, 0, 28, progress, 256, 256);
 
             // add animated bubbles
             int height = MathHelper.floor(time % 9);
-            DrawableHelper.drawTexture(matrices, 24, 24 + height, 176, height, 11, 9 - height, 256, 256);
-            DrawableHelper.drawTexture(matrices, 70, 24 + height, 176, height, 11, 9 - height, 256, 256);
+            graphics.drawTexture(JuicerEmiPlugin.JUICER_TEXTURE, 24, 24 + height, 176, height, 11, 9 - height, 256, 256);
+            graphics.drawTexture(JuicerEmiPlugin.JUICER_TEXTURE, 70, 24 + height, 176, height, 11, 9 - height, 256, 256);
         });
 
         // input and output slots

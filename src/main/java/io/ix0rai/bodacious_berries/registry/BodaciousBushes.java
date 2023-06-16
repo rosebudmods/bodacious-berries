@@ -12,7 +12,6 @@ import io.ix0rai.bodacious_berries.block.RainberryBush;
 import io.ix0rai.bodacious_berries.block.SpikedBerryBush;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.Material;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
@@ -42,7 +41,7 @@ public class BodaciousBushes {
     private static final VoxelShape LARGE_RASPBERRY = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 13.0D, 15.0D);
     private static final VoxelShape LARGE_CLOUDBERRY = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 15.0D, 13.0D);
 
-    public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
+    public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.create().ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
 
     public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berry.CHORUS_BERRIES,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);

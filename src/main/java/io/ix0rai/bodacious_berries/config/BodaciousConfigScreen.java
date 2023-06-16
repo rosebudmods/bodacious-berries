@@ -13,8 +13,8 @@ import io.ix0rai.bodacious_berries.registry.Berry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.util.math.MatrixStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -92,7 +92,7 @@ public class BodaciousConfigScreen extends SpruceScreen {
     }
 
     @Override
-    public void renderTitle(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 8, 16777215);
+    public void renderTitle(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        graphics.drawCenteredShadowedText(this.textRenderer, this.title, this.width / 2, 8, 16777215);
     }
 }

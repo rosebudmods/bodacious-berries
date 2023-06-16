@@ -1,7 +1,7 @@
 package io.ix0rai.bodacious_berries.block.entity;
 
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
@@ -18,8 +18,8 @@ public abstract class BodaciousScreen<T extends ScreenHandler> extends HandledSc
     }
 
     @Override
-    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-        this.textRenderer.draw(matrices, Language.getInstance().get(this.title.getString()), this.playerInventoryTitleX, this.titleY, 4210752);
-        this.textRenderer.draw(matrices, this.playerInventoryTitle, this.playerInventoryTitleX, this.playerInventoryTitleY, 4210752);
+    protected void drawForeground(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.drawText(this.textRenderer, Language.getInstance().get(this.title.getString()), this.titleX, this.titleY, 4210752, false);
+        graphics.drawText(this.textRenderer, this.playerInventoryTitle, this.playerInventoryTitleX, this.playerInventoryTitleY, 4210752, false);
     }
 }
