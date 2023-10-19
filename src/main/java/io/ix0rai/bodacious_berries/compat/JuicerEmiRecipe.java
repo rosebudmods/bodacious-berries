@@ -14,13 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JuicerEmiRecipe implements EmiRecipe {
-    private final Identifier id;
     private final List<EmiIngredient> inputs;
     private final EmiStack output;
     private final EmiIngredient receptacle;
 
     public JuicerEmiRecipe(JuicerRecipe recipe) {
-        this.id = recipe.getId();
         List<EmiIngredient> list = new ArrayList<>();
         recipe.getIngredients().forEach(ingredient -> list.add(EmiIngredient.of(ingredient)));
         for (int i = 0; i < 3; i++) {
@@ -38,7 +36,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
 
     @Override
     public Identifier getId() {
-        return id;
+        return null;
     }
 
     @Override
@@ -80,7 +78,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
             graphics.drawTexture(JuicerEmiPlugin.JUICER_TEXTURE, 70, 24 + height, 176, height, 11, 9 - height, 256, 256);
         });
 
-        // input and output slots
+        // input and result slots
         widgets.addSlot(inputs.get(0), 4, 3);
         widgets.addSlot(inputs.get(1), 24, 10);
         widgets.addSlot(inputs.get(2), 44, 3);

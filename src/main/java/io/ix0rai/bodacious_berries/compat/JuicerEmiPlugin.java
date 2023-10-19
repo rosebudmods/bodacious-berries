@@ -7,6 +7,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.block.entity.JuicerRecipe;
 import io.ix0rai.bodacious_berries.registry.BodaciousBlocks;
+import net.minecraft.recipe.RecipeHolder;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.util.Identifier;
 
@@ -24,8 +25,8 @@ public class JuicerEmiPlugin implements EmiPlugin {
 
         // add all juicer recipes to emi's recipe manager
         RecipeManager manager = registry.getRecipeManager();
-        for (JuicerRecipe recipe : manager.listAllOfType(JuicerRecipe.type)) {
-            registry.addRecipe(new JuicerEmiRecipe(recipe));
+        for (RecipeHolder<JuicerRecipe> recipe : manager.listAllOfType(JuicerRecipe.type)) {
+            registry.addRecipe(new JuicerEmiRecipe(recipe.value()));
         }
     }
 }

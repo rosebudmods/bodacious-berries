@@ -60,26 +60,6 @@ public class BerryVine extends VineBlock implements BerryBush {
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        return hasRandomTicks(state);
-    }
-
-    @Override
-    public boolean canGrow(World world, RandomGenerator random, BlockPos pos, BlockState state) {
-        return hasRandomTicks(state);
-    }
-
-    @Override
-    public void grow(ServerWorld world, RandomGenerator random, BlockPos pos, BlockState state) {
-        int newBerryAge = Math.min(MAX_AGE, state.get(AGE) + 1);
-        grow(world, pos, state, newBerryAge);
-    }
-
-    public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
-        world.setBlockState(pos, state.with(AGE, newAge), Block.NOTIFY_LISTENERS);
-    }
-
-    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
@@ -113,5 +93,21 @@ public class BerryVine extends VineBlock implements BerryBush {
     @Override
     public int getMaxBerryAmount() {
         return MAX_BERRY_AMOUNT;
+    }
+
+    @Override
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+        return this.hasRandomTicks(state);
+    }
+
+    @Override
+    public boolean canFertilize(World world, RandomGenerator random, BlockPos pos, BlockState state) {
+        return this.hasRandomTicks(state);
+    }
+
+    @Override
+    public void fertilize(ServerWorld world, RandomGenerator random, BlockPos pos, BlockState state) {
+        int newBerryAge = Math.min(MAX_AGE, state.get(AGE) + 1);
+        world.setBlockState(pos, state.with(AGE, newBerryAge), Block.NOTIFY_LISTENERS);
     }
 }

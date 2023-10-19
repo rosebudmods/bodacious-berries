@@ -1,21 +1,22 @@
 package io.ix0rai.bodacious_berries.block.entity;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.mojang.datafixers.util.Either;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.ix0rai.bodacious_berries.BodaciousBerries;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeHolder;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack output) implements Recipe<ImplementedInventory> {
+public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack result) implements Recipe<Inventory> {
     public static final String RECIPE_ID = BodaciousBerries.idString("juicing");
     public static Serializer serializer;
     public static RecipeType<JuicerRecipe> type;
@@ -46,7 +47,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         if (stack.isEmpty()) {
             return false;
         }
-        return output.getItem().equals(stack.getItem());
+        return result.getItem().equals(stack.getItem());
     }
 
     public boolean isReceptacle(ItemStack stack) {
@@ -69,14 +70,14 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
     }
 
     @Override
-    public boolean matches(ImplementedInventory inv, World world) {
+    public boolean matches(Inventory inv, World world) {
         if (inv.size() < 5) return false;
         return ingredient0.test(inv.getStack(3)) && ingredient1.test(inv.getStack(4)) && ingredient2.test(inv.getStack(5))
                 && (receptacle.test(inv.getStack(0)) || receptacle.test(inv.getStack(1)) || receptacle.test(inv.getStack(2)));
     }
 
     @Override
-    public ItemStack craft(ImplementedInventory inventory, DynamicRegistryManager registryManager) {
+    public ItemStack craft(Inventory inventory, DynamicRegistryManager registryManager) {
         return getResult(registryManager).copy();
     }
 
@@ -87,16 +88,11 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
     @Override
     public ItemStack getResult(DynamicRegistryManager registryManager) {
-        return this.output;
+        return this.result;
     }
 
     public ItemStack getResult() {
-        return this.output;
-    }
-
-    @Override
-    public Identifier getId() {
-        return this.id;
+        return this.result;
     }
 
     @Override
@@ -120,7 +116,7 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
 
         public static void reloadRecipes(MinecraftServer server) {
             RECIPES.clear();
-            RECIPES.addAll(server.getRecipeManager().listAllOfType(type));
+            RECIPES.addAll(server.getRecipeManager().listAllOfType(type).stream().map(RecipeHolder::value).toList());
         }
 
         /**
@@ -161,34 +157,60 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
         }
     }
 
+    /**
+     * Utility for parsing recipes via codec.
+     */
+    public record IngredientSet(Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle) {
+        private static final Codec<IngredientSet> ALL_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+                Ingredient.field_46095.fieldOf("all").forGetter((set) -> set.ingredient0),
+                Ingredient.field_46095.fieldOf("receptacle").forGetter((set) -> set.receptacle)
+        ).apply(instance, (ingredient, receptacle) -> new IngredientSet(ingredient, ingredient, ingredient, receptacle)));
+
+        private static final Codec<IngredientSet> INDIVIDUAL_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+                Ingredient.field_46095.fieldOf("0").forGetter((set) -> set.ingredient0),
+                Ingredient.field_46095.fieldOf("1").forGetter((set) -> set.ingredient1),
+                Ingredient.field_46095.fieldOf("2").forGetter((set) -> set.ingredient2),
+                Ingredient.field_46095.fieldOf("receptacle").forGetter((set) -> set.receptacle)
+        ).apply(instance, IngredientSet::new));
+
+        private static final Codec<Either<IngredientSet, IngredientSet>> EITHER_CODEC = Codec.either(
+                ALL_CODEC,
+                INDIVIDUAL_CODEC
+        );
+
+        private static final Codec<IngredientSet> CODEC = EITHER_CODEC
+                .flatXmap(
+                        either -> either.map(DataResult::success, DataResult::success),
+                        set -> DataResult.success(
+                                set.ingredientsMatch() ?
+                                        Either.left(set) :
+                                        Either.right(set)
+                        )
+                );
+
+        private boolean ingredientsMatch() {
+            return this.ingredient0.equals(this.ingredient1) && this.ingredient0.equals(ingredient2);
+        }
+    }
+
     public static class Serializer implements RecipeSerializer<JuicerRecipe> {
+        private static final Codec<JuicerRecipe> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+                IngredientSet.CODEC.fieldOf("ingredients").forGetter((recipe) -> new IngredientSet(recipe.ingredient0, recipe.ingredient1, recipe.ingredient2, recipe.receptacle)),
+                Registries.ITEM.getCodec().xmap(ItemStack::new, ItemStack::getItem).fieldOf("result").forGetter((recipe) -> recipe.result)
+        ).apply(instance, (set, result) -> new JuicerRecipe(set.ingredient0(), set.ingredient1(), set.ingredient2(), set.receptacle(), result)));
+
         @Override
-        public JuicerRecipe read(Identifier id, JsonObject json) {
-            JuicerRecipeJsonFormat recipeJson = new Gson().fromJson(json, JuicerRecipeJsonFormat.class);
+        public JuicerRecipe read(PacketByteBuf buf) {
+            Ingredient input1 = Ingredient.fromPacket(buf);
+            Ingredient input2 = Ingredient.fromPacket(buf);
+            Ingredient input3 = Ingredient.fromPacket(buf);
+            Ingredient receptacle = Ingredient.fromPacket(buf);
+            return new JuicerRecipe(input1, input2, input3, receptacle, buf.readItemStack());
+        }
 
-            if (recipeJson.ingredients == null || recipeJson.result == null) {
-                throw new JsonSyntaxException("a required json attribute is missing (result or ingredients) in recipe " + id + "!");
-            }
-
-            Ingredient input0;
-            Ingredient input1;
-            Ingredient input2;
-            JsonElement allIngredient = recipeJson.ingredients.get("all");
-            if (allIngredient != null) {
-                input0 = Ingredient.fromJson(allIngredient);
-                input1 = Ingredient.fromJson(allIngredient);
-                input2 = Ingredient.fromJson(allIngredient);
-            } else {
-                input0 = Ingredient.fromJson(recipeJson.ingredients.get("0"));
-                input1 = Ingredient.fromJson(recipeJson.ingredients.get("1"));
-                input2 = Ingredient.fromJson(recipeJson.ingredients.get("2"));
-            }
-            Ingredient receptacle = Ingredient.fromJson(recipeJson.ingredients.get("receptacle"));
-            Item outputItem = Registries.ITEM.getOrEmpty(new Identifier(recipeJson.result))
-                    .orElseThrow(() -> new JsonSyntaxException("no such item: " + recipeJson.result));
-            ItemStack output = new ItemStack(outputItem);
-
-            return new JuicerRecipe(id, input0, input1, input2, receptacle, output);
+        @Override
+        public Codec<JuicerRecipe> method_53736() {
+            return CODEC;
         }
 
         @Override
@@ -198,15 +220,6 @@ public record JuicerRecipe(Identifier id, Ingredient ingredient0, Ingredient ing
             recipe.ingredient2().write(packetData);
             recipe.receptacle().write(packetData);
             packetData.writeItemStack(recipe.getResult());
-        }
-
-        @Override
-        public JuicerRecipe read(Identifier id, PacketByteBuf packetData) {
-            Ingredient input1 = Ingredient.fromPacket(packetData);
-            Ingredient input2 = Ingredient.fromPacket(packetData);
-            Ingredient input3 = Ingredient.fromPacket(packetData);
-            Ingredient receptacle = Ingredient.fromPacket(packetData);
-            return new JuicerRecipe(id, input1, input2, input3, receptacle, packetData.readItemStack());
         }
     }
 }

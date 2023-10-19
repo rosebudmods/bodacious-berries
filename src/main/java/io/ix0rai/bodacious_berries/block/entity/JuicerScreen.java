@@ -28,7 +28,7 @@ public class JuicerScreen extends BodaciousScreen<JuicerScreenHandler> {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        this.renderBackground(graphics);
+        this.renderBackground(graphics, (int) delta, mouseX, mouseY);
         super.render(graphics, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(graphics, mouseX, mouseY);
     }

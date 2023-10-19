@@ -19,9 +19,9 @@ public class JuicerScreenHandler extends BodaciousScreenHandler {
 
     /**
      * slot map:
-     * 0: leftmost output slot
-     * 1: middle output slot
-     * 2: rightmost output slot
+     * 0: leftmost result slot
+     * 1: middle result slot
+     * 2: rightmost result slot
      * 3: ingredient slot
      * 4: ingredient slot 2
      * 5: ingredient slot 3
@@ -32,7 +32,7 @@ public class JuicerScreenHandler extends BodaciousScreenHandler {
         this.propertyDelegate = propertyDelegate;
         this.addProperties(propertyDelegate);
 
-        // output slots
+        // result slots
         this.addSlot(new JuicerOutputSlot(inventory, 0, 56, 51));
         this.addSlot(new JuicerOutputSlot(inventory, 1, 79, 58));
         this.addSlot(new JuicerOutputSlot(inventory, 2, 102, 51));
@@ -106,9 +106,9 @@ public class JuicerScreenHandler extends BodaciousScreenHandler {
     }
 
     private boolean attemptInsertToOutputSlot(ItemStack stack) {
-        // iterate over output slots
+        // iterate over result slots
         for (int i = 0; i < 3; i++) {
-            // check if tested output slot is empty
+            // check if tested result slot is empty
             if (this.slots.get(i).getStack().isEmpty()
                     && this.insertItem(new ItemStack(stack.getItem()), i, i + 1, false)) {
                 // if so, insert a single item and decrement the stack sending the item by 1

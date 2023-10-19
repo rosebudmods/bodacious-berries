@@ -17,6 +17,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.RecipeHolder;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
@@ -115,7 +116,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
-        Optional<JuicerRecipe> recipe = world.getRecipeManager().getFirstMatch(JuicerRecipe.type, juicer, world);
+        Optional<RecipeHolder<JuicerRecipe>> recipe = world.getRecipeManager().getFirstMatch(JuicerRecipe.type, juicer, world);
         boolean isBrewing = juicer.brewTime > 0;
 
         if (isBrewing) {
@@ -124,7 +125,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
             // if brewing is finished, craft the juices
             if (juicer.hasValidReceptacle() && juicer.brewTime == 0) {
                 if (recipe.isPresent()) {
-                    craft(world, pos, recipe.get(), juicer.inventory);
+                    craft(world, pos, recipe.get().value(), juicer.inventory);
                 } else if (juicer.makingDubiousJuice) {
                     craft(world, pos, new ItemStack(BodaciousJuices.DUBIOUS_JUICE), Ingredient.ofItems(BodaciousJuices.JUICE_RECEPTACLE), juicer.inventory);
                 }
@@ -138,7 +139,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
             DefaultedList<ItemStack> inventory = juicer.getInventory();
 
             if (recipe.isPresent()) {
-                juicer.makingBerryBlend = !recipe.get().ingredientsMatch(inventory.get(3));
+                juicer.makingBerryBlend = !recipe.get().value().ingredientsMatch(inventory.get(3));
 
                 // if we're not currently brewing, start brewing with the ingredient
                 startJuicer(world, pos, state, juicer);
