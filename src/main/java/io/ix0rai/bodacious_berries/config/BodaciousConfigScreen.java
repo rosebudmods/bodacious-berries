@@ -1,20 +1,12 @@
 package io.ix0rai.bodacious_berries.config;
 
-import dev.lambdaurora.spruceui.Position;
-import dev.lambdaurora.spruceui.SpruceTexts;
-import dev.lambdaurora.spruceui.option.SpruceBooleanOption;
-import dev.lambdaurora.spruceui.option.SpruceOption;
-import dev.lambdaurora.spruceui.option.SpruceSimpleActionOption;
-import dev.lambdaurora.spruceui.screen.SpruceScreen;
-import dev.lambdaurora.spruceui.widget.SpruceButtonWidget;
-import dev.lambdaurora.spruceui.widget.container.SpruceOptionListWidget;
 import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.registry.Berry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.option.SimpleOptionsScreen;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -26,15 +18,12 @@ import static io.ix0rai.bodacious_berries.BodaciousBerries.CONFIG;
  * based on the configuration screen for lambdabettergrass by lambdaurora
  */
 @Environment(EnvType.CLIENT)
-public class BodaciousConfigScreen extends SpruceScreen {
-    private final Screen parent;
-
+public class BodaciousConfigScreen extends SimpleOptionsScreen {
     private final SpruceOption resetOption;
     private final SpruceOption[] generationOptions = new SpruceOption[Berry.values().length];
 
     public BodaciousConfigScreen(@Nullable Screen parent) {
         super(BodaciousBerries.translatableText("config.title"));
-        this.parent = parent;
 
         for (Berry berry : Berry.values()) {
             generationOptions[berry.ordinal()] = createGenOption(berry.toString(),
@@ -59,15 +48,6 @@ public class BodaciousConfigScreen extends SpruceScreen {
     }
 
     @Override
-    public void closeScreen() {
-        if (this.client != null) {
-            this.client.setScreen(this.parent);
-        } else {
-            super.closeScreen();
-        }
-    }
-
-    @Override
     protected void init() {
         super.init();
 
@@ -89,10 +69,5 @@ public class BodaciousConfigScreen extends SpruceScreen {
         this.addDrawableChild(new SpruceButtonWidget(Position.of(this, this.width / 2 - 155 + 160, this.height - 29), 150,
                 buttonHeight, SpruceTexts.GUI_DONE,
                 buttonWidget -> this.closeScreen()));
-    }
-
-    @Override
-    public void renderTitle(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        graphics.drawCenteredShadowedText(this.textRenderer, this.title, this.width / 2, 8, 16777215);
     }
 }
