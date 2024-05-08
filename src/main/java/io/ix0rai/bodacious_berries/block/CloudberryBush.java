@@ -52,9 +52,9 @@ public class CloudberryBush extends BasicBerryBush.ThreeStageBush {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity entity, BlockHitResult hitResult) {
         if (Boolean.FALSE.equals(state.get(DYING))) {
-            super.onUse(state, world, pos, player, hand, hit);
+            super.onUse(state, world, pos, entity, hitResult);
         }
 
         return ActionResult.FAIL;
