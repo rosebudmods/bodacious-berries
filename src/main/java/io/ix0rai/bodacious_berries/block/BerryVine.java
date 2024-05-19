@@ -42,11 +42,6 @@ public class BerryVine extends VineBlock implements BerryBush {
         builder.add(AGE, UP, NORTH, EAST, SOUTH, WEST);
     }
 
-//    @Override
-//    public boolean hasRandomTicks(BlockState state) {
-//        return state.get(AGE) < MAX_AGE;
-//    }
-
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
         super.randomTick(state, world, pos, random);
@@ -103,12 +98,12 @@ public class BerryVine extends VineBlock implements BerryBush {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-        return state.hasRandomTicks();
+        return state.get(getAge()) < MAX_AGE;
     }
 
     @Override
     public boolean canFertilize(World world, RandomGenerator random, BlockPos pos, BlockState state) {
-        return state.hasRandomTicks();
+        return isFertilizable(world, pos, state);
     }
 
     @Override

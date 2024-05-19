@@ -55,11 +55,6 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         builder.add(getAge()).add(HALF);
     }
 
-//    @Override
-//    public boolean hasRandomTicks(BlockState state) {
-//        return state.get(getAge()) < MAX_AGE;
-//    }
-
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
         int age = state.get(getAge());
@@ -71,12 +66,12 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-        return state.hasRandomTicks();
+        return state.get(getAge()) < MAX_AGE;
     }
 
     @Override
     public boolean canFertilize(World world, RandomGenerator random, BlockPos pos, BlockState state) {
-        return state.hasRandomTicks();
+        return isFertilizable(world, pos, state);
     }
 
     @Override
@@ -100,13 +95,11 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hitResult) {
-//        if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-//            return ActionResult.PASS;
-//        } else if (state.get(getAge()) == MAX_AGE) {
-//            return BasicBerryBush.pickBerries(pos, world, state, this.getBerryItem());
-//        } else {
+        if (state.get(getAge()) == MAX_AGE) {
+            return BasicBerryBush.pickBerries(pos, world, state, this.getBerryItem());
+        } else {
             return super.onUse(state, world, pos, player, hitResult);
-//        }
+        }
     }
 
     @Override

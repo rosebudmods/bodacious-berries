@@ -9,7 +9,6 @@ import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemInteractionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -48,26 +47,18 @@ public class GrowingBerryBush extends BasicBerryBush {
             ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockHitResult hitResult
     ) {
         int i = state.get(getAge());
-        boolean isMaxAge = i == 3;
-        return !isMaxAge && stack.isOf(Items.BONE_MEAL)
-                ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION
-                : super.onInteract(stack, state, world, pos, entity, hand, hitResult);
-    }
+        boolean isMaxAge = i == getMaxAge();
+        if (isMaxAge && stack.isOf(Items.BONE_MEAL)) {
+            final int newAge = Math.min(maxAge, state.get(getAge()) + 1);
+            // grow to a double bush if new age exceeds maximum
+            if (newAge > maxAge) {
+                TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, Block.NOTIFY_LISTENERS);
+            }
 
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity entity, BlockHitResult hitResult) {
-//        // a GrowingBerryBush cannot produce berries until it grows to its double bush state
-//        if (state.hasRandomTicks() && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-//            final int newAge = Math.min(maxAge, state.get(getAge()) + 1);
-//            // grow to a double bush if new age exceeds maximum
-//            if (newAge > maxAge) {
-//                TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, Block.NOTIFY_LISTENERS);
-//            }
-//
-//            return ActionResult.PASS;
-//        }
+            return ItemInteractionResult.CONSUME;
+        }
 
-        return ActionResult.FAIL;
+        return super.onInteract(stack, state, world, pos, entity, hand, hitResult);
     }
 
     @Override

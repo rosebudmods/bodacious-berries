@@ -156,14 +156,12 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-        // hasRandomTicks checks the same thing as this method
-        return state.hasRandomTicks();
+        return state.get(getAge()) < getMaxAge();
     }
 
     @Override
     public boolean canFertilize(World world, RandomGenerator random, BlockPos pos, BlockState state) {
-        // hasRandomTicks checks the same thing as this method
-        return state.hasRandomTicks();
+        return isFertilizable(world, pos, state);
     }
 
     @Override
