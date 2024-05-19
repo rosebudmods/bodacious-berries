@@ -21,7 +21,6 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
@@ -56,10 +55,10 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
         builder.add(getAge()).add(HALF);
     }
 
-    @Override
-    public boolean hasRandomTicks(BlockState state) {
-        return state.get(getAge()) < MAX_AGE;
-    }
+//    @Override
+//    public boolean hasRandomTicks(BlockState state) {
+//        return state.get(getAge()) < MAX_AGE;
+//    }
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
@@ -72,12 +71,12 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-        return hasRandomTicks(state);
+        return state.hasRandomTicks();
     }
 
     @Override
     public boolean canFertilize(World world, RandomGenerator random, BlockPos pos, BlockState state) {
-        return hasRandomTicks(state);
+        return state.hasRandomTicks();
     }
 
     @Override
@@ -101,13 +100,13 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hitResult) {
-        if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
-            return ActionResult.PASS;
-        } else if (state.get(getAge()) == MAX_AGE) {
-            return BasicBerryBush.pickBerries(pos, world, state, this.getBerryItem());
-        } else {
+//        if (hasRandomTicks(state) && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
+//            return ActionResult.PASS;
+//        } else if (state.get(getAge()) == MAX_AGE) {
+//            return BasicBerryBush.pickBerries(pos, world, state, this.getBerryItem());
+//        } else {
             return super.onUse(state, world, pos, player, hitResult);
-        }
+//        }
     }
 
     @Override

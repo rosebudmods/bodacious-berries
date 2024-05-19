@@ -9,7 +9,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
@@ -28,11 +27,6 @@ public class CloudberryBush extends BasicBerryBush.ThreeStageBush {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(DYING);
         super.appendProperties(builder);
-    }
-
-    @Override
-    public boolean hasRandomTicks(BlockState state) {
-        return true;
     }
 
     @Override

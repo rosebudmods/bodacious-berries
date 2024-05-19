@@ -11,6 +11,7 @@ import net.minecraft.client.option.Option;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static io.ix0rai.bodacious_berries.BodaciousBerries.CONFIG;
@@ -25,15 +26,16 @@ public class BodaciousConfigScreen extends SimpleOptionsScreen {
         super(parent, MinecraftClient.getInstance().options, BodaciousBerries.translatableText("config.title"), createOptions());
     }
 
+    @SuppressWarnings("unchecked")
     private static Option<Boolean>[] createOptions() {
-        var options = new ArrayList<>();
+        List<Option<Boolean>> options = new ArrayList<>();
         for (Berry berry : Berry.values()) {
             options.add(createGenOption(berry.toString(),
                     value -> CONFIG.setGenerating(berry, value)
             ));
         }
 
-        return options.stream().toArray(Option[]::new);
+        return options.toArray(Option[]::new);
     }
 
     private static Option<Boolean> createGenOption(String key, Consumer<Boolean> setter) {

@@ -84,7 +84,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
         int age = state.get(getAge());
         // if the age isn't maximum and the light level is high enough grow the bush
-        if (age <= maxAge && random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
+        if (age < maxAge && random.nextInt(GROW_CHANCE) == 0 && world.getBaseLightLevel(pos.up(), 0) >= 9) {
             grow(world, pos, state, age + 1);
         }
     }

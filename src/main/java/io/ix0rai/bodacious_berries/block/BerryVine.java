@@ -17,7 +17,6 @@ import net.minecraft.util.ItemInteractionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
@@ -43,10 +42,10 @@ public class BerryVine extends VineBlock implements BerryBush {
         builder.add(AGE, UP, NORTH, EAST, SOUTH, WEST);
     }
 
-    @Override
-    public boolean hasRandomTicks(BlockState state) {
-        return state.get(AGE) < MAX_AGE;
-    }
+//    @Override
+//    public boolean hasRandomTicks(BlockState state) {
+//        return state.get(AGE) < MAX_AGE;
+//    }
 
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, RandomGenerator random) {
@@ -104,12 +103,12 @@ public class BerryVine extends VineBlock implements BerryBush {
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-        return this.hasRandomTicks(state);
+        return state.hasRandomTicks();
     }
 
     @Override
     public boolean canFertilize(World world, RandomGenerator random, BlockPos pos, BlockState state) {
-        return this.hasRandomTicks(state);
+        return state.hasRandomTicks();
     }
 
     @Override
