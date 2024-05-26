@@ -95,7 +95,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
      */
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (entity instanceof LivingEntity && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) < sizeChangeAge) {
+        if (entity instanceof LivingEntity && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) >= sizeChangeAge) {
             entity.setMovementMultiplier(state, BERRY_BUSH_SLOWING_VECTOR);
         }
     }
