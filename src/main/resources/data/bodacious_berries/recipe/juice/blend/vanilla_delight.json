@@ -2,17 +2,17 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "tag": "c:raspberries"
+      "tag": "c:foods/glow_berries"
     },
     "1": {
-      "tag": "c:blackberries"
+      "tag": "c:foods/sweet_berries"
     },
     "2": {
-      "item": "minecraft:sugar_cane"
+      "item": "minecraft:apple"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:opposite_juice"
+  "result": "bodacious_berries:vanilla_delight"
 }

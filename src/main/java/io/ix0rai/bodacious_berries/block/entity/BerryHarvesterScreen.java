@@ -8,7 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class BerryHarvesterScreen extends BodaciousScreen<BerryHarvesterScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
+    private static final Identifier TEXTURE = Identifier.ofDefault("textures/gui/container/dispenser.png");
 
     public BerryHarvesterScreen(BerryHarvesterScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

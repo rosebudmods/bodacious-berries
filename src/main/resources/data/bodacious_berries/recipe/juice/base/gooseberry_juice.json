@@ -2,11 +2,11 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "all": {
-      "tag": "c:saskatoon_berries"
+      "tag": "c:foods/gooseberries"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:grape_juice"
+  "result": "bodacious_berries:gooseberry_juice"
 }

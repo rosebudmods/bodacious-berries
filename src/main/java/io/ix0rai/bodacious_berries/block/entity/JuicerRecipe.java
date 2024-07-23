@@ -7,7 +7,6 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.ix0rai.bodacious_berries.BodaciousBerries;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -18,6 +17,7 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.HolderLookup;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
@@ -26,15 +26,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack result) implements Recipe<Inventory> {
-    public static final String RECIPE_ID = BodaciousBerries.idString("juicing");
+public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack result) implements Recipe<JuicerRecipeInput> {
+    public static final String RECIPE_PATH = "juicing";
+    public static final String RECIPE_ID = BodaciousBerries.idString(RECIPE_PATH);
     public static Serializer serializer;
     public static RecipeType<JuicerRecipe> type;
 
     public static void register() {
         // if this is not run on mod init, this file is loaded after the registry has already been frozen
         serializer = RecipeSerializer.register(RECIPE_ID, new Serializer());
-        type = RecipeType.register(RECIPE_ID);
+        type = Registry.register(Registries.RECIPE_TYPE, BodaciousBerries.id(RECIPE_PATH), new RecipeType<JuicerRecipe>() {
+            public String toString() {
+                return RECIPE_ID;
+            }
+        });
     }
 
     public boolean isIngredient(ItemStack stack) {
@@ -72,14 +77,13 @@ public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingre
     }
 
     @Override
-    public boolean matches(Inventory inv, World world) {
-        if (inv.size() < 5) return false;
-        return ingredient0.test(inv.getStack(3)) && ingredient1.test(inv.getStack(4)) && ingredient2.test(inv.getStack(5))
-                && (receptacle.test(inv.getStack(0)) || receptacle.test(inv.getStack(1)) || receptacle.test(inv.getStack(2)));
+    public boolean matches(JuicerRecipeInput inv, World world) {
+        return ingredient0.test(inv.ingredient0()) && ingredient1.test(inv.ingredient1()) && ingredient2.test(inv.ingredient2())
+                && (receptacle.test(inv.receptacle0()) || receptacle.test(inv.receptacle1()) || receptacle.test(inv.receptacle2()));
     }
 
     @Override
-    public ItemStack craft(Inventory inventory, HolderLookup.Provider provider) {
+    public ItemStack craft(JuicerRecipeInput input, HolderLookup.Provider provider) {
         return getResult(provider).copy();
     }
 

@@ -2,10 +2,10 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "tag": "c:rainberries"
+      "tag": "c:foods/rainberries"
     },
     "1": {
-      "tag": "c:goji_berries"
+      "tag": "c:foods/goji_berries"
     },
     "2": {
       "item": "minecraft:golden_apple"

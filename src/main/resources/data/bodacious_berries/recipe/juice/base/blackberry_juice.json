@@ -2,11 +2,11 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "all": {
-      "tag": "c:cloudberries"
+      "tag": "c:foods/blackberries"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:cloudberry_juice"
+  "result": "bodacious_berries:blackberry_juice"
 }

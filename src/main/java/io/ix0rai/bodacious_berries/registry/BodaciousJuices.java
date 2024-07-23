@@ -26,17 +26,17 @@ public class BodaciousJuices {
 
     public static void register() {
         register(BodaciousBerries.id("dubious_juice"), DUBIOUS_JUICE);
-        register("saskatoon_berry_juice", new Juice(BodaciousItems.SASKATOON_BERRIES, BodaciousBerries.translatableText("hint.more_purple")));
+        register("saskatoon_berry_juice", new Juice(BodaciousItems.SASKATOON_BERRIES));
         register("strawberry_juice", new Juice(BodaciousItems.STRAWBERRIES));
         register("raspberry_juice", new Juice(BodaciousItems.RASPBERRIES));
-        register("blackberry_juice", new Juice(BodaciousItems.BLACKBERRIES, BodaciousBerries.translatableText("hint.blackberries_and_sweetness")));
+        register("blackberry_juice", new Juice(BodaciousItems.BLACKBERRIES));
         register("rainberry_juice", new Juice(BodaciousItems.RAINBERRIES));
-        register("lingonberry_juice", new Juice(BodaciousItems.LINGONBERRIES, BodaciousBerries.translatableText("hint.more_red")));
+        register("lingonberry_juice", new Juice(BodaciousItems.LINGONBERRIES));
         register("grape_juice", new Juice(BodaciousItems.GRAPES));
-        register("goji_berry_juice", new Juice(BodaciousItems.GOJI_BERRIES, BodaciousBerries.translatableText("hint.sweetness")));
-        register("gooseberry_juice", new Juice(BodaciousItems.GOOSEBERRIES, BodaciousBerries.translatableText("hint.red_and_yellow")));
+        register("goji_berry_juice", new Juice(BodaciousItems.GOJI_BERRIES));
+        register("gooseberry_juice", new Juice(BodaciousItems.GOOSEBERRIES));
         register("glow_berry_juice", new Juice(Items.GLOW_BERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 90, 1), 1.0F)));
-        register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES, BodaciousBerries.translatableText("hint.vanilla")));
+        register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES));
         register("chorus_berry_juice", new ChorusBerryJuice(BodaciousItems.CHORUS_BERRIES, null));
         register("cloudberry_juice", new Juice(BodaciousItems.CLOUDBERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 1200, 1), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 600, 1), 1.0f)));
 

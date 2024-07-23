@@ -2,17 +2,17 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "tag": "c:strawberries"
+      "tag": "c:foods/chorus_berries"
     },
     "1": {
-      "tag": "c:lingonberries"
+      "tag": "c:foods/rainberries"
     },
     "2": {
-      "tag": "c:sweet_berries"
+      "item": "minecraft:chorus_fruit"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:red_juice"
+  "result": "bodacious_berries:end_blend"
 }

@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BodaciousBushes {
-    public static final TagKey<Block> BERRY_BUSHES_TAG = TagKey.of(RegistryKeys.BLOCK, new Identifier("c:berry_bushes"));
+    public static final TagKey<Block> BERRY_BUSHES_TAG = TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", "berry_bushes"));
     public static final IntProperty AGE_4 = IntProperty.of("age", 0, 4);
     private static final Map<Berry, BerryBush> BY_BERRY = new HashMap<>();
     private static final Map<Berry, DoubleBerryBush> DOUBLE_BUSHES = new HashMap<>();

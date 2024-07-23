@@ -2,11 +2,11 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "all": {
-      "tag": "c:chorus_berries"
+      "tag": "c:foods/lingonberries"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:chorus_berry_juice"
+  "result": "bodacious_berries:lingonberry_juice"
 }

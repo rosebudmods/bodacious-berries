@@ -116,7 +116,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
-        Optional<RecipeHolder<JuicerRecipe>> recipe = world.getRecipeManager().getFirstMatch(JuicerRecipe.type, juicer, world);
+        Optional<RecipeHolder<JuicerRecipe>> recipe = world.getRecipeManager().getFirstMatch(JuicerRecipe.type, new JuicerRecipeInput(juicer), world);
         boolean isBrewing = juicer.brewTime > 0;
 
         if (isBrewing) {

@@ -18,7 +18,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 public class BodaciousItems {
-    public static final TagKey<Item> BERRY_TAG = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "berries"));
+    public static final TagKey<Item> BERRY_TAG = TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "berries"));
 
     // berry items
     public static final AliasedBlockItem SASKATOON_BERRIES = new AliasedBlockItem(BodaciousBushes.SASKATOON_BERRY_BUSH, settings(3, 0.5f));

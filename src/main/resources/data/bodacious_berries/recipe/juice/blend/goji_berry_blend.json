@@ -2,17 +2,17 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "tag": "c:chorus_berries"
+      "tag": "c:foods/goji_berries"
     },
     "1": {
-      "tag": "c:grapes"
+      "tag": "c:foods/goji_berries"
     },
     "2": {
-      "item": "minecraft:chorus_fruit"
+      "item": "minecraft:sugar_cane"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:purple_delight"
+  "result": "bodacious_berries:goji_berry_blend"
 }

@@ -2,11 +2,11 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "all": {
-      "tag": "c:saskatoon_berries"
+      "tag": "c:foods/raspberries"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:saskatoon_berry_juice"
+  "result": "bodacious_berries:raspberry_juice"
 }

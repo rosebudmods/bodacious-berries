@@ -7,6 +7,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.block.entity.JuicerRecipe;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
@@ -17,6 +18,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
     private final List<EmiIngredient> inputs;
     private final EmiStack output;
     private final EmiIngredient receptacle;
+    private final Identifier id;
 
     public JuicerEmiRecipe(JuicerRecipe recipe) {
         List<EmiIngredient> list = new ArrayList<>();
@@ -27,6 +29,8 @@ public class JuicerEmiRecipe implements EmiRecipe {
         this.inputs = list;
         this.output = EmiStack.of(recipe.getResult(), 3);
         this.receptacle = EmiIngredient.of(recipe.receptacle(), 3);
+        String outputId = Registries.ITEM.getId(recipe.getResult().getItem()).getPath();
+        this.id = BodaciousBerries.id("/juicing/" + outputId);
     }
 
     @Override
@@ -36,7 +40,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
 
     @Override
     public Identifier getId() {
-        return null;
+        return this.id;
     }
 
     @Override

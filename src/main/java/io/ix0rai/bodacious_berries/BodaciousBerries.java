@@ -22,9 +22,9 @@ public class BodaciousBerries implements ModInitializer {
 
     public static Identifier id(String path) {
         if (!path.startsWith(MOD_ID + ":")) {
-            return new Identifier(idString(path));
+            return Identifier.of(MOD_ID, path);
         } else {
-            return new Identifier(path);
+            return Identifier.of(MOD_ID, path.split(MOD_ID + ":")[1]);
         }
     }
 

@@ -2,17 +2,17 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "tag": "c:goji_berries"
+      "tag": "c:foods/strawberries"
     },
     "1": {
-      "tag": "c:goji_berries"
+      "tag": "c:foods/lingonberries"
     },
     "2": {
-      "item": "minecraft:sugar_cane"
+      "tag": "c:foods/sweet_berries"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:goji_berry_blend"
+  "result": "bodacious_berries:red_juice"
 }

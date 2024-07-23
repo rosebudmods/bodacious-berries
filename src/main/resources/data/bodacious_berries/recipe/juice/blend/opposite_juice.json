@@ -2,17 +2,17 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "tag": "c:gooseberries"
+      "tag": "c:foods/raspberries"
     },
     "1": {
-      "item": "minecraft:glow_berries"
+      "tag": "c:foods/blackberries"
     },
     "2": {
-      "item": "bodacious_berries:raspberries"
+      "item": "minecraft:sugar_cane"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:gooseberry_rum"
+  "result": "bodacious_berries:opposite_juice"
 }

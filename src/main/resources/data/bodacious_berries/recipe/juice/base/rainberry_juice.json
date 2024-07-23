@@ -2,11 +2,11 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "all": {
-      "tag": "c:glow_berries"
+      "tag": "c:foods/rainberries"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:glow_berry_juice"
+  "result": "bodacious_berries:rainberry_juice"
 }

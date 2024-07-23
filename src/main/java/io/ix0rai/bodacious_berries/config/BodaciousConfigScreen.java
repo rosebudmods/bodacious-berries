@@ -6,7 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.option.SimpleOptionsScreen;
+import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.option.Option;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,14 +16,10 @@ import java.util.function.Consumer;
 
 import static io.ix0rai.bodacious_berries.BodaciousBerries.CONFIG;
 
-/**
- * based on the configuration screen for lambdabettergrass by lambdaurora
- */
 @Environment(EnvType.CLIENT)
-public class BodaciousConfigScreen extends SimpleOptionsScreen {
-
+public class BodaciousConfigScreen extends GameOptionsScreen {
     public BodaciousConfigScreen(@Nullable Screen parent) {
-        super(parent, MinecraftClient.getInstance().options, BodaciousBerries.translatableText("config.title"), createOptions());
+        super(parent, MinecraftClient.getInstance().options, BodaciousBerries.translatableText("config.title"));
     }
 
     @SuppressWarnings("unchecked")
@@ -40,5 +36,10 @@ public class BodaciousConfigScreen extends SimpleOptionsScreen {
 
     private static Option<Boolean> createGenOption(String key, Consumer<Boolean> setter) {
         return Option.ofBoolean(BodaciousBerries.translatableTextKey("config." + "generate_" + key), true, setter);
+    }
+
+    @Override
+    protected void method_60325() {
+        this.field_51824.addEntries(createOptions());
     }
 }

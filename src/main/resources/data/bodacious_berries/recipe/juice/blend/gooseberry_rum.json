@@ -2,17 +2,17 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "0": {
-      "tag": "c:chorus_berries"
+      "tag": "c:foods/gooseberries"
     },
     "1": {
-      "tag": "c:rainberries"
+      "tag": "c:foods/glow_berries"
     },
     "2": {
-      "item": "minecraft:chorus_fruit"
+      "tag": "c:foods/raspberries"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:end_blend"
+  "result": "bodacious_berries:gooseberry_rum"
 }

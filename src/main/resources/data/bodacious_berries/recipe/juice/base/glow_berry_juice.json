@@ -2,11 +2,11 @@
   "type": "bodacious_berries:juicing",
   "ingredients": {
     "all": {
-      "tag": "c:goji_berries"
+      "tag": "c:foods/glow_berries"
     },
     "receptacle": {
       "item": "minecraft:glass_bottle"
     }
   },
-  "result": "bodacious_berries:goji_berry_juice"
+  "result": "bodacious_berries:glow_berry_juice"
 }
