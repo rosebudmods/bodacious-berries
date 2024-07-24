@@ -32,7 +32,7 @@ public class SpikedBerryBush extends BasicBerryBush {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
 
-        if (!(world.isClient) && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) >= sizeChangeAge) {
+        if (!(world.isClient) && entity.isLiving() && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) >= sizeChangeAge) {
             boolean movedMinDistance = movedMinDistance(entity);
             if (movedMinDistance) {
                 entity.damage(world.getDamageSources().sweetBerryBush(), damage);
