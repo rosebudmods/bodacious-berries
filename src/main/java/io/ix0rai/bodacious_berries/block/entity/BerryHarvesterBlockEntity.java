@@ -41,7 +41,7 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
     }
 
     @Override
-    public void method_11014(NbtCompound nbt, HolderLookup.Provider lookupProvider) {
+    protected void readNbtImpl(NbtCompound nbt, HolderLookup.Provider lookupProvider) {
         Inventories.readNbt(nbt, inventory, lookupProvider);
     }
 

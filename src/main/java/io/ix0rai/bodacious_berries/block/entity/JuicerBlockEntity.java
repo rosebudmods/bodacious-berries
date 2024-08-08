@@ -67,7 +67,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     @Override
-    public void method_11014(NbtCompound nbt, HolderLookup.Provider lookupProvider) {
+    protected void readNbtImpl(NbtCompound nbt, HolderLookup.Provider lookupProvider) {
         Inventories.readNbt(nbt, inventory, lookupProvider);
     }
 

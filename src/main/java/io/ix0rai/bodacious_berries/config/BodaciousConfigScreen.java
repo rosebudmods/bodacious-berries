@@ -39,7 +39,7 @@ public class BodaciousConfigScreen extends GameOptionsScreen {
     }
 
     @Override
-    protected void method_60325() {
-        this.field_51824.addEntries(createOptions());
+    protected void initOptionButtons() {
+        this.buttonList.addEntries(createOptions());
     }
 }
