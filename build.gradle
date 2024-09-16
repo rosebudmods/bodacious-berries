@@ -3,20 +3,13 @@ plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
     id "java-library"
     id "maven-publish"
+    id "me.modmuss50.mod-publish-plugin" version "0.5.2"
 }
 
 int javaVersion = Integer.parseInt(project.java_version)
 
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
-
-loom {
-    runs {
-        client {
-            vmArgs "-Dfabric-tag-conventions-v1.legacyTagWarning=DEV_VERBOSE -Dfabric-tag-conventions-v2.missingTagTranslationWarning=VERBOSE"
-        }
-    }
-}
 
 repositories {
     maven { url = "https://maven.gegy.dev/" }
@@ -50,6 +43,45 @@ dependencies {
 
     // fabric api
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
+}
+
+publishMods {
+    displayName = "bodacious berries ${project.version}"
+    file = remapJar.archiveFile
+    changelog = rootProject.file("CHANGELOG.md").getText()
+    type = STABLE
+
+    modLoaders.add("quilt")
+    modLoaders.add("fabric")
+
+    dryRun = !providers.environmentVariable("MODRINTH_TOKEN").isPresent()
+            || !providers.environmentVariable("CURSEFORGE_TOKEN").isPresent()
+            || property("pub.should_publish") == "false"
+    dryRun = false
+
+    var mcVersions = [project.minecraft_version]
+    mcVersions.addAll(property("pub.additional_versions").toString().split(" ").findAll { !it.empty })
+
+    modrinth {
+        projectId = "KEFyvbuH"
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        mcVersions.forEach(minecraftVersions::add)
+
+        requires("fabric-api")
+        optional("modmenu")
+    }
+
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        projectId = "576755"
+        mcVersions.forEach(minecraftVersions::add)
+
+        clientRequired = true
+        serverRequired = true
+
+        requires("fabric-api")
+        optional("modmenu")
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
