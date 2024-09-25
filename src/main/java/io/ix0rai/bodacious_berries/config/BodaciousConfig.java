@@ -17,7 +17,6 @@ public class BodaciousConfig {
 
     public BodaciousConfig() {
         this.config = CommentedFileConfig.builder(CONFIG_FILE_PATH)
-                .concurrent()
                 .autosave()
                 .preserveInsertionOrder()
                 .build();
