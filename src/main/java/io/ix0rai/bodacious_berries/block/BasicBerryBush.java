@@ -30,7 +30,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
-public class BasicBerryBush extends PlantBlock implements BerryBush {
+public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
     protected static final Vec3d BERRY_BUSH_SLOWING_VECTOR = new Vec3d(0.5D, 0.25D, 0.5D);
     protected static final int GROW_CHANCE = 5;
     protected static final int MAX_BERRY_AMOUNT = 3;
@@ -181,11 +181,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public int getSizeChangeAge() {
         return sizeChangeAge;
-    }
-
-    @Override
-    public IntProperty getAge() {
-        throw new AssertionError("getAge() should always be overridden");
     }
 
     @Override
