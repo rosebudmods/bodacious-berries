@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
@@ -26,8 +27,8 @@ public class GrowingBerryBush extends BasicBerryBush {
     }
 
     @Override
-    public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
-        if (newAge < maxAge) {
+    public void grow(World world, BlockPos pos, BlockState state, int newAge) {
+        if (newAge <= maxAge) {
             world.setBlockState(pos, state.with(getAge(), newAge), Block.NOTIFY_LISTENERS);
         } else {
             TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, Block.NOTIFY_LISTENERS);
@@ -43,26 +44,20 @@ public class GrowingBerryBush extends BasicBerryBush {
     }
 
     @Override
-    protected ItemInteractionResult onInteract(
-            ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockHitResult hitResult
-    ) {
-        int i = state.get(getAge());
-        boolean isMaxAge = i == getMaxAge();
-        if (isMaxAge && stack.isOf(Items.BONE_MEAL)) {
-            final int newAge = Math.min(maxAge, state.get(getAge()) + 1);
-            // grow to a double bush if new age exceeds maximum
-            if (newAge > maxAge) {
-                TallPlantBlock.placeAt(world, futureBush.getDefaultState(), pos, Block.NOTIFY_LISTENERS);
-            }
-
-            return ItemInteractionResult.CONSUME;
-        }
-
-        return super.onInteract(stack, state, world, pos, entity, hand, hitResult);
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+        // this bush can be fertilised when at max age, at which point
+        // it will grow into the futureBush form.
+        return true;
     }
 
     @Override
     public IntProperty getAge() {
         return Properties.AGE_2;
+    }
+
+    @Override
+    public boolean canBeHarvested() {
+        // this bush can't be harvested while it hasn't grown to the futureBush.
+        return false;
     }
 }

@@ -30,7 +30,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
-public class BasicBerryBush extends PlantBlock implements BerryBush {
+public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
     protected static final Vec3d BERRY_BUSH_SLOWING_VECTOR = new Vec3d(0.5D, 0.25D, 0.5D);
     protected static final int GROW_CHANCE = 5;
     protected static final int MAX_BERRY_AMOUNT = 3;
@@ -121,7 +121,7 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity entity, BlockHitResult hitResult) {
         final int currentAge = state.get(getAge());
         // if bone meal is allowed to be used, pass action
-        if (currentAge == maxAge) {
+        if (currentAge == maxAge && canBeHarvested()) {
             // otherwise, give berries/unripe berries
             return pickBerries(pos, world, state, this.getBerryItem());
         } else {
@@ -166,11 +166,10 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
 
     @Override
     public void fertilize(ServerWorld world, RandomGenerator random, BlockPos pos, BlockState state) {
-        int newAge = Math.min(maxAge, state.get(getAge()) + 1);
-        grow(world, pos, state, newAge);
+        grow(world, pos, state, state.get(getAge()) + 1);
     }
 
-    public void grow(ServerWorld world, BlockPos pos, BlockState state, int newAge) {
+    public void grow(World world, BlockPos pos, BlockState state, int newAge) {
         world.setBlockState(pos, state.with(getAge(), newAge), Block.NOTIFY_LISTENERS);
     }
 
@@ -182,11 +181,6 @@ public class BasicBerryBush extends PlantBlock implements BerryBush {
     @Override
     public int getSizeChangeAge() {
         return sizeChangeAge;
-    }
-
-    @Override
-    public IntProperty getAge() {
-        throw new AssertionError("getAge() should always be overridden");
     }
 
     @Override

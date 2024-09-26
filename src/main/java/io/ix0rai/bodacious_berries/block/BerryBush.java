@@ -60,6 +60,13 @@ public interface BerryBush extends Fertilizable {
     }
 
     /**
+     * @return whether the bush can be harvested when at max age.
+     */
+    default boolean canBeHarvested() {
+        return true;
+    }
+
+    /**
      * sets the age of the bush its minimum possible age while preserving its size
      * @param world the world in which the bush is growing
      * @param pos the position of the bush

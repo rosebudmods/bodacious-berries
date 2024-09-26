@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 
-public class SpikedBerryBush extends BasicBerryBush {
+public abstract class SpikedBerryBush extends BasicBerryBush {
     private static final float MINIMUM_DAMAGE_DISTANCE = 0.003f;
     private final float damage;
 
