@@ -42,7 +42,7 @@ public class EndBlend extends Juice {
             }
 
             if (user instanceof PlayerEntity entity) {
-                entity.getItemCooldownManager().set(this, 10);
+                entity.getItemCooldownManager().method_62835(stack, 10);
             }
         }
 

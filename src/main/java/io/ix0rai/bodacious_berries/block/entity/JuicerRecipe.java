@@ -11,10 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.IngredientPlacement;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeHolder;
+import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.registry.HolderLookup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -24,6 +27,7 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack result) implements Recipe<JuicerRecipeInput> {
@@ -62,18 +66,23 @@ public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingre
     }
 
     @Override
-    public DefaultedList<Ingredient> getIngredients() {
+    public IngredientPlacement getIngredientPlacement() {
         DefaultedList<Ingredient> ingredients = DefaultedList.ofSize(3);
         ingredients.add(ingredient0);
         ingredients.add(ingredient1);
         ingredients.add(ingredient2);
 
-        return ingredients;
+        return IngredientPlacement.create(ingredients);
     }
 
     @Override
     public boolean isIgnoredInRecipeBook() {
         return true;
+    }
+
+    @Override
+    public RecipeBookCategory getRecipeBookCategory() {
+        return null;
     }
 
     @Override
@@ -84,17 +93,7 @@ public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingre
 
     @Override
     public ItemStack craft(JuicerRecipeInput input, HolderLookup.Provider provider) {
-        return getResult(provider).copy();
-    }
-
-    @Override
-    public boolean fits(int width, int height) {
-        return true;
-    }
-
-    @Override
-    public ItemStack getResult(HolderLookup.Provider provider) {
-        return this.result;
+        return getResult().copy();
     }
 
     public ItemStack getResult() {
@@ -102,12 +101,12 @@ public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingre
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends Recipe<JuicerRecipeInput>> getSerializer() {
         return serializer;
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public RecipeType<? extends Recipe<JuicerRecipeInput>> getType() {
         return type;
     }
 
@@ -122,7 +121,14 @@ public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingre
 
         public static void reloadRecipes(MinecraftServer server) {
             RECIPES.clear();
-            RECIPES.addAll(server.getRecipeManager().listAllOfType(type).stream().map(RecipeHolder::value).toList());
+            RECIPES.addAll(getRecipeHolders(server.getRecipeManager()).stream().map(RecipeHolder::value).toList());
+        }
+
+        @SuppressWarnings("unchecked")
+        public static List<RecipeHolder<JuicerRecipe>> getRecipeHolders(RecipeManager recipeManager) {
+            return recipeManager.getRecipes().stream()
+                    .filter(holder -> holder.value() instanceof JuicerRecipe)
+                    .map(holder -> (RecipeHolder<JuicerRecipe>) holder).toList();
         }
 
         /**
@@ -168,15 +174,15 @@ public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingre
      */
     public record IngredientSet(Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle) {
         private static final Codec<IngredientSet> ALL_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-                Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("all").forGetter((set) -> set.ingredient0),
-                Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("receptacle").forGetter((set) -> set.receptacle)
+                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("all").forGetter((set) -> set.ingredient0),
+                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("receptacle").forGetter((set) -> set.receptacle)
         ).apply(instance, (ingredient, receptacle) -> new IngredientSet(ingredient, ingredient, ingredient, receptacle)));
 
         private static final Codec<IngredientSet> INDIVIDUAL_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-                Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("0").forGetter((set) -> set.ingredient0),
-                Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("1").forGetter((set) -> set.ingredient1),
-                Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("2").forGetter((set) -> set.ingredient2),
-                Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("receptacle").forGetter((set) -> set.receptacle)
+                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("0").forGetter((set) -> set.ingredient0),
+                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("1").forGetter((set) -> set.ingredient1),
+                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("2").forGetter((set) -> set.ingredient2),
+                Ingredient.ALLOW_EMPTY_CODEC.fieldOf("receptacle").forGetter((set) -> set.receptacle)
         ).apply(instance, IngredientSet::new));
 
         private static final Codec<Either<IngredientSet, IngredientSet>> EITHER_CODEC = Codec.either(

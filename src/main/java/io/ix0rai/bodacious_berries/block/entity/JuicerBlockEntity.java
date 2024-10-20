@@ -23,6 +23,7 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.collection.DefaultedList;
@@ -94,13 +95,11 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         // decrement stack and give recipe remainder
         for (ItemStack ingredient : ingredients) {
             ingredient.decrement(1);
-            if (ingredient.getItem().hasRecipeRemainder()) {
-                ItemStack newStack = new ItemStack(ingredient.getItem().getRecipeRemainder());
-                if (ingredient.isEmpty()) {
-                    ingredient = newStack;
-                } else {
-                    ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), newStack);
-                }
+            ItemStack newStack = ingredient.getRecipeRemainder();
+            if (ingredient.isEmpty()) {
+                ingredient = newStack;
+            } else {
+                ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), newStack);
             }
 
             ingredient.decrement(1);
@@ -116,11 +115,14 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, JuicerBlockEntity juicer) {
-        Optional<RecipeHolder<JuicerRecipe>> recipe = world.getRecipeManager().getFirstMatch(JuicerRecipe.type, new JuicerRecipeInput(juicer), world);
+        if (!(world instanceof ServerWorld serverWorld))
+            return;
+
+        Optional<RecipeHolder<JuicerRecipe>> recipe = serverWorld.m_mlvimbbc().getFirstMatch(JuicerRecipe.type, new JuicerRecipeInput(juicer), world);
         boolean isBrewing = juicer.brewTime > 0;
 
         if (isBrewing) {
-            juicer.brewTime --;
+            juicer.brewTime--;
 
             // if brewing is finished, craft the juices
             if (juicer.hasValidReceptacle() && juicer.brewTime == 0) {

@@ -3,7 +3,8 @@ package io.ix0rai.bodacious_berries.item;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.AliasedBlockItem;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.ConsumeEffect;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Holder;
 import net.minecraft.registry.RegistryKeys;
@@ -20,12 +21,12 @@ import net.minecraft.world.dimension.DimensionTypes;
 public class ChorusBerryJuice extends Juice {
     private final Identifier biome;
 
-    public ChorusBerryJuice(AliasedBlockItem berry, Identifier biome) {
+    public ChorusBerryJuice(BlockItem berry, Identifier biome) {
         super(berry);
         this.biome = biome;
     }
 
-    @Override
+    /* @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         // teleport user to biome specified in constructor
         // the biome can be null, in which case the user will not be teleported
@@ -34,7 +35,7 @@ public class ChorusBerryJuice extends Juice {
         if (biome != null && world.getServer() != null) {
             MinecraftServer server = world.getServer();
             // ensure we are in the overworld
-            if (world.getDimension().equals(server.getRegistryManager().get(RegistryKeys.DIMENSION_TYPE).get(DimensionTypes.OVERWORLD_ID))) {
+            if (world.getDimension().equals(server.getRegistryManager().get(RegistryKeys.DIMENSION_TYPE).get().getValue().get(DimensionTypes.OVERWORLD_ID))) {
                 // locate the biome to teleport to
                 Pair<BlockPos, Boolean> pair = locateBiome(server, user.getBlockPos(), user);
                 BlockPos pos = pair.getFirst();
@@ -51,7 +52,7 @@ public class ChorusBerryJuice extends Juice {
 
         // consume item
         return super.finishUsing(stack, world, user);
-    }
+    } */
 
     private void safeTeleport(BlockPos pos, World world, LivingEntity user) {
         do {
@@ -67,8 +68,10 @@ public class ChorusBerryJuice extends Juice {
     }
 
     private Pair<BlockPos, Boolean> locateBiome(MinecraftServer server, BlockPos pos, LivingEntity user) {
+        Holder<Biome> biome = Holder.createDirect(server.getRegistryManager().get(RegistryKeys.BIOME).get().getValue().get(this.biome));
+
         Pair<BlockPos, Holder<Biome>> pair = server.getOverworld().locateBiome(
-                entry -> (entry.value().equals(Holder.createDirect(server.getRegistryManager().get(RegistryKeys.BIOME).get(biome)).value())),
+                biome::equals,
                 user.getBlockPos(),
                 6400,
                 8,
@@ -79,6 +82,18 @@ public class ChorusBerryJuice extends Juice {
             return Pair.of(pair.getFirst(), true);
         } else {
             return Pair.of(pos, false);
+        }
+    }
+
+    public record TeleportToBiomeEffect(Identifier biome) implements ConsumeEffect {
+        @Override
+        public Type<? extends ConsumeEffect> method_62864() {
+            return null;
+        }
+
+        @Override
+        public boolean method_62866(World world, ItemStack stack, LivingEntity entity) {
+            return false;
         }
     }
 }

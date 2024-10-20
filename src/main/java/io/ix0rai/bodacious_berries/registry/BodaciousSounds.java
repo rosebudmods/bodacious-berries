@@ -9,6 +9,6 @@ public class BodaciousSounds {
     public static final SoundEvent BERRY_PICK = SoundEvent.createVariableRangeEvent(BodaciousBerries.id("block.berry_bush.pick"));
 
     public static void register() {
-        Registry.register(Registries.SOUND_EVENT, BERRY_PICK.getId(), BERRY_PICK);
+        Registry.register(Registries.SOUND_EVENT, BERRY_PICK.location(), BERRY_PICK);
     }
 }

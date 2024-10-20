@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AliasedBlockItem;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -13,7 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
 
-public class ChorusBerries extends AliasedBlockItem {
+public class ChorusBerries extends BlockItem {
     public ChorusBerries(Block block, Settings settings) {
         super(block, settings);
     }
@@ -46,7 +46,7 @@ public class ChorusBerries extends AliasedBlockItem {
             }
 
             if (user instanceof PlayerEntity entity) {
-                entity.getItemCooldownManager().set(this, 10);
+                entity.getItemCooldownManager().method_62835(stack, 10);
             }
         }
 

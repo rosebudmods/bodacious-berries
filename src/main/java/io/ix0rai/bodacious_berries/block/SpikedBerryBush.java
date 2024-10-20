@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -32,10 +33,10 @@ public abstract class SpikedBerryBush extends BasicBerryBush {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
 
-        if (!(world.isClient) && entity.isLiving() && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) >= sizeChangeAge) {
+        if (world instanceof ServerWorld serverWorld && entity.isLiving() && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) >= sizeChangeAge) {
             boolean movedMinDistance = movedMinDistance(entity);
             if (movedMinDistance) {
-                entity.damage(world.getDamageSources().sweetBerryBush(), damage);
+                entity.method_64397(serverWorld, world.getDamageSources().sweetBerryBush(), damage);
             }
         }
     }

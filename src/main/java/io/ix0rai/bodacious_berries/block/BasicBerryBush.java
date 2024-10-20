@@ -20,7 +20,7 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemInteractionResult;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -50,7 +50,7 @@ public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
     public BasicBerryBush(Berry berry, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        super(BodaciousBushes.BERRY_BUSH_SETTINGS);
+        super(BodaciousBushes.berryBushSettings(berry.get()));
         this.berry = berry;
         this.maxAge = maxAge;
         this.smallShape = smallShape;
@@ -101,13 +101,13 @@ public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     @Override
-    protected ItemInteractionResult onInteract(
+    protected ActionResult onInteract(
             ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockHitResult hitResult
     ) {
         int age = state.get(getAge());
         boolean isMaxAge = age == getMaxAge();
         return !isMaxAge && stack.isOf(Items.BONE_MEAL)
-                ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION
+                ? ActionResult.PASS
                 : super.onInteract(stack, state, world, pos, entity, hand, hitResult);
     }
 
@@ -146,7 +146,7 @@ public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
 
         // reset berry growth; they were just picked
         bush.resetAge(world, pos, state);
-        return ActionResult.success(world.isClient);
+        return ActionResult.SUCCESS;
     }
 
     @Override

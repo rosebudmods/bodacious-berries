@@ -25,7 +25,7 @@ public class JuicerEmiPlugin implements EmiPlugin {
 
         // add all juicer recipes to emi's recipe manager
         RecipeManager manager = registry.getRecipeManager();
-        for (RecipeHolder<JuicerRecipe> recipe : manager.listAllOfType(JuicerRecipe.type)) {
+        for (RecipeHolder<JuicerRecipe> recipe : JuicerRecipe.Util.getRecipeHolders(manager)) {
             registry.addRecipe(new JuicerEmiRecipe(recipe.value()));
         }
     }
