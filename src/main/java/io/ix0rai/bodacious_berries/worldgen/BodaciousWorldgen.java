@@ -35,7 +35,7 @@ public class BodaciousWorldgen {
     }
 
     private static void createBiomeModification(Berry berry) {
-        Identifier id = BodaciousBerries.id("patch_" +  berry.get().getPath());
+        Identifier id = BodaciousBerries.id("patch_" +  berry.id().getPath());
         BiomeModifications.create(id)
                 .add(
                         ModificationPhase.ADDITIONS,

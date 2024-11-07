@@ -27,7 +27,6 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingredient ingredient2, Ingredient receptacle, ItemStack result) implements Recipe<JuicerRecipeInput> {
@@ -251,6 +250,7 @@ public record JuicerRecipe(Ingredient ingredient0, Ingredient ingredient1, Ingre
         }
 
         @Override
+        @Deprecated
         public PacketCodec<RegistryByteBuf, JuicerRecipe> getPacketCodec() {
             return packetCodec;
         }

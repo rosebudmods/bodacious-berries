@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 public class GojiBerryBlend extends Juice {
     public GojiBerryBlend(Settings settings) {
-        super(settings);
+        super("goji_berry_blend", settings);
     }
 
     @Override

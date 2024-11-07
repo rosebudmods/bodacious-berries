@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -25,6 +26,11 @@ public interface BerryBush extends Fertilizable {
             EntityType.OCELOT,
             EntityType.PARROT
     );
+
+    /**
+     * @return the ID of this berry bush
+     */
+    Identifier getId();
 
     /**
      * @return the type of berry that this bush gives when picked
@@ -87,6 +93,6 @@ public interface BerryBush extends Fertilizable {
      * gets the registered item associated with the bush's berry
      */
     default Item getBerryItem() {
-        return Registries.ITEM.get(getBerry().get());
+        return Registries.ITEM.get(getBerry().id());
     }
 }

@@ -118,7 +118,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
         if (!(world instanceof ServerWorld serverWorld))
             return;
 
-        Optional<RecipeHolder<JuicerRecipe>> recipe = serverWorld.m_mlvimbbc().getFirstMatch(JuicerRecipe.type, new JuicerRecipeInput(juicer), world);
+        Optional<RecipeHolder<JuicerRecipe>> recipe = serverWorld.getRecipeManager().getFirstMatch(JuicerRecipe.type, new JuicerRecipeInput(juicer), world);
         boolean isBrewing = juicer.brewTime > 0;
 
         if (isBrewing) {
@@ -189,7 +189,7 @@ public class JuicerBlockEntity extends BlockEntity implements ImplementedInvento
 
     @Override
     public Text getDisplayName() {
-        return Text.of(getCachedState().getBlock().getTranslationKey());
+        return Text.translatable(getCachedState().getBlock().getTranslationKey());
     }
 
     @Override

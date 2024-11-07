@@ -22,7 +22,7 @@ public class ChorusBerryJuice extends Juice {
     private final Identifier biome;
 
     public ChorusBerryJuice(BlockItem berry, Identifier biome) {
-        super(berry);
+        super("chorus_berry_juice", berry);
         this.biome = biome;
     }
 

@@ -49,7 +49,7 @@ public class BodaciousBlocks {
         Registry.register(Registries.BLOCK, id, block);
         Registry.register(Registries.SCREEN_HANDLER_TYPE, id, handler);
         Registry.register(Registries.BLOCK_ENTITY_TYPE, BodaciousBerries.id(id.getPath() + "_entity"), entity);
-        Item item = Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings().key(RegistryKey.of(RegistryKeys.ITEM, id))));
+        Item item = Registry.register(Registries.ITEM, id, new BlockItem(block, new Item.Settings().key(RegistryKey.of(RegistryKeys.ITEM, id)).method_63685()));
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.addItem(item));
     }
 }

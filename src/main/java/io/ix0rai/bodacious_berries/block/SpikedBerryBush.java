@@ -21,7 +21,7 @@ public abstract class SpikedBerryBush extends BasicBerryBush {
      * @param damage the amount of damage the berry bush does on contact
      */
     public SpikedBerryBush(Berry berry, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge, float damage) {
-        super(berry, maxAge, smallShape, largeShape, sizeChangeAge);
+        super(berry, null, maxAge, smallShape, largeShape, sizeChangeAge);
         LandPathNodeTypesRegistry.register(this, PathNodeType.DAMAGE_OTHER, null);
         if (damage < 1.0f) {
             throw new IllegalArgumentException("damage must be greater than or equal to 1");
@@ -36,7 +36,7 @@ public abstract class SpikedBerryBush extends BasicBerryBush {
         if (world instanceof ServerWorld serverWorld && entity.isLiving() && !UNSLOWED_ENTITIES.contains(entity.getType()) && state.get(getAge()) >= sizeChangeAge) {
             boolean movedMinDistance = movedMinDistance(entity);
             if (movedMinDistance) {
-                entity.method_64397(serverWorld, world.getDamageSources().sweetBerryBush(), damage);
+                entity.damage(serverWorld, world.getDamageSources().sweetBerryBush(), damage);
             }
         }
     }

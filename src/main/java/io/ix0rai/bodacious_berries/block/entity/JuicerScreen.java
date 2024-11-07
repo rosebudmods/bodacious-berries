@@ -1,15 +1,14 @@
 package io.ix0rai.bodacious_berries.block.entity;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import io.ix0rai.bodacious_berries.BodaciousBerries;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class JuicerScreen extends BodaciousScreen<JuicerScreenHandler> {
+public class JuicerScreen extends HandledScreen<JuicerScreenHandler> {
     private static final Identifier TEXTURE = BodaciousBerries.id("textures/gui/juicer.png");
     private static final int[] BUBBLE_PROGRESS = new int[]{29, 29, 25, 17, 11, 6, 0};
     private static final int DUBIOUS_BUBBLE_UV_X = 188;
@@ -29,7 +28,6 @@ public class JuicerScreen extends BodaciousScreen<JuicerScreenHandler> {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        this.renderBackground(graphics, (int) delta, mouseX, mouseY);
         super.render(graphics, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(graphics, mouseX, mouseY);
     }
@@ -39,7 +37,7 @@ public class JuicerScreen extends BodaciousScreen<JuicerScreenHandler> {
         // draw background
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
-        graphics.method_52706(RenderLayer::getGuiTextured, TEXTURE, x, y, this.backgroundWidth, this.backgroundHeight);
+        graphics.method_25290(RenderLayer::getGuiTextured, TEXTURE, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight, 256, 256);
         this.drawProgress(graphics);
     }
 

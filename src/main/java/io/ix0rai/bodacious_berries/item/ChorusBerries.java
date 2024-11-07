@@ -46,7 +46,7 @@ public class ChorusBerries extends BlockItem {
             }
 
             if (user instanceof PlayerEntity entity) {
-                entity.getItemCooldownManager().method_62835(stack, 10);
+                entity.getItemCooldownManager().set(stack, 10);
             }
         }
 

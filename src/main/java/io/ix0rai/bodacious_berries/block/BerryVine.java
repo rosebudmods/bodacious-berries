@@ -28,7 +28,7 @@ public class BerryVine extends VineBlock implements BerryBush {
     protected final Berry berry;
 
     public BerryVine(Berry berry) {
-        super(BodaciousBushes.berryBushSettings(berry.get()));
+        super(BodaciousBushes.berryBushSettings(berry.id()));
         this.berry = berry;
     }
 
@@ -84,6 +84,11 @@ public class BerryVine extends VineBlock implements BerryBush {
     @Override
     public IntProperty getAge() {
         return AGE;
+    }
+
+    @Override
+    public Identifier getId() {
+        return berry.bushId();
     }
 
     @Override

@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class EndBlend extends Juice {
     public EndBlend(Settings settings) {
-        super(settings);
+        super("end_blend", settings);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class EndBlend extends Juice {
             }
 
             if (user instanceof PlayerEntity entity) {
-                entity.getItemCooldownManager().method_62835(stack, 10);
+                entity.getItemCooldownManager().set(stack, 10);
             }
         }
 

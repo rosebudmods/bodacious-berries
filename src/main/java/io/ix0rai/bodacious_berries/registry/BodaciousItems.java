@@ -24,17 +24,17 @@ public class BodaciousItems {
     public static final TagKey<Item> BERRY_TAG = TagKey.of(RegistryKeys.ITEM, Identifier.of("c", "berries"));
 
     // berry items
-    public static final BlockItem SASKATOON_BERRIES = new BlockItem(BodaciousBushes.SASKATOON_BERRY_BUSH, settings(Berry.SASKATOON_BERRIES.get(), 3, 0.5f));
-    public static final BlockItem STRAWBERRIES = new BlockItem(BodaciousBushes.STRAWBERRY_BUSH, settings(Berry.STRAWBERRIES.get(), 3, 1f));
-    public static final BlockItem RASPBERRIES = new BlockItem(BodaciousBushes.RASPBERRY_BUSH, settings(Berry.RASPBERRIES.get(), 3, 0.5f));
-    public static final BlockItem BLACKBERRIES = new BlockItem(BodaciousBushes.BLACKBERRY_BUSH, settings(Berry.BLACKBERRIES.get(), 1, 1.5f));
-    public static final BlockItem CHORUS_BERRIES = new ChorusBerries(BodaciousBushes.CHORUS_BERRY_BUSH, settings(Berry.CHORUS_BERRIES.get(), 2, 1.6f));
-    public static final BlockItem RAINBERRIES = new Rainberries(BodaciousBushes.RAINBERRY_BUSH, settings(Berry.RAINBERRIES.get(), 3, 1.0f));
-    public static final BlockItem LINGONBERRIES = new BlockItem(BodaciousBushes.LINGONBERRY_BUSH, settings(Berry.LINGONBERRIES.get(), 2, 0.5f));
-    public static final BlockItem GRAPES = new BlockItem(BodaciousBushes.GRAPEVINE, settings(Berry.GRAPES.get(), 2, 1f));
-    public static final BlockItem GOJI_BERRIES = new GojiBerries(BodaciousBushes.GOJI_BERRY_BUSH, settings(Berry.GOJI_BERRIES.get(), 1, 2.2f));
-    public static final BlockItem GOOSEBERRIES = new BlockItem(BodaciousBushes.GOOSEBERRY_BUSH, settings(Berry.GOOSEBERRIES.get(), 2, 0.5f));
-    public static final BlockItem CLOUDBERRIES = new BlockItem(BodaciousBushes.CLOUDBERRY_BUSH, settings(Berry.CLOUDBERRIES.get(), 2, 1).food(
+    public static final BlockItem SASKATOON_BERRIES = new BlockItem(BodaciousBushes.SASKATOON_BERRY_BUSH, settings(Berry.SASKATOON_BERRIES.id(), 3, 0.5f));
+    public static final BlockItem STRAWBERRIES = new BlockItem(BodaciousBushes.STRAWBERRY_BUSH, settings(Berry.STRAWBERRIES.id(), 3, 1f));
+    public static final BlockItem RASPBERRIES = new BlockItem(BodaciousBushes.RASPBERRY_BUSH, settings(Berry.RASPBERRIES.id(), 3, 0.5f));
+    public static final BlockItem BLACKBERRIES = new BlockItem(BodaciousBushes.BLACKBERRY_BUSH, settings(Berry.BLACKBERRIES.id(), 1, 1.5f));
+    public static final BlockItem CHORUS_BERRIES = new ChorusBerries(BodaciousBushes.CHORUS_BERRY_BUSH, settings(Berry.CHORUS_BERRIES.id(), 2, 1.6f));
+    public static final BlockItem RAINBERRIES = new Rainberries(BodaciousBushes.RAINBERRY_BUSH, settings(Berry.RAINBERRIES.id(), 3, 1.0f));
+    public static final BlockItem LINGONBERRIES = new BlockItem(BodaciousBushes.LINGONBERRY_BUSH, settings(Berry.LINGONBERRIES.id(), 2, 0.5f));
+    public static final BlockItem GRAPES = new BlockItem(BodaciousBushes.GRAPEVINE, settings(Berry.GRAPES.id(), 2, 1f));
+    public static final BlockItem GOJI_BERRIES = new GojiBerries(BodaciousBushes.GOJI_BERRY_BUSH, settings(Berry.GOJI_BERRIES.id(), 1, 2.2f));
+    public static final BlockItem GOOSEBERRIES = new BlockItem(BodaciousBushes.GOOSEBERRY_BUSH, settings(Berry.GOOSEBERRIES.id(), 2, 0.5f));
+    public static final BlockItem CLOUDBERRIES = new BlockItem(BodaciousBushes.CLOUDBERRY_BUSH, settings(Berry.CLOUDBERRIES.id(), 2, 1).food(
             new FoodComponent.Builder().hunger(2).saturation(1f).build(),
             C_uaiigijw.method_62858().method_62854(new C_pmcnnsvg(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 600, 1), 1)).method_62852(0.8f).method_62851()));
 
@@ -60,8 +60,8 @@ public class BodaciousItems {
      */
     private static final float BERRY_COMPOST_LEVEL_INCREASE_CHANCE = 0.4f;
 
-    private static void register(Item item, Berry id) {
-        Item registeredItem = Registry.register(Registries.ITEM, id.get(), item);
+    private static void register(Item item, Berry berry) {
+        Item registeredItem = Registry.register(Registries.ITEM, berry.id(), item);
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> entries.addItem(registeredItem));
         CompostingChanceRegistry.INSTANCE.add(item, BERRY_COMPOST_LEVEL_INCREASE_CHANCE);
     }

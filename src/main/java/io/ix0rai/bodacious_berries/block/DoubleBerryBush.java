@@ -16,6 +16,7 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -33,7 +34,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected final Berry berry;
 
     public DoubleBerryBush(Berry berry) {
-        super(BodaciousBushes.berryBushSettings(berry.get()));
+        super(BodaciousBushes.berryBushSettings(berry.doubleBushId()));
         this.berry = berry;
     }
 
@@ -114,6 +115,11 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public IntProperty getAge() {
         return AGE;
+    }
+
+    @Override
+    public Identifier getId() {
+        return berry.doubleBushId();
     }
 
     @Override
