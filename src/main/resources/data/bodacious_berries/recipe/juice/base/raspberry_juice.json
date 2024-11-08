@@ -1,12 +1,8 @@
 {
   "type": "bodacious_berries:juicing",
   "ingredients": {
-    "all": {
-      "tag": "c:foods/raspberries"
-    },
-    "receptacle": {
-      "item": "minecraft:glass_bottle"
-    }
+    "all": "#c:foods/raspberries",
+    "receptacle": "minecraft:glass_bottle"
   },
   "result": "bodacious_berries:raspberry_juice"
 }

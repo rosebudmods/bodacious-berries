@@ -6,21 +6,11 @@
     "CPC"
   ],
   "key": {
-    "#": {
-      "tag": "minecraft:planks"
-    },
-    "i": {
-      "item": "minecraft:iron_ingot"
-    },
-    "R": {
-      "item": "minecraft:redstone"
-    },
-    "C": {
-      "item": "minecraft:cobblestone"
-    },
-    "P": {
-      "item": "minecraft:piston"
-    }
+    "#": "#minecraft:planks",
+    "i": "minecraft:iron_ingot",
+    "R": "minecraft:redstone",
+    "C": "minecraft:cobblestone",
+    "P": "minecraft:piston"
   },
   "result": {
     "id": "bodacious_berries:juicer",

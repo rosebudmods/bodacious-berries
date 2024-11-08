@@ -1,6 +1,5 @@
 package io.ix0rai.bodacious_berries.registry;
 
-import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.block.BasicBerryBush;
 import io.ix0rai.bodacious_berries.block.BerryBush;
 import io.ix0rai.bodacious_berries.block.BerryVine;

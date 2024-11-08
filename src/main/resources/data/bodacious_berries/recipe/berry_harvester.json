@@ -6,18 +6,10 @@
     "iOi"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:cobblestone"
-    },
-    "O": {
-      "tag": "minecraft:planks"
-    },
-    "S": {
-      "item": "minecraft:shears"
-    },
-    "i": {
-      "item": "minecraft:iron_ingot"
-    }
+    "#": "minecraft:cobblestone",
+    "O": "#minecraft:planks",
+    "S": "minecraft:shears",
+    "i": "minecraft:iron_ingot"
   },
   "result": {
     "id": "bodacious_berries:berry_harvester",

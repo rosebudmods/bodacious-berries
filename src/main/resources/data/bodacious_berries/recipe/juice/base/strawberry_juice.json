@@ -1,12 +1,8 @@
 {
   "type": "bodacious_berries:juicing",
   "ingredients": {
-    "all": {
-      "tag": "c:foods/strawberries"
-    },
-    "receptacle": {
-      "item": "minecraft:glass_bottle"
-    }
+    "all": "#c:foods/strawberries",
+    "receptacle": "minecraft:glass_bottle"
   },
   "result": "bodacious_berries:strawberry_juice"
 }

@@ -4,11 +4,12 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.ConsumeEffect;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Holder;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -16,7 +17,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.dimension.DimensionTypes;
+
+import java.util.Optional;
+import java.util.Set;
 
 public class ChorusBerryJuice extends Juice {
     private final Identifier biome;
@@ -26,24 +29,20 @@ public class ChorusBerryJuice extends Juice {
         this.biome = biome;
     }
 
-    /* @Override
+    @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         // teleport user to biome specified in constructor
         // the biome can be null, in which case the user will not be teleported
         boolean success = false;
 
-        if (biome != null && world.getServer() != null) {
-            MinecraftServer server = world.getServer();
-            // ensure we are in the overworld
-            if (world.getDimension().equals(server.getRegistryManager().get(RegistryKeys.DIMENSION_TYPE).get().getValue().get(DimensionTypes.OVERWORLD_ID))) {
-                // locate the biome to teleport to
-                Pair<BlockPos, Boolean> pair = locateBiome(server, user.getBlockPos(), user);
-                BlockPos pos = pair.getFirst();
-                success = pair.getSecond();
+        if (biome != null && world instanceof ServerWorld serverWorld) {
+            MinecraftServer server = serverWorld.getServer();
+            // locate the biome to teleport to
+            Optional<BlockPos> pos = locateBiome(server, serverWorld, user.getBlockPos());
 
-                if (success) {
-                    safeTeleport(pos, world, user);
-                }
+            if (pos.isPresent()) {
+                safeTeleport(pos.get(), serverWorld, user);
+                success = true;
             }
         }
 
@@ -52,48 +51,37 @@ public class ChorusBerryJuice extends Juice {
 
         // consume item
         return super.finishUsing(stack, world, user);
-    } */
+    }
 
-    private void safeTeleport(BlockPos pos, World world, LivingEntity user) {
+    private void safeTeleport(BlockPos pos, ServerWorld world, LivingEntity user) {
         do {
             pos = pos.up();
         } while ((!world.getBlockState(pos).getBlock().equals(Blocks.AIR)
                 && !world.getBlockState(pos.up()).getBlock().equals(Blocks.AIR))
                 || pos.getY() == world.getHeight());
 
-        user.requestTeleportAndDismount(pos.getX(), pos.getY(), pos.getZ());
+        user.teleport(world, pos.getX(), pos.getY(), pos.getZ(), Set.of(), 90, 0, true);
         SoundEvent soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
         user.playSound(soundEvent, 1.0F, 1.0F);
         world.playSound(null, user.getBlockPos(), soundEvent, SoundCategory.PLAYERS, 1.0F, 1.0F);
     }
 
-    private Pair<BlockPos, Boolean> locateBiome(MinecraftServer server, BlockPos pos, LivingEntity user) {
-        Holder<Biome> biome = Holder.createDirect(server.getRegistryManager().get(RegistryKeys.BIOME).get().getValue().get(this.biome));
+    private Optional<BlockPos> locateBiome(MinecraftServer server, ServerWorld world, BlockPos pos) {
+        Holder.Reference<Biome> biome = server.getRegistryManager().getLookup(RegistryKeys.BIOME).orElseThrow()
+                .getHolder(RegistryKey.of(RegistryKeys.BIOME, this.biome)).orElseThrow();
 
-        Pair<BlockPos, Holder<Biome>> pair = server.getOverworld().locateBiome(
+        Pair<BlockPos, Holder<Biome>> pair = world.locateBiome(
                 biome::equals,
-                user.getBlockPos(),
+                pos,
                 6400,
-                8,
-                10
+                64,
+                128
         );
 
         if (pair != null) {
-            return Pair.of(pair.getFirst(), true);
+            return Optional.of(pair.getFirst());
         } else {
-            return Pair.of(pos, false);
-        }
-    }
-
-    public record TeleportToBiomeEffect(Identifier biome) implements ConsumeEffect {
-        @Override
-        public Type<? extends ConsumeEffect> method_62864() {
-            return null;
-        }
-
-        @Override
-        public boolean method_62866(World world, ItemStack stack, LivingEntity entity) {
-            return false;
+            return Optional.empty();
         }
     }
 }

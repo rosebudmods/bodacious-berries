@@ -15,7 +15,6 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.unmapped.C_pmcnnsvg;
 import net.minecraft.unmapped.C_uaiigijw;
 import net.minecraft.util.Identifier;
@@ -70,14 +69,14 @@ public class BodaciousJuices {
         register(new GojiBerryBlend(JUICE_SETTINGS.food(
                 new FoodComponent.Builder().hunger(5).saturation(1.8F).build(),
                 C_uaiigijw.method_62859().method_62854(new C_pmcnnsvg(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F)).method_62851())));
-        register(new Juice("opposite_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturation(1.2F).build())));
-        register(new Juice("rainberry_blend", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturation(1.6F).build())));
-        register(new Juice("gooseberry_rum", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturation(1.0f).build())));
-        register(new Juice("red_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturation(1.3F).build())));
-        register(new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturation(3.3F).build())));
-        register(new Juice("purple_delight", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturation(1.6F).build())));
-        register(new Juice("traffic_light_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturation(1.4F).build())));
-        register(new Juice("vanilla_delight", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturation(2.0F).build())));
+        register(new Juice("opposite_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturation(1.2F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("rainberry_blend", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturation(1.6F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("gooseberry_rum", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturation(1.0f).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("red_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturation(1.3F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturation(3.3F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("purple_delight", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturation(1.6F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("traffic_light_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturation(1.4F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("vanilla_delight", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturation(2.0F).build(), C_uaiigijw.method_62859().method_62851())));
     }
 
     private static void register(Juice juice) {
