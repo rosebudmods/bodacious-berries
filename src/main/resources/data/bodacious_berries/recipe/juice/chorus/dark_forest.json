@@ -1,12 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "minecraft:dark_oak_sapling"
-    },
-    {
-      "item": "bodacious_berries:chorus_berry_juice"
-    }
+    "minecraft:dark_oak_sapling",
+    "bodacious_berries:chorus_berry_juice"
   ],
   "result": {
     "id": "bodacious_berries:chorus_berry_juice_dark_forest",

@@ -15,30 +15,34 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.unmapped.C_pmcnnsvg;
+import net.minecraft.unmapped.C_uaiigijw;
 import net.minecraft.util.Identifier;
+
+import java.util.List;
 
 import static net.minecraft.world.biome.Biomes.*;
 
 public class BodaciousJuices {
     public static final Item JUICE_RECEPTACLE = Items.GLASS_BOTTLE;
     public static final Item.Settings JUICE_SETTINGS = new Item.Settings().recipeRemainder(JUICE_RECEPTACLE).maxCount(16);
-    public static final Juice DUBIOUS_JUICE = new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturation(2F).build()));
+    public static final Juice DUBIOUS_JUICE = new Juice("dubious_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(2).saturation(2F).build()));
 
     public static void register() {
-        register(BodaciousBerries.id("dubious_juice"), DUBIOUS_JUICE);
-        register("saskatoon_berry_juice", new Juice(BodaciousItems.SASKATOON_BERRIES));
-        register("strawberry_juice", new Juice(BodaciousItems.STRAWBERRIES));
-        register("raspberry_juice", new Juice(BodaciousItems.RASPBERRIES));
-        register("blackberry_juice", new Juice(BodaciousItems.BLACKBERRIES));
-        register("rainberry_juice", new Juice(BodaciousItems.RAINBERRIES));
-        register("lingonberry_juice", new Juice(BodaciousItems.LINGONBERRIES));
-        register("grape_juice", new Juice(BodaciousItems.GRAPES));
-        register("goji_berry_juice", new Juice(BodaciousItems.GOJI_BERRIES));
-        register("gooseberry_juice", new Juice(BodaciousItems.GOOSEBERRIES));
-        register("glow_berry_juice", new Juice(Items.GLOW_BERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 90, 1), 1.0F)));
-        register("sweet_berry_juice", new Juice(Items.SWEET_BERRIES));
-        register("chorus_berry_juice", new ChorusBerryJuice(BodaciousItems.CHORUS_BERRIES, null));
-        register("cloudberry_juice", new Juice(BodaciousItems.CLOUDBERRIES, new FoodComponent.Builder().statusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 1200, 1), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 600, 1), 1.0f)));
+        register(DUBIOUS_JUICE);
+        register(new Juice(Berry.SASKATOON_BERRIES, BodaciousItems.SASKATOON_BERRIES));
+        register(new Juice(Berry.STRAWBERRIES, BodaciousItems.STRAWBERRIES));
+        register(new Juice(Berry.RASPBERRIES, BodaciousItems.RASPBERRIES));
+        register(new Juice(Berry.BLACKBERRIES, BodaciousItems.BLACKBERRIES));
+        register(new Juice(Berry.RAINBERRIES, BodaciousItems.RAINBERRIES));
+        register(new Juice(Berry.LINGONBERRIES, BodaciousItems.LINGONBERRIES));
+        register(new Juice(Berry.GRAPES, BodaciousItems.GRAPES));
+        register(new Juice(Berry.GOJI_BERRIES, BodaciousItems.GOJI_BERRIES));
+        register(new Juice(Berry.GOOSEBERRIES, BodaciousItems.GOOSEBERRIES));
+        register(new Juice("glow_berry_juice", Items.GLOW_BERRIES, new FoodComponent.Builder(), C_uaiigijw.method_62859().method_62854(new C_pmcnnsvg(new StatusEffectInstance(StatusEffects.GLOWING, 90, 1), 1.0F))));
+        register(new Juice("sweet_berry_juice", Items.SWEET_BERRIES));
+        register(new ChorusBerryJuice(BodaciousItems.CHORUS_BERRIES, null));
+        register(new Juice(Berry.CLOUDBERRIES, BodaciousItems.CLOUDBERRIES, new FoodComponent.Builder(), C_uaiigijw.method_62859().method_62854(new C_pmcnnsvg(List.of(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 1200, 1), new StatusEffectInstance(StatusEffects.LEVITATION, 600, 1))))));
 
         createBiomeChorusJuice();
         registerBlends();
@@ -62,20 +66,21 @@ public class BodaciousJuices {
     }
 
     private static void registerBlends() {
-        register("goji_berry_blend", new GojiBerryBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturation(1.8F).statusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F).build())));
-        register("opposite_juice", new Juice(new FoodComponent.Builder().hunger(4).saturation(1.2F).build()));
-        register("rainberry_blend", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturation(1.6F).build())));
-        register("gooseberry_rum", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturation(1.0f).build())));
-        register("red_juice", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturation(1.3F).build())));
-        register("end_blend", new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturation(3.3F).build())));
-        register("purple_delight", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturation(1.6F).build())));
-        register("traffic_light_juice", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturation(1.4F).build())));
-        register("vanilla_delight", new Juice(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturation(2.0F).build())));
+        register(new GojiBerryBlend(JUICE_SETTINGS.food(
+                new FoodComponent.Builder().hunger(5).saturation(1.8F).build(),
+                C_uaiigijw.method_62859().method_62854(new C_pmcnnsvg(new StatusEffectInstance(StatusEffects.GLOWING, 800, 1), 1.0F)).method_62851())));
+        register(new Juice("opposite_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturation(1.2F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("rainberry_blend", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturation(1.6F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("gooseberry_rum", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(7).saturation(1.0f).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("red_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturation(1.3F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new EndBlend(JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(3).saturation(3.3F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("purple_delight", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(6).saturation(1.6F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("traffic_light_juice", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(5).saturation(1.4F).build(), C_uaiigijw.method_62859().method_62851())));
+        register(new Juice("vanilla_delight", JUICE_SETTINGS.food(new FoodComponent.Builder().hunger(4).saturation(2.0F).build(), C_uaiigijw.method_62859().method_62851())));
     }
 
-    private static void register(String name, Juice juice) {
-        Identifier id = BodaciousBerries.id(name);
-        register(id, juice);
+    private static void register(Juice juice) {
+        register(juice.getJuiceId(), juice);
     }
 
     private static void register(Identifier id, Juice juice) {

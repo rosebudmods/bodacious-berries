@@ -188,6 +188,6 @@ public class BerryHarvesterBlockEntity extends BlockEntity implements Implemente
 
     @Override
     public Text getDisplayName() {
-        return Text.of(getCachedState().getBlock().getTranslationKey());
+        return Text.translatable(getCachedState().getBlock().getTranslationKey());
     }
 }

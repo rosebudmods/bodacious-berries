@@ -16,7 +16,7 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemInteractionResult;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -34,7 +34,7 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     protected final Berry berry;
 
     public DoubleBerryBush(Berry berry) {
-        super(BodaciousBushes.BERRY_BUSH_SETTINGS);
+        super(BodaciousBushes.berryBushSettings(berry.doubleBushId()));
         this.berry = berry;
     }
 
@@ -85,11 +85,11 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     }
 
     @Override
-    protected ItemInteractionResult onInteract(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockHitResult hitResult) {
+    protected ActionResult onInteract(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockHitResult hitResult) {
         int age = state.get(AGE);
         boolean isMaxAge = age == MAX_AGE;
         return !isMaxAge && stack.isOf(Items.BONE_MEAL)
-                ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION
+                ? ActionResult.PASS
                 : super.onInteract(stack, state, world, pos, entity, hand, hitResult);
     }
 
@@ -115,6 +115,11 @@ public class DoubleBerryBush extends TallPlantBlock implements BerryBush {
     @Override
     public IntProperty getAge() {
         return AGE;
+    }
+
+    @Override
+    public Identifier getId() {
+        return berry.doubleBushId();
     }
 
     @Override

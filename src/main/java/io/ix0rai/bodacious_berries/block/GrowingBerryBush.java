@@ -3,15 +3,9 @@ package io.ix0rai.bodacious_berries.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallPlantBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemInteractionResult;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
@@ -22,7 +16,7 @@ public class GrowingBerryBush extends BasicBerryBush {
     private final DoubleBerryBush futureBush;
 
     public GrowingBerryBush(VoxelShape smallShape, VoxelShape largeShape, DoubleBerryBush bush) {
-        super(bush.getBerry(), 2, smallShape, largeShape, 2);
+        super(bush.getBerry(), null, 2, smallShape, largeShape, 2);
         this.futureBush = bush;
     }
 

@@ -1,18 +1,10 @@
 {
   "type": "bodacious_berries:juicing",
   "ingredients": {
-    "0": {
-      "tag": "c:foods/raspberries"
-    },
-    "1": {
-      "tag": "c:foods/blackberries"
-    },
-    "2": {
-      "item": "minecraft:sugar_cane"
-    },
-    "receptacle": {
-      "item": "minecraft:glass_bottle"
-    }
+    "0": "#c:foods/raspberries",
+    "1": "#c:foods/blackberries",
+    "2": "minecraft:sugar_cane",
+    "receptacle": "minecraft:glass_bottle"
   },
   "result": "bodacious_berries:opposite_juice"
 }

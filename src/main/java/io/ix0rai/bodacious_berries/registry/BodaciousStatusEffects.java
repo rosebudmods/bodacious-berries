@@ -10,8 +10,8 @@ import net.minecraft.registry.Registry;
 
 public class BodaciousStatusEffects {
     public static final StatusEffect REFRESHED = new RefreshedStatusEffect(StatusEffectType.BENEFICIAL, 0xFF0066)
-            .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, BodaciousBerries.id("refreshed_movement_speed"), 0.015, EntityAttributeModifier.Operation.ADD_VALUE)
-            .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, BodaciousBerries.id("refreshed_attack_damage"), 0.5, EntityAttributeModifier.Operation.ADD_VALUE);
+            .addAttributeModifier(EntityAttributes.MOVEMENT_SPEED, BodaciousBerries.id("refreshed_movement_speed"), 0.015, EntityAttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(EntityAttributes.ATTACK_DAMAGE, BodaciousBerries.id("refreshed_attack_damage"), 0.5, EntityAttributeModifier.Operation.ADD_VALUE);
 
     public static void register() {
         Registry.register(Registries.STATUS_EFFECT, BodaciousBerries.id("refreshed"), REFRESHED);

@@ -1,18 +1,10 @@
 {
   "type": "bodacious_berries:juicing",
   "ingredients": {
-    "0": {
-      "tag": "c:foods/gooseberries"
-    },
-    "1": {
-      "tag": "c:foods/glow_berries"
-    },
-    "2": {
-      "tag": "c:foods/raspberries"
-    },
-    "receptacle": {
-      "item": "minecraft:glass_bottle"
-    }
+    "0": "#c:foods/gooseberries",
+    "1": "#c:foods/glow_berries",
+    "2": "#c:foods/raspberries",
+    "receptacle": "minecraft:glass_bottle"
   },
   "result": "bodacious_berries:traffic_light_juice"
 }

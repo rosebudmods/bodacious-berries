@@ -15,19 +15,17 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-@SuppressWarnings("deprecation")
 public class BerryHarvesterBlock extends BlockWithEntity {
-    public static final DirectionProperty FACING = FacingBlock.FACING;
+    public static final EnumProperty<Direction> FACING = FacingBlock.FACING;
 
     public BerryHarvesterBlock(Settings settings) {
         super(settings);

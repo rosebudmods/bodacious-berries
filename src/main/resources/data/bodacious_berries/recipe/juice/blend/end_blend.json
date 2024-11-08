@@ -1,18 +1,10 @@
 {
   "type": "bodacious_berries:juicing",
   "ingredients": {
-    "0": {
-      "tag": "c:foods/chorus_berries"
-    },
-    "1": {
-      "tag": "c:foods/rainberries"
-    },
-    "2": {
-      "item": "minecraft:chorus_fruit"
-    },
-    "receptacle": {
-      "item": "minecraft:glass_bottle"
-    }
+    "0": "#c:foods/chorus_berries",
+    "1": "#c:foods/rainberries",
+    "2": "minecraft:chorus_fruit",
+    "receptacle": "minecraft:glass_bottle"
   },
   "result": "bodacious_berries:end_blend"
 }

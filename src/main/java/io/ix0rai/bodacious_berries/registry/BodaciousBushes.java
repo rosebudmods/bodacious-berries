@@ -1,6 +1,5 @@
 package io.ix0rai.bodacious_berries.registry;
 
-import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.block.BasicBerryBush;
 import io.ix0rai.bodacious_berries.block.BerryBush;
 import io.ix0rai.bodacious_berries.block.BerryVine;
@@ -14,6 +13,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.BlockSoundGroup;
@@ -41,7 +41,7 @@ public class BodaciousBushes {
     private static final VoxelShape LARGE_RASPBERRY = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 13.0D, 15.0D);
     private static final VoxelShape LARGE_CLOUDBERRY = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 15.0D, 13.0D);
 
-    public static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.create().ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
+    private static final AbstractBlock.Settings BERRY_BUSH_SETTINGS = AbstractBlock.Settings.create().ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).nonOpaque();
 
     public static final ChorusBerryBush CHORUS_BERRY_BUSH = new ChorusBerryBush(Berry.CHORUS_BERRIES,
             SMALL_LINGONBERRY, LARGE_LINGONBERRY, 2);
@@ -68,34 +68,39 @@ public class BodaciousBushes {
             SMALL_SWEET_BERRY, LARGE_CLOUDBERRY, 1);
 
     public static final List<Block> COLOUR_PROVIDER_EXCLUDED = new ArrayList<>();
+
+    public static AbstractBlock.Settings berryBushSettings(Identifier id) {
+        return BERRY_BUSH_SETTINGS.key(RegistryKey.of(RegistryKeys.BLOCK, id));
+    }
     
     public static void register() {
-        register("saskatoon_berry_bush", SASKATOON_BERRY_BUSH);
-        register("double_saskatoon_berry_bush", DOUBLE_SASKATOON_BERRY_BUSH);
-        register("strawberry_bush", STRAWBERRY_BUSH);
-        register("raspberry_bush", RASPBERRY_BUSH);
-        register("blackberry_bush", BLACKBERRY_BUSH);
-        registerWithoutColourProvider("chorus_berry_bush", CHORUS_BERRY_BUSH);
-        registerWithoutColourProvider("rainberry_bush", RAINBERRY_BUSH);
-        register("lingonberry_bush", LINGONBERRY_BUSH);
-        register("grapevine", GRAPEVINE);
-        register("goji_berry_bush", GOJI_BERRY_BUSH);
-        register("double_goji_berry_bush", DOUBLE_GOJI_BERRY_BUSH);
-        register("gooseberry_bush", GOOSEBERRY_BUSH);
-        registerWithoutColourProvider("cloudberry_bush", CLOUDBERRY_BUSH);
+        register(SASKATOON_BERRY_BUSH);
+        register(DOUBLE_SASKATOON_BERRY_BUSH);
+        register(STRAWBERRY_BUSH);
+        register(RASPBERRY_BUSH);
+        register(BLACKBERRY_BUSH);
+        registerWithoutColourProvider(CHORUS_BERRY_BUSH);
+        registerWithoutColourProvider(RAINBERRY_BUSH);
+        register(LINGONBERRY_BUSH);
+        register(GRAPEVINE);
+        register(GOJI_BERRY_BUSH);
+        register(DOUBLE_GOJI_BERRY_BUSH);
+        register(GOOSEBERRY_BUSH);
+        registerWithoutColourProvider(CLOUDBERRY_BUSH);
     }
 
-    private static void register(String name, Block block) {
-        Registry.register(Registries.BLOCK, BodaciousBerries.id(name), block);
-        if (BY_BERRY.containsKey(((BerryBush) block).getBerry())) {
-            DOUBLE_BUSHES.put(((BerryBush) block).getBerry(), (DoubleBerryBush) block);
+    private static <T extends Block & BerryBush> void register(T block) {
+        Berry berry = block.getBerry();
+        Registry.register(Registries.BLOCK, block.getId(), block);
+        if (BY_BERRY.containsKey(berry)) {
+            DOUBLE_BUSHES.put(berry, (DoubleBerryBush) block);
         } else {
-            BY_BERRY.put(((BerryBush) block).getBerry(), (BerryBush) block);
+            BY_BERRY.put(berry, block);
         }
     }
 
-    private static void registerWithoutColourProvider(String name, Block block) {
-        register(name, block);
+    private static <T extends Block & BerryBush> void registerWithoutColourProvider(T block) {
+        register(block);
         COLOUR_PROVIDER_EXCLUDED.add(block);
     }
 

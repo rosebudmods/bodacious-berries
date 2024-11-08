@@ -1,12 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "minecraft:cornflower"
-    },
-    {
-      "item": "bodacious_berries:chorus_berry_juice"
-    }
+    "minecraft:cornflower",
+    "bodacious_berries:chorus_berry_juice"
   ],
   "result": {
     "id": "bodacious_berries:chorus_berry_juice_plains",

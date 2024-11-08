@@ -1,12 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "minecraft:sand"
-    },
-    {
-      "item": "bodacious_berries:chorus_berry_juice"
-    }
+    "minecraft:sand",
+    "bodacious_berries:chorus_berry_juice"
   ],
   "result": {
     "id": "bodacious_berries:chorus_berry_juice_desert",

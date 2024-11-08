@@ -7,6 +7,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import io.ix0rai.bodacious_berries.BodaciousBerries;
 import io.ix0rai.bodacious_berries.block.entity.JuicerRecipe;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -22,7 +23,7 @@ public class JuicerEmiRecipe implements EmiRecipe {
 
     public JuicerEmiRecipe(JuicerRecipe recipe) {
         List<EmiIngredient> list = new ArrayList<>();
-        recipe.getIngredients().forEach(ingredient -> list.add(EmiIngredient.of(ingredient)));
+        recipe.getIngredientPlacement().getIngredients().forEach(ingredient -> list.add(EmiIngredient.of(ingredient)));
         for (int i = 0; i < 3; i++) {
             list.add(EmiIngredient.of(recipe.receptacle()));
         }
@@ -68,18 +69,18 @@ public class JuicerEmiRecipe implements EmiRecipe {
         // juicer background and animated textures
         widgets.addDrawable(-19, 3, 64, 59, (graphics, mouseX, mouseY, delta) -> {
             // add juicer background
-            graphics.drawTexture(JuicerEmiPlugin.JUICER_TEXTURE, 20, 0, 55, 17, 64, 59, 256, 256);
+            graphics.method_52708(RenderLayer::getGuiTextured, JuicerEmiPlugin.JUICER_TEXTURE, 20, 0, 55, 17, 64, 59, 256, 256);
 
             // add progress bar
             final double time = System.currentTimeMillis() / 250d;
 
             int progress = MathHelper.floor(time % 16);
-            graphics.drawTexture(JuicerEmiPlugin.JUICER_TEXTURE, 38, 24, 187, 0, 28, progress, 256, 256);
+            graphics.method_52708(RenderLayer::getGuiTextured, JuicerEmiPlugin.JUICER_TEXTURE, 38, 24, 187, 0, 28, progress, 256, 256);
 
             // add animated bubbles
             int height = MathHelper.floor(time % 9);
-            graphics.drawTexture(JuicerEmiPlugin.JUICER_TEXTURE, 24, 24 + height, 176, height, 11, 9 - height, 256, 256);
-            graphics.drawTexture(JuicerEmiPlugin.JUICER_TEXTURE, 70, 24 + height, 176, height, 11, 9 - height, 256, 256);
+            graphics.method_52708(RenderLayer::getGuiTextured, JuicerEmiPlugin.JUICER_TEXTURE, 24, 24 + height, 176, height, 11, 9 - height, 256, 256);
+            graphics.method_52708(RenderLayer::getGuiTextured, JuicerEmiPlugin.JUICER_TEXTURE, 70, 24 + height, 176, height, 11, 9 - height, 256, 256);
         });
 
         // input and result slots

@@ -20,7 +20,7 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemInteractionResult;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -29,12 +29,14 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
     protected static final Vec3d BERRY_BUSH_SLOWING_VECTOR = new Vec3d(0.5D, 0.25D, 0.5D);
     protected static final int GROW_CHANCE = 5;
     protected static final int MAX_BERRY_AMOUNT = 3;
 
+    protected final Identifier id;
     protected final Berry berry;
     protected final int maxAge;
     protected final VoxelShape smallShape;
@@ -49,8 +51,9 @@ public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
      * @param largeShape large voxel shape for the bush
      * @param sizeChangeAge the age when the bush switches from smallShape to largeShape, this will also be the age it resets to when berries are picked
      */
-    public BasicBerryBush(Berry berry, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-        super(BodaciousBushes.BERRY_BUSH_SETTINGS);
+    public BasicBerryBush(Berry berry, @Nullable Identifier id, int maxAge, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
+        super(BodaciousBushes.berryBushSettings(id == null ? berry.bushId() : id));
+        this.id = id == null ? berry.bushId() : id;
         this.berry = berry;
         this.maxAge = maxAge;
         this.smallShape = smallShape;
@@ -101,13 +104,13 @@ public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     @Override
-    protected ItemInteractionResult onInteract(
+    protected ActionResult onInteract(
             ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockHitResult hitResult
     ) {
         int age = state.get(getAge());
         boolean isMaxAge = age == getMaxAge();
         return !isMaxAge && stack.isOf(Items.BONE_MEAL)
-                ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION
+                ? ActionResult.PASS
                 : super.onInteract(stack, state, world, pos, entity, hand, hitResult);
     }
 
@@ -146,7 +149,7 @@ public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
 
         // reset berry growth; they were just picked
         bush.resetAge(world, pos, state);
-        return ActionResult.success(world.isClient);
+        return ActionResult.SUCCESS;
     }
 
     @Override
@@ -184,6 +187,11 @@ public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
     }
 
     @Override
+    public Identifier getId() {
+        return id;
+    }
+
+    @Override
     public Berry getBerry() {
         return berry;
     }
@@ -195,7 +203,7 @@ public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
 
     public static class FourStageBush extends BasicBerryBush {
         public FourStageBush(Berry berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-            super(berryType, 4, smallShape, largeShape, sizeChangeAge);
+            super(berryType, null, 4, smallShape, largeShape, sizeChangeAge);
         }
 
         @Override
@@ -206,7 +214,7 @@ public abstract class BasicBerryBush extends PlantBlock implements BerryBush {
 
     public static class ThreeStageBush extends BasicBerryBush {
         public ThreeStageBush(Berry berryType, VoxelShape smallShape, VoxelShape largeShape, int sizeChangeAge) {
-            super(berryType, 3, smallShape, largeShape, sizeChangeAge);
+            super(berryType, null, 3, smallShape, largeShape, sizeChangeAge);
         }
 
         @Override
